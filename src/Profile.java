@@ -2,7 +2,7 @@ import java.sql.Date;
 
 public class Profile
 {
-    String name, nationality, bloodType, field, additionalField, email, phoneNumber;
+    String name, nationality, field, additionalField, email, phoneNumber;
     int age;
     char gender;
     Date birthDate;
@@ -16,11 +16,6 @@ public class Profile
     public void setNationality(String nationality)
     {
         this.nationality = nationality;
-    }
-
-    public void setBloodType(String bloodType)
-    {
-        this.bloodType = bloodType;
     }
 
     public void setField(String field)
@@ -69,11 +64,6 @@ public class Profile
         return nationality;
     }
 
-    public String getBloodType()
-    {
-        return bloodType;
-    }
-
     public String getField()
     {
         return field;
@@ -109,5 +99,4 @@ public class Profile
         return birthDate;
     }
 
-    
 }

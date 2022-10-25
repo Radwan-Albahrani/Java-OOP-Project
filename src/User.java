@@ -37,7 +37,6 @@ public class User
         profile.setAdditionalField(additionalField);
         profile.setAge(age);
         profile.setBirthDate(birthDate);
-        profile.setBloodType(bloodType);
         profile.setNationality(nationality);
         profile.setGender(gender);
 
@@ -52,11 +51,10 @@ public class User
         viewProfile.add(profile.getEmail());
         viewProfile.add(profile.getField());
         viewProfile.add(profile.getAdditionalField());
-        viewProfile.add(profile.getBloodType());
         viewProfile.add(profile.getNationality());
-        // viewProfile.add(profile.getAge());
-        // viewProfile.add(profile.getBirthDate());
-        // viewProfile.add(profile.getGender());
+        viewProfile.add("" + profile.getAge());
+        viewProfile.add("" + profile.getBirthDate());
+        viewProfile.add("" + profile.getGender());
 
         return viewProfile;
     }
@@ -67,6 +65,6 @@ public class User
 
     public void requestChange() // request change from admin
     {
-
+        // TODO create request change method
     }
 }
