@@ -7,9 +7,9 @@ public class Student extends User
     private int numberOfCourses;
     private double gpa;
     private double stipend;
-    private double attendance; 
+    private double attendence;
     List<Courses> courses = new ArrayList <Courses>();
-    List<announcements> announcements = new ArrayList <announcements>();
+    public static List<String> announcements = new ArrayList <String>();
 
     public double setGpa(double gpa)
     {
@@ -21,24 +21,20 @@ public class Student extends User
         return gpa;
     }
 
-    public double viewAttendance()
+    public double setAttendence(double attendence)
     {
-        return attendance;
+        this.attendence = attendence;
+    }
+
+    public double viewAttendence()
+    {
+        return attendence;
     }
 
     public void registerCourse()
     {
-        
+
     }
-
-
-
-
-
-
-
-
-
 
     public static void main(String[] args) 
     {
