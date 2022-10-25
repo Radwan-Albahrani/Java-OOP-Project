@@ -1,8 +1,9 @@
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User
+public abstract class User
 {
     public static int numberOfUsers = 0;
     int authorityLevel, age;
@@ -20,16 +21,18 @@ public class User
         return expirationDate;
     }
 
-    public void register(int authorityLevel, String username, String password, String name, String nationality, String bloodType, String field,
-            String additionalField, String email, String phoneNumber, Date birthDate, char gender) // user login
+    User(int authorityLevel, String username, String password, String name, String nationality, String field,
+            String additionalField, String email, String phoneNumber, LocalDate birthDate, Gender gender, int age) // user login
     {
         // Setting up Authentication
+        auth = new Authentication();
         auth.setUsername(username);
         auth.setPassword(password);
         auth.setUserID(numberOfUsers++);
         auth.setAuthorityLevel(authorityLevel);
 
         // Setting up Profile
+        profile = new Profile();
         profile.setName(name);
         profile.setPhoneNumber(phoneNumber);
         profile.setEmail(email);
@@ -39,6 +42,8 @@ public class User
         profile.setBirthDate(birthDate);
         profile.setNationality(nationality);
         profile.setGender(gender);
+        creationDate = new Date(System.currentTimeMillis());
+        expirationDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 365);
 
     }
 
@@ -54,7 +59,7 @@ public class User
         viewProfile.add(profile.getNationality());
         viewProfile.add("" + profile.getAge());
         viewProfile.add("" + profile.getBirthDate());
-        viewProfile.add("" + profile.getGender());
+        viewProfile.add("" + profile.getGender().toString());
 
         return viewProfile;
     }

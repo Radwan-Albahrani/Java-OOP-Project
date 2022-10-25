@@ -1,11 +1,13 @@
 import java.sql.Date;
+import java.time.LocalDate;
 
+enum Gender { M, F }
 public class Profile
 {
     String name, nationality, field, additionalField, email, phoneNumber;
     int age;
-    char gender;
-    Date birthDate;
+    Gender gender;
+    LocalDate birthDate;
 
     // Setters
     public void setName(String name)
@@ -43,12 +45,12 @@ public class Profile
         this.age = age;
     }
 
-    public void setGender(char gender)
+    public void setGender(Gender gender)
     {
         this.gender = gender;
     }
 
-    public void setBirthDate(Date birthDate)
+    public void setBirthDate(LocalDate birthDate)
     {
         this.birthDate = birthDate;
     }
@@ -89,12 +91,12 @@ public class Profile
         return age;
     }
 
-    public char getGender()
+    public Gender getGender()
     {
         return gender;
     }
 
-    public Date getBirthDate()
+    public LocalDate getBirthDate()
     {
         return birthDate;
     }
