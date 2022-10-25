@@ -239,9 +239,9 @@ public class Main
 
         // Asking if the user is an instructor or a student or an Admin
         System.out.println("Please select your role: ");
-        System.out.println("1. Student");
+        System.out.println("1. Admin");
         System.out.println("2. Instructor");
-        System.out.println("3. Admin");
+        System.out.println("3. Student");
 
         System.out.print("\n\nYour choice: ");
         int role = scanner.nextInt();
@@ -251,8 +251,9 @@ public class Main
         while (role != 1 && role != 2 && role != 3)
         {
             System.out.println("Please select a valid role: ");
-            System.out.println("1. Student");
+            System.out.println("1. Admin");
             System.out.println("2. Instructor");
+            System.out.println("3. Student");
             role = scanner.nextInt();
         }
 
@@ -331,10 +332,10 @@ public class Main
         additionalField = scanner.nextLine();
         email = "" + name.split(" ")[0] + User.numberOfUsers + "@university.com";
 
-        // Check if role is 1 or 2
+        // Check role and create appropriate object
         if (role == 1)
         {
-            User student = new Student(2, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
+            User student = new Admin(0, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
             return student;
         }
         else if (role == 2)
@@ -344,7 +345,7 @@ public class Main
         }
         else
         {
-            User admin = new Admin(0, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
+            User admin = new Student(2, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
             return admin;
         }
     }
