@@ -47,10 +47,4 @@ public class Courses
     {
         return creditHours;
     }
-
-
-    public static void main(String[] args) 
-    {
-        
-    }
 }
