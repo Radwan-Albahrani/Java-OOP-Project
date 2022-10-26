@@ -43,7 +43,7 @@ public class Courses
         return coursePercents;
     }
 
-    public int creditHours()
+    public int getCreditHours()
     {
         return creditHours;
     }

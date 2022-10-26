@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends Instructor
 {
@@ -9,4 +11,19 @@ public class Admin extends Instructor
         super(authorityLevel, username, password, name, nationality, field, additionalField, email, phoneNumber, birthDate, gender, age);
     }
 
+   
+
+    public static void createCourse(String courseName, String courseGrade, int creditHours, double coursePercents)
+    {
+        List<Courses> createCourses = new ArrayList<Courses>();
+
+        Courses course = new Courses();
+        course.setCourseName(courseName);
+        course.setCourseGrade(courseGrade);
+        course.setCreditHours(creditHours);
+        course.setCoursePercents(coursePercents);
+       
+
+        createCourses.add(course);        
+    }
 }
