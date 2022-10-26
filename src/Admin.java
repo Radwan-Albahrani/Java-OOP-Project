@@ -24,10 +24,11 @@ public class Admin extends Instructor
         allCourses.add(course);
     }
 
-    public static void editCourse(int index)
+    public static void editCourse(Courses oldCourse, Courses newCourse)
     {
-        
-    }  
+        allCourses.remove(oldCourse);
+        allCourses.add(newCourse);
+    }
 
     public static void deleteCourse(Courses course)
     {
@@ -54,5 +55,4 @@ public class Admin extends Instructor
 
     }
 
-  
 }
