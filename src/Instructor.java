@@ -28,16 +28,15 @@ public class Instructor extends User
 
     public static int numberOfInstructors;
 
-    private double salary;
     List<Student> students = new ArrayList<Student>();
-    List<Courses> currentClass = new ArrayList<Courses>();
+    Courses currentClass = null;
+    public Courses getCurrentClass()
+    {
+        return currentClass;
+    }
+
     List<Student> viewAllGpa = new ArrayList<Student>();
     public Evaluation evaluation;
-
-    public void setStudentGrade(Student student, int index, String courseGrade)
-    {
-        student.courses.get(index).setCourseGrade(courseGrade);
-    }
 
     public void sendAnnouncement(String announcements)
     {
@@ -53,5 +52,17 @@ public class Instructor extends User
     public void setAttendance(Student student, double attendance)
     {
         student.setAttendance(attendance);
+    }
+
+    public void addStudent(Student student)
+    {
+        students.add(student);
+    }
+
+    @Override
+    public void registerCourse(Courses course)
+    {
+        currentClass = course;
+        course.setInstructor(this);
     }
 }

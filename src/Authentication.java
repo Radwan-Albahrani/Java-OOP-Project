@@ -1,4 +1,6 @@
-public class Authentication
+import java.io.Serializable;
+
+public class Authentication implements Serializable
 {
     String username, password;
     int authorityLevel, userID;
