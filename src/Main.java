@@ -99,6 +99,58 @@ public class Main
         }
         // TODO after login, check if user is admin, instructor, or student
         System.out.println("Successfully Logged in!");
+        // Student workflow
+        if (currentUser instanceof Student)
+        {
+            // Create a menu for the student to view announcements, register course, view grades, drop courses, and logout.
+            studentMenu();
+
+            int choice = scanner.nextInt();
+            switch (choice)
+            {
+                case 1:
+                    // Register Course
+                    registerCourse((Student) currentUser);
+                case 2:
+                    // View Grades
+                    viewGrades((Student) currentUser);
+                case 3:
+                    // Drop Courses
+                    dropCourses((Student) currentUser);
+            }
+        }
+    }
+
+    private static void dropCourses(Student currentUser)
+    {
+    }
+
+    private static void viewGrades(Student currentUser)
+    {
+        List<Courses> courses = currentUser.viewGrades();
+        for (Courses course : courses)
+        {
+            System.out.println(course);
+        }
+    }
+
+    private static void registerCourse(Student currentUser)
+    {
+        // Get all Courses from admin class
+        // TODO get courses from admin class
+    }
+
+    private static void studentMenu()
+    {
+        System.out.println("Welcome to the Student Management system.");
+        System.out.println("Select one of the following: ");
+        System.out.println("1. Register Course");
+        System.out.println("2. View courses");
+        System.out.println("3. View Grades");
+        System.out.println("4. View Announcements");
+        System.out.println("5. Logout");
+
+        System.out.println("\n\nPlease enter your choice: ");
     }
 
     private static User login(int loginChoice, List<Student> students, List<Instructor> instructors, List<Admin> admins)

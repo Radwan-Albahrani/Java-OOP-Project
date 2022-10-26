@@ -1,4 +1,3 @@
-import java.sql.Date;
 import java.time.LocalDate;
 
 enum Gender { M, F }
