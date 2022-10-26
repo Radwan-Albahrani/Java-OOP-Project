@@ -24,7 +24,7 @@ public class Admin extends Instructor
         allCourses.add(course);
     }
 
-    public static void editCourse(int index)
+    public static void editCourse(Courses course)
     {
         
     }  
