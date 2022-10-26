@@ -21,7 +21,6 @@ public class Student extends User
     }
 
     public static int numberOfStudents;
-    private int numberOfCourses;
     private double gpa;
     private double attendance;
     List<Courses> courses = new ArrayList<Courses>();
@@ -46,7 +45,7 @@ public class Student extends User
     {
         return attendance;
     }
-
+    @Override
     public void registerCourse(Courses course)
     {
         courses.add(course);

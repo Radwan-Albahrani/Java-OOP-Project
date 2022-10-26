@@ -9,7 +9,7 @@ public class Main
 {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws CloneNotSupportedException
     {
         List<Student> students = new ArrayList<Student>();
         List<Instructor> instructors = new ArrayList<Instructor>();
@@ -43,34 +43,39 @@ public class Main
                     studentMenu();
 
                     int choice = scanner.nextInt();
-                    switch (choice)
-                    {
-                        case 1:
-                            // Register Course
-                            registerCourse((Student) currentUser);
-                            break;
-                        case 2:
-                            // View Grades
-                            viewGrades((Student) currentUser);
-                            break;
-                        case 3:
-                            // Drop Courses
-                            dropCourses((Student) currentUser);
-                            break;
-                        case 4:
-                            // View announcements
-                            for (String announcements : Student.announcements)
-                            {
-                                System.out.println(announcements);
-                            }
-                            break;
-                        case 5:
-                            // Logout
-                            System.out.println("Successfully logged out!");
-                            break;
-                    }
+                    studentWorkFlow(currentUser, choice);
                 }
             }
+        }
+    }
+
+    private static void studentWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
+    {
+        switch (choice)
+        {
+            case 1:
+                // Register Course
+                registerCourse((Student) currentUser);
+                break;
+            case 2:
+                // View Grades
+                viewGrades((Student) currentUser);
+                break;
+            case 3:
+                // Drop Courses
+                dropCourses((Student) currentUser);
+                break;
+            case 4:
+                // View announcements
+                for (String announcements : Student.announcements)
+                {
+                    System.out.println(announcements);
+                }
+                break;
+            case 5:
+                // Logout
+                System.out.println("Successfully logged out!");
+                break;
         }
     }
 
@@ -174,10 +179,23 @@ public class Main
         }
     }
 
-    private static void registerCourse(Student currentUser)
+    private static void registerCourse(User currentUser) throws CloneNotSupportedException
     {
         // Get all Courses from admin class
-        // TODO get courses from admin class
+        List<Courses> courses = Admin.allCourses;
+        // List All courses
+        for (int i = 0; i < courses.size(); i++)
+        {
+            System.out.println((i+1) + ". " + courses.get(i).getCourseName());
+        }
+
+        // Select a course from the menu
+        System.out.print("Enter the number of the course you want to register: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        // Add course to student
+        currentUser.registerCourse((Courses) courses.get(choice-1).clone());
     }
 
     private static void studentMenu()

@@ -68,4 +68,6 @@ public abstract class User
     {
         // TODO create request change method
     }
+
+    public abstract void registerCourse(Courses course);
 }

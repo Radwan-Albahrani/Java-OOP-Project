@@ -28,9 +28,8 @@ public class Instructor extends User
 
     public static int numberOfInstructors;
 
-    private double salary;
     List<Student> students = new ArrayList<Student>();
-    List<Courses> currentClass = new ArrayList<Courses>();
+    Courses currentClass = null;
     List<Student> viewAllGpa = new ArrayList<Student>();
     public Evaluation evaluation;
 
@@ -53,5 +52,12 @@ public class Instructor extends User
     public void setAttendance(Student student, double attendance)
     {
         student.setAttendance(attendance);
+    }
+
+    @Override
+    public void registerCourse(Courses course)
+    {
+        // TODO Auto-generated method stub
+        currentClass = course;
     }
 }
