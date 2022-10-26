@@ -1,5 +1,5 @@
 
-public class Courses
+public class Courses implements Cloneable
 {
     private String courseName;
     private String courseGrade;
@@ -46,5 +46,11 @@ public class Courses
     public int getCreditHours()
     {
         return creditHours;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 }
