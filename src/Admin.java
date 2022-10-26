@@ -45,7 +45,7 @@ public class Admin extends Instructor
 
     }
 
-    public static void editIntstructorInformation()
+    public static void editInstructorInformation()
     {
 
     }

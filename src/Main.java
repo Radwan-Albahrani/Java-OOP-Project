@@ -43,14 +43,135 @@ public class Main
                     studentMenu();
 
                     int choice = scanner.nextInt();
-                    studentWorkFlow(currentUser, choice);
+                    int exit = studentWorkFlow(currentUser, choice);
+                    if (exit == 1)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            else if (currentUser instanceof Instructor)
+            {
+                while (true)
+                {
+                    // Create a menu for the instructor to send announcements, select course, view student grades, set student grades and logout.
+                    instructorMenu();
+
+                    int choice = scanner.nextInt();
+                    instructorWorkFlow(currentUser, choice);
+                }
+            }
+
+            else if (currentUser instanceof Admin)
+            {
+                while (true)
+                {
+                    // Create a menu for the admin to view announcements, register course, view grades, drop courses, and logout.
+                    adminMenu();
+
+                    int choice = scanner.nextInt();
+                    adminWorkFlow(currentUser, choice);
                 }
             }
         }
     }
 
-    private static void studentWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
+    private static void adminWorkFlow(User currentUser, int choice)
     {
+    }
+
+    private static void adminMenu()
+    {
+    }
+
+    private static void instructorWorkFlow(User currentUser, int choice)
+    {
+        switch (choice)
+        {
+            case 1:
+                System.out.println("Enter the announcement: ");
+                String announcement = scanner.nextLine();
+                ((Instructor) currentUser).sendAnnouncement(announcement);
+                break;
+            case 2:
+                while (true)
+                {
+                    if (((Instructor) currentUser).getCurrentClass() != null) {
+                        System.out.println("You are already teaching a class");
+                        break;
+                    }
+                    System.out.println("Enter the course name: ");
+                    String courseName = scanner.nextLine();
+                    Courses selectedCourse = null;
+                    // Search for course in admin
+                    for (Courses course : Admin.allCourses)
+                    {
+                        if (course.getCourseName().equals(courseName))
+                        {
+                            selectedCourse = course;
+                            break;
+                        }
+                    }
+
+                    if (selectedCourse != null)
+                    {
+                        ((Instructor) currentUser).registerCourse(selectedCourse);
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Course not found!");
+                    }
+                }
+                break;
+            case 3:
+                while (true)
+                {
+                    System.out.println("Enter the student name: ");
+                    String studentName = scanner.nextLine();
+                    Student selectedStudent = null;
+                    // Search for student in instructor
+                    for (Student student : ((Instructor) currentUser).students)
+                    {
+                        if (student.profile.getName().equals(studentName))
+                        {
+                            selectedStudent = student;
+                            break;
+                        }
+                    }
+
+                    if (selectedStudent != null)
+                    {
+                        for (Courses course : selectedStudent.courses)
+                        {
+                            System.out.println(course.getCourseName() + " " + course.getCourseGrade());
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Student not found!");
+                    }
+                }
+                break;
+        }
+    }
+
+    private static void instructorMenu()
+    {
+        System.out.println("1. Send Announcement");
+        System.out.println("2. Select Course");
+        System.out.println("3. View Student Grades");
+        System.out.println("4. Set Student Grades");
+        System.out.println("5. Logout");
+
+        System.out.print("\n\nEnter your choice: ");
+    }
+
+    private static int studentWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
+    {
+        int exitCode = 0;
         switch (choice)
         {
             case 1:
@@ -75,8 +196,10 @@ public class Main
             case 5:
                 // Logout
                 System.out.println("Successfully logged out!");
+                exitCode = 1;
                 break;
         }
+        return exitCode;
     }
 
     private static User LoginWorkflow(List<Student> students, List<Instructor> instructors, List<Admin> admins, User currentUser, int choice)
@@ -158,7 +281,7 @@ public class Main
         // List All courses
         for (int i = 0; i < courses.size(); i++)
         {
-            System.out.println((i+1) + ". " + courses.get(i).getCourseName());
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName());
         }
 
         // Select a course from the menu
@@ -167,7 +290,7 @@ public class Main
         scanner.nextLine();
 
         // Drop the course
-        currentUser.dropCourses(courses.get(choice-1));
+        currentUser.dropCourses(courses.get(choice - 1));
     }
 
     private static void viewGrades(Student currentUser)
@@ -186,7 +309,7 @@ public class Main
         // List All courses
         for (int i = 0; i < courses.size(); i++)
         {
-            System.out.println((i+1) + ". " + courses.get(i).getCourseName());
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName());
         }
 
         // Select a course from the menu
@@ -195,7 +318,7 @@ public class Main
         scanner.nextLine();
 
         // Add course to student
-        currentUser.registerCourse((Courses) courses.get(choice-1).clone());
+        currentUser.registerCourse((Courses) courses.get(choice - 1).clone());
     }
 
     private static void studentMenu()

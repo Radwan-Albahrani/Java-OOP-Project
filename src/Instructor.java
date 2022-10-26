@@ -30,6 +30,11 @@ public class Instructor extends User
 
     List<Student> students = new ArrayList<Student>();
     Courses currentClass = null;
+    public Courses getCurrentClass()
+    {
+        return currentClass;
+    }
+
     List<Student> viewAllGpa = new ArrayList<Student>();
     public Evaluation evaluation;
 
