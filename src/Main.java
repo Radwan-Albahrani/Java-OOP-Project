@@ -17,112 +17,139 @@ public class Main
         User currentUser = null;
         while (true)
         {
-            // Creating a menu for the user to choose from with login and register
-            MainMenu();
-            System.out.print("\n\nEnter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            // Switch statement for choice
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    while (true)
-                    {
-                        // Login as Admin, Instructor, or Student
-                        LoginMenu();
-                        System.out.print("\n\nEnter your choice: ");
-                        int loginChoice = scanner.nextInt();
-                        scanner.nextLine();
+                // Creating a menu for the user to choose from with login and register
+                MainMenu();
+                System.out.print("\n\nEnter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-                        // If admins are empty, then there are no admins
-                        if (admins.isEmpty() && loginChoice == 1)
-                        {
-                            System.out.println("There are no admins!");
-                            break;
-                        }
-
-                        // If instructors are empty, then there are no instructors
-                        else if (instructors.isEmpty() && loginChoice == 2)
-                        {
-                            System.out.println("There are no instructors!");
-                            break;
-                        }
-
-                        // If students are empty, then there are no students
-                        else if (students.isEmpty() && loginChoice == 3)
-                        {
-                            System.out.println("There are no students!");
-                            break;
-                        }
-                        currentUser = login(loginChoice, students, instructors, admins);
-
-                        // Check if current user is null
-                        if (currentUser != null)
-                        {
-                            break;
-                        }
-                    }
+                currentUser = LoginWorkflow(students, instructors, admins, currentUser, choice);
+                // Check if current user is null
+                if (currentUser != null)
+                {
                     break;
-
-                case 2:
-                    User registered = getInformation();
-                    if (registered instanceof Student)
-                    {
-                        students.add((Student) registered);
-                    }
-                    else if (registered instanceof Instructor)
-                    {
-                        instructors.add((Instructor) registered);
-                    }
-                    else if (registered instanceof Admin)
-                    {
-                        admins.add((Admin) registered);
-                    }
-                    else
-                    {
-                        System.out.println("Error: User is not a student or instructor");
-                    }
-
-                    break;
-                case 3:
-                    System.out.println("Thank you for using the University of Java");
-                    System.exit(0);
-                    break;
-
+                }
             }
-            // Check if current user is null
-            if (currentUser != null)
+            // TODO after login, check if user is admin, instructor, or student
+            System.out.println("Successfully Logged in!");
+            // Student workflow
+            if (currentUser instanceof Student)
             {
-                break;
-            }
-        }
-        // TODO after login, check if user is admin, instructor, or student
-        System.out.println("Successfully Logged in!");
-        // Student workflow
-        if (currentUser instanceof Student)
-        {
-            // Create a menu for the student to view announcements, register course, view grades, drop courses, and logout.
-            studentMenu();
+                while (true)
+                {
+                    // Create a menu for the student to view announcements, register course, view grades, drop courses, and logout.
+                    studentMenu();
 
-            int choice = scanner.nextInt();
-            switch (choice)
-            {
-                case 1:
-                    // Register Course
-                    registerCourse((Student) currentUser);
-                case 2:
-                    // View Grades
-                    viewGrades((Student) currentUser);
-                case 3:
-                    // Drop Courses
-                    dropCourses((Student) currentUser);
+                    int choice = scanner.nextInt();
+                    switch (choice)
+                    {
+                        case 1:
+                            // Register Course
+                            registerCourse((Student) currentUser);
+                            break;
+                        case 2:
+                            // View Grades
+                            viewGrades((Student) currentUser);
+                            break;
+                        case 3:
+                            // Drop Courses
+                            dropCourses((Student) currentUser);
+                            break;
+                        case 4:
+                            // View announcements
+                            for (String announcements : Student.announcements)
+                            {
+                                System.out.println(announcements);
+                            }
+                            break;
+                        case 5:
+                            // Logout
+                            System.out.println("Successfully logged out!");
+                            break;
+                    }
+                }
             }
         }
     }
 
+    private static User LoginWorkflow(List<Student> students, List<Instructor> instructors, List<Admin> admins, User currentUser, int choice)
+    {
+        // Switch statement for choice
+        switch (choice)
+        {
+            case 1:
+                while (true)
+                {
+                    // Login as Admin, Instructor, or Student
+                    LoginMenu();
+                    System.out.print("\n\nEnter your choice: ");
+                    int loginChoice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    // If admins are empty, then there are no admins
+                    if (admins.isEmpty() && loginChoice == 1)
+                    {
+                        System.out.println("There are no admins!");
+                        break;
+                    }
+
+                    // If instructors are empty, then there are no instructors
+                    else if (instructors.isEmpty() && loginChoice == 2)
+                    {
+                        System.out.println("There are no instructors!");
+                        break;
+                    }
+
+                    // If students are empty, then there are no students
+                    else if (students.isEmpty() && loginChoice == 3)
+                    {
+                        System.out.println("There are no students!");
+                        break;
+                    }
+                    currentUser = login(loginChoice, students, instructors, admins);
+
+                    // Check if current user is null
+                    if (currentUser != null)
+                    {
+                        break;
+                    }
+                }
+                break;
+
+            case 2:
+                User registered = getInformation();
+                if (registered instanceof Student)
+                {
+                    students.add((Student) registered);
+                }
+                else if (registered instanceof Instructor)
+                {
+                    instructors.add((Instructor) registered);
+                }
+                else if (registered instanceof Admin)
+                {
+                    admins.add((Admin) registered);
+                }
+                else
+                {
+                    System.out.println("Error: User is not a student or instructor");
+                }
+
+                break;
+            case 3:
+                System.out.println("Thank you for using the University of Java");
+                System.exit(0);
+                break;
+
+        }
+        return currentUser;
+    }
+
     private static void dropCourses(Student currentUser)
     {
+
     }
 
     private static void viewGrades(Student currentUser)
