@@ -59,7 +59,11 @@ public class Main
                     instructorMenu();
 
                     int choice = scanner.nextInt();
-                    instructorWorkFlow(currentUser, choice);
+                    int exit = instructorWorkFlow(currentUser, choice);
+                    if (exit == 1)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -85,15 +89,19 @@ public class Main
     {
     }
 
-    private static void instructorWorkFlow(User currentUser, int choice)
+    private static int instructorWorkFlow(User currentUser, int choice)
     {
+        int exitcode = 0;
         switch (choice)
         {
+            // Send announcements
             case 1:
-                System.out.println("Enter the announcement: ");
+                scanner.nextLine();
+                System.out.print("Enter the announcement: ");
                 String announcement = scanner.nextLine();
                 ((Instructor) currentUser).sendAnnouncement(announcement);
                 break;
+            // Register instructor in a class
             case 2:
                 while (true)
                 {
@@ -125,6 +133,7 @@ public class Main
                     }
                 }
                 break;
+            // View student grades
             case 3:
                 while (true)
                 {
@@ -155,7 +164,14 @@ public class Main
                     }
                 }
                 break;
+            case 4:
+                // TODO Set Student Grades
+                break;
+            case 5:
+                exitcode = 1;
+                break;
         }
+        return exitcode;
     }
 
     private static void instructorMenu()
@@ -490,11 +506,6 @@ public class Main
             role = scanner.nextInt();
         }
 
-        // Asking for information
-        System.out.print("Enter your username: ");
-        username = scanner.nextLine();
-        System.out.print("Enter your password: ");
-        password = getPassword();
         System.out.print("Enter your name: ");
         name = scanner.nextLine();
 
@@ -564,6 +575,10 @@ public class Main
         System.out.print("Enter your additional field (If Any): ");
         additionalField = scanner.nextLine();
         email = "" + name.split(" ")[0] + User.numberOfUsers + "@university.com";
+        username = "" + name.split(" ") + User.numberOfUsers;
+        System.out.println("Your Username has been set to: " + username);
+        System.out.print("Enter your password: ");
+        password = getPassword();
 
         // Check role and create appropriate object
         if (role == 1)
