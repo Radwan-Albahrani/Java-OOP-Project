@@ -49,6 +49,7 @@ public class Student extends User
     public void registerCourse(Courses course)
     {
         courses.add(course);
+        course.getInstructor().addStudent(this);
     }
 
     public void dropCourses(Courses course)

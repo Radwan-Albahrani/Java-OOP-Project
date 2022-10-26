@@ -11,9 +11,30 @@ public class Main
 
     public static void main(String[] args) throws CloneNotSupportedException
     {
-        List<Student> students = new ArrayList<Student>();
-        List<Instructor> instructors = new ArrayList<Instructor>();
-        List<Admin> admins = new ArrayList<Admin>();
+        // Get students from files if exists
+        String studentFileName = "./data/students.ser";
+        String instructorFileName = "./data/instructors.ser";
+        String adminFileName = "./data/admins.ser";
+        List<Student> students = OS.ReadFromFileStudents(studentFileName);
+        List<Instructor> instructors = OS.ReadFromFileInstructors(instructorFileName);
+        List<Admin> admins = OS.ReadFromFileAdmins(adminFileName);
+        if (students == null)
+        {
+            students = new ArrayList<Student>();
+            OS.WriteToFileStudent(students, studentFileName);
+        }
+        if (instructors == null)
+        {
+            instructors = new ArrayList<Instructor>();
+            OS.WriteToFileInstructor(instructors, instructorFileName);
+        }
+        if (admins == null)
+        {
+            admins = new ArrayList<Admin>();
+            OS.WriteToFileAdmin(admins, adminFileName);
+        }
+
+        // Get Logged in user
         User currentUser = null;
         while (true)
         {
@@ -32,7 +53,6 @@ public class Main
                     break;
                 }
             }
-            // TODO after login, check if user is admin, instructor, or student
             System.out.println("Successfully Logged in!");
             // Student workflow
             if (currentUser instanceof Student)
@@ -46,6 +66,7 @@ public class Main
                     int exit = studentWorkFlow(currentUser, choice);
                     if (exit == 1)
                     {
+                        OS.WriteToFileStudent(students, studentFileName);
                         break;
                     }
                 }
@@ -62,6 +83,7 @@ public class Main
                     int exit = instructorWorkFlow(currentUser, choice);
                     if (exit == 1)
                     {
+                        OS.WriteToFileInstructor(instructors, instructorFileName);
                         break;
                     }
                 }
@@ -83,10 +105,19 @@ public class Main
 
     private static void adminWorkFlow(User currentUser, int choice)
     {
+        // TODO Admin Workflow 
     }
 
     private static void adminMenu()
     {
+        System.out.println("1. View Alerts");
+        System.out.println("2. Create Course");
+        System.out.println("3. Delete Course");
+        System.out.println("4. Edit Course");
+        System.out.println("5. Edit User Information.");
+        System.out.println("6. Logout");
+
+        System.out.print("\n\nEnter your choice: ");
     }
 
     private static int instructorWorkFlow(User currentUser, int choice)
@@ -105,7 +136,8 @@ public class Main
             case 2:
                 while (true)
                 {
-                    if (((Instructor) currentUser).getCurrentClass() != null) {
+                    if (((Instructor) currentUser).getCurrentClass() != null)
+                    {
                         System.out.println("You are already teaching a class");
                         break;
                     }
@@ -154,7 +186,11 @@ public class Main
                     {
                         for (Courses course : selectedStudent.courses)
                         {
-                            System.out.println(course.getCourseName() + " " + course.getCourseGrade());
+                            if (course.getCourseName().equals(((Instructor) currentUser).getCurrentClass().getCourseName()))
+                            {
+                                System.out.println("Student " + selectedStudent.profile.getName() + " has a grade of " + course.getCourseGrade());
+                                break;
+                            }
                         }
                         break;
                     }
@@ -165,9 +201,52 @@ public class Main
                 }
                 break;
             case 4:
-                // TODO Set Student Grades
+                // Select a student from the available students
+                List<Student> students = ((Instructor) currentUser).viewStudents();
+                // Get class
+                Courses currentClass = ((Instructor) currentUser).getCurrentClass();
+
+                // List all students
+                for (int i = 0; i < students.size(); i++)
+                {
+                    System.out.println(i + 1 + ". " + students.get(i).profile.getName());
+                }
+
+                // Select a student
+                System.out.println("Select a student: ");
+                int studentIndex = scanner.nextInt();
+                scanner.nextLine();
+                Student selectedStudent = students.get(studentIndex - 1);
+
+                // Ask what grade to set
+                System.out.println("Enter the Percentage grade: ");
+                Double grade = scanner.nextDouble();
+
+                // Check if grade is between 0 and 100. If not, ask again
+                while (grade < 0 || grade > 100)
+                {
+                    System.out.println("Enter the Percentage grade (Must be between 0 and 100): ");
+                    grade = scanner.nextDouble();
+                }
+                // Search for that class in student and set its grade
+                for (Courses course : selectedStudent.courses)
+                {
+                    if (course.getCourseName().equals(currentClass.getCourseName()))
+                    {
+                        course.setCoursePercents(grade);
+                        break;
+                    }
+                }
                 break;
             case 5:
+                // Request a Change from the admin
+                System.out.print("Type out an email to the admin for a change request: ");
+                String email = scanner.nextLine();
+                email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
+                        + currentUser.auth.getUserID();
+                Admin.alerts.add(email);
+                System.out.println("Change Requested Successfully");
+            case 6:
                 exitcode = 1;
                 break;
         }
@@ -180,7 +259,8 @@ public class Main
         System.out.println("2. Select Course");
         System.out.println("3. View Student Grades");
         System.out.println("4. Set Student Grades");
-        System.out.println("5. Logout");
+        System.out.println("5. Request Change");
+        System.out.println("6. Logout");
 
         System.out.print("\n\nEnter your choice: ");
     }
@@ -210,6 +290,14 @@ public class Main
                 }
                 break;
             case 5:
+                // Request a Change from the admin
+                System.out.print("Type out an email to the admin for a change request: ");
+                String email = scanner.nextLine();
+                email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
+                        + currentUser.auth.getUserID();
+                Admin.alerts.add(email);
+                System.out.println("Change Requested Successfully");
+            case 6:
                 // Logout
                 System.out.println("Successfully logged out!");
                 exitCode = 1;
@@ -250,6 +338,11 @@ public class Main
                     else if (students.isEmpty() && loginChoice == 3)
                     {
                         System.out.println("There are no students!");
+                        break;
+                    }
+
+                    else if (loginChoice == 4)
+                    {
                         break;
                     }
                     currentUser = login(loginChoice, students, instructors, admins);
@@ -322,10 +415,27 @@ public class Main
     {
         // Get all Courses from admin class
         List<Courses> courses = Admin.allCourses;
-        // List All courses
+
+        // If courses is empty exit
+        if (courses.isEmpty())
+        {
+            System.out.println("There are no courses!");
+            return;
+        }
+
+        // Clean courses list if course has no instructor
         for (int i = 0; i < courses.size(); i++)
         {
-            System.out.println((i + 1) + ". " + courses.get(i).getCourseName());
+            if (courses.get(i).getInstructor() == null)
+            {
+                courses.remove(i);
+            }
+        }
+
+        // List All courses that have instructors
+        for (int i = 0; i < courses.size(); i++)
+        {
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName() + " - " + courses.get(i).getInstructor().profile.getName());
         }
 
         // Select a course from the menu
@@ -345,9 +455,10 @@ public class Main
         System.out.println("2. View courses");
         System.out.println("3. View Grades");
         System.out.println("4. View Announcements");
-        System.out.println("5. Logout");
+        System.out.println("5. Request Change");
+        System.out.println("6. Logout");
 
-        System.out.println("\n\nPlease enter your choice: ");
+        System.out.print("\n\nPlease enter your choice: ");
     }
 
     private static User login(int loginChoice, List<Student> students, List<Instructor> instructors, List<Admin> admins)
@@ -484,7 +595,7 @@ public class Main
         int age = 0;
         Gender gender = Gender.valueOf("M");
         LocalDate dob = null;
-        boolean notParsed = false;
+        boolean notParsed;
 
         // Asking if the user is an instructor or a student or an Admin
         System.out.println("Please select your role: ");
@@ -509,6 +620,8 @@ public class Main
         System.out.print("Enter your name: ");
         name = scanner.nextLine();
 
+        // Get date of birth and validate it
+        notParsed = false;
         while (!notParsed)
         {
             try
@@ -526,8 +639,19 @@ public class Main
             }
         }
 
+        // Get Nationality
         System.out.print("Enter your nationality: ");
         nationality = scanner.nextLine();
+
+        // nationality cannot be empty
+        while (nationality.isEmpty())
+        {
+            System.out.println("Nationality cannot be empty");
+            System.out.print("Enter your Nationality: ");
+            field = scanner.nextLine();
+        }
+
+        // Get phone number and make sure its the proper format
         notParsed = false;
         while (!notParsed)
         {
@@ -555,6 +679,7 @@ public class Main
             }
         }
 
+        // Get Gender and make sure it is either M or F
         notParsed = false;
         while (!notParsed)
         {
@@ -570,13 +695,29 @@ public class Main
             }
         }
         scanner.nextLine();
+
+        // Get field
         System.out.print("Enter your field: ");
         field = scanner.nextLine();
+
+        // Field Cannot be empty
+        while (field.isEmpty())
+        {
+            System.out.println("Field cannot be empty");
+            System.out.print("Enter your field: ");
+            field = scanner.nextLine();
+        }
+
+        // Get Additional Field
         System.out.print("Enter your additional field (If Any): ");
         additionalField = scanner.nextLine();
+
+        // Set Arbitrary Username and email fields
         email = "" + name.split(" ")[0] + User.numberOfUsers + "@university.com";
-        username = "" + name.split(" ") + User.numberOfUsers;
+        username = "" + name.split(" ")[0] + User.numberOfUsers;
         System.out.println("Your Username has been set to: " + username);
+
+        // Get Password
         System.out.print("Enter your password: ");
         password = getPassword();
 

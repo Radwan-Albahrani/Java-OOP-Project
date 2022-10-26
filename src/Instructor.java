@@ -38,11 +38,6 @@ public class Instructor extends User
     List<Student> viewAllGpa = new ArrayList<Student>();
     public Evaluation evaluation;
 
-    public void setStudentGrade(Student student, int index, String courseGrade)
-    {
-        student.courses.get(index).setCourseGrade(courseGrade);
-    }
-
     public void sendAnnouncement(String announcements)
     {
         Student.announcements.add(announcements);
@@ -59,10 +54,15 @@ public class Instructor extends User
         student.setAttendance(attendance);
     }
 
+    public void addStudent(Student student)
+    {
+        students.add(student);
+    }
+
     @Override
     public void registerCourse(Courses course)
     {
-        // TODO Auto-generated method stub
         currentClass = course;
+        course.setInstructor(this);
     }
 }

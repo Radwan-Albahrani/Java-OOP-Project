@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class User
+public abstract class User implements Serializable
 {
     public static int numberOfUsers = 0;
     int authorityLevel, age;
@@ -62,11 +63,6 @@ public abstract class User
         viewProfile.add("" + profile.getGender().toString());
 
         return viewProfile;
-    }
-
-    public void requestChange() // request change from admin
-    {
-        // TODO create request change method
     }
 
     public abstract void registerCourse(Courses course);

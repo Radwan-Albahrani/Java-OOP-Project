@@ -1,18 +1,30 @@
+import java.io.Serializable;
 
-public class Courses implements Cloneable
+public class Courses implements Cloneable, Serializable
 {
     private String courseName;
     private String courseGrade;
     private int creditHours;
     private double coursePercents;
+    private Instructor instructor = null;
 
-    //setters
+    public Instructor getInstructor()
+    {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor)
+    {
+        this.instructor = instructor;
+    }
+
+    // setters
     public void setCourseName(String courseName)
     {
         this.courseName = courseName;
     }
 
-    public void setCourseGrade(String courseGrade)
+    private void setCourseGrade(String courseGrade)
     {
         this.courseGrade = courseGrade;
     }
@@ -25,9 +37,46 @@ public class Courses implements Cloneable
     public void setCoursePercents(double coursePercents)
     {
         this.coursePercents = coursePercents;
+        if (coursePercents >= 95)
+        {
+            setCourseGrade("A+");
+
+        }
+        else if (coursePercents >= 90)
+        {
+            setCourseGrade("A");
+        }
+        else if (coursePercents >= 85)
+        {
+            setCourseGrade("B+");
+        }
+        else if (coursePercents >= 80)
+        {
+            setCourseGrade("B");
+        }
+        else if (coursePercents >= 75)
+        {
+            setCourseGrade("C+");
+        }
+        else if (coursePercents >= 70)
+        {
+            setCourseGrade("C");
+        }
+        else if (coursePercents >= 65)
+        {
+            setCourseGrade("D+");
+        }
+        else if (coursePercents >= 60)
+        {
+            setCourseGrade("D");
+        }
+        else
+        {
+            setCourseGrade("F");
+        }
     }
 
-    //Getters
+    // Getters
     public String getCourseName()
     {
         return courseName;

@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
 enum Gender { M, F }
-public class Profile
+public class Profile implements Serializable
 {
     String name, nationality, field, additionalField, email, phoneNumber;
     int age;
