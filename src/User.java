@@ -64,10 +64,6 @@ public abstract class User
         return viewProfile;
     }
 
-    {
-
-    }
-
     public void requestChange() // request change from admin
     {
         // TODO create request change method

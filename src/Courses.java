@@ -43,7 +43,7 @@ public class Courses implements Cloneable
         return coursePercents;
     }
 
-    public int creditHours()
+    public int getCreditHours()
     {
         return creditHours;
     }
