@@ -23,4 +23,36 @@ public class Admin extends Instructor
 
         allCourses.add(course);
     }
+
+    public static void editCourse(int index)
+    {
+        
+    }  
+
+    public static void deleteCourse(Courses course)
+    {
+        allCourses.remove(course);
+    }
+
+    public static void editProfile()
+    {
+
+    }
+
+    public static void editStudentInformation()
+    {
+
+    }
+
+    public static void editIntstructorInformation()
+    {
+
+    }
+
+    public static void displayAlerts()
+    {
+
+    }
+
+  
 }
