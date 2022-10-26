@@ -52,6 +52,11 @@ public class Student extends User
         courses.add(course);
     }
 
+    public void dropCourses(Courses course)
+    {
+        courses.remove(course);
+    }
+
     public List<Courses> viewGrades()
     {
         return courses;
