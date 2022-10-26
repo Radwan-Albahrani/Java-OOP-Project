@@ -149,12 +149,25 @@ public class Main
 
     private static void dropCourses(Student currentUser)
     {
+        List<Courses> courses = currentUser.viewCourses();
+        // List All courses
+        for (int i = 0; i < courses.size(); i++)
+        {
+            System.out.println((i+1) + ". " + courses.get(i).getCourseName());
+        }
 
+        // Select a course from the menu
+        System.out.print("Enter the number of the course you want to drop: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        // Drop the course
+        currentUser.dropCourses(courses.get(choice-1));
     }
 
     private static void viewGrades(Student currentUser)
     {
-        List<Courses> courses = currentUser.viewGrades();
+        List<Courses> courses = currentUser.viewCourses();
         for (Courses course : courses)
         {
             System.out.println(course);
