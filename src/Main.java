@@ -620,6 +620,12 @@ public class Main
         System.out.print("Enter your name: ");
         name = scanner.nextLine();
 
+        // While name is empty, Ask again
+        while (name.isEmpty())
+        {
+            System.out.print("Please enter a valid name: ");
+            name = scanner.nextLine();
+        }
         // Get date of birth and validate it
         notParsed = false;
         while (!notParsed)
