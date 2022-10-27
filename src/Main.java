@@ -8,16 +8,17 @@ import java.io.Console;
 public class Main
 {
     public static Scanner scanner = new Scanner(System.in);
+    public static List<Admin> admins = null;
+    public static String studentFileName = "./data/students.ser";
+    public static String instructorFileName = "./data/instructors.ser";
+    public static String adminFileName = "./data/admins.ser";
 
     public static void main(String[] args) throws CloneNotSupportedException
     {
         // Get students from files if exists
-        String studentFileName = "./data/students.ser";
-        String instructorFileName = "./data/instructors.ser";
-        String adminFileName = "./data/admins.ser";
         List<Student> students = OS.ReadFromFileStudents(studentFileName);
         List<Instructor> instructors = OS.ReadFromFileInstructors(instructorFileName);
-        List<Admin> admins = OS.ReadFromFileAdmins(adminFileName);
+        admins = OS.ReadFromFileAdmins(adminFileName);
         if (students == null)
         {
             students = new ArrayList<Student>();
@@ -28,10 +29,51 @@ public class Main
             instructors = new ArrayList<Instructor>();
             OS.WriteToFileInstructor(instructors, instructorFileName);
         }
+        else
+        {
+            for (Instructor instructor : instructors)
+            {
+                instructor.populateStudents(students);
+            }
+        }
         if (admins == null)
         {
             admins = new ArrayList<Admin>();
             OS.WriteToFileAdmin(admins, adminFileName);
+        }
+        else
+        {
+            for (Admin admin : admins)
+            {
+                admin.populateCourses(instructors);
+            }
+        }
+
+        // Get the maximum userID from users
+        int maxUserID = 0;
+        if (!(students.isEmpty() && admins.isEmpty() && instructors.isEmpty()))
+        {
+
+            for (Admin admin : admins)
+            {
+                if (admin.auth.getUserID() > maxUserID)
+                    maxUserID = admin.auth.getUserID();
+            }
+
+            for (Instructor instructor : instructors)
+            {
+                if (instructor.auth.getUserID() > maxUserID)
+                    maxUserID = instructor.auth.getUserID();
+            }
+
+            for (Student student : students)
+            {
+                if (student.auth.getUserID() > maxUserID)
+                    maxUserID = student.auth.getUserID();
+            }
+
+            // Set The userId to the max
+            User.numberOfUsers = maxUserID + 1;
         }
 
         // Get Logged in user
@@ -42,9 +84,9 @@ public class Main
             {
                 // Creating a menu for the user to choose from with login and register
                 MainMenu();
-                System.out.print("\n\nEnter your choice: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
+                System.out.print("Please enter your choice: ");
+                // Try to get an Integer and tell user if its not an integer
+                int choice = getInt();
 
                 currentUser = LoginWorkflow(students, instructors, admins, currentUser, choice);
                 // Check if current user is null
@@ -62,28 +104,30 @@ public class Main
                     // Create a menu for the student to view announcements, register course, view grades, drop courses, and logout.
                     studentMenu();
 
-                    int choice = scanner.nextInt();
+                    int choice = getInt();
                     int exit = studentWorkFlow(currentUser, choice);
                     if (exit == 1)
                     {
                         OS.WriteToFileStudent(students, studentFileName);
+                        currentUser = null;
                         break;
                     }
                 }
             }
 
-            else if (currentUser instanceof Instructor)
+            else if (currentUser instanceof Instructor && !(currentUser instanceof Admin))
             {
                 while (true)
                 {
                     // Create a menu for the instructor to send announcements, select course, view student grades, set student grades and logout.
                     instructorMenu();
 
-                    int choice = scanner.nextInt();
+                    int choice = getInt();
                     int exit = instructorWorkFlow(currentUser, choice);
                     if (exit == 1)
                     {
                         OS.WriteToFileInstructor(instructors, instructorFileName);
+                        currentUser = null;
                         break;
                     }
                 }
@@ -96,16 +140,116 @@ public class Main
                     // Create a menu for the admin to view announcements, register course, view grades, drop courses, and logout.
                     adminMenu();
 
-                    int choice = scanner.nextInt();
-                    adminWorkFlow(currentUser, choice);
+                    int choice = getInt();
+                    int exit = adminWorkFlow(currentUser, choice);
+                    if (exit == 1)
+                    {
+                        OS.WriteToFileAdmin(admins, adminFileName);
+                        currentUser = null;
+                        break;
+                    }
                 }
             }
         }
     }
 
-    private static void adminWorkFlow(User currentUser, int choice)
+    private static int getInt()
     {
-        // TODO Admin Workflow 
+        int choice = 0;
+        boolean notParsed = false;
+        do
+        {
+            try
+            {
+                choice = Integer.parseInt(scanner.nextLine());
+                notParsed = false;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Please enter a valid number!");
+                System.out.print("Enter Your Choice: ");
+                notParsed = true;
+            }
+        } while (notParsed);
+
+        return choice;
+    }
+
+    private static int adminWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
+    {
+        // TODO Admin Workflow
+        int exitcode = 0;
+        switch (choice)
+        {
+            case 1:
+                // If alerts is empty, tell user there are no alerts
+                if (((Admin) currentUser).alerts.isEmpty())
+                {
+                    System.out.println("There are no alerts!");
+                }
+                else
+                {
+                    // Print all alerts
+                    for (String alert : ((Admin) currentUser).alerts)
+                    {
+                        System.out.println(alert);
+                    }
+                }
+
+                break;
+            case 2:
+                // Create new course
+                System.out.print("Enter course name: ");
+                String courseName = scanner.nextLine();
+                System.out.print("Enter Credit Hours: ");
+                int creditHours = getInt();
+                Admin.createCourse(courseName, creditHours);
+                System.out.println("Course Created Successfully!");
+                break;
+
+            case 3:
+                // Display current courses
+                for (int i = 0; i < admins.get(0).allCourses.size(); i++)
+                {
+                    System.out.println(i + 1 + ". " + admins.get(0).allCourses.get(i).getCourseName());
+
+                }
+
+                // Select the course to edit
+                System.out.print("Enter course number to edit: ");
+                int courseNumber = getInt();
+                Courses SelectedCourse = admins.get(0).allCourses.get(courseNumber - 1);
+                // Index Check While loop
+                while (courseNumber < 1 || courseNumber > admins.get(0).allCourses.size())
+                {
+                    System.out.println("Please enter a valid course number!");
+                    System.out.print("Enter course number to edit: ");
+                    courseNumber = getInt();
+                }
+
+                // Create a new course object
+                Courses newCourse = (Courses) SelectedCourse.clone();
+
+                // Get new information
+                System.out.print("Enter new course name: ");
+                String newCourseName = scanner.nextLine();
+                System.out.print("Enter new Credit Hours: ");
+                int newCreditHours = getInt();
+
+                // Edit the course
+                newCourse.setCourseName(newCourseName);
+                newCourse.setCreditHours(newCreditHours);
+                Admin.editCourse(SelectedCourse, newCourse);
+
+            case 6:
+                // Logout
+                System.out.println("Logged out Successfully!");
+                exitcode = 1;
+                break;
+            default:
+                break;
+        }
+        return exitcode;
     }
 
     private static void adminMenu()
@@ -141,63 +285,90 @@ public class Main
                         System.out.println("You are already teaching a class");
                         break;
                     }
-                    System.out.println("Enter the course name: ");
-                    String courseName = scanner.nextLine();
-                    Courses selectedCourse = null;
-                    // Search for course in admin
-                    for (Courses course : Admin.allCourses)
+
+                    // Get All courses
+                    List<Courses> allCourses = admins.get(0).allCourses;
+
+                    // Clean out all courses so that the instructor is not in the list
+                    for (int i = 0; i < allCourses.size(); i++)
                     {
-                        if (course.getCourseName().equals(courseName))
+                        if (allCourses.get(i).getInstructor() != null)
                         {
-                            selectedCourse = course;
-                            break;
+                            allCourses.remove(i);
                         }
                     }
 
-                    if (selectedCourse != null)
+                    // IF courses is empty then there are no courses to register in
+                    if (allCourses.isEmpty())
                     {
-                        ((Instructor) currentUser).registerCourse(selectedCourse);
+                        System.out.println("There are no courses to register in!");
                         break;
                     }
-                    else
+                    // Display the rest of the courses
+                    for (int i = 0; i < allCourses.size(); i++)
                     {
-                        System.out.println("Course not found!");
+                        System.out.println(i + 1 + ". " + allCourses.get(i).getCourseName());
                     }
+
+                    // Selecting A course
+                    System.out.print("\n\nEnter the course number to register: ");
+                    int courseNumber = getInt();
+
+                    // Index Check
+                    while (courseNumber < 1 || courseNumber > allCourses.size())
+                    {
+                        System.out.println("Invalid Choice");
+                        System.out.print("Enter the number of the course you want Register: ");
+                        choice = getInt();
+                    }
+
+                    // Register the course
+                    ((Instructor) currentUser).registerCourse(allCourses.get(courseNumber - 1));
+                    System.out.println("Course Registered Successfully!");
+                    break;
                 }
                 break;
             // View student grades
             case 3:
                 while (true)
                 {
-                    System.out.println("Enter the student name: ");
-                    String studentName = scanner.nextLine();
-                    Student selectedStudent = null;
-                    // Search for student in instructor
-                    for (Student student : ((Instructor) currentUser).students)
+                    // Display All Students the instructor is teaching
+                    List<Student> students = ((Instructor) currentUser).viewStudents();
+                    if (students.isEmpty())
                     {
-                        if (student.profile.getName().equals(studentName))
-                        {
-                            selectedStudent = student;
-                            break;
-                        }
-                    }
-
-                    if (selectedStudent != null)
-                    {
-                        for (Courses course : selectedStudent.courses)
-                        {
-                            if (course.getCourseName().equals(((Instructor) currentUser).getCurrentClass().getCourseName()))
-                            {
-                                System.out.println("Student " + selectedStudent.profile.getName() + " has a grade of " + course.getCourseGrade());
-                                break;
-                            }
-                        }
+                        System.out.println("You are not teaching any students!");
                         break;
                     }
-                    else
+                    for (int i = 0; i < students.size(); i++)
                     {
-                        System.out.println("Student not found!");
+                        System.out.println(i + 1 + ". " + students.get(i).profile.getName() + " " + students.get(i).auth.getUserID());
                     }
+
+                    // Selecting A student
+                    System.out.print("Enter the student number to view grades: ");
+                    int studentNumber = getInt();
+
+                    // Index Check
+                    while (studentNumber < 1 || studentNumber > students.size())
+                    {
+                        System.out.println("Invalid Choice!");
+                        System.out.print("Enter the number of the student you want to view: ");
+                        studentNumber = getInt();
+                    }
+
+                    // Display the student grades for the course the instructor is teaching
+                    Student selectedStudent = students.get(studentNumber - 1);
+                    for (Courses course : selectedStudent.courses)
+                    {
+                        if (course.getInstructor() == currentUser)
+                        {
+                            System.out.println("Course: " + course.getCourseName());
+                            System.out.println("Grade: " + course.getCourseGrade());
+                        }
+
+                    }
+                    break;
+
                 }
                 break;
             case 4:
@@ -206,6 +377,12 @@ public class Main
                 // Get class
                 Courses currentClass = ((Instructor) currentUser).getCurrentClass();
 
+                // Check if students is empty
+                if (students.isEmpty())
+                {
+                    System.out.println("You are not teaching any students!");
+                    break;
+                }
                 // List all students
                 for (int i = 0; i < students.size(); i++)
                 {
@@ -213,13 +390,19 @@ public class Main
                 }
 
                 // Select a student
-                System.out.println("Select a student: ");
-                int studentIndex = scanner.nextInt();
-                scanner.nextLine();
+                System.out.print("Select a student: ");
+                int studentIndex = getInt();
+                // Index Check While loop
+                while (studentIndex < 1 || studentIndex > students.size())
+                {
+                    System.out.println("Please enter a valid student number!");
+                    System.out.print("Select a student: ");
+                    studentIndex = getInt();
+                }
                 Student selectedStudent = students.get(studentIndex - 1);
 
                 // Ask what grade to set
-                System.out.println("Enter the Percentage grade: ");
+                System.out.print("Enter the Percentage grade: ");
                 Double grade = scanner.nextDouble();
 
                 // Check if grade is between 0 and 100. If not, ask again
@@ -244,10 +427,14 @@ public class Main
                 String email = scanner.nextLine();
                 email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
                         + currentUser.auth.getUserID();
-                Admin.alerts.add(email);
+                for (Admin admin : admins)
+                {
+                    admin.alerts.add(email);
+                }
                 System.out.println("Change Requested Successfully");
             case 6:
                 exitcode = 1;
+                System.out.println("Logged out Successfully!");
                 break;
         }
         return exitcode;
@@ -276,7 +463,7 @@ public class Main
                 break;
             case 2:
                 // View Grades
-                viewGrades((Student) currentUser);
+                viewCourses((Student) currentUser);
                 break;
             case 3:
                 // Drop Courses
@@ -295,11 +482,15 @@ public class Main
                 String email = scanner.nextLine();
                 email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
                         + currentUser.auth.getUserID();
-                Admin.alerts.add(email);
+                for (Admin admin : admins)
+                {
+                    admin.alerts.add(email);
+                }
                 System.out.println("Change Requested Successfully");
+                break;
             case 6:
                 // Logout
-                System.out.println("Successfully logged out!");
+                System.out.println("Logged out Successfully!");
                 exitCode = 1;
                 break;
         }
@@ -317,8 +508,7 @@ public class Main
                     // Login as Admin, Instructor, or Student
                     LoginMenu();
                     System.out.print("\n\nEnter your choice: ");
-                    int loginChoice = scanner.nextInt();
-                    scanner.nextLine();
+                    int loginChoice = getInt();
 
                     // If admins are empty, then there are no admins
                     if (admins.isEmpty() && loginChoice == 1)
@@ -361,7 +551,7 @@ public class Main
                 {
                     students.add((Student) registered);
                 }
-                else if (registered instanceof Instructor)
+                else if (registered instanceof Instructor && !(registered instanceof Admin))
                 {
                     instructors.add((Instructor) registered);
                 }
@@ -377,6 +567,9 @@ public class Main
                 break;
             case 3:
                 System.out.println("Thank you for using the University of Java");
+                OS.WriteToFileAdmin(admins, adminFileName);
+                OS.WriteToFileInstructor(instructors, instructorFileName);
+                OS.WriteToFileStudent(students, studentFileName);
                 System.exit(0);
                 break;
 
@@ -395,26 +588,32 @@ public class Main
 
         // Select a course from the menu
         System.out.print("Enter the number of the course you want to drop: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = getInt();
+
+        // Index Check
+        while (choice < 1 || choice > courses.size())
+        {
+            System.out.print("Enter the number of the course you want to drop: ");
+            choice = getInt();
+        }
 
         // Drop the course
         currentUser.dropCourses(courses.get(choice - 1));
     }
 
-    private static void viewGrades(Student currentUser)
+    private static void viewCourses(Student currentUser)
     {
         List<Courses> courses = currentUser.viewCourses();
         for (Courses course : courses)
         {
-            System.out.println(course);
+            System.out.println(course.getCourseName() + ": " + course.getCoursePercent());
         }
     }
 
     private static void registerCourse(User currentUser) throws CloneNotSupportedException
     {
         // Get all Courses from admin class
-        List<Courses> courses = Admin.allCourses;
+        List<Courses> courses = admins.get(0).allCourses;
 
         // If courses is empty exit
         if (courses.isEmpty())
@@ -432,6 +631,24 @@ public class Main
             }
         }
 
+        // If course is already registered, remove it from list of courses
+        for (int i = 0; i < courses.size(); i++)
+        {
+            if (currentUser instanceof Student)
+            {
+                if (((Student) currentUser).isRegistered(courses.get(i)))
+                {
+                    courses.remove(i);
+                }
+            }
+        }
+
+        // If courses is empty exit
+        if (courses.isEmpty())
+        {
+            System.out.println("There are no courses!");
+            return;
+        }
         // List All courses that have instructors
         for (int i = 0; i < courses.size(); i++)
         {
@@ -440,11 +657,17 @@ public class Main
 
         // Select a course from the menu
         System.out.print("Enter the number of the course you want to register: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = getInt();
 
+        // Index Check
+        while (choice < 1 || choice > courses.size())
+        {
+            System.out.print("Enter the number of the course you want to drop: ");
+            choice = getInt();
+        }
         // Add course to student
         currentUser.registerCourse((Courses) courses.get(choice - 1).clone());
+        System.out.println("Course Registered Successfully!");
     }
 
     private static void studentMenu()
@@ -452,8 +675,8 @@ public class Main
         System.out.println("Welcome to the Student Management system.");
         System.out.println("Select one of the following: ");
         System.out.println("1. Register Course");
-        System.out.println("2. View courses");
-        System.out.println("3. View Grades");
+        System.out.println("2. View Courses");
+        System.out.println("3. Drop Course");
         System.out.println("4. View Announcements");
         System.out.println("5. Request Change");
         System.out.println("6. Logout");
@@ -578,7 +801,7 @@ public class Main
         // Get local date of now
         LocalDate curDate = LocalDate.now();
         // calculates the amount of time between two dates and returns the years
-        if ((dob != null) && (curDate != null))
+        if ((dob != null) && (curDate != null) && (dob.isBefore(curDate)))
         {
             return Period.between(dob, curDate).getYears();
         }
@@ -602,24 +825,32 @@ public class Main
         System.out.println("1. Admin");
         System.out.println("2. Instructor");
         System.out.println("3. Student");
+        System.out.println("4. Exit");
 
         System.out.print("\n\nYour choice: ");
-        int role = scanner.nextInt();
-        scanner.nextLine();
+        int role = getInt();
 
         // Validating role
-        while (role != 1 && role != 2 && role != 3)
+        while (role != 1 && role != 2 && role != 3 && role != 4)
         {
-            System.out.println("Please select a valid role: ");
-            System.out.println("1. Admin");
-            System.out.println("2. Instructor");
-            System.out.println("3. Student");
-            role = scanner.nextInt();
+            System.out.println("Invalid choice");
+            System.out.print("Please enter your choice: ");
+            role = getInt();
+        }
+        if (role == 4)
+        {
+            return null;
         }
 
         System.out.print("Enter your name: ");
         name = scanner.nextLine();
 
+        // While name is empty, Ask again
+        while (name.isEmpty())
+        {
+            System.out.print("Please enter a valid name: ");
+            name = scanner.nextLine();
+        }
         // Get date of birth and validate it
         notParsed = false;
         while (!notParsed)
@@ -631,7 +862,14 @@ public class Main
                 String input = scanner.nextLine();
                 dob = LocalDate.parse(input);
                 age = calculateAge(dob);
-                notParsed = true;
+                if (age <= 0)
+                {
+                    System.out.println("Please enter a valid date of birth");
+                }
+                else
+                {
+                    notParsed = true;
+                }
             }
             catch (Exception e)
             {
@@ -724,18 +962,22 @@ public class Main
         // Check role and create appropriate object
         if (role == 1)
         {
-            User student = new Admin(0, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
-            return student;
+            User admin = new Admin(0, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
+            System.out.println("Registration as Admin Successful!");
+            return admin;
         }
         else if (role == 2)
         {
             User instructor = new Instructor(1, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
+            System.out.println("Registration As Instructor Successful!");
             return instructor;
         }
         else
         {
-            User admin = new Student(2, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
-            return admin;
+            User student = new Student(2, username, password, name, nationality, field, additionalField, email, phoneNumber, dob, gender, age);
+            System.out.println("Registration as Student Successful!");
+            return student;
         }
+
     }
 }
