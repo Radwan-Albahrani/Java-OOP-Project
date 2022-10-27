@@ -30,6 +30,24 @@ public class Instructor extends User
 
     List<Student> students = new ArrayList<Student>();
     Courses currentClass = null;
+
+    public void populateStudents(List<Student> givenStudents)
+    {
+        students.clear();
+        for (Student student : givenStudents)
+        {
+            for (Courses course : student.viewCourses())
+            {
+                if (course.getInstructor().getCurrentClass().getCourseName().equals(currentClass.getCourseName()))
+                {
+                    course.setInstructor(this);
+                    students.add(student);
+                }
+            }
+        }
+
+    }
+
     public Courses getCurrentClass()
     {
         return currentClass;

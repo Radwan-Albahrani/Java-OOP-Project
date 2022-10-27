@@ -61,4 +61,17 @@ public class Student extends User
     {
         return courses;
     }
+
+    public boolean isRegistered(Courses courses2)
+    {
+        // Loop through registered courses and make sure this student isn't registered
+        for (Courses course : this.courses)
+        {
+            if (course.getCourseName().equals(courses2.getCourseName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
