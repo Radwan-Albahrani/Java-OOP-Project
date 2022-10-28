@@ -88,6 +88,8 @@ public class Menus
 
     static void editMenuExact()
     {
+        System.out.println(
+                ConsoleColors.PURPLE + "===========================================================================================" + ConsoleColors.RESET);
         System.out.println("Select the field to edit: ");
         System.out.println("1. Name");
         System.out.println("2. Nationality");
@@ -96,16 +98,22 @@ public class Menus
         System.out.println("5. Field");
         System.out.println("6. Additional Field");
 
+        System.out.println(
+                ConsoleColors.PURPLE + "===========================================================================================" + ConsoleColors.RESET);
         System.out.print(ConsoleColors.YELLOW + "Enter your choice: " + ConsoleColors.RESET);
     }
 
     static void editMenu()
     {
+        System.out.println(
+                ConsoleColors.PURPLE + "===========================================================================================" + ConsoleColors.RESET);
         System.out.println("Select From the following: ");
         System.out.println("1. Edit Student Information");
         System.out.println("2. Edit Instructor Information");
         System.out.println("3. Edit My Information");
 
+        System.out.println(
+                ConsoleColors.PURPLE + "===========================================================================================" + ConsoleColors.RESET);
         System.out.print(ConsoleColors.YELLOW + "\n\nEnter your choice: ");
     }
 
