@@ -6,22 +6,14 @@ import java.util.List;
 
 public abstract class User implements Serializable
 {
+    // V=====================================ariables =====================================
     public static int numberOfUsers = 0;
     int authorityLevel, age;
     Date creationDate, expirationDate;
     Authentication auth;
     Profile profile;
 
-    public Date getCreationDate()
-    {
-        return creationDate;
-    }
-
-    public Date getExpirationDate()
-    {
-        return expirationDate;
-    }
-
+    // ===================================== Constructor =====================================
     User(int authorityLevel, String username, String password, String name, String nationality, String field,
             String additionalField, String email, String phoneNumber, LocalDate birthDate, Gender gender, int age) // user login
     {
@@ -48,7 +40,20 @@ public abstract class User implements Serializable
 
     }
 
-    public List<String> viewProfile() // allow to view profile
+    // ===================================== Getters =====================================
+    public Date getCreationDate()
+    {
+        return creationDate;
+    }
+
+    public Date getExpirationDate()
+    {
+        return expirationDate;
+    }
+
+    // ===================================== Methods=====================================
+    // Method to view profile
+    public List<String> viewProfile()
     {
         // Setting up Profile
         List<String> viewProfile = new ArrayList<String>();

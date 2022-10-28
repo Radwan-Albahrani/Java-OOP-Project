@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class OS
 {
+    // Writing to files based on type of object
     public static void WriteToFileStudent(List<Student> users, String filename)
     {
         // write to file
@@ -71,6 +72,7 @@ public class OS
         }
     }
 
+    // Reading from files based on type of object
     public static List<Student> ReadFromFileStudents(String filename)
     {
         List<Student> students = null;

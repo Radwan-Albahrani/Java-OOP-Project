@@ -4,6 +4,13 @@ import java.time.LocalDate;
 
 public class Student extends User
 {
+    // ===================================== Variables =====================================
+    public static int numberOfStudents;
+    private double gpa;
+    List<Courses> courses = new ArrayList<Courses>();
+    public static List<String> announcements = new ArrayList<String>();
+
+    // ===================================== Constructor =====================================
     Student(int authorityLevel,
             String username,
             String password,
@@ -20,31 +27,78 @@ public class Student extends User
         super(authorityLevel, username, password, name, nationality, field, additionalField, email, phoneNumber, birthDate, gender, age);
     }
 
-    public static int numberOfStudents;
-    private double gpa;
-    private double attendance;
-    List<Courses> courses = new ArrayList<Courses>();
-    public static List<String> announcements = new ArrayList<String>();
-
-    public void setGpa(double gpa)
+    // ===================================== Setter =====================================
+    private void setGpa(double gpa)
     {
         this.gpa = gpa;
     }
 
+    // ===================================== Getters =====================================
+    public List<Courses> getCourses()
+    {
+        return courses;
+    }
+
     public double getGpa()
     {
+        calculateGPA();
         return gpa;
     }
 
-    public void setAttendance(double attendance)
+    // ===================================== Methods =====================================
+    public void calculateGPA()
     {
-        this.attendance = attendance;
+        // Variables
+        double rawScores = 0;
+        double totalCredits = 0;
+        // Calculate GPA from all courses in this student
+        for (Courses course : this.courses)
+        {
+            double coursePercents = course.getCoursePercent();
+            if (coursePercents >= 95)
+            {
+                rawScores += 5 * course.getCreditHours();
+
+            }
+            else if (coursePercents >= 90)
+            {
+                rawScores += 4.75 * course.getCreditHours();
+            }
+            else if (coursePercents >= 85)
+            {
+                rawScores += 4.5 * course.getCreditHours();
+            }
+            else if (coursePercents >= 80)
+            {
+                rawScores += 4 * course.getCreditHours();
+            }
+            else if (coursePercents >= 75)
+            {
+                rawScores += 3.5 * course.getCreditHours();
+            }
+            else if (coursePercents >= 70)
+            {
+                rawScores += 3 * course.getCreditHours();
+            }
+            else if (coursePercents >= 65)
+            {
+                rawScores += 2.5 * course.getCreditHours();
+            }
+
+            else if (coursePercents >= 60)
+            {
+                rawScores += 2 * course.getCreditHours();
+            }
+            else
+            {
+                rawScores += 1.0 * course.getCreditHours();
+            }
+            totalCredits += course.getCreditHours();
+        }
+        double GPA = rawScores / totalCredits;
+        setGpa(GPA);
     }
 
-    public double viewAttendance()
-    {
-        return attendance;
-    }
     @Override
     public void registerCourse(Courses course)
     {
@@ -54,14 +108,11 @@ public class Student extends User
 
     public void dropCourses(Courses course)
     {
+        course.getInstructor().students.remove(this);
         courses.remove(course);
     }
 
-    public List<Courses> viewCourses()
-    {
-        return courses;
-    }
-
+    // Check if the student is already registered to a course
     public boolean isRegistered(Courses courses2)
     {
         // Loop through registered courses and make sure this student isn't registered

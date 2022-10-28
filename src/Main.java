@@ -8,12 +8,14 @@ import java.io.Console;
 
 public class Main
 {
+    // Statuc Variables
     public static Scanner scanner = new Scanner(System.in);
     public static List<Admin> admins = null;
     public static String studentFileName = "./data/students.ser";
     public static String instructorFileName = "./data/instructors.ser";
     public static String adminFileName = "./data/admins.ser";
 
+    // Main Method
     public static void main(String[] args) throws CloneNotSupportedException
     {
         // Get students from files if exists
@@ -151,28 +153,64 @@ public class Main
         }
     }
 
-    private static int getInt()
+    // ===================================== Menus =====================================
+    private static void MainMenu()
     {
-        int choice = 0;
-        boolean notParsed = false;
-        do
-        {
-            try
-            {
-                choice = Integer.parseInt(scanner.nextLine());
-                notParsed = false;
-            }
-            catch (NumberFormatException e)
-            {
-                System.out.println("Please enter a valid number!");
-                System.out.print("Enter Your Choice: ");
-                notParsed = true;
-            }
-        } while (notParsed);
-
-        return choice;
+        System.out.println("Welcome to the University of Java");
+        System.out.println("Please choose one of the following options:");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Exit");
     }
 
+    private static void LoginMenu()
+    {
+        System.out.println("Please choose one of the following options:");
+        System.out.println("1. Admin");
+        System.out.println("2. Instructor");
+        System.out.println("3. Student");
+        System.out.println("4. Exit");
+    }
+
+    private static void adminMenu()
+    {
+        System.out.println("1. View Alerts");
+        System.out.println("2. Create Course");
+        System.out.println("3. Edit Course");
+        System.out.println("4. Delete Course");
+        System.out.println("5. Edit User Information.");
+        System.out.println("6. Logout");
+
+        System.out.print("\n\nEnter your choice: ");
+    }
+
+    private static void instructorMenu()
+    {
+        System.out.println("1. Send Announcement");
+        System.out.println("2. Select Course");
+        System.out.println("3. View Student Grades");
+        System.out.println("4. Set Student Grades");
+        System.out.println("5. Request Change");
+        System.out.println("6. Logout");
+
+        System.out.print("\n\nEnter your choice: ");
+    }
+
+    private static void studentMenu()
+    {
+        System.out.println("Welcome to the Student Management system.");
+        System.out.println("Select one of the following: ");
+        System.out.println("1. Register Course");
+        System.out.println("2. View Courses");
+        System.out.println("3. Drop Course");
+        System.out.println("4. View Announcements");
+        System.out.println("5. Request Change");
+        System.out.println("6. Logout");
+
+        System.out.print("\n\nPlease enter your choice: ");
+    }
+
+    // ===================================== Workflows =====================================
     private static int adminWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
     {
         // TODO Admin Workflow
@@ -188,6 +226,7 @@ public class Main
                 else
                 {
                     // Print all alerts
+                    System.out.println("Alerts: \n");
                     for (String alert : ((Admin) currentUser).alerts)
                     {
                         System.out.println(alert);
@@ -244,20 +283,9 @@ public class Main
         return exitcode;
     }
 
-    private static void adminMenu()
-    {
-        System.out.println("1. View Alerts");
-        System.out.println("2. Create Course");
-        System.out.println("3. Edit Course");
-        System.out.println("4. Delete Course");
-        System.out.println("5. Edit User Information.");
-        System.out.println("6. Logout");
-
-        System.out.print("\n\nEnter your choice: ");
-    }
-
     private static int instructorWorkFlow(User currentUser, int choice)
     {
+        // Exit Variable
         int exitcode = 0;
         switch (choice)
         {
@@ -265,8 +293,11 @@ public class Main
             case 1:
                 System.out.print("Enter the announcement: ");
                 String announcement = scanner.nextLine();
+                announcement = "Instructor Name: " + ((Instructor) currentUser).profile.getName() + "\nCourse: "
+                        + ((Instructor) currentUser).getCurrentClass().getCourseName() + "\nAnnouncement: " + announcement;
                 ((Instructor) currentUser).sendAnnouncement(announcement);
                 break;
+
             // Register instructor in a class
             case 2:
                 while (true)
@@ -280,7 +311,7 @@ public class Main
                     // Get All courses
                     List<Courses> allCourses = Admin.allCourses;
 
-                    // IF courses is empty then there are no courses to register in
+                    // If courses is empty then there are no courses to register in
                     if (allCourses.isEmpty())
                     {
                         System.out.println("There are no courses to register in!");
@@ -417,8 +448,8 @@ public class Main
                 // Request a Change from the admin
                 System.out.print("Type out an email to the admin for a change request: ");
                 String email = scanner.nextLine();
-                email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
-                        + currentUser.auth.getUserID();
+                email = "From: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
+                        + currentUser.auth.getUserID() + "\nRequest: " + email;
                 for (Admin admin : admins)
                 {
                     admin.alerts.add(email);
@@ -432,20 +463,9 @@ public class Main
         return exitcode;
     }
 
-    private static void instructorMenu()
-    {
-        System.out.println("1. Send Announcement");
-        System.out.println("2. Select Course");
-        System.out.println("3. View Student Grades");
-        System.out.println("4. Set Student Grades");
-        System.out.println("5. Request Change");
-        System.out.println("6. Logout");
-
-        System.out.print("\n\nEnter your choice: ");
-    }
-
     private static int studentWorkFlow(User currentUser, int choice) throws CloneNotSupportedException
     {
+        // Variable for exiting the workflow
         int exitCode = 0;
         switch (choice)
         {
@@ -463,6 +483,7 @@ public class Main
                 break;
             case 4:
                 // View announcements
+                System.out.println("Announcements: \n\n");
                 for (String announcements : Student.announcements)
                 {
                     System.out.println(announcements);
@@ -472,8 +493,8 @@ public class Main
                 // Request a Change from the admin
                 System.out.print("Type out an email to the admin for a change request: ");
                 String email = scanner.nextLine();
-                email = email + "\n\nFrom: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
-                        + currentUser.auth.getUserID();
+                email = "From: " + currentUser.profile.getName() + "\nEmail: " + currentUser.profile.getEmail() + "\nID: "
+                        + currentUser.auth.getUserID() + "\nRequest: " + email;
                 for (Admin admin : admins)
                 {
                     admin.alerts.add(email);
@@ -579,9 +600,13 @@ public class Main
         return currentUser;
     }
 
+    // ===================================== Methods =====================================
+    // Method to drop a course from a student
     private static void dropCourses(Student currentUser)
     {
-        List<Courses> courses = currentUser.viewCourses();
+        // Get Courses from current user
+        List<Courses> courses = currentUser.getCourses();
+
         // List All courses
         for (int i = 0; i < courses.size(); i++)
         {
@@ -603,15 +628,22 @@ public class Main
         currentUser.dropCourses(courses.get(choice - 1));
     }
 
+    // Method to view all courses of a student
     private static void viewCourses(Student currentUser)
     {
-        List<Courses> courses = currentUser.viewCourses();
+        // Get all courses from the current user and print them along with grades
+        List<Courses> courses = currentUser.getCourses();
+        System.out.println("Courses: \n");
         for (Courses course : courses)
         {
-            System.out.println(course.getCourseName() + ": " + course.getCoursePercent());
+            System.out.println("Course name: " + course.getCourseName() + "\nCourse Percent: " + course.getCoursePercent());
         }
+
+        // Print out the GPA at the end
+        System.out.println("GPA: " + currentUser.getGpa());
     }
 
+    // Method to register a course for a student
     private static void registerCourse(User currentUser) throws CloneNotSupportedException
     {
         // Get all Courses from admin class
@@ -672,20 +704,7 @@ public class Main
         System.out.println("Course Registered Successfully!");
     }
 
-    private static void studentMenu()
-    {
-        System.out.println("Welcome to the Student Management system.");
-        System.out.println("Select one of the following: ");
-        System.out.println("1. Register Course");
-        System.out.println("2. View Courses");
-        System.out.println("3. Drop Course");
-        System.out.println("4. View Announcements");
-        System.out.println("5. Request Change");
-        System.out.println("6. Logout");
-
-        System.out.print("\n\nPlease enter your choice: ");
-    }
-
+    // Method to login  as an admin, instructor, or student
     private static User login(int loginChoice, List<Student> students, List<Instructor> instructors, List<Admin> admins)
     {
         User currentUser = null;
@@ -772,6 +791,7 @@ public class Main
         }
     }
 
+    // Method to get password in a hidden way
     private static String getPassword()
     {
         Console console = System.console();
@@ -780,24 +800,7 @@ public class Main
         return password;
     }
 
-    private static void LoginMenu()
-    {
-        System.out.println("Please choose one of the following options:");
-        System.out.println("1. Admin");
-        System.out.println("2. Instructor");
-        System.out.println("3. Student");
-        System.out.println("4. Exit");
-    }
-
-    private static void MainMenu()
-    {
-        System.out.println("Welcome to the University of Java");
-        System.out.println("Please choose one of the following options:");
-        System.out.println("1. Login");
-        System.out.println("2. Register");
-        System.out.println("3. Exit");
-    }
-
+    // Method to calculate age based on date of birth
     public static int calculateAge(LocalDate dob)
     {
         // Get local date of now
@@ -813,6 +816,7 @@ public class Main
         }
     }
 
+    // TESTER METHOD REMOVE WHEN DONE
     public static User testGetInformation(int role)
     {
         if (role == 1)
@@ -841,6 +845,7 @@ public class Main
         }
     }
 
+    // Method to get information from the user
     public static User getInformation(int role)
     {
         // Variables
@@ -1000,4 +1005,28 @@ public class Main
         }
 
     }
+
+    // Method to get an integer
+    private static int getInt()
+    {
+        int choice = 0;
+        boolean notParsed = false;
+        do
+        {
+            try
+            {
+                choice = Integer.parseInt(scanner.nextLine());
+                notParsed = false;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Please enter a valid number!");
+                System.out.print("Enter Your Choice: ");
+                notParsed = true;
+            }
+        } while (notParsed);
+
+        return choice;
+    }
+
 }
