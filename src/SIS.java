@@ -677,10 +677,10 @@ public class SIS
     public static void changePassword(User currentUser)
     {
         // Set Password
-        System.out.println(ConsoleColors.BLUE + "Enter New Password: " + ConsoleColors.RESET);
+        System.out.print(ConsoleColors.BLUE + "Enter New Password: " + ConsoleColors.RESET);
         String newPassword = SIS.getPassword();
         // Confirm Password
-        System.out.println(ConsoleColors.BLUE + "Confirm New Password: " + ConsoleColors.RESET);
+        System.out.print(ConsoleColors.BLUE + "Confirm New Password: " + ConsoleColors.RESET);
         String confirmPassword = SIS.getPassword();
         if (newPassword.equals(confirmPassword))
         {
