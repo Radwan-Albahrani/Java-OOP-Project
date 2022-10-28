@@ -19,9 +19,13 @@ public class Admin extends Instructor
         allCourses.clear();
         for (Instructor instructor : instructors)
         {
-            allCourses.add(instructor.currentClass);
+            if (instructor.currentClass != null)
+            {
+                allCourses.add(instructor.currentClass);
+            }
         }
     }
+
     public static void createCourse(String courseName, int creditHours)
     {
         Courses course = new Courses();
