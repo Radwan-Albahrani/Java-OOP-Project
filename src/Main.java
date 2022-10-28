@@ -455,6 +455,7 @@ public class Main
                     admin.alerts.add(email);
                 }
                 System.out.println("Change Requested Successfully");
+                break;
             case 6:
                 exitcode = 1;
                 System.out.println("Logged out Successfully!");
