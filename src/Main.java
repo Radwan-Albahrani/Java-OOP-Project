@@ -263,7 +263,6 @@ public class Main
         {
             // Send announcements
             case 1:
-                scanner.nextLine();
                 System.out.print("Enter the announcement: ");
                 String announcement = scanner.nextLine();
                 ((Instructor) currentUser).sendAnnouncement(announcement);
@@ -281,6 +280,13 @@ public class Main
                     // Get All courses
                     List<Courses> allCourses = Admin.allCourses;
 
+                    // IF courses is empty then there are no courses to register in
+                    if (allCourses.isEmpty())
+                    {
+                        System.out.println("There are no courses to register in!");
+                        break;
+                    }
+
                     // Clean out all courses so that the instructor is not in the list
                     for (int i = 0; i < allCourses.size(); i++)
                     {
@@ -290,12 +296,6 @@ public class Main
                         }
                     }
 
-                    // IF courses is empty then there are no courses to register in
-                    if (allCourses.isEmpty())
-                    {
-                        System.out.println("There are no courses to register in!");
-                        break;
-                    }
                     // Display the rest of the courses
                     for (int i = 0; i < allCourses.size(); i++)
                     {
@@ -547,7 +547,7 @@ public class Main
 
                 System.out.print("\n\nYour choice: ");
                 int role = getInt();
-                // TODO change this to getinformation after testing
+                // TODO change this to getInformation after testing
                 User registered = testGetInformation(role);
                 if (registered instanceof Student)
                 {
