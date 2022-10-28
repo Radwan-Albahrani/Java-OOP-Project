@@ -426,13 +426,13 @@ public class Main
 
                 // Ask what grade to set
                 System.out.print("Enter the Percentage grade: ");
-                Double grade = scanner.nextDouble();
+                Double grade = getDouble();
 
                 // Check if grade is between 0 and 100. If not, ask again
                 while (grade < 0 || grade > 100)
                 {
                     System.out.println("Enter the Percentage grade (Must be between 0 and 100): ");
-                    grade = scanner.nextDouble();
+                    grade = getDouble();
                 }
                 // Search for that class in student and set its grade
                 for (Courses course : selectedStudent.courses)
@@ -1029,4 +1029,26 @@ public class Main
         return choice;
     }
 
+    // Method to get a double
+    private static double getDouble()
+    {
+        double choice = 0;
+        boolean notParsed = false;
+        do
+        {
+            try
+            {
+                choice = Double.parseDouble(scanner.nextLine());
+                notParsed = false;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Please enter a valid number!");
+                System.out.print("Enter Your Choice: ");
+                notParsed = true;
+            }
+        } while (notParsed);
+
+        return choice;
+    }
 }
