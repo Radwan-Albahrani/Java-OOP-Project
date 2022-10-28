@@ -2,26 +2,19 @@ import java.io.Serializable;
 
 public class Courses implements Cloneable, Serializable
 {
-    private String courseName;
+    CourseInfo courseInfo = new CourseInfo();
     private String courseGrade;
-    private int creditHours;
     private double coursePercents;
-    private Instructor instructor = null;
-
-    public Instructor getInstructor()
-    {
-        return instructor;
-    }
 
     public void setInstructor(Instructor instructor)
     {
-        this.instructor = instructor;
+        courseInfo.instructor = instructor;
     }
 
     // setters
     public void setCourseName(String courseName)
     {
-        this.courseName = courseName;
+        courseInfo.courseName = courseName;
     }
 
     private void setCourseGrade(String courseGrade)
@@ -31,7 +24,7 @@ public class Courses implements Cloneable, Serializable
 
     public void setCreditHours(int creditHours)
     {
-        this.creditHours = creditHours;
+        courseInfo.creditHours = creditHours;
     }
 
     public void setCoursePercents(double coursePercents)
@@ -79,7 +72,7 @@ public class Courses implements Cloneable, Serializable
     // Getters
     public String getCourseName()
     {
-        return courseName;
+        return courseInfo.courseName;
     }
 
     public String getCourseGrade()
@@ -94,7 +87,12 @@ public class Courses implements Cloneable, Serializable
 
     public int getCreditHours()
     {
-        return creditHours;
+        return courseInfo.creditHours;
+    }
+
+    public Instructor getInstructor()
+    {
+        return courseInfo.instructor;
     }
 
     @Override
