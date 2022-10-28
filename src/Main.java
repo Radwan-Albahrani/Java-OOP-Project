@@ -455,6 +455,7 @@ public class Main
                     admin.alerts.add(email);
                 }
                 System.out.println("Change Requested Successfully");
+                break;
             case 6:
                 exitcode = 1;
                 System.out.println("Logged out Successfully!");
@@ -570,6 +571,10 @@ public class Main
                 int role = getInt();
                 // TODO change this to getInformation after testing
                 User registered = testGetInformation(role);
+                if (registered == null)
+                {
+                     System.out.println("There are no admins in this system.");
+                }
                 if (registered instanceof Student)
                 {
                     students.add((Student) registered);
@@ -827,6 +832,7 @@ public class Main
             System.out.println("Password: " + admin.auth.getPassword());
             return admin;
         }
+
         else if (role == 2)
         {
             User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
@@ -854,6 +860,12 @@ public class Main
         Gender gender = Gender.valueOf("M");
         LocalDate dob = null;
         boolean notParsed;
+
+        // Only allow user creation if at least one admin exists 
+        if (admins.isEmpty())
+        {
+            return null;
+        }
 
         // Validating role
         while (role != 1 && role != 2 && role != 3 && role != 4)
