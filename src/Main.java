@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -43,10 +44,7 @@ public class Main
         }
         else
         {
-            for (Admin admin : admins)
-            {
-                admin.populateCourses(instructors);
-            }
+            Admin.populateCourses(instructors);
         }
 
         // Get the maximum userID from users
@@ -209,26 +207,23 @@ public class Main
 
             case 3:
                 // Display current courses
-                for (int i = 0; i < admins.get(0).allCourses.size(); i++)
+                for (int i = 0; i < Admin.allCourses.size(); i++)
                 {
-                    System.out.println(i + 1 + ". " + admins.get(0).allCourses.get(i).getCourseName());
+                    System.out.println(i + 1 + ". " + Admin.allCourses.get(i).getCourseName());
 
                 }
 
                 // Select the course to edit
                 System.out.print("Enter course number to edit: ");
                 int courseNumber = getInt();
-                Courses SelectedCourse = admins.get(0).allCourses.get(courseNumber - 1);
+                Courses SelectedCourse = Admin.allCourses.get(courseNumber - 1);
                 // Index Check While loop
-                while (courseNumber < 1 || courseNumber > admins.get(0).allCourses.size())
+                while (courseNumber < 1 || courseNumber > Admin.allCourses.size())
                 {
                     System.out.println("Please enter a valid course number!");
                     System.out.print("Enter course number to edit: ");
                     courseNumber = getInt();
                 }
-
-                // Create a new course object
-                Courses newCourse = (Courses) SelectedCourse.clone();
 
                 // Get new information
                 System.out.print("Enter new course name: ");
@@ -236,11 +231,8 @@ public class Main
                 System.out.print("Enter new Credit Hours: ");
                 int newCreditHours = getInt();
 
-                // Edit the course
-                newCourse.setCourseName(newCourseName);
-                newCourse.setCreditHours(newCreditHours);
-                Admin.editCourse(SelectedCourse, newCourse);
-
+                Admin.editCourse(SelectedCourse, newCourseName, newCreditHours);
+                break;
             case 6:
                 // Logout
                 System.out.println("Logged out Successfully!");
@@ -256,8 +248,8 @@ public class Main
     {
         System.out.println("1. View Alerts");
         System.out.println("2. Create Course");
-        System.out.println("3. Delete Course");
-        System.out.println("4. Edit Course");
+        System.out.println("3. Edit Course");
+        System.out.println("4. Delete Course");
         System.out.println("5. Edit User Information.");
         System.out.println("6. Logout");
 
@@ -287,7 +279,7 @@ public class Main
                     }
 
                     // Get All courses
-                    List<Courses> allCourses = admins.get(0).allCourses;
+                    List<Courses> allCourses = Admin.allCourses;
 
                     // Clean out all courses so that the instructor is not in the list
                     for (int i = 0; i < allCourses.size(); i++)
@@ -546,7 +538,17 @@ public class Main
                 break;
 
             case 2:
-                User registered = getInformation();
+                // Asking if the user is an instructor or a student or an Admin
+                System.out.println("Please select your role: ");
+                System.out.println("1. Admin");
+                System.out.println("2. Instructor");
+                System.out.println("3. Student");
+                System.out.println("4. Exit");
+
+                System.out.print("\n\nYour choice: ");
+                int role = getInt();
+                // TODO change this to getinformation after testing
+                User registered = testGetInformation(role);
                 if (registered instanceof Student)
                 {
                     students.add((Student) registered);
@@ -613,7 +615,7 @@ public class Main
     private static void registerCourse(User currentUser) throws CloneNotSupportedException
     {
         // Get all Courses from admin class
-        List<Courses> courses = admins.get(0).allCourses;
+        List<Courses> courses = Admin.allCourses;
 
         // If courses is empty exit
         if (courses.isEmpty())
@@ -811,7 +813,35 @@ public class Main
         }
     }
 
-    public static User getInformation()
+    public static User testGetInformation(int role)
+    {
+        if (role == 1)
+        {
+            User admin = new Admin(0, "admin" + User.numberOfUsers, "123", "admin" + User.numberOfUsers, "admin", "admin", "admin", "admin", "admin",
+                    LocalDate.now(), Gender.F, 0);
+            System.out.println("Username: " + admin.auth.getUsername());
+            System.out.println("Password: " + admin.auth.getPassword());
+            return admin;
+        }
+        else if (role == 2)
+        {
+            User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
+                    "instructor", "instructor", "instructor", LocalDate.now(), Gender.F, 0);
+            System.out.println("Username: " + instructor.auth.getUsername());
+            System.out.println("Password: " + instructor.auth.getPassword());
+            return instructor;
+        }
+        else
+        {
+            User student = new Student(0, "student" + User.numberOfUsers, "123", "student" + User.numberOfUsers, "student", "student", "student", "student",
+                    "student", LocalDate.now(), Gender.F, 0);
+            System.out.println("Username: " + student.auth.getUsername());
+            System.out.println("Password: " + student.auth.getPassword());
+            return student;
+        }
+    }
+
+    public static User getInformation(int role)
     {
         // Variables
         String name, nationality, field, additionalField, email, phoneNumber = "", username, password = "";
@@ -819,16 +849,6 @@ public class Main
         Gender gender = Gender.valueOf("M");
         LocalDate dob = null;
         boolean notParsed;
-
-        // Asking if the user is an instructor or a student or an Admin
-        System.out.println("Please select your role: ");
-        System.out.println("1. Admin");
-        System.out.println("2. Instructor");
-        System.out.println("3. Student");
-        System.out.println("4. Exit");
-
-        System.out.print("\n\nYour choice: ");
-        int role = getInt();
 
         // Validating role
         while (role != 1 && role != 2 && role != 3 && role != 4)
