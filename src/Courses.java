@@ -4,28 +4,14 @@ public class Courses implements Cloneable, Serializable
 {
     // ===================================== Variables =====================================
     CourseInfo courseInfo = new CourseInfo();
+
     private String courseGrade;
     private double coursePercents;
 
     // ===================================== Setters =====================================
-    public void setInstructor(Instructor instructor)
-    {
-        courseInfo.instructor = instructor;
-    }
-
-    public void setCourseName(String courseName)
-    {
-        courseInfo.courseName = courseName;
-    }
-
     private void setCourseGrade(String courseGrade)
     {
         this.courseGrade = courseGrade;
-    }
-
-    public void setCreditHours(int creditHours)
-    {
-        courseInfo.creditHours = creditHours;
     }
 
     public void setCoursePercents(double coursePercents)
@@ -86,16 +72,10 @@ public class Courses implements Cloneable, Serializable
         return coursePercents;
     }
 
-    public int getCreditHours()
+    public CourseInfo getCourseInfo()
     {
-        return courseInfo.creditHours;
+        return courseInfo;
     }
-
-    public Instructor getInstructor()
-    {
-        return courseInfo.instructor;
-    }
-
     // ===================================== Methods =====================================
     // Cloning method
     @Override

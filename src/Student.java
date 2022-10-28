@@ -8,8 +8,6 @@ public class Student extends User
     public static int numberOfStudents;
     private double gpa;
     List<Courses> courses = new ArrayList<Courses>();
-    public static List<String> announcements = new ArrayList<String>();
-
     // ===================================== Constructor =====================================
     Student(int authorityLevel,
             String username,
@@ -46,6 +44,7 @@ public class Student extends User
     }
 
     // ===================================== Methods =====================================
+    // Method to calculate GPA
     public void calculateGPA()
     {
         // Variables
@@ -57,58 +56,60 @@ public class Student extends User
             double coursePercents = course.getCoursePercent();
             if (coursePercents >= 95)
             {
-                rawScores += 5 * course.getCreditHours();
+                rawScores += 5 * course.courseInfo.getCreditHours();
 
             }
             else if (coursePercents >= 90)
             {
-                rawScores += 4.75 * course.getCreditHours();
+                rawScores += 4.75 * course.courseInfo.getCreditHours();
             }
             else if (coursePercents >= 85)
             {
-                rawScores += 4.5 * course.getCreditHours();
+                rawScores += 4.5 * course.courseInfo.getCreditHours();
             }
             else if (coursePercents >= 80)
             {
-                rawScores += 4 * course.getCreditHours();
+                rawScores += 4 * course.courseInfo.getCreditHours();
             }
             else if (coursePercents >= 75)
             {
-                rawScores += 3.5 * course.getCreditHours();
+                rawScores += 3.5 * course.courseInfo.getCreditHours();
             }
             else if (coursePercents >= 70)
             {
-                rawScores += 3 * course.getCreditHours();
+                rawScores += 3 * course.courseInfo.getCreditHours();
             }
             else if (coursePercents >= 65)
             {
-                rawScores += 2.5 * course.getCreditHours();
+                rawScores += 2.5 * course.courseInfo.getCreditHours();
             }
 
             else if (coursePercents >= 60)
             {
-                rawScores += 2 * course.getCreditHours();
+                rawScores += 2 * course.courseInfo.getCreditHours();
             }
             else
             {
-                rawScores += 1.0 * course.getCreditHours();
+                rawScores += 1.0 * course.courseInfo.getCreditHours();
             }
-            totalCredits += course.getCreditHours();
+            totalCredits += course.courseInfo.getCreditHours();
         }
         double GPA = rawScores / totalCredits;
         setGpa(GPA);
     }
 
+    // Method to Register a course
     @Override
     public void registerCourse(Courses course)
     {
         courses.add(course);
-        course.getInstructor().addStudent(this);
+        course.courseInfo.getInstructor().addStudent(this);
     }
 
-    public void dropCourses(Courses course)
+    // Method to drop a course
+    public void dropCourse(Courses course)
     {
-        course.getInstructor().students.remove(this);
+        course.courseInfo.getInstructor().students.remove(this);
         courses.remove(course);
     }
 
@@ -124,5 +125,124 @@ public class Student extends User
             }
         }
         return false;
+    }
+
+    // Method to drop a course from a student
+    public void dropCourses()
+    {
+        // Get Courses from current user
+        List<Courses> courses = this.getCourses();
+
+        if (courses.isEmpty())
+        {
+            System.out.println("You are not registered in any courses!");
+            return;
+        }
+        // List All courses
+        for (int i = 0; i < courses.size(); i++)
+        {
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName());
+        }
+
+        // Select a course from the menu
+        System.out.print("Enter the number of the course you want to drop: ");
+        int choice = SIS.getInt();
+
+        // Index Check
+        while (choice < 1 || choice > courses.size())
+        {
+            System.out.print("Enter the number of the course you want to drop: ");
+            choice = SIS.getInt();
+        }
+
+        // Drop the course
+        this.dropCourse(courses.get(choice - 1));
+    }
+
+    // Method to register a course for a student
+    public void registerCourse() throws CloneNotSupportedException
+    {
+        // Get all Courses from admin class
+        List<Courses> courses = Admin.allCourses;
+
+        // If courses is empty exit
+        if (courses.isEmpty())
+        {
+            System.out.println("There are no courses!");
+            return;
+        }
+
+        // Clean courses list if course has no instructor
+        for (int i = 0; i < courses.size(); i++)
+        {
+            if (courses.get(i).courseInfo.getInstructor() == null)
+            {
+                courses.remove(i);
+            }
+        }
+
+        // If course is already registered, remove it from list of courses
+        for (int i = 0; i < courses.size(); i++)
+        {
+            if (this instanceof Student)
+            {
+                if (this.isRegistered(courses.get(i)))
+                {
+                    courses.remove(i);
+                }
+            }
+        }
+
+        // If courses is empty exit
+        if (courses.isEmpty())
+        {
+            System.out.println("There are no courses!");
+            return;
+        }
+        // List All courses that have instructors
+        for (int i = 0; i < courses.size(); i++)
+        {
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName() + " - " + courses.get(i).courseInfo.getInstructor().profile.getName());
+        }
+
+        // Select a course from the menu
+        System.out.print("Enter the number of the course you want to register: ");
+        int choice = SIS.getInt();
+
+        // Index Check
+        while (choice < 1 || choice > courses.size())
+        {
+            System.out.print("Enter the number of the course you want to drop: ");
+            choice = SIS.getInt();
+        }
+        // Add course to student
+        this.registerCourse((Courses) courses.get(choice - 1).clone());
+        System.out.println("Course Registered Successfully!");
+    }
+
+    // Method to view all courses of a student
+    public void viewCourses()
+    {
+        // Get all courses from the current user and print them along with grades
+        List<Courses> courses = this.getCourses();
+
+        // If no courses
+        if (courses.isEmpty())
+        {
+            System.out.println("You are not registered in any courses!");
+            return;
+        }
+        else
+        {
+            System.out.println("Your courses are: ");
+            for (Courses course : courses)
+            {
+                System.out.println("Course name: " + course.getCourseName() + "\nCourse Percent: " + course.getCoursePercent());
+            }
+
+        }
+
+        // Print out the GPA at the end
+        System.out.println("GPA: " + this.getGpa());
     }
 }
