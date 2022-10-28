@@ -547,6 +547,7 @@ public class Main
 
                 System.out.print("\n\nYour choice: ");
                 int role = getInt();
+                // TODO change this to getinformation after testing
                 User registered = testGetInformation(role);
                 if (registered instanceof Student)
                 {
