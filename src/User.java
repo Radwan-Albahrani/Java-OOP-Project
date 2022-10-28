@@ -57,18 +57,46 @@ public abstract class User implements Serializable
     {
         // Setting up Profile
         List<String> viewProfile = new ArrayList<String>();
-        viewProfile.add(profile.getName());
-        viewProfile.add(profile.getPhoneNumber());
-        viewProfile.add(profile.getEmail());
-        viewProfile.add(profile.getField());
-        viewProfile.add(profile.getAdditionalField());
-        viewProfile.add(profile.getNationality());
-        viewProfile.add("" + profile.getAge());
-        viewProfile.add("" + profile.getBirthDate());
-        viewProfile.add("" + profile.getGender().toString());
+        viewProfile.add(ConsoleColors.PURPLE + "=============================================================================================" + ConsoleColors.RESET);
+        viewProfile.add(ConsoleColors.BLACK + "Name: " + ConsoleColors.RESET + profile.getName());
+        viewProfile.add(ConsoleColors.BLACK + "Age: " + ConsoleColors.RESET+ profile.getAge());
+        viewProfile.add(ConsoleColors.BLACK + "Gender: " + ConsoleColors.RESET + profile.getGender().toString());
+        viewProfile.add(ConsoleColors.BLACK + "Nationality: " + ConsoleColors.RESET + profile.getNationality());
+        viewProfile.add(ConsoleColors.BLACK + "Phone Number: " + ConsoleColors.RESET + profile.getPhoneNumber());
+        viewProfile.add(ConsoleColors.BLACK + "Email: " + ConsoleColors.RESET + profile.getEmail());
+        viewProfile.add(ConsoleColors.BLACK + "Birthday: " + ConsoleColors.RESET + profile.getBirthDate());
+        viewProfile.add(ConsoleColors.BLACK + "Field: " + ConsoleColors.RESET + profile.getField());
+        viewProfile.add(ConsoleColors.BLACK + "Additional Field: " + ConsoleColors.RESET + profile.getAdditionalField());
+        viewProfile.add(ConsoleColors.PURPLE + "============================================================================================" + ConsoleColors.RESET);
 
         return viewProfile;
     }
 
     public abstract void registerCourse(Courses course);
+
+    // Method to Display Profile
+    public void displayProfile() throws InterruptedException
+    {
+        List<String> profile = this.viewProfile();
+        System.out.println(ConsoleColors.BLUE + "Your Profile: " + ConsoleColors.RESET);
+        for (String s : profile)
+        {
+            System.out.println(s);
+        }
+        Thread.sleep(2000);
+    }
+
+    // Request Change from Admin
+    public void requestChange()
+    {
+        System.out.print("Type out an email to the admin for a change request: ");
+        String email = Main.scanner.nextLine();
+        email = "From: " + this.profile.getName() + "\nEmail: " + this.profile.getEmail() + "\nID: "
+                + this.auth.getUserID() + "\nRequest: " + email;
+        for (Admin admin : Main.admins)
+        {
+            admin.alerts.add(email);
+        }
+        System.out.println("Change Requested Successfully");
+    }
 }

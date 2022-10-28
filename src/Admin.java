@@ -23,7 +23,7 @@ public class Admin extends Instructor
         allCourses.clear();
         for (Instructor instructor : instructors)
         {
-            if (instructor.currentClass != null)
+            if (instructor.getCurrentClass() != null)
             {
                 allCourses.add(instructor.currentClass);
             }
@@ -34,8 +34,8 @@ public class Admin extends Instructor
     public static void createCourse(String courseName, int creditHours)
     {
         Courses course = new Courses();
-        course.setCourseName(courseName);
-        course.setCreditHours(creditHours);
+        course.courseInfo.setCourseName(course, courseName);
+        course.courseInfo.setCreditHours(course, creditHours);
         Admin.allCourses.add(course);
 
     }
@@ -43,24 +43,112 @@ public class Admin extends Instructor
     // Method to edit a course name and credit hours for a given course
     public static void editCourse(Courses selectedCourse, String courseName, int creditHours)
     {
-        selectedCourse.setCourseName(courseName);
-        selectedCourse.setCreditHours(creditHours);
+        selectedCourse.courseInfo.setCourseName(selectedCourse, courseName);
+        selectedCourse.courseInfo.setCreditHours(selectedCourse, creditHours);
     }
 
-    // TODO Method to delete a course from the list of all courses
-    public static void deleteCourse(Courses course)
+    // Method to delete a course from the list of all courses
+    public static void deleteCourse(Courses course) throws InterruptedException
     {
-        for (Admin admin : Main.admins)
+        // Null check
+        if (course == null)
         {
-            admin.allCourses.remove(course);
+            System.out.println("Course not found");
+            return;
         }
 
+        // If course has instructor
+        if (course.courseInfo.getInstructor() != null)
+        {
+            // Get All students from the instructor
+            List<Student> studentsWithCourse = course.getCourseInfo().getInstructor().getStudents();
+            // Remove the course from the students
+            for (Student student : studentsWithCourse)
+            {
+                // Find course in list of courses
+                for (Courses studentCourse : student.getCourses())
+                {
+                    if (studentCourse.getCourseInfo().getCourseName().equals(course.getCourseInfo().getCourseName())
+                            && studentCourse.getCourseInfo().getInstructor().equals(course.getCourseInfo().getInstructor()))
+                    {
+                        student.getCourses().remove(studentCourse);
+                        break;
+                    }
+                }
+
+            }
+
+            // Remove the course from the instructor
+            course.courseInfo.getInstructor().setCurrentClass(null);
+            course.courseInfo.setInstructor(null);
+
+            // Remove Course from Admin
+            Admin.allCourses.remove(course);
+
+            // Inform User
+            System.out.println(ConsoleColors.GREEN + "Course deleted successfully" + ConsoleColors.RESET);
+            Thread.sleep(1000);
+        }
+        else
+        {
+            Admin.allCourses.remove(course);
+            System.out.println(ConsoleColors.GREEN + "Course deleted successfully" + ConsoleColors.RESET);
+            Thread.sleep(1000);
+        }
     }
 
-    // TODO method to edit profiles of Users
-    public static void editProfile()
+    // Method to edit dob
+    public void editProfile(User userToEdit, LocalDate dob, int age)
     {
+        userToEdit.profile.setBirthDate(dob);
+        userToEdit.profile.setAge(age);
+    }
 
+    // Method to edit any other profile value
+    public void editProfile(User userToEdit, int editChoiceExact, String newValue)
+    {
+        switch (editChoiceExact)
+        {
+            case 1:
+                userToEdit.profile.setName(newValue);
+                userToEdit.profile.setEmail(newValue + userToEdit.auth.getUserID() + "@university.com");
+                userToEdit.auth.setUsername(newValue + userToEdit.auth.getUserID());
+                break;
+            case 2:
+                userToEdit.profile.setNationality(newValue);
+                break;
+            case 3:
+                userToEdit.profile.setPhoneNumber(newValue);
+                break;
+            case 5:
+                userToEdit.profile.setField(newValue);
+                break;
+            case 6:
+                userToEdit.profile.setAdditionalField(newValue);
+                break;
+            default:
+                System.out.println("Invalid choice!");
+                break;
+        }
+    }
+
+    // Method to view Alerts
+    public void viewAlerts()
+    {
+        // If alerts is empty, tell user there are no alerts
+        if (this.alerts.isEmpty())
+        {
+            System.out.println("There are no alerts!");
+        }
+        else
+        {
+            // Print all alerts
+            System.out.println("Alerts: \n");
+            for (String alert : this.alerts)
+            {
+                System.out.println(alert);
+            }
+        }
     }
 
 }
