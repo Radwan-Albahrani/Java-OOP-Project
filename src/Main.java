@@ -573,10 +573,9 @@ public class Main
                 User registered = testGetInformation(role);
                 if (registered == null)
                 {
-                    System.out.println("There are no admins in this system.");
-                    break;
+                     System.out.println("There are no admins in this system.");
                 }
-                else if (registered instanceof Student)
+                if (registered instanceof Student)
                 {
                     students.add((Student) registered);
                 }
@@ -834,11 +833,6 @@ public class Main
             return admin;
         }
 
-        if (admins.isEmpty())
-        {
-            return null;
-        }
-
         else if (role == 2)
         {
             User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
@@ -866,6 +860,12 @@ public class Main
         Gender gender = Gender.valueOf("M");
         LocalDate dob = null;
         boolean notParsed;
+
+        // Only allow user creation if at least one admin exists 
+        if (admins.isEmpty())
+        {
+            return null;
+        }
 
         // Validating role
         while (role != 1 && role != 2 && role != 3 && role != 4)
