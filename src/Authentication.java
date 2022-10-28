@@ -2,10 +2,11 @@ import java.io.Serializable;
 
 public class Authentication implements Serializable
 {
+    // ===================================== Variables =====================================
     String username, password;
     int authorityLevel, userID;
 
-    // Getters
+    // ===================================== Getters =====================================
     public String getUsername()
     {
         return username;
@@ -26,7 +27,7 @@ public class Authentication implements Serializable
         return authorityLevel;
     }
 
-    // Setters
+    // ===================================== Setters =====================================
     public void setUsername(String username)
     {
         this.username = username;

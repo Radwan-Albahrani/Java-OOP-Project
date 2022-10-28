@@ -2,16 +2,17 @@ import java.io.Serializable;
 
 public class Courses implements Cloneable, Serializable
 {
+    // ===================================== Variables =====================================
     CourseInfo courseInfo = new CourseInfo();
     private String courseGrade;
     private double coursePercents;
 
+    // ===================================== Setters =====================================
     public void setInstructor(Instructor instructor)
     {
         courseInfo.instructor = instructor;
     }
 
-    // setters
     public void setCourseName(String courseName)
     {
         courseInfo.courseName = courseName;
@@ -69,7 +70,7 @@ public class Courses implements Cloneable, Serializable
         }
     }
 
-    // Getters
+    // ===================================== Getters =====================================
     public String getCourseName()
     {
         return courseInfo.courseName;
@@ -95,6 +96,8 @@ public class Courses implements Cloneable, Serializable
         return courseInfo.instructor;
     }
 
+    // ===================================== Methods =====================================
+    // Cloning method
     @Override
     protected Object clone() throws CloneNotSupportedException
     {

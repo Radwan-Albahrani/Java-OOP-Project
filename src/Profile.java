@@ -4,12 +4,13 @@ import java.time.LocalDate;
 enum Gender { M, F }
 public class Profile implements Serializable
 {
+    // ===================================== Variables =====================================
     String name, nationality, field, additionalField, email, phoneNumber;
     int age;
     Gender gender;
     LocalDate birthDate;
 
-    // Setters
+    // ===================================== Setters =====================================
     public void setName(String name)
     {
         this.name = name;
@@ -55,7 +56,7 @@ public class Profile implements Serializable
         this.birthDate = birthDate;
     }
 
-    // Getters
+    // ===================================== Getters =====================================
     public String getName()
     {
         return name;
