@@ -571,7 +571,12 @@ public class Main
                 int role = getInt();
                 // TODO change this to getInformation after testing
                 User registered = testGetInformation(role);
-                if (registered instanceof Student)
+                if (registered == null)
+                {
+                    System.out.println("There are no admins in this system.");
+                    break;
+                }
+                else if (registered instanceof Student)
                 {
                     students.add((Student) registered);
                 }
@@ -828,6 +833,12 @@ public class Main
             System.out.println("Password: " + admin.auth.getPassword());
             return admin;
         }
+
+        if (admins.isEmpty())
+        {
+            return null;
+        }
+
         else if (role == 2)
         {
             User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
