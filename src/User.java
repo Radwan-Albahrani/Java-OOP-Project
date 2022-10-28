@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class User implements Serializable
 {
-    // V=====================================ariables =====================================
+    // V===================================== Variables =====================================
     public static int numberOfUsers = 0;
     int authorityLevel, age;
     Date creationDate, expirationDate;
