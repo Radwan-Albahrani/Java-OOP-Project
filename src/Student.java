@@ -8,6 +8,7 @@ public class Student extends User
     public static int numberOfStudents;
     private double gpa;
     List<Courses> courses = new ArrayList<Courses>();
+
     // ===================================== Constructor =====================================
     Student(int authorityLevel,
             String username,
@@ -106,6 +107,15 @@ public class Student extends User
         course.courseInfo.getInstructor().addStudent(this);
     }
 
+    // Populate Course Info
+    public void populateCourseInfo()
+    {
+        for (Courses course : courses)
+        {
+            course.setCourseInfo(course.getCourseInfo().getInstructor().getCurrentClass().getCourseInfo());;
+        }
+    }
+
     // Method to drop a course
     public void dropCourse(Courses course)
     {
@@ -160,7 +170,7 @@ public class Student extends User
     }
 
     // Method to register a course for a student
-    public void registerCourse() throws CloneNotSupportedException
+    public void registerCourse() throws CloneNotSupportedException, InterruptedException
     {
         // Get all Courses from admin class
         List<Courses> courses = Admin.allCourses;
@@ -168,7 +178,7 @@ public class Student extends User
         // If courses is empty exit
         if (courses.isEmpty())
         {
-            System.out.println("There are no courses!");
+            System.out.println(ConsoleColors.RED + "There are no courses!" + ConsoleColors.RESET);
             return;
         }
 
@@ -196,7 +206,7 @@ public class Student extends User
         // If courses is empty exit
         if (courses.isEmpty())
         {
-            System.out.println("There are no courses!");
+            System.out.println(ConsoleColors.RED + "There are no courses!" + ConsoleColors.RESET);
             return;
         }
         // List All courses that have instructors
@@ -206,18 +216,20 @@ public class Student extends User
         }
 
         // Select a course from the menu
-        System.out.print("Enter the number of the course you want to register: ");
+        System.out.print(ConsoleColors.BLUE + "Enter the number of the course you want to register: " + ConsoleColors.RESET);
         int choice = SIS.getInt();
 
         // Index Check
         while (choice < 1 || choice > courses.size())
         {
-            System.out.print("Enter the number of the course you want to drop: ");
+            System.out.println(ConsoleColors.RED + "Invalid Choice!" + ConsoleColors.RESET);
+            System.out.print(ConsoleColors.BLUE + "Enter the number of the course you want to Register: " + ConsoleColors.RESET);
             choice = SIS.getInt();
         }
         // Add course to student
         this.registerCourse((Courses) courses.get(choice - 1).clone());
-        System.out.println("Course Registered Successfully!");
+        System.out.println(ConsoleColors.GREEN + "Course Registered Successfully!" + ConsoleColors.RESET);
+        Thread.sleep(1000);
     }
 
     // Method to view all courses of a student

@@ -4,7 +4,6 @@ public class Courses implements Cloneable, Serializable
 {
     // ===================================== Variables =====================================
     CourseInfo courseInfo = new CourseInfo();
-
     private String courseGrade;
     private double coursePercents;
 
@@ -12,6 +11,11 @@ public class Courses implements Cloneable, Serializable
     private void setCourseGrade(String courseGrade)
     {
         this.courseGrade = courseGrade;
+    }
+
+    public void setCourseInfo(CourseInfo courseInfo)
+    {
+        this.courseInfo = courseInfo;
     }
 
     public void setCoursePercents(double coursePercents)
