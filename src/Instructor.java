@@ -147,6 +147,13 @@ public class Instructor extends User
                 }
             }
 
+            // If courses is empty then there are no courses to register in
+            if (allCourses.isEmpty())
+            {
+                System.out.println("There are no courses to register in!");
+                break;
+            }
+
             // Display the rest of the courses
             for (int i = 0; i < allCourses.size(); i++)
             {
