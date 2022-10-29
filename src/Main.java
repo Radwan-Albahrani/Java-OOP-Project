@@ -154,7 +154,7 @@ public class Main
                 // Make sure course name is not empty
                 while (courseName.isEmpty())
                 {
-                    System.out.print(ConsoleColors.RED + "Course name cannot be empty!" + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "Course name cannot be empty!" + ConsoleColors.RESET);
                     System.out.print(ConsoleColors.BLUE + "Enter course name: " + ConsoleColors.RESET);
                     courseName = scanner.nextLine();
                 }
@@ -163,7 +163,7 @@ public class Main
                 // Make sure credit hours is bigger than 0
                 while (creditHours <= 0)
                 {
-                    System.out.print(ConsoleColors.RED + "Credit hours must be bigger than 0! " + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "Credit hours must be bigger than 0! " + ConsoleColors.RESET);
                     System.out.print(ConsoleColors.BLUE + "Enter Credit Hours: " + ConsoleColors.RESET);
                     creditHours = SIS.getInt();
                 }
@@ -172,6 +172,13 @@ public class Main
                 break;
 
             case 3:
+                // If all courses is empty, break
+                if (Admin.allCourses.isEmpty())
+                {
+                    System.out.println(ConsoleColors.RED + "There are no courses to view!" + ConsoleColors.RESET);
+                    break;
+                }
+
                 // Display current courses
                 for (int i = 0; i < Admin.allCourses.size(); i++)
                 {
