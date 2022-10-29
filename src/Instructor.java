@@ -128,7 +128,8 @@ public class Instructor extends User
             }
 
             // Get All courses
-            List<Courses> allCourses = Admin.allCourses;
+            List<Courses> allCourses = new ArrayList<>();
+            allCourses.addAll(Admin.allCourses);
 
             // If courses is empty then there are no courses to register in
             if (allCourses.isEmpty())
