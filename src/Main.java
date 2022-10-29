@@ -154,7 +154,7 @@ public class Main
                 // Make sure course name is not empty
                 while (courseName.isEmpty())
                 {
-                    System.out.print(ConsoleColors.RED + "Course name cannot be empty!" + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "Course name cannot be empty!" + ConsoleColors.RESET);
                     System.out.print(ConsoleColors.BLUE + "Enter course name: " + ConsoleColors.RESET);
                     courseName = scanner.nextLine();
                 }
@@ -163,7 +163,7 @@ public class Main
                 // Make sure credit hours is bigger than 0
                 while (creditHours <= 0)
                 {
-                    System.out.print(ConsoleColors.RED + "Credit hours must be bigger than 0! " + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "Credit hours must be bigger than 0! " + ConsoleColors.RESET);
                     System.out.print(ConsoleColors.BLUE + "Enter Credit Hours: " + ConsoleColors.RESET);
                     creditHours = SIS.getInt();
                 }
@@ -172,6 +172,13 @@ public class Main
                 break;
 
             case 3:
+                // If all courses is empty, break
+                if (Admin.allCourses.isEmpty())
+                {
+                    System.out.println(ConsoleColors.RED + "There are no courses to view!" + ConsoleColors.RESET);
+                    break;
+                }
+
                 // Display current courses
                 for (int i = 0; i < Admin.allCourses.size(); i++)
                 {
@@ -451,10 +458,6 @@ public class Main
                 int role = SIS.getInt();
                 // TODO change this to getInformation after testing
                 User registered = SIS.testGetInformation(role);
-                if (registered == null)
-                {
-                    System.out.println(ConsoleColors.RED + "There are no admins in this system." + ConsoleColors.RESET);
-                }
                 if (registered instanceof Student)
                 {
                     students.add((Student) registered);
@@ -469,7 +472,7 @@ public class Main
                 }
                 else
                 {
-                    System.out.println(ConsoleColors.RED + "Error: User is not a student or instructor" + ConsoleColors.RESET);
+                    break;
                 }
 
                 break;
