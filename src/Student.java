@@ -173,7 +173,8 @@ public class Student extends User
     public void registerCourse() throws CloneNotSupportedException, InterruptedException
     {
         // Get all Courses from admin class
-        List<Courses> courses = Admin.allCourses;
+        List<Courses> courses = new ArrayList<>();
+        courses.addAll(Admin.allCourses);
 
         // If courses is empty exit
         if (courses.isEmpty())
@@ -189,6 +190,13 @@ public class Student extends User
             {
                 courses.remove(i);
             }
+        }
+
+        // If courses is empty exit
+        if (courses.isEmpty())
+        {
+            System.out.println(ConsoleColors.RED + "There are no courses!" + ConsoleColors.RESET);
+            return;
         }
 
         // If course is already registered, remove it from list of courses
@@ -209,6 +217,7 @@ public class Student extends User
             System.out.println(ConsoleColors.RED + "There are no courses!" + ConsoleColors.RESET);
             return;
         }
+
         // List All courses that have instructors
         for (int i = 0; i < courses.size(); i++)
         {
