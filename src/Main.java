@@ -26,6 +26,16 @@ public class Main
             students = new ArrayList<Student>();
             OS.WriteToFileStudent(students, studentFileName);
         }
+        else
+        {
+            for(Student student : students)
+            {
+                if(!(student.getCourses().isEmpty()))
+                {
+                    student.populateCourseInfo();
+                }
+            }
+        }
         if (instructors == null)
         {
             instructors = new ArrayList<Instructor>();

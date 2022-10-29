@@ -45,6 +45,13 @@ public class Admin extends Instructor
     {
         selectedCourse.courseInfo.setCourseName(selectedCourse, courseName);
         selectedCourse.courseInfo.setCreditHours(selectedCourse, creditHours);
+        for (Student student : Main.students)
+        {
+            if (!(student.getCourses().isEmpty()))
+            {
+                student.populateCourseInfo();
+            }
+        }
     }
 
     // Method to delete a course from the list of all courses

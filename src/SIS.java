@@ -432,11 +432,6 @@ public class SIS
     // TESTER METHOD REMOVE WHEN DONE
     static User testGetInformation(int role)
     {
-        // Only allow user creation if at least one admin exists
-        if (Main.admins.isEmpty())
-        {
-            return null;
-        }
 
         if (role == 1)
         {
@@ -445,6 +440,12 @@ public class SIS
             System.out.println("Username: " + admin.auth.getUsername());
             System.out.println("Password: " + admin.auth.getPassword());
             return admin;
+        }
+
+        // Only allow user creation if at least one admin exists
+        if (Main.admins.isEmpty())
+        {
+            return null;
         }
 
         else if (role == 2)
