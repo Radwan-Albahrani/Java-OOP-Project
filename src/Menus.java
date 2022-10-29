@@ -97,6 +97,7 @@ public class Menus
         System.out.println("4. Birthday");
         System.out.println("5. Field");
         System.out.println("6. Additional Field");
+        System.out.println("7. Exit");
 
         System.out.println(
                 ConsoleColors.PURPLE + "===========================================================================================" + ConsoleColors.RESET);

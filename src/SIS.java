@@ -9,20 +9,7 @@ public class SIS
     // Edit Admin Information
     static void editAdminInfo(User currentUser)
     {
-        // Get User ID of user to edit
-        System.out.print(ConsoleColors.BLUE + "Enter Admin User ID: " + ConsoleColors.RESET);
-        int adminID = SIS.getInt();
-
-        // Find the admin
-        Admin adminToEdit = null;
-        for (Admin admin : Main.admins)
-        {
-            if (admin.auth.getUserID() == adminID)
-            {
-                adminToEdit = admin;
-                break;
-            }
-        }
+        Admin adminToEdit = (Admin) currentUser;
 
         // Null Check
         if (adminToEdit == null)
@@ -44,11 +31,17 @@ public class SIS
         int editChoiceExact = SIS.getInt();
 
         // Check Choice
-        while (editChoiceExact < 1 || editChoiceExact > 6)
+        while (editChoiceExact < 1 || editChoiceExact > 7)
         {
             System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
             System.out.print(ConsoleColors.YELLOW + "Enter your choice: " + ConsoleColors.RESET);
             editChoiceExact = SIS.getInt();
+        }
+
+        if (editChoiceExact == 7)
+        {
+            System.out.println("Exiting...");
+            return;
         }
 
         // Get Value Based on Choice
@@ -144,11 +137,17 @@ public class SIS
         int editChoiceExact = SIS.getInt();
 
         // Check Choice
-        while (editChoiceExact < 1 || editChoiceExact > 6)
+        while (editChoiceExact < 1 || editChoiceExact > 7)
         {
             System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
             System.out.print(ConsoleColors.YELLOW + "Enter your choice: " + ConsoleColors.RESET);
             editChoiceExact = SIS.getInt();
+        }
+
+        if (editChoiceExact == 7)
+        {
+            System.out.println("Exiting...");
+            return;
         }
 
         // Get Value Based on Choice
@@ -246,11 +245,18 @@ public class SIS
         int editChoiceExact = SIS.getInt();
 
         // Check Choice
-        while (editChoiceExact < 1 || editChoiceExact > 6)
+        while (editChoiceExact < 1 || editChoiceExact > 7)
         {
             System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
             System.out.print(ConsoleColors.YELLOW + "Enter your choice: " + ConsoleColors.RESET);
             editChoiceExact = SIS.getInt();
+        }
+
+        // Exit if exiting
+        if (editChoiceExact == 7)
+        {
+            System.out.println("Exiting...");
+            return;
         }
 
         // Get Value Based on Choice
@@ -426,6 +432,12 @@ public class SIS
     // TESTER METHOD REMOVE WHEN DONE
     static User testGetInformation(int role)
     {
+        // Only allow user creation if at least one admin exists
+        if (Main.admins.isEmpty())
+        {
+            return null;
+        }
+
         if (role == 1)
         {
             User admin = new Admin(0, "admin" + User.numberOfUsers, "123", "admin" + User.numberOfUsers, "admin", "admin", "admin", "admin", "admin",
@@ -443,13 +455,18 @@ public class SIS
             System.out.println("Password: " + instructor.auth.getPassword());
             return instructor;
         }
-        else
+        else if (role == 3)
         {
             User student = new Student(0, "student" + User.numberOfUsers, "123", "student" + User.numberOfUsers, "student", "student", "student", "student",
                     "student", LocalDate.now(), Gender.F, 0);
             System.out.println("Username: " + student.auth.getUsername());
             System.out.println("Password: " + student.auth.getPassword());
             return student;
+        }
+        else
+        {
+            System.out.println("Invalid Choice!");
+            return null;
         }
     }
 
