@@ -150,8 +150,23 @@ public class Main
                 // Create new course
                 System.out.print(ConsoleColors.BLUE + "Enter course name: " + ConsoleColors.RESET);
                 String courseName = scanner.nextLine();
+
+                // Make sure course name is not empty
+                while (courseName.isEmpty())
+                {
+                    System.out.print(ConsoleColors.RED + "Course name cannot be empty!" + ConsoleColors.RESET);
+                    System.out.print(ConsoleColors.BLUE + "Enter course name: " + ConsoleColors.RESET);
+                    courseName = scanner.nextLine();
+                }
                 System.out.print(ConsoleColors.BLUE + "Enter Credit Hours: " + ConsoleColors.RESET);
                 int creditHours = SIS.getInt();
+                // Make sure credit hours is bigger than 0
+                while (creditHours <= 0)
+                {
+                    System.out.print(ConsoleColors.RED + "Credit hours must be bigger than 0! " + ConsoleColors.RESET);
+                    System.out.print(ConsoleColors.BLUE + "Enter Credit Hours: " + ConsoleColors.RESET);
+                    creditHours = SIS.getInt();
+                }
                 Admin.createCourse(courseName, creditHours);
                 System.out.println(ConsoleColors.GREEN + "Course Created Successfully!" + ConsoleColors.RESET);
                 break;
@@ -167,7 +182,7 @@ public class Main
                 // Select the course to edit
                 System.out.print(ConsoleColors.BLUE + "Enter course number to edit: " + ConsoleColors.RESET);
                 int courseNumber = SIS.getInt();
-                Courses SelectedCourse = Admin.allCourses.get(courseNumber - 1);
+
                 // Index Check While loop
                 while (courseNumber < 1 || courseNumber > Admin.allCourses.size())
                 {
@@ -175,6 +190,9 @@ public class Main
                     System.out.print(ConsoleColors.BLUE + "Enter course number to edit: " + ConsoleColors.RESET);
                     courseNumber = SIS.getInt();
                 }
+
+                // Select a course
+                Courses SelectedCourse = Admin.allCourses.get(courseNumber - 1);
 
                 // Get new information
                 System.out.print(ConsoleColors.BLACK_BRIGHT + "Enter new course name: " + ConsoleColors.RESET);
@@ -200,10 +218,21 @@ public class Main
 
                     }
 
-                    // Select the course to edit
+                    // Select the course to delete
                     System.out.print(ConsoleColors.BLUE + "Enter course number to delete: " + ConsoleColors.RESET);
                     int courseNumberToDelete = SIS.getInt();
+
+                    // Null Check While loop
+                    while (courseNumberToDelete < 1 || courseNumberToDelete > Admin.allCourses.size())
+                    {
+                        System.out.println(ConsoleColors.RED + "Please enter a valid course number!" + ConsoleColors.RESET);
+                        System.out.print(ConsoleColors.BLUE + "Enter course number to delete: " + ConsoleColors.RESET);
+                        courseNumberToDelete = SIS.getInt();
+                    }
+
+                    // Select Course
                     Courses SelectedCourseToDelete = Admin.allCourses.get(courseNumberToDelete - 1);
+
                     // Index Check While loop
                     while (courseNumberToDelete < 1 || courseNumberToDelete > Admin.allCourses.size())
                     {
@@ -260,6 +289,7 @@ public class Main
                 exitcode = 1;
                 break;
             default:
+                System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
                 break;
         }
         return exitcode;
@@ -302,6 +332,9 @@ public class Main
                 exitcode = 1;
                 System.out.println(ConsoleColors.GREEN + "Logged out Successfully!" + ConsoleColors.RESET);
                 Thread.sleep(1000);
+                break;
+            default:
+                System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
                 break;
         }
         return exitcode;
@@ -350,6 +383,9 @@ public class Main
                 System.out.println(ConsoleColors.GREEN + "Logged out Successfully!" + ConsoleColors.RESET);
                 Thread.sleep(1000);
                 exitCode = 1;
+                break;
+            default:
+                System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
                 break;
         }
         return exitCode;
@@ -443,6 +479,9 @@ public class Main
                 OS.WriteToFileInstructor(instructors, instructorFileName);
                 OS.WriteToFileStudent(students, studentFileName);
                 System.exit(0);
+                break;
+            default:
+                System.out.println(ConsoleColors.RED + "Please enter a valid choice!" + ConsoleColors.RESET);
                 break;
 
         }
