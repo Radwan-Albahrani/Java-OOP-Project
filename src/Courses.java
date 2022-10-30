@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class Courses implements Cloneable, Serializable
 {
     // ===================================== Variables =====================================
-    CourseInfo courseInfo = new CourseInfo();
+    private CourseInfo courseInfo = new CourseInfo();
     private String courseGrade;
     private double coursePercents;
 
@@ -63,7 +63,7 @@ public class Courses implements Cloneable, Serializable
     // ===================================== Getters =====================================
     public String getCourseName()
     {
-        return courseInfo.courseName;
+        return courseInfo.getCourseName();
     }
 
     public String getCourseGrade()

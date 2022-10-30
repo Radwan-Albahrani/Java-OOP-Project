@@ -86,7 +86,7 @@ public class Main
             System.out.println(ConsoleColors.GREEN + "Successfully Logged in!" + ConsoleColors.RESET);
 
             // Display Welcome Message to logged in user
-            System.out.println("Welcome " + currentUser.profile.getName() + "!");
+            System.out.println("Welcome " + currentUser.getProfile().getName() + "!");
 
             // Student workflow
             if (currentUser instanceof Student)
@@ -467,7 +467,7 @@ public class Main
                 System.out.print(ConsoleColors.YELLOW + "\n\nYour choice: " + ConsoleColors.RESET);
                 int role = SIS.getInt();
                 // TODO change this to getInformation after testing
-                User registered = SIS.testGetInformation(role);
+                User registered = SIS.getInformation(role);
                 if (registered instanceof Student)
                 {
                     students.add((Student) registered);

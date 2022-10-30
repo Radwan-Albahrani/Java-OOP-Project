@@ -6,8 +6,7 @@ public class Instructor extends User
 {
     // ===================================== Variables =====================================
     public static int numberOfInstructors;
-
-    List<Student> students = new ArrayList<Student>();
+    private List<Student> students = new ArrayList<Student>();
 
     // ===================================== Constructor =====================================
     Instructor(int authorityLevel,
@@ -46,11 +45,13 @@ public class Instructor extends User
     {
         return students;
     }
+
     // Getter method
     public Courses getCurrentClass()
     {
         return currentClass;
     }
+
     // ===================================== Methods =====================================
     // Method to populate students and add any lost references due to serialization
     public void populateStudents(List<Student> givenStudents)
@@ -60,17 +61,15 @@ public class Instructor extends User
         {
             for (Courses course : student.getCourses())
             {
-                if (course.courseInfo.getInstructor().getCurrentClass().getCourseName().equals(currentClass.getCourseName()))
+                if (course.getCourseInfo().getInstructor().getCurrentClass().getCourseName().equals(currentClass.getCourseName()))
                 {
-                    course.courseInfo.setInstructor(this);
+                    course.getCourseInfo().setInstructor(this);
                     students.add(student);
                 }
             }
         }
 
     }
-
-
 
     // Method to send announcements
     public void sendAnnouncement(String announcements)
@@ -96,7 +95,7 @@ public class Instructor extends User
     public void registerCourse(Courses course)
     {
         currentClass = course;
-        course.courseInfo.setInstructor(this);
+        course.getCourseInfo().setInstructor(this);
     }
 
     // Send announcements
@@ -110,7 +109,8 @@ public class Instructor extends User
         {
             System.out.print("Enter your announcement: ");
             String announcement = Main.scanner.nextLine();
-            announcement = "From: " + this.profile.getName() + "\nEmail: " + this.profile.getEmail() + "\nCourse: " + this.getCurrentClass() +"\nAnnouncement: " + announcement + "\n\n";
+            announcement = "From: " + this.getProfile().getName() + "\nEmail: " + this.getProfile().getEmail() + "\nCourse: " + this.getCurrentClass()
+                    + "\nAnnouncement: " + announcement + "\n\n";
             this.sendAnnouncement(announcement);
             System.out.println("Announcement sent successfully!");
         }
@@ -141,7 +141,7 @@ public class Instructor extends User
             // Clean out all courses so that the instructor is not in the list
             for (int i = 0; i < allCourses.size(); i++)
             {
-                if (allCourses.get(i).courseInfo.getInstructor() != null)
+                if (allCourses.get(i).getCourseInfo().getInstructor() != null)
                 {
                     allCourses.remove(i);
                 }
@@ -197,7 +197,7 @@ public class Instructor extends User
             // List all students
             for (int i = 0; i < students.size(); i++)
             {
-                System.out.println(i + 1 + ". " + students.get(i).profile.getName());
+                System.out.println(i + 1 + ". " + students.get(i).getProfile().getName());
             }
 
             // Select a student
@@ -251,7 +251,7 @@ public class Instructor extends User
             }
             for (int i = 0; i < students.size(); i++)
             {
-                System.out.println(i + 1 + ". " + students.get(i).profile.getName() + " " + students.get(i).auth.getUserID());
+                System.out.println(i + 1 + ". " + students.get(i).getProfile().getName() + " " + students.get(i).getAuth().getUserID());
             }
 
             // Selecting A student
@@ -270,7 +270,7 @@ public class Instructor extends User
             Student selectedStudent = students.get(studentNumber - 1);
             for (Courses course : selectedStudent.courses)
             {
-                if (course.courseInfo.getInstructor() == this)
+                if (course.getCourseInfo().getInstructor() == this)
                 {
                     System.out.println("Course: " + course.getCourseName());
                     System.out.println("Grade: " + course.getCourseGrade());

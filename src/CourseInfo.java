@@ -5,19 +5,17 @@ import java.util.List;
 public class CourseInfo implements Serializable
 {
     // ===================================== Variables =====================================
-    public String courseName;
-
-
-    public int creditHours;
-    public Instructor instructor = null;
-    public List<String> announcements = new ArrayList<String>();
+    private String courseName;
+    private int creditHours;
+    private Instructor instructor = null;
+    private List<String> announcements = new ArrayList<String>();
 
     // ===================================== Getters =====================================
     public List<String> getAnnouncements()
     {
         return announcements;
     }
-    
+
     public String getCourseName()
     {
         return courseName;

@@ -8,10 +8,9 @@ public abstract class User implements Serializable
 {
     // V===================================== Variables =====================================
     public static int numberOfUsers = 0;
-    int authorityLevel, age;
-    Date creationDate, expirationDate;
-    Authentication auth;
-    Profile profile;
+    private Date creationDate, expirationDate;
+    private Authentication auth;
+    private Profile profile;
 
     // ===================================== Constructor =====================================
     User(int authorityLevel, String username, String password, String name, String nationality, String field,
@@ -51,15 +50,27 @@ public abstract class User implements Serializable
         return expirationDate;
     }
 
+    public Authentication getAuth()
+    {
+        return auth;
+    }
+
+    public Profile getProfile()
+    {
+        return profile;
+    }
+
+
     // ===================================== Methods=====================================
     // Method to view profile
     public List<String> viewProfile()
     {
         // Setting up Profile
         List<String> viewProfile = new ArrayList<String>();
-        viewProfile.add(ConsoleColors.PURPLE + "=============================================================================================" + ConsoleColors.RESET);
+        viewProfile.add(
+                ConsoleColors.PURPLE + "=============================================================================================" + ConsoleColors.RESET);
         viewProfile.add(ConsoleColors.BLACK + "Name: " + ConsoleColors.RESET + profile.getName());
-        viewProfile.add(ConsoleColors.BLACK + "Age: " + ConsoleColors.RESET+ profile.getAge());
+        viewProfile.add(ConsoleColors.BLACK + "Age: " + ConsoleColors.RESET + profile.getAge());
         viewProfile.add(ConsoleColors.BLACK + "Gender: " + ConsoleColors.RESET + profile.getGender().toString());
         viewProfile.add(ConsoleColors.BLACK + "Nationality: " + ConsoleColors.RESET + profile.getNationality());
         viewProfile.add(ConsoleColors.BLACK + "Phone Number: " + ConsoleColors.RESET + profile.getPhoneNumber());
@@ -67,7 +78,8 @@ public abstract class User implements Serializable
         viewProfile.add(ConsoleColors.BLACK + "Birthday: " + ConsoleColors.RESET + profile.getBirthDate());
         viewProfile.add(ConsoleColors.BLACK + "Field: " + ConsoleColors.RESET + profile.getField());
         viewProfile.add(ConsoleColors.BLACK + "Additional Field: " + ConsoleColors.RESET + profile.getAdditionalField());
-        viewProfile.add(ConsoleColors.PURPLE + "============================================================================================" + ConsoleColors.RESET);
+        viewProfile.add(
+                ConsoleColors.PURPLE + "============================================================================================" + ConsoleColors.RESET);
 
         return viewProfile;
     }

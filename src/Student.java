@@ -57,43 +57,43 @@ public class Student extends User
             double coursePercents = course.getCoursePercent();
             if (coursePercents >= 95)
             {
-                rawScores += 5 * course.courseInfo.getCreditHours();
+                rawScores += 5 * course.getCourseInfo().getCreditHours();
 
             }
             else if (coursePercents >= 90)
             {
-                rawScores += 4.75 * course.courseInfo.getCreditHours();
+                rawScores += 4.75 * course.getCourseInfo().getCreditHours();
             }
             else if (coursePercents >= 85)
             {
-                rawScores += 4.5 * course.courseInfo.getCreditHours();
+                rawScores += 4.5 * course.getCourseInfo().getCreditHours();
             }
             else if (coursePercents >= 80)
             {
-                rawScores += 4 * course.courseInfo.getCreditHours();
+                rawScores += 4 * course.getCourseInfo().getCreditHours();
             }
             else if (coursePercents >= 75)
             {
-                rawScores += 3.5 * course.courseInfo.getCreditHours();
+                rawScores += 3.5 * course.getCourseInfo().getCreditHours();
             }
             else if (coursePercents >= 70)
             {
-                rawScores += 3 * course.courseInfo.getCreditHours();
+                rawScores += 3 * course.getCourseInfo().getCreditHours();
             }
             else if (coursePercents >= 65)
             {
-                rawScores += 2.5 * course.courseInfo.getCreditHours();
+                rawScores += 2.5 * course.getCourseInfo().getCreditHours();
             }
 
             else if (coursePercents >= 60)
             {
-                rawScores += 2 * course.courseInfo.getCreditHours();
+                rawScores += 2 * course.getCourseInfo().getCreditHours();
             }
             else
             {
-                rawScores += 1.0 * course.courseInfo.getCreditHours();
+                rawScores += 1.0 * course.getCourseInfo().getCreditHours();
             }
-            totalCredits += course.courseInfo.getCreditHours();
+            totalCredits += course.getCourseInfo().getCreditHours();
         }
         double GPA = rawScores / totalCredits;
         setGpa(GPA);
@@ -104,7 +104,7 @@ public class Student extends User
     public void registerCourse(Courses course)
     {
         courses.add(course);
-        course.courseInfo.getInstructor().addStudent(this);
+        course.getCourseInfo().getInstructor().addStudent(this);
     }
 
     // Populate Course Info
@@ -119,7 +119,7 @@ public class Student extends User
     // Method to drop a course
     public void dropCourse(Courses course)
     {
-        course.courseInfo.getInstructor().students.remove(this);
+        course.getCourseInfo().getInstructor().getStudents().remove(this);
         courses.remove(course);
     }
 
@@ -186,7 +186,7 @@ public class Student extends User
         // Clean courses list if course has no instructor
         for (int i = 0; i < courses.size(); i++)
         {
-            if (courses.get(i).courseInfo.getInstructor() == null)
+            if (courses.get(i).getCourseInfo().getInstructor() == null)
             {
                 courses.remove(i);
             }
@@ -221,7 +221,7 @@ public class Student extends User
         // List All courses that have instructors
         for (int i = 0; i < courses.size(); i++)
         {
-            System.out.println((i + 1) + ". " + courses.get(i).getCourseName() + " - " + courses.get(i).courseInfo.getInstructor().profile.getName());
+            System.out.println((i + 1) + ". " + courses.get(i).getCourseName() + " - " + courses.get(i).getCourseInfo().getInstructor().getProfile().getName());
         }
 
         // Select a course from the menu
