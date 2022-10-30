@@ -3,8 +3,8 @@ import java.io.Serializable;
 public class Authentication implements Serializable
 {
     // ===================================== Variables =====================================
-    String username, password;
-    int authorityLevel, userID;
+    private String username, password;
+    private int authorityLevel, userID;
 
     // ===================================== Getters =====================================
     public String getUsername()

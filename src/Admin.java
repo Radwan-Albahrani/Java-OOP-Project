@@ -34,8 +34,8 @@ public class Admin extends Instructor
     public static void createCourse(String courseName, int creditHours)
     {
         Courses course = new Courses();
-        course.courseInfo.setCourseName(course, courseName);
-        course.courseInfo.setCreditHours(course, creditHours);
+        course.getCourseInfo().setCourseName(course, courseName);
+        course.getCourseInfo().setCreditHours(course, creditHours);
         Admin.allCourses.add(course);
 
     }
@@ -43,8 +43,8 @@ public class Admin extends Instructor
     // Method to edit a course name and credit hours for a given course
     public static void editCourse(Courses selectedCourse, String courseName, int creditHours)
     {
-        selectedCourse.courseInfo.setCourseName(selectedCourse, courseName);
-        selectedCourse.courseInfo.setCreditHours(selectedCourse, creditHours);
+        selectedCourse.getCourseInfo().setCourseName(selectedCourse, courseName);
+        selectedCourse.getCourseInfo().setCreditHours(selectedCourse, creditHours);
         for (Student student : Main.students)
         {
             if (!(student.getCourses().isEmpty()))
@@ -65,7 +65,7 @@ public class Admin extends Instructor
         }
 
         // If course has instructor
-        if (course.courseInfo.getInstructor() != null)
+        if (course.getCourseInfo().getInstructor() != null)
         {
             // Get All students from the instructor
             List<Student> studentsWithCourse = course.getCourseInfo().getInstructor().getStudents();
@@ -86,8 +86,8 @@ public class Admin extends Instructor
             }
 
             // Remove the course from the instructor
-            course.courseInfo.getInstructor().setCurrentClass(null);
-            course.courseInfo.setInstructor(null);
+            course.getCourseInfo().getInstructor().setCurrentClass(null);
+            course.getCourseInfo().setInstructor(null);
 
             // Remove Course from Admin
             Admin.allCourses.remove(course);
@@ -107,8 +107,8 @@ public class Admin extends Instructor
     // Method to edit dob
     public void editProfile(User userToEdit, LocalDate dob, int age)
     {
-        userToEdit.profile.setBirthDate(dob);
-        userToEdit.profile.setAge(age);
+        userToEdit.getProfile().setBirthDate(dob);
+        userToEdit.getProfile().setAge(age);
     }
 
     // Method to edit any other profile value
@@ -117,21 +117,21 @@ public class Admin extends Instructor
         switch (editChoiceExact)
         {
             case 1:
-                userToEdit.profile.setName(newValue);
-                userToEdit.profile.setEmail(newValue + userToEdit.auth.getUserID() + "@university.com");
-                userToEdit.auth.setUsername(newValue + userToEdit.auth.getUserID());
+                userToEdit.getProfile().setName(newValue);
+                userToEdit.getProfile().setEmail(newValue + userToEdit.getAuth().getUserID() + "@university.com");
+                userToEdit.getAuth().setUsername(newValue + userToEdit.getAuth().getUserID());
                 break;
             case 2:
-                userToEdit.profile.setNationality(newValue);
+                userToEdit.getProfile().setNationality(newValue);
                 break;
             case 3:
-                userToEdit.profile.setPhoneNumber(newValue);
+                userToEdit.getProfile().setPhoneNumber(newValue);
                 break;
             case 5:
-                userToEdit.profile.setField(newValue);
+                userToEdit.getProfile().setField(newValue);
                 break;
             case 6:
-                userToEdit.profile.setAdditionalField(newValue);
+                userToEdit.getProfile().setAdditionalField(newValue);
                 break;
             default:
                 System.out.println("Invalid choice!");

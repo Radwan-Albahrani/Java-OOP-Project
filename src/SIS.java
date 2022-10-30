@@ -110,7 +110,7 @@ public class SIS
         Instructor instructorToEdit = null;
         for (Instructor instructor : Main.instructors)
         {
-            if (instructor.auth.getUserID() == instructorID)
+            if (instructor.getAuth().getUserID() == instructorID)
             {
                 instructorToEdit = instructor;
                 break;
@@ -218,7 +218,7 @@ public class SIS
         Student studentToEdit = null;
         for (Student student : Main.students)
         {
-            if (student.auth.getUserID() == studentID)
+            if (student.getAuth().getUserID() == studentID)
             {
                 studentToEdit = student;
                 break;
@@ -337,7 +337,7 @@ public class SIS
                 password = SIS.getPassword();
                 for (Admin admin : admins)
                 {
-                    if (admin.auth.getUsername().equals(username) && admin.auth.getPassword().equals(password))
+                    if (admin.getAuth().getUsername().equals(username) && admin.getAuth().getPassword().equals(password))
                     {
                         // Get this admin from the admins arraylist
                         currentUser = admin;
@@ -359,7 +359,7 @@ public class SIS
                 password = SIS.getPassword();
                 for (Instructor instructor : instructors)
                 {
-                    if (instructor.auth.getUsername().equals(username) && instructor.auth.getPassword().equals(password))
+                    if (instructor.getAuth().getUsername().equals(username) && instructor.getAuth().getPassword().equals(password))
                     {
                         // Get this instructor from the instructors arraylist
                         currentUser = instructor;
@@ -381,7 +381,7 @@ public class SIS
                 password = SIS.getPassword();
                 for (Student student : students)
                 {
-                    if (student.auth.getUsername().equals(username) && student.auth.getPassword().equals(password))
+                    if (student.getAuth().getUsername().equals(username) && student.getAuth().getPassword().equals(password))
                     {
                         // Get this student from the students arraylist
                         currentUser = student;
@@ -437,8 +437,8 @@ public class SIS
         {
             User admin = new Admin(0, "admin" + User.numberOfUsers, "123", "admin" + User.numberOfUsers, "admin", "admin", "admin", "admin", "admin",
                     LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + admin.auth.getUsername());
-            System.out.println("Password: " + admin.auth.getPassword());
+            System.out.println("Username: " + admin.getAuth().getUsername());
+            System.out.println("Password: " + admin.getAuth().getPassword());
             return admin;
         }
 
@@ -452,16 +452,16 @@ public class SIS
         {
             User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
                     "instructor", "instructor", "instructor", LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + instructor.auth.getUsername());
-            System.out.println("Password: " + instructor.auth.getPassword());
+            System.out.println("Username: " + instructor.getAuth().getUsername());
+            System.out.println("Password: " + instructor.getAuth().getPassword());
             return instructor;
         }
         else if (role == 3)
         {
             User student = new Student(0, "student" + User.numberOfUsers, "123", "student" + User.numberOfUsers, "student", "student", "student", "student",
                     "student", LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + student.auth.getUsername());
-            System.out.println("Password: " + student.auth.getPassword());
+            System.out.println("Username: " + student.getAuth().getUsername());
+            System.out.println("Password: " + student.getAuth().getPassword());
             return student;
         }
         else
@@ -703,7 +703,7 @@ public class SIS
         String confirmPassword = SIS.getPassword();
         if (newPassword.equals(confirmPassword))
         {
-            currentUser.auth.setPassword(newPassword);
+            currentUser.getAuth().setPassword(newPassword);
             System.out.println(ConsoleColors.GREEN + "Password Changed Successfully!" + ConsoleColors.RESET);
         }
         else

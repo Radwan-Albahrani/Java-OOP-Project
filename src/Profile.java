@@ -5,10 +5,10 @@ enum Gender { M, F }
 public class Profile implements Serializable
 {
     // ===================================== Variables =====================================
-    String name, nationality, field, additionalField, email, phoneNumber;
-    int age;
-    Gender gender;
-    LocalDate birthDate;
+    private String name, nationality, field, additionalField, email, phoneNumber;
+    private int age;
+    private Gender gender;
+    private LocalDate birthDate;
 
     // ===================================== Setters =====================================
     public void setName(String name)

@@ -86,7 +86,7 @@ public class Main
             System.out.println(ConsoleColors.GREEN + "Successfully Logged in!" + ConsoleColors.RESET);
 
             // Display Welcome Message to logged in user
-            System.out.println("Welcome " + currentUser.profile.getName() + "!");
+            System.out.println("Welcome " + currentUser.getProfile().getName() + "!");
 
             // Student workflow
             if (currentUser instanceof Student)
