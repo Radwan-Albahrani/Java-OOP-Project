@@ -472,7 +472,7 @@ public class SIS
     }
 
     // Method to get information from the user
-    private static User getInformation(int role)
+    static User getInformation(int role)
     {
         // Variables
         String name, nationality, field, additionalField, email, phoneNumber = "", username, password = "";
@@ -481,13 +481,6 @@ public class SIS
         LocalDate dob = null;
         boolean notParsed;
 
-        // Only allow user creation if at least one admin exists
-        if (Main.admins.isEmpty())
-        {
-            System.out.println(ConsoleColors.RED + "There are no admins in this system. Please Register some admins First!" + ConsoleColors.RESET);
-            return null;
-        }
-
         // Validating role
         while (role != 1 && role != 2 && role != 3 && role != 4)
         {
@@ -495,6 +488,14 @@ public class SIS
             System.out.print(ConsoleColors.YELLOW + "Please enter your choice: " + ConsoleColors.RESET);
             role = SIS.getInt();
         }
+
+        // Only allow user creation if at least one admin exists
+        if (Main.admins.isEmpty() && role != 1)
+        {
+            return null;
+        }
+
+        // Exits the method if the user enters 4
         if (role == 4)
         {
             return null;
