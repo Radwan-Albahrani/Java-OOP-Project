@@ -429,48 +429,6 @@ public class SIS
         }
     }
 
-    // TESTER METHOD REMOVE WHEN DONE
-    static User testGetInformation(int role)
-    {
-
-        if (role == 1)
-        {
-            User admin = new Admin(0, "admin" + User.numberOfUsers, "123", "admin" + User.numberOfUsers, "admin", "admin", "admin", "admin", "admin",
-                    LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + admin.getAuth().getUsername());
-            System.out.println("Password: " + admin.getAuth().getPassword());
-            return admin;
-        }
-
-        // Only allow user creation if at least one admin exists
-        if (Main.admins.isEmpty())
-        {
-            return null;
-        }
-
-        else if (role == 2)
-        {
-            User instructor = new Instructor(0, "instructor" + User.numberOfUsers, "123", "instructor" + User.numberOfUsers, "instructor", "instructor",
-                    "instructor", "instructor", "instructor", LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + instructor.getAuth().getUsername());
-            System.out.println("Password: " + instructor.getAuth().getPassword());
-            return instructor;
-        }
-        else if (role == 3)
-        {
-            User student = new Student(0, "student" + User.numberOfUsers, "123", "student" + User.numberOfUsers, "student", "student", "student", "student",
-                    "student", LocalDate.now(), Gender.F, 0);
-            System.out.println("Username: " + student.getAuth().getUsername());
-            System.out.println("Password: " + student.getAuth().getPassword());
-            return student;
-        }
-        else
-        {
-            System.out.println("Invalid Choice!");
-            return null;
-        }
-    }
-
     // Method to get information from the user
     static User getInformation(int role)
     {
