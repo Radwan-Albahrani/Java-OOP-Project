@@ -450,6 +450,7 @@ public class SIS
         // Only allow user creation if at least one admin exists
         if (Main.admins.isEmpty() && role != 1)
         {
+            System.out.println(ConsoleColors.RED + "No admins registered! Please register as an admin First!" + ConsoleColors.RESET);
             return null;
         }
 
