@@ -559,7 +559,7 @@ public class SIS
         // Confirming password
         System.out.print(ConsoleColors.BLUE + "Confirm your password: " + ConsoleColors.RESET);
         String confirmPassword = getPassword();
-        
+
         // If passwords dont match, ask again
         while (!password.equals(confirmPassword))
         {
