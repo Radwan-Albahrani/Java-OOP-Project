@@ -556,6 +556,20 @@ public class SIS
         System.out.print(ConsoleColors.BLUE + "Enter your password: " + ConsoleColors.RESET);
         password = getPassword();
 
+        // Confirming password
+        System.out.print(ConsoleColors.BLUE + "Confirm your password: " + ConsoleColors.RESET);
+        String confirmPassword = getPassword();
+        
+        // If passwords dont match, ask again
+        while (!password.equals(confirmPassword))
+        {
+            System.out.println(ConsoleColors.RED + "Passwords don't match" + ConsoleColors.RESET);
+            System.out.print(ConsoleColors.BLUE + "Enter your password: " + ConsoleColors.RESET);
+            password = getPassword();
+            System.out.print(ConsoleColors.BLUE + "Confirm your password: " + ConsoleColors.RESET);
+            confirmPassword = getPassword();
+        }
+
         // Check role and create appropriate object
         if (role == 1)
         {
