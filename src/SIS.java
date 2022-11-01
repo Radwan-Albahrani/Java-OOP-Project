@@ -47,32 +47,61 @@ public class SIS
         // Get Value Based on Choice
         String newValue = "";
         LocalDate dob = null;
-        switch (editChoiceExact)
+        boolean valid = false;
+        while (!valid)
         {
-            case 1:
-                System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 2:
-                System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 3:
-                System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 4:
-                System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
-                dob = SIS.getDateOfBirth();
-                break;
-            case 5:
-                System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 6:
-                System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
+            switch (editChoiceExact)
+            {
+                case 1:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 2:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 4:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
+                    dob = SIS.getDateOfBirth();
+                    break;
+                case 5:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 6:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+            }
+
+            // Check if valid
+            if (editChoiceExact == 4)
+            {
+                if (dob != null)
+                {
+                    valid = true;
+                }
+            }
+            else
+            {
+                if (!newValue.equals(""))
+                {
+                    // Check if it has any digits
+                    if (newValue.matches(".*\\d.*"))
+                    {
+                        System.out.println(ConsoleColors.RED + "Invalid Input! Please enter a valid input! Cannot have digits" + ConsoleColors.RESET);
+                    }
+                    else
+                    {
+                        valid = true;
+                    }
+                }
+            }
+
         }
         int age = SIS.calculateAge(dob);
         if (editChoiceExact == 4)
@@ -153,32 +182,61 @@ public class SIS
         // Get Value Based on Choice
         String newValue = "";
         LocalDate dob = null;
-        switch (editChoiceExact)
+        boolean valid = false;
+        while (!valid)
         {
-            case 1:
-                System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 2:
-                System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 3:
-                System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 4:
-                System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
-                dob = SIS.getDateOfBirth();
-                break;
-            case 5:
-                System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 6:
-                System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
+            switch (editChoiceExact)
+            {
+                case 1:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 2:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 4:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
+                    dob = SIS.getDateOfBirth();
+                    break;
+                case 5:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 6:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+            }
+
+            // Check if valid
+            if (editChoiceExact == 4)
+            {
+                if (dob != null)
+                {
+                    valid = true;
+                }
+            }
+            else
+            {
+                if (!newValue.equals(""))
+                {
+                    // Check if it has any digits
+                    if (newValue.matches(".*\\d.*"))
+                    {
+                        System.out.println(ConsoleColors.RED + "Invalid Input! Please enter a valid input! Cannot have digits" + ConsoleColors.RESET);
+                    }
+                    else
+                    {
+                        valid = true;
+                    }
+                }
+            }
+
         }
 
         // Edit the instructor
@@ -262,32 +320,61 @@ public class SIS
         // Get Value Based on Choice
         String newValue = "";
         LocalDate dob = null;
-        switch (editChoiceExact)
+        boolean valid = false;
+        while (!valid)
         {
-            case 1:
-                System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 2:
-                System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 3:
-                System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 4:
-                System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
-                dob = SIS.getDateOfBirth();
-                break;
-            case 5:
-                System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
-            case 6:
-                System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
-                newValue = Main.scanner.nextLine();
-                break;
+            switch (editChoiceExact)
+            {
+                case 1:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Name: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 2:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Nationality: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Phone Number: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 4:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Date of Birth: " + ConsoleColors.RESET);
+                    dob = SIS.getDateOfBirth();
+                    break;
+                case 5:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+                case 6:
+                    System.out.print(ConsoleColors.BLUE + "Enter new Additional Field: " + ConsoleColors.RESET);
+                    newValue = Main.scanner.nextLine();
+                    break;
+            }
+
+            // Check if valid
+            if (editChoiceExact == 4)
+            {
+                if (dob != null)
+                {
+                    valid = true;
+                }
+            }
+            else
+            {
+                if (!newValue.equals(""))
+                {
+                    // Check if it has any digits
+                    if (newValue.matches(".*\\d.*"))
+                    {
+                        System.out.println(ConsoleColors.RED + "Invalid Input! Please enter a valid input! Cannot have digits" + ConsoleColors.RESET);
+                    }
+                    else
+                    {
+                        valid = true;
+                    }
+                }
+            }
+
         }
         int age = SIS.calculateAge(dob);
         // Edit the student
@@ -463,11 +550,29 @@ public class SIS
         System.out.print(ConsoleColors.BLUE + "Enter your name: " + ConsoleColors.RESET);
         name = Main.scanner.nextLine();
 
-        // While name is empty, Ask again
-        while (name.isEmpty())
+        notParsed = false;
+        while (!notParsed)
         {
-            System.out.print(ConsoleColors.RED + "Please enter a valid name: " + ConsoleColors.RESET);
-            name = Main.scanner.nextLine();
+            // nationality cannot be empty
+            while (name.isEmpty())
+            {
+                System.out.println(ConsoleColors.RED + "Name cannot be empty" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Name: " + ConsoleColors.RESET);
+                name = Main.scanner.nextLine();
+            }
+            notParsed = true;
+            // nationality cannot have any digits
+            if(name.matches(".*\\d.*"))
+            {
+                notParsed = false;
+            }
+
+            if (!notParsed)
+            {
+                System.out.println(ConsoleColors.RED + "Cannot contain Digits!" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Name: " + ConsoleColors.RESET);
+                name = Main.scanner.nextLine();
+            }
         }
         // Get date of birth and validate it
         dob = SIS.getDateOfBirth();
@@ -477,12 +582,30 @@ public class SIS
         System.out.print(ConsoleColors.BLUE + "Enter your nationality: " + ConsoleColors.RESET);
         nationality = Main.scanner.nextLine();
 
-        // nationality cannot be empty
-        while (nationality.isEmpty())
+        // nationality cannot be empty or have digits
+        notParsed = false;
+        while (!notParsed)
         {
-            System.out.println(ConsoleColors.RED + "Nationality cannot be empty" + ConsoleColors.RESET);
-            System.out.print(ConsoleColors.BLUE + "Enter your Nationality: " + ConsoleColors.RESET);
-            field = Main.scanner.nextLine();
+            // nationality cannot be empty
+            while (nationality.isEmpty())
+            {
+                System.out.println(ConsoleColors.RED + "Nationality cannot be empty" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Nationality: " + ConsoleColors.RESET);
+                nationality = Main.scanner.nextLine();
+            }
+            notParsed = true;
+            // nationality cannot have any digits
+            if(nationality.matches(".*\\d.*"))
+            {
+                notParsed = false;
+            }
+
+            if (!notParsed)
+            {
+                System.out.println(ConsoleColors.RED + "Cannot contain Digits!" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Nationality: " + ConsoleColors.RESET);
+                nationality = Main.scanner.nextLine();
+            }
         }
 
         // Get phone number and make sure its the proper format
@@ -534,13 +657,31 @@ public class SIS
         System.out.print(ConsoleColors.BLUE + "Enter your field: " + ConsoleColors.RESET);
         field = Main.scanner.nextLine();
 
-        // Field Cannot be empty
-        while (field.isEmpty())
+        notParsed = false;
+        while (!notParsed)
         {
-            System.out.println(ConsoleColors.RED + "Field cannot be empty" + ConsoleColors.RESET);
-            System.out.print(ConsoleColors.BLUE + "Enter your field: " + ConsoleColors.RESET);
-            field = Main.scanner.nextLine();
+            // nationality cannot be empty
+            while (field.isEmpty())
+            {
+                System.out.println(ConsoleColors.RED + "Field cannot be empty" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Field: " + ConsoleColors.RESET);
+                field = Main.scanner.nextLine();
+            }
+            notParsed = true;
+            if(field.matches(".*\\d.*"))
+            {
+                notParsed = false;
+            }
+
+            if (!notParsed)
+            {
+                System.out.println(ConsoleColors.RED + "Cannot contain Digits!" + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.BLUE + "Enter your Field: " + ConsoleColors.RESET);
+                field = Main.scanner.nextLine();
+            }
         }
+
+        // Field cannot have any digits
 
         // Get Additional Field
         System.out.print(ConsoleColors.BLUE + "Enter your additional field (If Any): " + ConsoleColors.RESET);
