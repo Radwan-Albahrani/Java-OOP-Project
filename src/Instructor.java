@@ -109,7 +109,7 @@ public class Instructor extends User
         {
             System.out.print("Enter your announcement: ");
             String announcement = Main.scanner.nextLine();
-            announcement = "From: " + this.getProfile().getName() + "\nEmail: " + this.getProfile().getEmail() + "\nCourse: " + this.getCurrentClass()
+            announcement = "From: " + this.getProfile().getName() + "\nEmail: " + this.getProfile().getEmail() + "\nCourse: " + this.getCurrentClass().getCourseName()
                     + "\nAnnouncement: " + announcement + "\n\n";
             this.sendAnnouncement(announcement);
             System.out.println("Announcement sent successfully!");
