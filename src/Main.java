@@ -466,7 +466,7 @@ public class Main
 
                 System.out.print(ConsoleColors.YELLOW + "\n\nYour choice: " + ConsoleColors.RESET);
                 int role = SIS.getInt();
-                // TODO change this to getInformation after testing
+
                 User registered = SIS.getInformation(role);
                 if (registered instanceof Student)
                 {
