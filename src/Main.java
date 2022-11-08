@@ -12,6 +12,7 @@ public class Main
     public static String studentFileName = "./data/students.ser";
     public static String instructorFileName = "./data/instructors.ser";
     public static String adminFileName = "./data/admins.ser";
+    public static boolean demonstrationMode = false;
 
     // Main Method
     public static void main(String[] args) throws CloneNotSupportedException, InterruptedException
