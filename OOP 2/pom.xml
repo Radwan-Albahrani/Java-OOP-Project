@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>oop.project</groupId>
+  <artifactId>project</artifactId>
+  <version>1.0</version>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.path>D:\Windows Files\Desktop\Github\Repositories\Final Project OOP\OOP 2</project.path>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.k33ptoo</groupId>
+      <artifactId>KControls</artifactId>
+      <version>2.0</version>
+      <scope>system</scope>
+      <systemPath>${project.path}\src\main\resources\Dependencies\KControls-2.0.jar</systemPath>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Build an executable JAR -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>oop.project.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
