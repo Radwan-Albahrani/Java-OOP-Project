@@ -9,7 +9,7 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <project.path>D:\Windows Files\Desktop\Github\Repositories\Final Project OOP\OOP 2</project.path>
+    <project.path>D:\Windows Folders\Desktop\Github\Java-OOP-Project\OOP 2</project.path> <!-- Change this to your project path -->
   </properties>
 
   <dependencies>
