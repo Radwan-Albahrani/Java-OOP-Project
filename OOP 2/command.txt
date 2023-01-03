@@ -1,1 +1,8 @@
+installing:
 mvn install:install-file -Dfile=".\src\main\resources\Dependencies\KControls-2.0.jar" -DgroupId="com.k33ptoo" -DartifactId="KControls" -Dversion="2.0" -Dpackaging="jar"
+
+Building:
+mvn clean package
+
+Running:
+java -jar .\target\project-1.0.jar
