@@ -1,3 +1,1 @@
-mvn install:install-file -Dfile="D:\Windows_Folders\Desktop\Github\Java-OOP-Project\OOP 2\src\main\resources\Dependencies\KControls-2.0.jar" -DgroupId="com.k33ptoo" -DartifactId="KControls" -Dversion="2.0" -Dpackaging="jar"
-
-change the path to the location of the KControls-2.0.jar file
+mvn install:install-file -Dfile=".\src\main\resources\Dependencies\KControls-2.0.jar" -DgroupId="com.k33ptoo" -DartifactId="KControls" -Dversion="2.0" -Dpackaging="jar"
