@@ -8,8 +8,7 @@
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.path>D:\Windows Folders\Desktop\Github\Java-OOP-Project\OOP 2</project.path> <!-- Change this to your project path -->
+    <maven.compiler.target>17</maven.compiler.target> <!-- Change this to your project path -->
   </properties>
 
   <dependencies>
@@ -17,12 +16,30 @@
       <groupId>com.k33ptoo</groupId>
       <artifactId>KControls</artifactId>
       <version>2.0</version>
-      <scope>system</scope>
-      <systemPath>${project.path}\src\main\resources\Dependencies\KControls-2.0.jar</systemPath>
     </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
