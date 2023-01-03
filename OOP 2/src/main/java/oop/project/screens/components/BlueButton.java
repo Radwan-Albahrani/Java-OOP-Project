@@ -8,9 +8,10 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 
-public class BlueButton extends KButton {
-
-    public BlueButton(String text) {
+public class BlueButton extends KButton
+{
+    public BlueButton(String text)
+    {
         this.setText(text);
         this.setFont(new Font("Arial", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.POWDER_BLUE);
@@ -23,5 +24,4 @@ public class BlueButton extends KButton {
         this.setPreferredSize(new Dimension(150, 50));
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
-
 }

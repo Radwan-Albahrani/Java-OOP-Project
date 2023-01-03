@@ -7,7 +7,8 @@ import com.k33ptoo.components.*;
 import oop.project.App;
 import oop.project.screens.components.*;
 
-public class LoginScreen extends JFrame {
+public class LoginScreen extends JFrame
+{
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JLabel usernameLabel;
@@ -18,7 +19,8 @@ public class LoginScreen extends JFrame {
     private KButton registerButton;
     private JLabel picture;
 
-    public LoginScreen() {
+    public LoginScreen()
+    {
         super("Login");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
@@ -119,7 +121,5 @@ public class LoginScreen extends JFrame {
         add(loginPanel, constraints);
 
         setVisible(true);
-
     }
-
 }
