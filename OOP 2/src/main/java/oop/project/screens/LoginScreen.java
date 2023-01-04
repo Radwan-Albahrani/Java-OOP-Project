@@ -2,10 +2,14 @@ package oop.project.screens;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import com.k33ptoo.components.*;
 
 import oop.project.App;
 import oop.project.screens.components.*;
+import oop.project.screens.hooks.*;
 
 public class LoginScreen extends JFrame
 {
@@ -22,93 +26,101 @@ public class LoginScreen extends JFrame
     public LoginScreen()
     {
         super("Login");
+
+        // Frame Setup
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
-        // Frame Setup
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(screenWidth / 2, (int) (screenHeight / 1.2));
         setLocationRelativeTo(null);
         setResizable(false);
-        Image icon = new ImageIcon(App.Path + "LoginScreen/AppIcon.jpg").getImage();
+        Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
         setIconImage(icon);
 
         // Background Setup
-        Image backgroundImage = new ImageIcon(App.Path + "LoginScreen/backgroundBlurred.png").getImage();
+        Image backgroundImage = new ImageIcon(App.Path + "LoginScreen/background.png").getImage();
         int width = getWidth();
         int height = getHeight();
-        int newWidth = width;
-        int newHeight = height;
-        Image scaledBackgroundImage = backgroundImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
         setContentPane(background);
 
         // Login Panel Setup
         loginPanel = new ThemedPanel();
-        loginPanel.setPreferredSize(new Dimension((int) (getWidth() / 3), (int) (getHeight() / 2.2)));
+        loginPanel.setPreferredSize(new Dimension((int) (getWidth() / 3), (int) (getHeight() / 2.8)));
         loginPanel.setSize(getPreferredSize());
+        loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         // Login Label Setup
         loginLabel = new JLabel("Student Information System");
         loginLabel.setForeground(Color.WHITE);
         loginLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        loginLabel.setHorizontalAlignment(JLabel.CENTER);
 
         // Picture Setup
         Image image = new ImageIcon(App.Path + "LoginScreen/loginScreenIcon.png").getImage();
         width = image.getWidth(null);
         height = image.getHeight(null);
-        newWidth = width / 3;
-        newHeight = height / 3;
-        Image scaledImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
-        picture = new JLabel(scaledImageIcon);
+        Image scaledImage = image.getScaledInstance(width / 3, height / 3, Image.SCALE_SMOOTH);
+        picture = new JLabel(new ImageIcon(scaledImage));
 
-        // Username Setup
-        usernameLabel = new JLabel("Username:");
+        // Login Top Panel Setup
+        JPanel LoginTopBox = new VerticalPanel(loginLabel, picture);
+
+        // Username Label and Field Setup
+        usernameLabel = new JLabel("Username: ");
         usernameLabel.setForeground(Color.WHITE);
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
-        // Username Field Setup
         usernameField = new JTextField(15);
         usernameField.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
 
-        // Password Setup
-        passwordLabel = new JLabel("Password:");
+        JComponent[] userComponents = {usernameLabel, usernameField};
+        Box userBox = AddToBox.addToHorizontalBox(userComponents, 1);
+
+        // Password Label and Field Setup
+        passwordLabel = new JLabel("Password: ");
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
-        // Password Field Setup
         passwordField = new JPasswordField(15);
         passwordField.setFont(new Font("Arial", Font.PLAIN, 20));
         passwordField.setHorizontalAlignment(JTextField.CENTER);
-        passwordField.setSize(300, 50);
+
+        JComponent[] passComponents = {passwordLabel, passwordField};
+        Box passBox = AddToBox.addToHorizontalBox(passComponents, 1);
+
+        // Button Setup
+        JPanel buttonBox = new JPanel();
+        buttonBox.setOpaque(false);
+        buttonBox.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         // Login Button Setup
         loginButton = new BlueButton("Login");
 
         // Register Button Setup
         registerButton = new BlueButton("Register");
+        registerButton.addActionListener(
+                new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        new RegisterScreen();
+                        dispose();
+                    }
+                });
+
+        buttonBox.add(loginButton);
+        buttonBox.add(registerButton);
 
         // Adding Components to Login Panel
-        loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-
-        // Login Top Panel Setup
-        JPanel loginTop = new JPanel();
-        loginTop.setOpaque(false);
-        loginTop.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-        loginTop.setPreferredSize(new Dimension(400, 220));
-        loginTop.setSize(getPreferredSize());
-        loginTop.add(loginLabel);
-        loginTop.add(picture);
-
-        loginPanel.add(loginTop);
-        loginPanel.add(usernameLabel);
-        loginPanel.add(usernameField);
-        loginPanel.add(passwordLabel);
-        loginPanel.add(passwordField);
-        loginPanel.add(loginButton);
-        loginPanel.add(registerButton);
+        loginPanel.add(LoginTopBox);
+        loginPanel.add(userBox);
+        loginPanel.add(passBox);
+        loginPanel.add(buttonBox);
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();

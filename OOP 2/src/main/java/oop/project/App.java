@@ -1,6 +1,6 @@
 package oop.project;
 
-import oop.project.screens.LoginScreen;
+import oop.project.screens.*;
 
 public final class App
 {
