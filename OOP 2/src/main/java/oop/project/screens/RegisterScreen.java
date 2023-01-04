@@ -20,7 +20,8 @@ public class RegisterScreen extends JFrame
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(screenWidth / 2, (int) (screenHeight / 1.2));
+        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        setSize(screenWidth, screenHeight);
         setLocationRelativeTo(null);
         setResizable(false);
         Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
@@ -36,9 +37,9 @@ public class RegisterScreen extends JFrame
 
         // Register Panel Setup
         KGradientPanel registerPanel = new ThemedPanel();
-        registerPanel.setPreferredSize(new Dimension((int) (getWidth() / 2), (int) (getHeight() / 1.6)));
+        registerPanel.setPreferredSize(new Dimension((int) (getWidth() / 2), (int) (getHeight() / 1.4)));
         registerPanel.setSize(getPreferredSize());
-        registerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        registerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 10));
 
         // Register Label Setup
         JLabel registerLabel = new JLabel("Registration");

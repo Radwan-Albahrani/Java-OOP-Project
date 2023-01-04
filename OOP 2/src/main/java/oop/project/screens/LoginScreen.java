@@ -32,7 +32,8 @@ public class LoginScreen extends JFrame
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(screenWidth / 2, (int) (screenHeight / 1.2));
+        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        setSize(screenWidth, screenHeight);
         setLocationRelativeTo(null);
         setResizable(false);
         Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
@@ -48,9 +49,9 @@ public class LoginScreen extends JFrame
 
         // Login Panel Setup
         loginPanel = new ThemedPanel();
-        loginPanel.setPreferredSize(new Dimension((int) (getWidth() / 3), (int) (getHeight() / 2.8)));
+        loginPanel.setPreferredSize(new Dimension((int) (getWidth() / 3), (int) (getHeight() / 2)));
         loginPanel.setSize(getPreferredSize());
-        loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 
         // Login Label Setup
         loginLabel = new JLabel("Student Information System");
