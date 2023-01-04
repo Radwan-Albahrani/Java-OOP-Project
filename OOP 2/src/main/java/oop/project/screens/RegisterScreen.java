@@ -7,6 +7,7 @@ import com.k33ptoo.components.*;
 import oop.project.App;
 import oop.project.screens.components.*;
 import oop.project.screens.hooks.*;
+import oop.project.handlers.*;
 
 public class RegisterScreen extends JFrame
 {
@@ -87,6 +88,7 @@ public class RegisterScreen extends JFrame
         JTextField usernameField = new JTextField(31);
         usernameField.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
+        usernameField.setEditable(false);
 
         JComponent userBoxComponents[] = {usernameLabel, usernameField};
         Box userBox = AddToBox.addToHorizontalBox(userBoxComponents, 2);
@@ -99,10 +101,14 @@ public class RegisterScreen extends JFrame
         JTextField emailField = new JTextField(31);
         emailField.setFont(new Font("Arial", Font.PLAIN, 20));
         emailField.setHorizontalAlignment(JTextField.CENTER);
+        emailField.setEditable(false);
 
         JComponent emailBoxComponents[] = {emailLabel, emailField};
         Box emailBox = AddToBox.addToHorizontalBox(emailBoxComponents, 2);
 
+        // Add Focus Listeners
+        lastNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
+        firstNameField.addFocusListener(new GenerateUserAndEmail(lastNameField, firstNameField, emailField, usernameField));
         // Password Label and Field Setup
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setForeground(Color.WHITE);
