@@ -1,7 +1,6 @@
 package oop.project;
 
 import oop.project.screens.*;
-import oop.project.screens.instructor_story.*;;
 
 public final class App
 {
