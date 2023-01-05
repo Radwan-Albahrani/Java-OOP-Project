@@ -13,6 +13,7 @@ public class FrameConfig
     public static void set(JFrame frame, String title)
     {
         // Frame Setup
+        frame.setTitle(title);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;

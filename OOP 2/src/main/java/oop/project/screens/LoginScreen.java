@@ -23,8 +23,6 @@ public class LoginScreen extends JFrame
 
     public LoginScreen()
     {
-        super("Login");
-
         // Frame Setup
         FrameConfig.set(this, "Login");
 

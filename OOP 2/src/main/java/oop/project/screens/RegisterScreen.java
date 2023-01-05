@@ -12,8 +12,6 @@ public class RegisterScreen extends JFrame
 {
     public RegisterScreen()
     {
-        super("Register");
-
         // Frame Setup
         FrameConfig.set(this, "Register");
 
