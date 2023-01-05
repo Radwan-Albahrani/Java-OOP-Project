@@ -1,6 +1,7 @@
 package oop.project;
 
 import oop.project.screens.*;
+import oop.project.screens.instructor_story.*;;
 
 public final class App
 {
@@ -8,6 +9,7 @@ public final class App
 
     public static void main(String[] args)
     {
-        new LoginScreen();
+        new InstructorScreen();
+
     }
 }
