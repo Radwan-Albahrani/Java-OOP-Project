@@ -45,7 +45,7 @@ public class InstructorScreen extends JFrame
         splitPaneV.setDividerSize(0); // Setting the divider size
         splitPaneV.setRightComponent(buttonPanel); // Setting the left component (Button Panel)
         splitPaneV.setLeftComponent(mainPanel); // Setting the right component (Main Panel)
-
+        
         setVisible(true);
     }
 
