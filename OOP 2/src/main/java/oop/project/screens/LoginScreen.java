@@ -39,7 +39,7 @@ public class LoginScreen extends JFrame
         loginLabel = new TitleLabel("Student Information System");
 
         // Picture Setup
-        picture = FrameConfig.setPicture("LoginScreen/LoginScreenIcon.png", 0.4);
+        picture = FrameConfig.getPicture("LoginScreen/LoginScreenIcon.png", 0.4);
 
         // Login Top Panel Setup
         JPanel LoginTopBox = new VerticalPanel(loginLabel, picture);

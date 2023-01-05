@@ -37,7 +37,7 @@ public class FrameConfig
         frame.setContentPane(background);
     }
 
-    public static JLabel setPicture(String path, double scale)
+    public static JLabel getPicture(String path, double scale)
     {
         Image image = new ImageIcon(App.Path + path).getImage();
         int width = image.getWidth(null);
