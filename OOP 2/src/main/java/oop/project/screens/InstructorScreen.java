@@ -33,25 +33,30 @@ public class InstructorScreen extends JFrame
     KGradientPanel announcementPanel = new ThemedPanelStudent(); // Panel for the announcement screen
     KGradientPanel viewStudentsPanel = new ThemedPanelStudent(); // Panel for the view students screen
     KGradientPanel editGradesPanel = new ThemedPanelStudent(); // Panel for the edit grades screen
+    KGradientPanel alertPanel = new ThemedPanelStudent(); // Panel for the student view screen
     KGradientPanel profilePanel = new ThemedPanelStudent(); // Panel for the profile screen
 
     // Button Setup
-    KButton MenuButton = new CustomButton("Main Menu"); // Button to go back to the main menu
-    KButton AnnouncementButton = new CustomButton("Add Announcement"); // Button to add an announcement
-    KButton StudentButton = new CustomButton("View Students"); // Button to view the students
-    KButton StudentViewButton = new CustomButton("View Students"); // Button to view the students
-    KButton editGradeButton = new CustomButton("Edit Grades"); // Button to edit grades
-    KButton ProfileButton = new CustomButton("View Profile"); // Button to view profile
-    KButton LogoutButton = new CustomButton("Logout"); // Button to logout
+    KButton MenuButton = new CustomButton(" Main Menu "); // Button to go back to the main menu
+    KButton AnnouncementButton = new CustomButton(" Add Announcement "); // Button to add an announcement
+    KButton StudentButton = new CustomButton(" View Students "); // Button to view the students
+    KButton StudentViewButton = new CustomButton(" View Students "); // Button to view the students
+    KButton editGradeButton = new CustomButton(" Edit Grades "); // Button to edit grades
+    KButton ProfileButton = new CustomButton(" View Profile "); // Button to view profile
+    KButton AlertButton = new CustomButton(" Alert Admin "); // Button to alert the admin
+    KButton LogoutButton = new CustomButton(" Logout "); // Button to logout
 
     // Box Setup
-    JComponent[] mainButtonComponents = {AnnouncementButton, StudentButton, ProfileButton}; // Components for the Main Menu
-    Box mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 3); // Box for the Main Menu
+    JComponent[] mainButtonComponents = {AnnouncementButton, StudentButton, ProfileButton, AlertButton}; // Components for the Main Menu
+    Box mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 4); // Box for the Main Menu
     JComponent[] studentButtonComponents = {MenuButton, StudentViewButton, editGradeButton}; // Components for the Student Menu
     Box studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 3); // Box for the Student Menu
 
+    
     public InstructorScreen()
     {
+       
+
         // Frame Setup
         FrameConfig.set(this, "Instructor"); // Creating the frame
 
@@ -71,15 +76,16 @@ public class InstructorScreen extends JFrame
         buttonPanel.add(LogoutButton, BorderLayout.SOUTH);
 
         // Announcement Panel Setup (Will replace Main Panel when Announcement Button is clicked)
-        JLabel announcementLabel = new JLabel("Please add an announcement");
-        KButton sendButton = new CustomButton("Send");
-        sendButton.setPreferredSize(new Dimension(100, 50));
-        JTextField announcementTextField = new JTextField();
-        announcementTextField.setPreferredSize(new Dimension(200, 50));
+        JLabel announcementLabel = new JLabel("Send an Announcement to your Students");
         announcementLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        announcementPanel.add(announcementLabel);
-        announcementPanel.add(announcementTextField); // TODO: Add a textfield to add the announcement
-        announcementPanel.add(sendButton);
+        JTextArea announcementTextArea = new JTextArea();
+        announcementTextArea.setPreferredSize(new Dimension(1000, getHeight() - 200));
+        KButton sendannouncementButton = new CustomButton(" Send ");
+        sendannouncementButton.setPreferredSize(new Dimension(150, 50));
+        JComponent[] announcementComponents = {announcementLabel, announcementTextArea, sendannouncementButton}; // Components for the Announcement Menu
+        Box announcementBox = AddToBox.addToHorizontalBox(announcementComponents, 3); // Box for the Announcement Menu
+        announcementPanel.add(announcementBox, BorderLayout.CENTER);
+
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new JLabel("Here are all the students");
@@ -95,9 +101,21 @@ public class InstructorScreen extends JFrame
         profileLabel.setFont(new Font("Arial", Font.BOLD, 30));
         profilePanel.add(profileLabel);
 
+        // Profile Panel Setup (Will replace Main Panel when Profile Button is clicked)
+        JLabel alertLabel = new JLabel("Send Alert to an Admin");
+        alertLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        JTextArea alertTextArea = new JTextArea();
+        alertTextArea.setPreferredSize(new Dimension(1000, getHeight() - 200));
+        KButton sendalertButton = new CustomButton(" Send ");
+        sendalertButton.setPreferredSize(new Dimension(150, 50));
+        JComponent[] alertButtonComponents = {alertLabel, alertTextArea, sendalertButton}; // Components for the Announcement Menu
+        Box alertBox = AddToBox.addToHorizontalBox(alertButtonComponents, 3); // Box for the Announcement Menu
+        alertPanel.add(alertBox, BorderLayout.CENTER);
+
+
         // Adding the panels to the frame
-        JPanel navBar = new NavBar(this);
-        add(navBar, BorderLayout.NORTH);
+        JPanel navBar = new NavBar(this); // Creating the nav bar
+        add(navBar, BorderLayout.NORTH); // add the nav bar to the top
         add(buttonPanel, BorderLayout.WEST); // add the button panel to the left
         add(mainPanel, BorderLayout.CENTER); // add the main panel to the center
 
@@ -108,7 +126,10 @@ public class InstructorScreen extends JFrame
         MenuButton.addActionListener(handler);
         AnnouncementButton.addActionListener(handler);
         StudentButton.addActionListener(handler);
+        StudentViewButton.addActionListener(handler);
+        editGradeButton.addActionListener(handler);
         ProfileButton.addActionListener(handler);
+        AlertButton.addActionListener(handler);
         LogoutButton.addActionListener(handler);
     }
 
@@ -127,26 +148,28 @@ public class InstructorScreen extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             String buttonClicked = e.getActionCommand();
-            if (buttonClicked.equals("Main Menu"))
+            if (buttonClicked.equals(" Main Menu "))
             {
                 remove(announcementPanel);
                 remove(viewStudentsPanel);
                 remove(editGradesPanel);
+                remove(alertPanel);
                 add(mainPanel, BorderLayout.CENTER);
                 buttonPanel.remove(studentButtonBox);
                 buttonPanel.add(mainButtonBox, BorderLayout.NORTH);
             }
 
-            else if (buttonClicked.equals("Add Announcement"))
+            else if (buttonClicked.equals(" Add Announcement "))
             {
                 remove(mainPanel);
                 remove(profilePanel);
                 remove(viewStudentsPanel);
                 remove(editGradesPanel);
+                remove(alertPanel);
                 add(announcementPanel, BorderLayout.CENTER);
             }
 
-            else if (buttonClicked.equals("View Students"))
+            else if (buttonClicked.equals(" View Students "))
             {
                 buttonPanel.remove(mainButtonBox);
                 buttonPanel.add(studentButtonBox, BorderLayout.NORTH);
@@ -155,28 +178,41 @@ public class InstructorScreen extends JFrame
                 remove(announcementPanel);
                 remove(profilePanel);
                 remove(editGradesPanel);
+                remove(alertPanel);
                 add(viewStudentsPanel, BorderLayout.CENTER);
             }
 
-            else if (buttonClicked.equals("Edit Grades"))
+            else if (buttonClicked.equals(" Edit Grades "))
             {
                 remove(mainPanel);
                 remove(announcementPanel);
                 remove(viewStudentsPanel);
                 remove(profilePanel);
+                remove(alertPanel);
                 add(editGradesPanel, BorderLayout.CENTER);
             }
 
-            else if (buttonClicked.equals("View Profile"))
+            else if (buttonClicked.equals(" View Profile "))
             {
                 remove(mainPanel);
                 remove(announcementPanel);
                 remove(viewStudentsPanel);
                 remove(editGradesPanel);
+                remove(alertPanel);
                 add(profilePanel, BorderLayout.CENTER);
             }
+                
+            else if (buttonClicked.equals(" Alert Admin "))
+            {
+                remove(mainPanel);
+                remove(announcementPanel);
+                remove(viewStudentsPanel);
+                remove(editGradesPanel);
+                remove(profilePanel);
+                add(alertPanel, BorderLayout.CENTER);
+            }
 
-            else if (buttonClicked.equals("Logout"))
+            else if (buttonClicked.equals(" Logout "))
             {
                 dispose();
                 new LoginScreen();
