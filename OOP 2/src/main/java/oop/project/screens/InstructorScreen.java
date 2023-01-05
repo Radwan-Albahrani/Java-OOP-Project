@@ -33,11 +33,13 @@ public class InstructorScreen extends JFrame
 
         // Button Panel Setup
         KGradientPanel buttonPanel = new ThemedPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        buttonPanel.setLayout(new BorderLayout());
+        buttonPanel.setPreferredSize(new Dimension(250, 0));
 
-        JComponent[] buttonComponents = {AnnouncementButton, StudentButton, ProfileButton, LogoutButton};
-        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 4);
-        buttonPanel.add(buttonBox);
+        JComponent[] buttonComponents = {AnnouncementButton, StudentButton, ProfileButton};
+        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 3);
+        buttonPanel.add(buttonBox, BorderLayout.NORTH);
+        buttonPanel.add(LogoutButton, BorderLayout.SOUTH);
         // Main Panel Setup
         KGradientPanel mainPanel = new ThemedPanelStudent();
 
