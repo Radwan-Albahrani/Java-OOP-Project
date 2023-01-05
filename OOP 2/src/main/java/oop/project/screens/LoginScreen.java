@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import com.k33ptoo.components.*;
-
-import oop.project.App;
 import oop.project.screens.components.*;
 import oop.project.screens.hooks.*;
 
@@ -28,24 +26,10 @@ public class LoginScreen extends JFrame
         super("Login");
 
         // Frame Setup
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        setSize(screenWidth, screenHeight);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
-        setIconImage(icon);
+        FrameConfig.set(this, "Login");
 
         // Background Setup
-        Image backgroundImage = new ImageIcon(App.Path + "LoginScreen/background.png").getImage();
-        int width = getWidth();
-        int height = getHeight();
-        Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
-        setContentPane(background);
+        FrameConfig.setBackground(this, "LoginScreen/background.png");
 
         // Login Panel Setup
         loginPanel = new ThemedPanel();
@@ -54,17 +38,10 @@ public class LoginScreen extends JFrame
         loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 
         // Login Label Setup
-        loginLabel = new JLabel("Student Information System");
-        loginLabel.setForeground(Color.WHITE);
-        loginLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        loginLabel.setHorizontalAlignment(JLabel.CENTER);
+        loginLabel = new TitleLabel("Student Information System");
 
         // Picture Setup
-        Image image = new ImageIcon(App.Path + "LoginScreen/loginScreenIcon.png").getImage();
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-        Image scaledImage = image.getScaledInstance(width / 3, height / 3, Image.SCALE_SMOOTH);
-        picture = new JLabel(new ImageIcon(scaledImage));
+        picture = FrameConfig.setPicture("LoginScreen/LoginScreenIcon.png", 0.4);
 
         // Login Top Panel Setup
         JPanel LoginTopBox = new VerticalPanel(loginLabel, picture);
