@@ -40,9 +40,11 @@ public class InstructorScreen extends JFrame
         Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 3);
         buttonPanel.add(buttonBox, BorderLayout.NORTH);
         buttonPanel.add(LogoutButton, BorderLayout.SOUTH);
+
         // Main Panel Setup
         KGradientPanel mainPanel = new ThemedPanelStudent();
 
+        add(buttonPanel, BorderLayout.WEST);
         add(mainPanel, BorderLayout.CENTER);
 
         setVisible(true);
