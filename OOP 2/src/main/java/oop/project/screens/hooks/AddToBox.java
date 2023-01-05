@@ -29,4 +29,28 @@ public class AddToBox
         return horizontalBox;
     }
 
+    public static Box addToVerticalBox(JComponent[] component, int numberOfComponentsPerRow)
+    {
+        int counter = 0;
+        Box verticalBox = Box.createVerticalBox();
+        Box horizontalBox = Box.createHorizontalBox();
+        for (JComponent jComponent : component)
+        {
+            horizontalBox.add(jComponent);
+            if (counter != numberOfComponentsPerRow - 1)
+            {
+                horizontalBox.add(Box.createHorizontalStrut(10));
+            }
+            counter++;
+            if (counter == numberOfComponentsPerRow)
+            {
+                verticalBox.add(horizontalBox);
+                verticalBox.add(Box.createVerticalStrut(10));
+                horizontalBox = Box.createHorizontalBox();
+                counter = 0;
+            }
+        }
+        return verticalBox;
+    }
+
 }

@@ -52,10 +52,8 @@ public class InstructorScreen extends JFrame
     JComponent[] studentButtonComponents = {MenuButton, StudentViewButton, editGradeButton}; // Components for the Student Menu
     Box studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 3); // Box for the Student Menu
 
-    
     public InstructorScreen()
     {
-       
 
         // Frame Setup
         FrameConfig.set(this, "Instructor"); // Creating the frame
@@ -80,12 +78,13 @@ public class InstructorScreen extends JFrame
         announcementLabel.setFont(new Font("Arial", Font.BOLD, 30));
         JTextArea announcementTextArea = new JTextArea();
         announcementTextArea.setPreferredSize(new Dimension(1000, getHeight() - 200));
-        KButton sendannouncementButton = new CustomButton(" Send ");
-        sendannouncementButton.setPreferredSize(new Dimension(150, 50));
-        JComponent[] announcementComponents = {announcementLabel, announcementTextArea, sendannouncementButton}; // Components for the Announcement Menu
-        Box announcementBox = AddToBox.addToHorizontalBox(announcementComponents, 3); // Box for the Announcement Menu
-        announcementPanel.add(announcementBox, BorderLayout.CENTER);
+        announcementTextArea.setLineWrap(true);
+        KButton sendAnnouncementButton = new CustomButton(" Send ");
+        sendAnnouncementButton.setPreferredSize(new Dimension(150, 50));
+        JComponent[] announcementComponents = {announcementLabel, announcementTextArea, sendAnnouncementButton}; // Components for the Announcement Menu
+        Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1); // Box for the Announcement Menu
 
+        announcementPanel.add(announcementBox, BorderLayout.CENTER);
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new JLabel("Here are all the students");
@@ -106,12 +105,12 @@ public class InstructorScreen extends JFrame
         alertLabel.setFont(new Font("Arial", Font.BOLD, 30));
         JTextArea alertTextArea = new JTextArea();
         alertTextArea.setPreferredSize(new Dimension(1000, getHeight() - 200));
-        KButton sendalertButton = new CustomButton(" Send ");
-        sendalertButton.setPreferredSize(new Dimension(150, 50));
-        JComponent[] alertButtonComponents = {alertLabel, alertTextArea, sendalertButton}; // Components for the Announcement Menu
-        Box alertBox = AddToBox.addToHorizontalBox(alertButtonComponents, 3); // Box for the Announcement Menu
+        alertTextArea.setLineWrap(true);
+        KButton sendAlertButton = new CustomButton(" Send ");
+        sendAlertButton.setPreferredSize(new Dimension(150, 50));
+        JComponent[] alertButtonComponents = {alertLabel, alertTextArea, sendAlertButton}; // Components for the Announcement Menu
+        Box alertBox = AddToBox.addToVerticalBox(alertButtonComponents, 1); // Box for the Announcement Menu
         alertPanel.add(alertBox, BorderLayout.CENTER);
-
 
         // Adding the panels to the frame
         JPanel navBar = new NavBar(this); // Creating the nav bar
@@ -201,7 +200,7 @@ public class InstructorScreen extends JFrame
                 remove(alertPanel);
                 add(profilePanel, BorderLayout.CENTER);
             }
-                
+
             else if (buttonClicked.equals(" Alert Admin "))
             {
                 remove(mainPanel);
