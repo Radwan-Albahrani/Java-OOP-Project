@@ -9,7 +9,6 @@
 *      -Send a message to the admin using Alerts
 */
 
-
 package oop.project.screens;
 
 import javax.swing.*;
@@ -18,54 +17,34 @@ import com.k33ptoo.components.*;
 
 import oop.project.screens.components.*;
 import oop.project.screens.hooks.*;
-import oop.project.handlers.*;
 
-
-public class InstructorScreen extends JFrame 
+public class InstructorScreen extends JFrame
 {
-    private JSplitPane splitPaneV; // Veritcal split pane
-    private JPanel buttonPanel; // Panel for buttons
-    private JPanel mainPanel;   // Panel for main content
-
     public InstructorScreen()
     {
         // Frame Setup
         FrameConfig.set(this, "Instructor"); // Creating the frame
 
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BorderLayout());
-        getContentPane().add(leftPanel);
+        KButton AnnouncementButton = new BlueButton("Add Announcement");
+        AnnouncementButton.setPreferredSize(new Dimension(200, 50));
+        KButton StudentButton = new BlueButton("View Students");
+        KButton ProfileButton = new BlueButton("View Profile");
+        KButton LogoutButton = new BlueButton("Logout");
 
-        createMainPanel();
-        createButtonPanel();
-        
-        splitPaneV = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        leftPanel.add( splitPaneV, BorderLayout.CENTER );
-        splitPaneV.setDividerLocation(100); // Setting the divider location
-        splitPaneV.setDividerSize(0); // Setting the divider size
-        splitPaneV.setRightComponent(buttonPanel); // Setting the left component (Button Panel)
-        splitPaneV.setLeftComponent(mainPanel); // Setting the right component (Main Panel)
+        // Button Panel Setup
+        KGradientPanel buttonPanel = new ThemedPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+
+        JComponent[] buttonComponents = {AnnouncementButton, StudentButton, ProfileButton, LogoutButton};
+        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 4);
+        buttonPanel.add(buttonBox);
+        // Main Panel Setup
+        KGradientPanel mainPanel = new ThemedPanelStudent();
+
+        setLayout(new BorderLayout());
+        add(buttonPanel, BorderLayout.WEST);
+        add(mainPanel, BorderLayout.CENTER);
 
         setVisible(true);
-    }
-
-    public void createButtonPanel()
-    {
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new FlowLayout());
-        mainPanel.setBackground(Color.WHITE);
-        
-
-        mainPanel.add(new JButton("Add Announcement"), BorderLayout.CENTER);
-        mainPanel.add(new JButton("View Students"), BorderLayout.CENTER);
-        mainPanel.add(new JButton("View Profile"), BorderLayout.CENTER);
-        mainPanel.add(new JButton("Logout"), BorderLayout.CENTER);
-    }
-
-    public void createMainPanel()
-    {
-        buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BorderLayout());
-        buttonPanel.setBackground(Color.WHITE);
     }
 }
