@@ -16,12 +16,12 @@ public class CustomButton extends KButton
 
         this.setText(text);
         this.setFont(new Font("Arial", Font.BOLD, 20));
-        this.setkStartColor(ThemeColors.DARK_POWDER_BLUE);
-        this.setkEndColor(ThemeColors.MEDIUM_SEA_GREEN); 
-        this.setkHoverStartColor(ThemeColors.DARK_POWDER_BLUE);
-        this.setkHoverEndColor(ThemeColors.DARK_SEA_GREEN);
-        this.setkForeGround(ThemeColors.LIGHT_KHAKI);
-        this.setkHoverForeGround(ThemeColors.KHAKI);
+        this.setkStartColor(ThemeColors.MIDDLE_BLUE_COLOR);
+        this.setkEndColor(ThemeColors.TIFFANY_BLUE); 
+        this.setkHoverStartColor(ThemeColors.MIDDLE_BLUE_COLOR);
+        this.setkHoverEndColor(ThemeColors.BLURPLE);
+        this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
+        this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
         this.setPreferredSize(new Dimension(150, 50));
         this.setBorder(border);
     }
