@@ -49,6 +49,10 @@ public class Student extends JFrame
         studentLabel.setHorizontalAlignment(JLabel.CENTER);
         studentLabel.setHorizontalTextPosition(JLabel.CENTER);
 
+        //Border Layout
+        BorderLayout borderLayout = new BorderLayout();
+        setLayout(borderLayout);
+
         //Register Class Button setup
         KButton registerClass = new BlueButton("Register Class");
 
