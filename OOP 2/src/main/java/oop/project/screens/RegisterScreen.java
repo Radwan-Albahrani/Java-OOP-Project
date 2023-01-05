@@ -16,7 +16,7 @@ public class RegisterScreen extends JFrame
         FrameConfig.set(this, "Register");
 
         // Background Setup
-        FrameConfig.setBackground(this, "RegisterScreen/background.png");
+        FrameConfig.setBackground(this, "RegisterScreen/Background.png");
 
         // Register Panel Setup
         KGradientPanel registerPanel = new ThemedPanel();
@@ -126,8 +126,10 @@ public class RegisterScreen extends JFrame
         registerPanel.add(authBox);
         registerPanel.add(bottomPanel);
 
-        // Add Register Panel to Frame
-        setLayout(new GridBagLayout());
+        // Add Register Panel Wrapper
+        JPanel registerPanelWrapper = new JPanel();
+        registerPanelWrapper.setLayout(new GridBagLayout());
+        registerPanelWrapper.setOpaque(false);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -135,7 +137,10 @@ public class RegisterScreen extends JFrame
         constraints.weighty = 1;
         constraints.insets = new Insets(0, 10, 0, 10);
         constraints.fill = GridBagConstraints.NONE;
-        add(registerPanel, constraints);
+        registerPanelWrapper.add(registerPanel, constraints);
+
+        setLayout(new BorderLayout());
+        add(registerPanelWrapper, BorderLayout.CENTER);
 
         setVisible(true);
     }

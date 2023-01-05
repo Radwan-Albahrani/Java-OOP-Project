@@ -98,7 +98,8 @@ public class LoginScreen extends JFrame
         loginPanel.add(passBox);
         loginPanel.add(buttonBox);
 
-        setLayout(new GridBagLayout());
+        // Login Panel Wrapper Setup
+        JPanel loginPanelWrapper = new JPanel();
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -106,7 +107,13 @@ public class LoginScreen extends JFrame
         constraints.weighty = 1;
         constraints.insets = new Insets(0, 10, 0, 10);
         constraints.fill = GridBagConstraints.NONE;
-        add(loginPanel, constraints);
+        constraints.anchor = GridBagConstraints.CENTER;
+        loginPanelWrapper.setOpaque(false);
+        loginPanelWrapper.setLayout(new GridBagLayout());
+        loginPanelWrapper.add(loginPanel, constraints);
+
+        setLayout(new BorderLayout());
+        add(loginPanelWrapper, BorderLayout.CENTER);
 
         setVisible(true);
     }
