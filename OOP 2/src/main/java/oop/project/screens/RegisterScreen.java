@@ -127,9 +127,9 @@ public class RegisterScreen extends JFrame
         registerPanel.add(bottomPanel);
 
         // Add Register Panel Wrapper
-        JPanel registerPanelWrapper = new JPanel();
-        registerPanelWrapper.setLayout(new GridBagLayout());
-        registerPanelWrapper.setOpaque(false);
+        JPanel wrapper = new JPanel();
+        wrapper.setLayout(new GridBagLayout());
+        wrapper.setOpaque(false);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -137,10 +137,12 @@ public class RegisterScreen extends JFrame
         constraints.weighty = 1;
         constraints.insets = new Insets(0, 10, 0, 10);
         constraints.fill = GridBagConstraints.NONE;
-        registerPanelWrapper.add(registerPanel, constraints);
+        wrapper.add(registerPanel, constraints);
 
         setLayout(new BorderLayout());
-        add(registerPanelWrapper, BorderLayout.CENTER);
+        JPanel navBar = new NavBar(this);
+        add(navBar, BorderLayout.NORTH);
+        add(wrapper, BorderLayout.CENTER);
 
         setVisible(true);
     }
