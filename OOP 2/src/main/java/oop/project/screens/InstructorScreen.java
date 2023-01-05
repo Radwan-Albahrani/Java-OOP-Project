@@ -25,11 +25,11 @@ public class InstructorScreen extends JFrame
         // Frame Setup
         FrameConfig.set(this, "Instructor"); // Creating the frame
 
-        KButton AnnouncementButton = new BlueButton("Add Announcement");
+        KButton AnnouncementButton = new CustomButton("Add Announcement");
         AnnouncementButton.setPreferredSize(new Dimension(250, 50));
-        KButton StudentButton = new BlueButton("View Students");
-        KButton ProfileButton = new BlueButton("View Profile");
-        KButton LogoutButton = new BlueButton("Logout");
+        KButton StudentButton = new CustomButton("View Students");
+        KButton ProfileButton = new CustomButton("View Profile");
+        KButton LogoutButton = new CustomButton("Logout");
 
         // Button Panel Setup
         KGradientPanel buttonPanel = new ThemedPanel();
