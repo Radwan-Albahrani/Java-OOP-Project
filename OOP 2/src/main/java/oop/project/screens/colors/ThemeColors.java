@@ -12,7 +12,6 @@ public class ThemeColors
     public static final Color DARK_SEA_GREEN = new Color(143, 188, 143);
     public static final Color KHAKI = new Color(240, 230, 140);
     public static final Color LIGHT_KHAKI = new Color(255, 245, 155);
-    
     public static final Color GUNMETAL = new Color(43, 48, 58);
     public static final Color MIDDLE_BLUE_COLOR = new Color(128, 128, 128);
     public static final Color LAVENDER_BLUSH = new Color(255, 240, 245);
@@ -21,5 +20,12 @@ public class ThemeColors
     public static final Color TIFFANY_BLUE = new Color(10, 186, 181);
     public static final Color ROSE_MADDER = new Color(211, 211, 211);
     public static final Color BLURPLE = new Color(78, 93, 148);
+    public static final Color RED = new Color(255, 0, 0);
+    public static final Color DARK_RED = new Color(139, 0, 0);
+    public static final Color ORANGE = new Color(255, 165, 0);
+    public static final Color DARK_ORANGE = new Color(255, 140, 0);
+    public static final Color YELLOW = new Color(255, 255, 0);
+    public static final Color YELLOW_DARK = new Color(255, 255, 0);
+    public static final Color LIGHT_GRAY = new Color(211, 211, 211);
 
 }

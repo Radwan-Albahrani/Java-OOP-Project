@@ -24,6 +24,8 @@ public class FrameConfig
         frame.setResizable(false);
         Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
         frame.setIconImage(icon);
+        frame.setLayout(null);
+        frame.setUndecorated(true);
     }
 
     public static void setBackground(JFrame frame, String path)
