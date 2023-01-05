@@ -26,7 +26,7 @@ public class InstructorScreen extends JFrame
         FrameConfig.set(this, "Instructor"); // Creating the frame
 
         KButton AnnouncementButton = new BlueButton("Add Announcement");
-        AnnouncementButton.setPreferredSize(new Dimension(200, 50));
+        AnnouncementButton.setPreferredSize(new Dimension(250, 50));
         KButton StudentButton = new BlueButton("View Students");
         KButton ProfileButton = new BlueButton("View Profile");
         KButton LogoutButton = new BlueButton("Logout");
@@ -35,14 +35,25 @@ public class InstructorScreen extends JFrame
         KGradientPanel buttonPanel = new ThemedPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
 
-        JComponent[] buttonComponents = {AnnouncementButton, StudentButton, ProfileButton, LogoutButton};
-        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 4);
+        JComponent[] buttonComponents = {AnnouncementButton, StudentButton, ProfileButton};
+        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 3);
         buttonPanel.add(buttonBox);
+
+        setLayout(new BorderLayout());
+        add(buttonPanel, BorderLayout.WEST);        Box verticalSpace = Box.createVerticalBox();
+        verticalSpace.add(Box.createVerticalStrut(getHeight() - 500));
+        buttonPanel.add(verticalSpace);
+       
+
+        JComponent[] loginComponent = {LogoutButton};
+        Box loginButton = AddToBox.addToHorizontalBox(loginComponent, 1);
+        buttonPanel.add(loginButton);
+
+
         // Main Panel Setup
         KGradientPanel mainPanel = new ThemedPanelStudent();
 
-        setLayout(new BorderLayout());
-        add(buttonPanel, BorderLayout.WEST);
+
         add(mainPanel, BorderLayout.CENTER);
 
         setVisible(true);
