@@ -73,11 +73,14 @@ public class InstructorScreen extends JFrame
 
         // Announcement Panel Setup (Will replace Main Panel when Announcement Button is clicked)
         JLabel announcementLabel = new JLabel("Please add an annoucement");
+        KButton sendButton = new CustomButton("Send");
+        sendButton.setPreferredSize(new Dimension(100, 50));
         JTextField announcementTextField = new JTextField();
         announcementTextField.setPreferredSize(new Dimension(200, 50));
         announcementLabel.setFont(new Font("Arial", Font.BOLD, 30));
         announcementPanel.add(announcementLabel);
         announcementPanel.add(announcementTextField); //TODO: Add a textfield to add the announcement
+        announcementPanel.add(sendButton);
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new JLabel("Here are all the students");
@@ -170,6 +173,7 @@ public class InstructorScreen extends JFrame
                 dispose();
                 new LoginScreen();
             }
+
             buttonPanel.revalidate();
             buttonPanel.repaint();
         }
