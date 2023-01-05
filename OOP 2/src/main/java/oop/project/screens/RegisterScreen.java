@@ -65,10 +65,6 @@ public class RegisterScreen extends JFrame
         usernameField.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
         usernameField.setEditable(false);
-
-        JComponent userBoxComponents[] = {usernameLabel, usernameField};
-        Box userBox = AddToBox.addToHorizontalBox(userBoxComponents, 2);
-
         // Email Label and Field Setup
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setForeground(Color.WHITE);
@@ -79,8 +75,8 @@ public class RegisterScreen extends JFrame
         emailField.setHorizontalAlignment(JTextField.CENTER);
         emailField.setEditable(false);
 
-        JComponent emailBoxComponents[] = {emailLabel, emailField};
-        Box emailBox = AddToBox.addToHorizontalBox(emailBoxComponents, 2);
+        JComponent userBoxComponents[] = {usernameLabel, usernameField, emailLabel, emailField};
+        Box userAndEmailBox = AddToBox.addToHorizontalBox(userBoxComponents, 4);
 
         // Add Focus Listeners
         lastNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
@@ -126,8 +122,7 @@ public class RegisterScreen extends JFrame
         // Add Components to Register Panel
         registerPanel.add(registerTopFrame);
         registerPanel.add(nameBox);
-        registerPanel.add(userBox);
-        registerPanel.add(emailBox);
+        registerPanel.add(userAndEmailBox);
         registerPanel.add(authBox);
         registerPanel.add(bottomPanel);
 
