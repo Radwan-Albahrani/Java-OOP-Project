@@ -104,7 +104,7 @@ public class InstructorScreen extends JFrame
         setVisible(true);
 
         // Action Listeners
-        ButtonHandler handler = new ButtonHandler();
+        ButtonHandler handler = new ButtonHandler(this);
         MenuButton.addActionListener(handler);
         AnnouncementButton.addActionListener(handler);
         StudentButton.addActionListener(handler);
@@ -116,6 +116,13 @@ public class InstructorScreen extends JFrame
 
     public class ButtonHandler implements ActionListener
     {
+        JFrame frame;
+
+        ButtonHandler(JFrame frame)
+        {
+            this.frame = frame;
+        }
+
         @Override
         public void actionPerformed(ActionEvent e)
         {
@@ -175,8 +182,8 @@ public class InstructorScreen extends JFrame
                 new LoginScreen();
             }
 
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
+            frame.revalidate();
+            frame.repaint();
         }
     }
 }
