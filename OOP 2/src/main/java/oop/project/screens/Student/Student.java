@@ -25,13 +25,8 @@ public class Student extends JFrame
 
         KGradientPanel[] studentPanels = {StudentMain, registerClass, ViewAlerts,DropClass,ViewGrades};
 
-        KButton[] studentButtons = {
-            new StudentMainButton("Student Main", studentPanels),
-            new registerClassButton("Register Class", studentPanels),
-            new ViewAlertsButton("View Alerts", studentPanels),
-            new DropClassButton("Drop Class", studentPanels),
-            new ViewGradesButton("View Grades", studentPanels)
-        };
+        KButton[] studentButtons = {new StudentMainButton("Student Main", studentPanels),new registerClassButton("Register Class", studentPanels),
+            new ViewAlertsButton("View Alerts", studentPanels),new DropClassButton("Drop Class", studentPanels),new ViewGradesButton("View Grades", studentPanels)};
 
     }
 }
