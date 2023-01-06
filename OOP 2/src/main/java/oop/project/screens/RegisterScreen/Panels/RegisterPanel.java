@@ -1,59 +1,28 @@
-package oop.project.screens;
+package oop.project.screens.RegisterScreen.Panels;
 
 import javax.swing.*;
-import java.awt.*;
+
 import com.k33ptoo.components.*;
 
-import oop.project.App;
+import java.awt.*;
+
+import oop.project.handlers.GenerateUserAndEmail;
 import oop.project.screens.components.*;
 import oop.project.screens.hooks.*;
-import oop.project.handlers.*;
 
-public class RegisterScreen extends JFrame
+public class RegisterPanel extends ThemedPanel
 {
-    public RegisterScreen()
+    public RegisterPanel(int Width, int Height)
     {
-        super("Register");
-
-        // Frame Setup
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        setSize(screenWidth, screenHeight);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
-        setIconImage(icon);
-
-        // Background Setup
-        Image backgroundImage = new ImageIcon(App.Path + "RegisterScreen/background.png").getImage();
-        int width = getWidth();
-        int height = getHeight();
-        Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
-        setContentPane(background);
-
-        // Register Panel Setup
-        KGradientPanel registerPanel = new ThemedPanel();
-        registerPanel.setPreferredSize(new Dimension((int) (getWidth() / 2), (int) (getHeight() / 1.4)));
-        registerPanel.setSize(getPreferredSize());
-        registerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 10));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 10));
+        this.setPreferredSize(new Dimension((int) (Width / 2), (int) (Height / 1.4)));
+        this.setSize(getPreferredSize());
 
         // Register Label Setup
-        JLabel registerLabel = new JLabel("Registration");
-        registerLabel.setForeground(Color.WHITE);
-        registerLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        registerLabel.setHorizontalAlignment(JLabel.CENTER);
-        registerLabel.setHorizontalTextPosition(JLabel.CENTER);
+        JLabel registerLabel = new TitleLabel("Registration");
 
         // Picture Setup
-        Image image = new ImageIcon(App.Path + "RegisterScreen/RegisterScreenIcon.png").getImage();
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-        Image scaledImage = image.getScaledInstance((int) (width / 2.5), (int) (height / 2.5), Image.SCALE_SMOOTH);
-        JLabel picture = new JLabel(new ImageIcon(scaledImage));
+        JLabel picture = FrameConfig.getPicture("RegisterScreen/RegisterScreenIcon.png", 0.4);
 
         // Register Top Frame Setup
         JPanel registerTopFrame = new VerticalPanel(registerLabel, picture);
@@ -90,10 +59,6 @@ public class RegisterScreen extends JFrame
         usernameField.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
         usernameField.setEditable(false);
-
-        JComponent userBoxComponents[] = {usernameLabel, usernameField};
-        Box userBox = AddToBox.addToHorizontalBox(userBoxComponents, 2);
-
         // Email Label and Field Setup
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setForeground(Color.WHITE);
@@ -104,8 +69,8 @@ public class RegisterScreen extends JFrame
         emailField.setHorizontalAlignment(JTextField.CENTER);
         emailField.setEditable(false);
 
-        JComponent emailBoxComponents[] = {emailLabel, emailField};
-        Box emailBox = AddToBox.addToHorizontalBox(emailBoxComponents, 2);
+        JComponent userBoxComponents[] = {usernameLabel, usernameField, emailLabel, emailField};
+        Box userAndEmailBox = AddToBox.addToHorizontalBox(userBoxComponents, 4);
 
         // Add Focus Listeners
         lastNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
@@ -149,24 +114,11 @@ public class RegisterScreen extends JFrame
         JPanel bottomPanel = new VerticalPanel(userTypeBox, registerButton);
 
         // Add Components to Register Panel
-        registerPanel.add(registerTopFrame);
-        registerPanel.add(nameBox);
-        registerPanel.add(userBox);
-        registerPanel.add(emailBox);
-        registerPanel.add(authBox);
-        registerPanel.add(bottomPanel);
-
-        // Add Register Panel to Frame
-        setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        constraints.insets = new Insets(0, 10, 0, 10);
-        constraints.fill = GridBagConstraints.NONE;
-        add(registerPanel, constraints);
-
-        setVisible(true);
+        this.add(registerTopFrame);
+        this.add(nameBox);
+        this.add(userAndEmailBox);
+        this.add(authBox);
+        this.add(bottomPanel);
     }
+
 }
