@@ -12,9 +12,11 @@ import oop.project.screens.hooks.*;
 
 public class RegisterPanel extends ThemedPanel
 {
-    public RegisterPanel()
+    public RegisterPanel(int Width, int Height)
     {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 10));
+        this.setPreferredSize(new Dimension((int) (Width / 2), (int) (Height / 1.4)));
+        this.setSize(getPreferredSize());
 
         // Register Label Setup
         JLabel registerLabel = new TitleLabel("Registration");

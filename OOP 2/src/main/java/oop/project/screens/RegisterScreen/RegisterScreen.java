@@ -19,9 +19,7 @@ public class RegisterScreen extends JFrame
         FrameConfig.setBackground(this, "RegisterScreen/Background.png");
 
         // Register Panel Setup
-        KGradientPanel registerPanel = new RegisterPanel();
-        registerPanel.setPreferredSize(new Dimension((int) (getWidth() / 2), (int) (getHeight() / 1.4)));
-        registerPanel.setSize(getPreferredSize());
+        KGradientPanel registerPanel = new RegisterPanel(getWidth(), getHeight());
 
         // Add Register Panel Wrapper
         JPanel wrapper = new JPanel();

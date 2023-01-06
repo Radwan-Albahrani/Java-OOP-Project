@@ -20,9 +20,7 @@ public class LoginScreen extends JFrame
         FrameConfig.setBackground(this, "LoginScreen/background.png");
 
         // Login Panel Setup
-        ThemedPanel loginPanel = new LoginPanel(this);
-        loginPanel.setPreferredSize(new Dimension((int) (getWidth() / 3), (int) (getHeight() / 2)));
-        loginPanel.setSize(getPreferredSize());
+        ThemedPanel loginPanel = new LoginPanel(this, getWidth(), getHeight());
 
         // Login Panel Wrapper Setup
         JPanel loginPanelWrapper = new JPanel();
