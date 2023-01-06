@@ -17,24 +17,10 @@ public class Student extends JFrame
         super("Student");
 
         //Frame setup
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        setSize(screenWidth, screenHeight);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
-        setIconImage(icon);
+        FrameConfig.set(this, "Student Screen");
 
         //Background setup
-        Image backgroundImage = new ImageIcon(App.Path + "StudentScreen/background.png").getImage();
-        int width = getWidth();
-        int height = getHeight();
-        Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
-        setContentPane(background);
+        FrameConfig.setBackground(this, "StudentScreen/background.png");
 
         //Student Panel setup
         KGradientPanel studentPanel = new ThemedPanel();

@@ -29,4 +29,8 @@ public class AddToBox
         return horizontalBox;
     }
 
+    public static Box addToVerticalBox(JComponent[] registerClassComponents, int i) {
+        return null;
+    }
+
 }
