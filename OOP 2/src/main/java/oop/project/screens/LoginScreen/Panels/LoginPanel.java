@@ -11,9 +11,11 @@ import java.awt.event.ActionEvent;
 
 public class LoginPanel extends ThemedPanel
 {
-    public LoginPanel(JFrame frame)
+    public LoginPanel(JFrame frame, int Width, int Height)
     {
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
+        this.setPreferredSize(new Dimension((int) (Width / 3), (int) (Height / 2)));
+        this.setSize(getPreferredSize());
 
         // Login Label Setup
         JLabel loginLabel = new TitleLabel("Student Information System");
