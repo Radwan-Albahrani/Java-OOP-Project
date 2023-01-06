@@ -1,4 +1,4 @@
-package oop.project.screens;
+package oop.project.screens.Student;
 
 import java.awt.*;
 import javax.swing.*;
