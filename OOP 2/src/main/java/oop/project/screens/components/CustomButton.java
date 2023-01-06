@@ -9,7 +9,7 @@ import java.awt.Dimension;
 import javax.swing.border.*;
 
 public class CustomButton extends KButton
-{   
+{
     public CustomButton(String text)
     {
         Border border = new LineBorder(ThemeColors.BLACK, 2, true);
@@ -17,7 +17,7 @@ public class CustomButton extends KButton
         this.setText(text);
         this.setFont(new Font("Arial", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.MIDDLE_BLUE_COLOR);
-        this.setkEndColor(ThemeColors.TIFFANY_BLUE); 
+        this.setkEndColor(ThemeColors.TIFFANY_BLUE);
         this.setkHoverStartColor(ThemeColors.MIDDLE_BLUE_COLOR);
         this.setkHoverEndColor(ThemeColors.BLURPLE);
         this.setkForeGround(ThemeColors.LAVENDER_BLUSH);

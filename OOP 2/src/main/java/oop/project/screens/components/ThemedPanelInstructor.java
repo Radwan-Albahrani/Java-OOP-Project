@@ -6,9 +6,9 @@ import oop.project.screens.colors.ThemeColors;
 
 import javax.swing.BorderFactory;
 
-public class ThemedPanelStudent extends KGradientPanel
+public class ThemedPanelInstructor extends KGradientPanel
 {
-    public ThemedPanelStudent()
+    public ThemedPanelInstructor()
     {
         this.setkStartColor(ThemeColors.KHAKI);
         this.setkEndColor(ThemeColors.LIGHT_KHAKI);
