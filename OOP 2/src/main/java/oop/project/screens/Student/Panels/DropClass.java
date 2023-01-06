@@ -16,14 +16,10 @@ public class DropClass extends ThemedPanel
         dropClassLabel.setFont(new Font("Arial", Font.BOLD, 30));
         this.add(dropClassLabel);
 
-        JTextArea dropClassTextArea = new JTextArea();
-        dropClassTextArea.setPreferredSize(new Dimension(1000, 200));
-        dropClassTextArea.setLineWrap(true);
-
         KButton dropClassButton = new BlueButton("Drop Class");
         dropClassButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] dropClassComponents = {dropClassLabel, dropClassTextArea, dropClassButton};
+        JComponent[] dropClassComponents = {dropClassLabel,dropClassButton};
         Box dropClassBox = AddToBox.addToVerticalBox(dropClassComponents, 1);
 
         this.add(dropClassBox);

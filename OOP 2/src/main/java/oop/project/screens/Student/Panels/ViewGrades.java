@@ -14,15 +14,11 @@ public class ViewGrades extends ThemedPanel
     {
         JLabel ViewGradesLabel = new JLabel("View Grades");
         ViewGradesLabel.setFont(new Font("Arial", Font.BOLD, 30));
-
-        JTextArea ViewGradesTextArea = new JTextArea();
-        ViewGradesTextArea.setPreferredSize(new Dimension(1000, 200));
-        ViewGradesTextArea.setLineWrap(true);
-
+        
         KButton ViewGradesButton = new BlueButton(" View Grades");
         ViewGradesButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] ViewGradesComponents = {ViewGradesLabel, ViewGradesTextArea, ViewGradesButton};
+        JComponent[] ViewGradesComponents = {ViewGradesLabel,ViewGradesButton};
         Box ViewGradesBox = AddToBox.addToVerticalBox(ViewGradesComponents, 1);
 
         this.add(ViewGradesBox);

@@ -16,14 +16,14 @@ public class registerClass extends ThemedPanel
         JLabel registerClassLabel = new JLabel("Register ");
         registerClassLabel.setFont(new Font("Arial", Font.BOLD, 30));
 
-        JTextArea registerClassTextArea = new JTextArea();
-        registerClassTextArea.setPreferredSize(new Dimension(1000, 200));
-        registerClassTextArea.setLineWrap(true);
-
         KButton registerClassButton = new BlueButton(" Register Class");
         registerClassButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] registerClassComponents = {registerClassLabel, registerClassTextArea, registerClassButton};
+        JComboBox registerClassComboBox = new JComboBox();
+        registerClassComboBox.setPreferredSize(new Dimension(150, 50));
+
+
+        JComponent[] registerClassComponents = {registerClassLabel, registerClassComboBox ,registerClassButton};
         Box registerClassBox = AddToBox.addToVerticalBox(registerClassComponents, 1);
 
         this.add(registerClassBox);
