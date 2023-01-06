@@ -16,6 +16,9 @@ public class DropClass extends ThemedPanel
         dropClassLabel.setFont(new Font("Arial", Font.BOLD, 30));
         this.add(dropClassLabel);
 
+        JComboBox dropClassComboBox = new JComboBox();
+        dropClassComboBox.setPreferredSize(new Dimension(150, 50));
+
         KButton dropClassButton = new BlueButton("Drop Class");
         dropClassButton.setPreferredSize(new Dimension(150, 50));
 
