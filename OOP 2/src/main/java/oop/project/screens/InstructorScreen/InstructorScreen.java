@@ -43,6 +43,7 @@ public class InstructorScreen extends JFrame
         KGradientPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
         KGradientPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
+        // Setting up a dictionary to store the panels
         Dictionary<String, KGradientPanel> panels = new Hashtable<String, KGradientPanel>();
         panels.put("main", mainPanel);
         panels.put("announcement", announcementPanel);
@@ -52,16 +53,7 @@ public class InstructorScreen extends JFrame
         panels.put("alerts", alertsPanel);
         panels.put("button", buttonPanel);
 
-        // // Setting up Buttons Panel to switch between panels
-        // KGradientPanel[] panels = {
-        // mainPanel,
-        // announcementPanel,
-        // viewStudentsPanel,
-        // editGradesPanel,
-        // profilePanel,
-        // alertsPanel,
-        // buttonPanel
-        // };
+        // Setting the panels in the button panel
         ((ButtonPanel) buttonPanel).setPanels(panels);
 
         // Adding Panel to Frame
