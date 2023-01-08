@@ -33,8 +33,8 @@ public class ButtonHandlerInstructor implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        String buttonClicked = e.getActionCommand();
-        if (buttonClicked.equals(" Main Menu "))
+        String buttonClicked = e.getActionCommand().trim();
+        if (buttonClicked.equals("Main Menu"))
         {
             frame.remove(panels.get("announcement"));
             frame.remove(panels.get("viewStudents"));
@@ -45,7 +45,7 @@ public class ButtonHandlerInstructor implements ActionListener
             panels.get("button").add(mainButtonBox, BorderLayout.NORTH);
         }
 
-        else if (buttonClicked.equals(" Add Announcement "))
+        else if (buttonClicked.equals("Add Announcement"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("profile"));
@@ -55,7 +55,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.add(panels.get("announcement"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" View Students ") || buttonClicked.equals(" Manage Students "))
+        else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
         {
             panels.get("button").remove(mainButtonBox);
             panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
@@ -68,7 +68,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.add(panels.get("viewStudents"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" Edit Grades "))
+        else if (buttonClicked.equals("Edit Grades"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("announcement"));
@@ -78,7 +78,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.add(panels.get("editGrades"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" View Profile "))
+        else if (buttonClicked.equals("View Profile"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("announcement"));
@@ -88,7 +88,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.add(panels.get("profile"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" Alert Admin "))
+        else if (buttonClicked.equals("Alert Admin"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("announcement"));
@@ -98,7 +98,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.add(panels.get("alerts"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" Logout "))
+        else if (buttonClicked.equals("Logout"))
         {
             frame.dispose();
             new LoginScreen();
