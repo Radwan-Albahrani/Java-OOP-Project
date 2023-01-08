@@ -11,15 +11,18 @@ import com.k33ptoo.components.KGradientPanel;
 
 import oop.project.screens.LoginScreen.LoginScreen;
 
+import java.util.*;
+
 // TODO: use buttonPanel.remove() to remove the current panel and add the new one with an if statement assuming the button is clicked
 public class ButtonHandlerInstructor implements ActionListener
 {
     JFrame frame;
-    KGradientPanel[] panels;
+    Dictionary<String, KGradientPanel> panels;
     Box studentButtonBox;
     Box mainButtonBox;
 
-    public ButtonHandlerInstructor(JFrame frame, KGradientPanel[] panels, Box studentButtonBox, Box mainButtonBox)
+    public ButtonHandlerInstructor(JFrame frame, Dictionary<String, KGradientPanel> panels, Box studentButtonBox,
+            Box mainButtonBox)
     {
         this.frame = frame;
         this.panels = panels;
@@ -33,66 +36,66 @@ public class ButtonHandlerInstructor implements ActionListener
         String buttonClicked = e.getActionCommand();
         if (buttonClicked.equals(" Main Menu "))
         {
-            frame.remove(panels[1]);
-            frame.remove(panels[2]);
-            frame.remove(panels[3]);
-            frame.remove(panels[5]);
-            frame.add(panels[0], BorderLayout.CENTER);
-            panels[6].remove(studentButtonBox);
-            panels[6].add(mainButtonBox, BorderLayout.NORTH);
+            frame.remove(panels.get("announcement"));
+            frame.remove(panels.get("viewStudents"));
+            frame.remove(panels.get("editGrades"));
+            frame.remove(panels.get("alerts"));
+            frame.add(panels.get("main"), BorderLayout.CENTER);
+            panels.get("button").remove(studentButtonBox);
+            panels.get("button").add(mainButtonBox, BorderLayout.NORTH);
         }
 
         else if (buttonClicked.equals(" Add Announcement "))
         {
-            frame.remove(panels[0]);
-            frame.remove(panels[4]);
-            frame.remove(panels[2]);
-            frame.remove(panels[3]);
-            frame.remove(panels[5]);
-            frame.add(panels[1], BorderLayout.CENTER);
+            frame.remove(panels.get("main"));
+            frame.remove(panels.get("profile"));
+            frame.remove(panels.get("viewStudents"));
+            frame.remove(panels.get("editGrades"));
+            frame.remove(panels.get("alerts"));
+            frame.add(panels.get("announcement"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals(" View Students "))
+        else if (buttonClicked.equals(" View Students ") || buttonClicked.equals(" Manage Students "))
         {
-            panels[6].remove(mainButtonBox);
-            panels[6].add(studentButtonBox, BorderLayout.NORTH);
+            panels.get("button").remove(mainButtonBox);
+            panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
 
-            frame.remove(panels[0]);
-            frame.remove(panels[1]);
-            frame.remove(panels[4]);
-            frame.remove(panels[3]);
-            frame.remove(panels[5]);
-            frame.add(panels[2], BorderLayout.CENTER);
+            frame.remove(panels.get("main"));
+            frame.remove(panels.get("announcement"));
+            frame.remove(panels.get("profile"));
+            frame.remove(panels.get("editGrades"));
+            frame.remove(panels.get("alerts"));
+            frame.add(panels.get("viewStudents"), BorderLayout.CENTER);
         }
 
         else if (buttonClicked.equals(" Edit Grades "))
         {
-            frame.remove(panels[0]);
-            frame.remove(panels[1]);
-            frame.remove(panels[2]);
-            frame.remove(panels[4]);
-            frame.remove(panels[5]);
-            frame.add(panels[3], BorderLayout.CENTER);
+            frame.remove(panels.get("main"));
+            frame.remove(panels.get("announcement"));
+            frame.remove(panels.get("viewStudents"));
+            frame.remove(panels.get("profile"));
+            frame.remove(panels.get("alerts"));
+            frame.add(panels.get("editGrades"), BorderLayout.CENTER);
         }
 
         else if (buttonClicked.equals(" View Profile "))
         {
-            frame.remove(panels[0]);
-            frame.remove(panels[1]);
-            frame.remove(panels[2]);
-            frame.remove(panels[3]);
-            frame.remove(panels[5]);
-            frame.add(panels[4], BorderLayout.CENTER);
+            frame.remove(panels.get("main"));
+            frame.remove(panels.get("announcement"));
+            frame.remove(panels.get("viewStudents"));
+            frame.remove(panels.get("editGrades"));
+            frame.remove(panels.get("alerts"));
+            frame.add(panels.get("profile"), BorderLayout.CENTER);
         }
 
         else if (buttonClicked.equals(" Alert Admin "))
         {
-            frame.remove(panels[0]);
-            frame.remove(panels[1]);
-            frame.remove(panels[2]);
-            frame.remove(panels[3]);
-            frame.remove(panels[4]);
-            frame.add(panels[5], BorderLayout.CENTER);
+            frame.remove(panels.get("main"));
+            frame.remove(panels.get("announcement"));
+            frame.remove(panels.get("viewStudents"));
+            frame.remove(panels.get("editGrades"));
+            frame.remove(panels.get("profile"));
+            frame.add(panels.get("alerts"), BorderLayout.CENTER);
         }
 
         else if (buttonClicked.equals(" Logout "))

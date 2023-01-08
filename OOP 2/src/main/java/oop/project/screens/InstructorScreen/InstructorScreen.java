@@ -19,10 +19,13 @@ package oop.project.screens.InstructorScreen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Dictionary;
+
 import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
 import oop.project.screens.components.*;
 import oop.project.screens.hooks.*;
+import java.util.*;
 
 public class InstructorScreen extends JFrame
 {
@@ -40,16 +43,25 @@ public class InstructorScreen extends JFrame
         KGradientPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
         KGradientPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
-        // Setting up Buttons Panel to switch between panels
-        KGradientPanel[] panels = {
-                mainPanel,
-                announcementPanel,
-                viewStudentsPanel,
-                editGradesPanel,
-                profilePanel,
-                alertsPanel,
-                buttonPanel
-        };
+        Dictionary<String, KGradientPanel> panels = new Hashtable<String, KGradientPanel>();
+        panels.put("main", mainPanel);
+        panels.put("announcement", announcementPanel);
+        panels.put("viewStudents", viewStudentsPanel);
+        panels.put("editGrades", editGradesPanel);
+        panels.put("profile", profilePanel);
+        panels.put("alerts", alertsPanel);
+        panels.put("button", buttonPanel);
+
+        // // Setting up Buttons Panel to switch between panels
+        // KGradientPanel[] panels = {
+        // mainPanel,
+        // announcementPanel,
+        // viewStudentsPanel,
+        // editGradesPanel,
+        // profilePanel,
+        // alertsPanel,
+        // buttonPanel
+        // };
         ((ButtonPanel) buttonPanel).setPanels(panels);
 
         // Adding Panel to Frame
