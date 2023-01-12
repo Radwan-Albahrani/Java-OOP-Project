@@ -1,7 +1,5 @@
 package oop.project.screens.AdminScreen.Panels;
 
-
-
 import oop.project.components.ThemedPanelAdmin;
 import javax.swing.*;
 import java.awt.*;

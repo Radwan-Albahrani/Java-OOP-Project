@@ -1,6 +1,5 @@
 package oop.project.screens.AdminScreen.Panels;
 
-
 import oop.project.components.ThemedPanelAdmin;
 
 import javax.swing.*;
@@ -16,23 +15,3 @@ public class ViewInstructors extends ThemedPanelAdmin
         this.add(viewStudentsLabel);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

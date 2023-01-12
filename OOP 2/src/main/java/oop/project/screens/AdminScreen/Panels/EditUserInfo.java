@@ -1,7 +1,5 @@
 package oop.project.screens.AdminScreen.Panels;
 
-
-
 import oop.project.components.ThemedPanelAdmin;
 
 import javax.swing.*;
@@ -16,11 +14,3 @@ public class EditUserInfo extends ThemedPanelAdmin
         this.add(Edit_User_info);
     }
 }
-
-
-
-
-
-
-
-
