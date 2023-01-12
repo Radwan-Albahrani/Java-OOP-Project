@@ -41,28 +41,38 @@ public class StudentButton extends ThemedPanelStudent
     public StudentButton(JFrame frame, int Width, int Height)
     {
         this.frame = frame;
-        this.setPreferredSize(new Dimension(300, 0));
+        this.setPreferredSize(new Dimension(400, 0));
 
         for (int i = 0; i < ButtonNames.length; i++)
         {
-            studentButtons.put(ButtonNames[i].trim(), new CustomButtonStudent(ButtonNames[i]));
+            studentButtons.put(ButtonNames[i].trim(), new CustomButton(ButtonNames[i]));
         }
-
+        JLabel mainTitle = new JLabel("Student Dashboard");
+        mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
+        mainTitle.setForeground(Color.BLACK);
+        mainTitle.setHorizontalAlignment(JLabel.CENTER);
+        mainTitle.setVerticalAlignment(JLabel.CENTER);
         JComponent[] mainButtonComponents = {
+                mainTitle,
                 studentButtons.get("View Alerts"),
                 studentButtons.get("Manage Classes"),
                 studentButtons.get("View Grades")
         };
 
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 3);
-
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 4);
+        JLabel coursesTitle = new JLabel("Manage Courses");
+        coursesTitle.setFont(new Font("Arial", Font.BOLD, 34));
+        coursesTitle.setForeground(Color.BLACK);
+        coursesTitle.setHorizontalAlignment(JLabel.CENTER);
+        coursesTitle.setVerticalAlignment(JLabel.CENTER);
         JComponent[] studentButtonComponents = {
+                coursesTitle,
                 studentButtons.get("Main Menu"),
                 studentButtons.get("Register Class"),
                 studentButtons.get("Drop Class"),
         };
 
-        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 3);
+        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 4);
 
         this.setLayout(new BorderLayout());
         this.add(mainButtonBox, BorderLayout.NORTH);

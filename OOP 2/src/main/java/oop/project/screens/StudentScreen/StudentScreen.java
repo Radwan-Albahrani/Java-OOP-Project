@@ -30,6 +30,7 @@ public class StudentScreen extends JFrame
         panels.put("viewAlerts", viewAlerts);
         panels.put("dropClass", dropClass);
         panels.put("viewGrades", viewGrades);
+        panels.put("button", buttonPanel);
 
         ((StudentButton) buttonPanel).setPanels(panels);
 
@@ -42,5 +43,15 @@ public class StudentScreen extends JFrame
         add(mainPanel, BorderLayout.CENTER);
 
         setVisible(true);
+    }
+
+    public void resetFrame(JPanel buttons, JPanel main)
+    {
+        setLayout(new BorderLayout());
+        JPanel navBar = new NavBar(this);
+
+        add(navBar, BorderLayout.NORTH);
+        add(main, BorderLayout.CENTER);
+        add(buttons, BorderLayout.WEST);
     }
 }

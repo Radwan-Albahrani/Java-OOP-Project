@@ -8,7 +8,9 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
+import oop.project.screens.StudentScreen.StudentScreen;
 
 import java.util.*;
 
@@ -42,16 +44,21 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("viewAlerts"));
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
-            frame.add(panels.get("main"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "StudentScreen/background.png");
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
 
         else if (buttonClicked.equals("Register Class") || buttonClicked.equals("Manage Classes"))
         {
+            panels.get("button").remove(mainButtonBox);
+            panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
+
             frame.remove(panels.get("main"));
             frame.remove(panels.get("viewAlerts"));
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
-            frame.add(panels.get("registerClass"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("registerClass"));
         }
 
         else if (buttonClicked.equals("View Alerts"))
@@ -60,7 +67,8 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("registerClass"));
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
-            frame.add(panels.get("viewAlerts"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewAlerts"));
         }
 
         else if (buttonClicked.equals("Drop Class"))
@@ -69,7 +77,8 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("registerClass"));
             frame.remove(panels.get("viewAlerts"));
             frame.remove(panels.get("viewGrades"));
-            frame.add(panels.get("dropClass"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("dropClass"));
         }
 
         else if (buttonClicked.equals("View Grades"))
@@ -78,7 +87,8 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("registerClass"));
             frame.remove(panels.get("viewAlerts"));
             frame.remove(panels.get("dropClass"));
-            frame.add(panels.get("viewGrades"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
         else if (buttonClicked.equals("Logout"))
