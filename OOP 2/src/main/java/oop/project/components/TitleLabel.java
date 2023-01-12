@@ -1,4 +1,4 @@
-package oop.project.screens.components;
+package oop.project.components;
 
 import javax.swing.JLabel;
 
