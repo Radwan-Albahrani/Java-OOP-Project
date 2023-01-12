@@ -21,7 +21,7 @@ public class ViewAlerts extends TransparentPanel
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
         alertTextArea.setLineWrap(true);
 
-        KButton refreshButton = new CustomButtonInstructor(" Refresh ");
+        KButton refreshButton = new CustomButton(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] announcementComponents = {alertsLabel, alertTextArea, refreshButton}; // Components for the Alerts Menu
