@@ -50,7 +50,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     {
         // Set the frame and the panel size
         this.frame = frame;
-        this.setPreferredSize(new Dimension(400, 0));
+        this.setPreferredSize(new Dimension(440, 0));
 
         // Add all the buttons to the dictionary
         for (int i = 0; i < All_buttons.length; i++)

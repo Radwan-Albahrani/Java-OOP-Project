@@ -12,6 +12,7 @@ public class AddToBox
         Box verticalBox = Box.createVerticalBox();
         for (JComponent jComponent : component)
         {
+            verticalBox.add(Box.createVerticalStrut(10));
             verticalBox.add(jComponent);
             if (counter != numberOfComponentsPerColumn - 1)
             {

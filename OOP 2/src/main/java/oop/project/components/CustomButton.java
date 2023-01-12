@@ -22,7 +22,9 @@ public class CustomButton extends KButton
         this.setkHoverEndColor(ThemeColors.SLIGHTLY_BROWN);
         this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
         this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
-        this.setPreferredSize(new Dimension(150, 50));
+        this.setPreferredSize(new Dimension(400, 50));
+        this.setMinimumSize(getPreferredSize());
+        this.setMaximumSize(getPreferredSize());
         this.setBorder(border);
     }
 }
