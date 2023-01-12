@@ -1,10 +1,10 @@
-package oop.project.screens.AdminScreen.Panels;
+package oop.project.screens.AdminScreen.panels;
 
 
 
 
 
-import oop.project.screens.components.ThemedPanelAdmin;
+import oop.project.components.ThemedPanelAdmin;
 
 import javax.swing.*;
 import java.awt.*;

@@ -3,13 +3,13 @@ package oop.project.screens.AdminScreen;
 
 
 
-import oop.project.screens.AdminScreen.Panels.*;
+import oop.project.screens.AdminScreen.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
 import com.k33ptoo.components.*;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
+import oop.project.components.*;
+import oop.project.hooks.*;
 
 public class AdminScreen extends JFrame
 {
