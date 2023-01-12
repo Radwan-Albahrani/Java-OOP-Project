@@ -4,9 +4,9 @@ import javax.swing.*;
 
 import java.awt.*;
 
+import oop.project.components.*;
+import oop.project.hooks.*;
 import oop.project.screens.LoginScreen.Panels.LoginPanel;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
 
 public class LoginScreen extends JFrame
 {

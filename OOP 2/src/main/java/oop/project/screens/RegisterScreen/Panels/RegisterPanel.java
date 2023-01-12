@@ -6,9 +6,9 @@ import com.k33ptoo.components.*;
 
 import java.awt.*;
 
+import oop.project.components.*;
 import oop.project.handlers.GenerateUserAndEmail;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
+import oop.project.hooks.*;
 
 public class RegisterPanel extends ThemedPanel
 {

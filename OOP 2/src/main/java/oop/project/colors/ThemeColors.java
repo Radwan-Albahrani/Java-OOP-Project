@@ -1,4 +1,4 @@
-package oop.project.screens.colors;
+package oop.project.colors;
 
 import java.awt.Color;
 
