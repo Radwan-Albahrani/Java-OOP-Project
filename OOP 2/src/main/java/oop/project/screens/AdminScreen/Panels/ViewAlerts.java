@@ -1,7 +1,7 @@
 package oop.project.screens.AdminScreen.Panels;
 
 import oop.project.hooks.AddToBox;
-
+import oop.project.colors.ThemeColors;
 import oop.project.components.*;
 
 import javax.swing.*;
@@ -20,6 +20,9 @@ public class ViewAlerts extends TransparentPanel
         JTextArea alertTextArea = new JTextArea();
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
         alertTextArea.setLineWrap(true);
+        alertTextArea.setBackground(ThemeColors.LIGHT_GRAY);
+        alertTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
+        alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.DARK_GREYISH_BROWN, 5));
 
         KButton refreshButton = new CustomButton(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));

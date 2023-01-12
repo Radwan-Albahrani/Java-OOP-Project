@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class ThemeColors
 {
-    public static final Color BLACK = new Color(0, 0, 0);
+    public static final Color BLACK = new Color(0, 0, 0, 240);
     public static final Color WHITE = new Color(255, 255, 255);
     public static final Color POWDER_BLUE = new Color(176, 224, 230);
     public static final Color DARK_POWDER_BLUE = new Color(135, 206, 235);
@@ -27,9 +27,9 @@ public class ThemeColors
     public static final Color YELLOW = new Color(255, 255, 0);
     public static final Color YELLOW_DARK = new Color(255, 255, 0);
     public static final Color LIGHT_GRAY = new Color(211, 211, 211);
-    public static final Color SORT_OF_BROWN = new Color(106, 115, 99);
-    public static final Color SLIGHTLY_BROWN = new Color(24, 28, 31);
-    public static final Color DARK_GREENISH_BROWN = new Color(54, 65, 64);
+    public static final Color SORT_OF_BROWN = new Color(106, 115, 99, 240);
+    public static final Color SLIGHTLY_BROWN = new Color(24, 28, 31, 240);
+    public static final Color DARK_GREENISH_BROWN = new Color(54, 65, 64, 240);
     public static final Color LIGHT_GREENISH_BROWN = new Color(133, 125, 103);
     public static final Color DARK_GREYISH_BROWN = new Color(59, 57, 50);
     public static final Color A_LITTLE_GREY = new Color(56, 58, 54);

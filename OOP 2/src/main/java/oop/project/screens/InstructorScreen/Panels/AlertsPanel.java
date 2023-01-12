@@ -1,5 +1,6 @@
 package oop.project.screens.InstructorScreen.Panels;
 
+import oop.project.colors.ThemeColors;
 import oop.project.components.CustomButton;
 import oop.project.components.TransparentPanel;
 import oop.project.hooks.AddToBox;
@@ -21,6 +22,9 @@ public class AlertsPanel extends TransparentPanel
         JTextArea alertTextArea = new JTextArea();
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
         alertTextArea.setLineWrap(true);
+        alertTextArea.setBackground(ThemeColors.LIGHT_GRAY);
+        alertTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
+        alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.DARK_GREYISH_BROWN, 5));
 
         KButton sendAlertButton = new CustomButton(" Send ");
         sendAlertButton.setPreferredSize(new Dimension(150, 50));
