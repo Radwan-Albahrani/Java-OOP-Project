@@ -50,7 +50,7 @@ public class ButtonPanel extends ThemedPanel
     {
         // Set the frame and the panel size
         this.frame = frame;
-        this.setPreferredSize(new Dimension(300, 0));
+        this.setPreferredSize(new Dimension(440, 0));
 
         // Add all the buttons to the dictionary
         for (int i = 0; i < ButtonNames.length; i++)
@@ -58,25 +58,39 @@ public class ButtonPanel extends ThemedPanel
             MainButtons.put(ButtonNames[i].trim(), new CustomButton(ButtonNames[i]));
         }
 
+        // JLabel title
+
+        JLabel mainTitle = new JLabel("Instructor Dashboard");
+        mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
+        mainTitle.setForeground(Color.BLACK);
+        mainTitle.setHorizontalAlignment(JLabel.CENTER);
+        mainTitle.setVerticalAlignment(JLabel.CENTER);
         // Buttons for the main Box
         JComponent[] mainButtonComponents = {
+                mainTitle,
                 MainButtons.get("Add Announcement"),
                 MainButtons.get("Manage Students"),
                 MainButtons.get("View Profile"),
                 MainButtons.get("Alert Admin")
         };
         // Add the buttons to the mainButtonBox
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 4);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
 
+        JLabel studentTitle = new JLabel("Edit Student Grades");
+        studentTitle.setFont(new Font("Arial", Font.BOLD, 34));
+        studentTitle.setForeground(Color.BLACK);
+        studentTitle.setHorizontalAlignment(JLabel.CENTER);
+        studentTitle.setVerticalAlignment(JLabel.CENTER);
         // Buttons for the student Box
         JComponent[] studentButtonComponents = {
+                studentTitle,
                 MainButtons.get("Main Menu"),
                 MainButtons.get("View Students"),
                 MainButtons.get("Edit Grades")
         };
 
         // Add the buttons to the studentButtonBox
-        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 3); // B
+        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 4);
 
         // Add the main box and the logout button during panel initialization
         this.setLayout(new BorderLayout());
