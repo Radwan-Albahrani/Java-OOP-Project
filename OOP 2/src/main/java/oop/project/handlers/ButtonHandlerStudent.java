@@ -6,23 +6,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
-
-import com.k33ptoo.components.KGradientPanel;
+import javax.swing.JPanel;
 
 import oop.project.screens.LoginScreen.LoginScreen;
 
 import java.util.*;
 
-
-public class ButtonHandlerStudent implements ActionListener 
+public class ButtonHandlerStudent implements ActionListener
 {
-    Dictionary<String, KGradientPanel> panels;
+    Dictionary<String, JPanel> panels;
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
 
-    public ButtonHandlerStudent(JFrame frame, Dictionary<String, KGradientPanel> panels, Box studentButtonBox,
-            Box mainButtonBox) 
+    public ButtonHandlerStudent(JFrame frame, Dictionary<String, JPanel> panels, Box studentButtonBox,
+            Box mainButtonBox)
     {
         this.frame = frame;
         this.panels = panels;
@@ -31,7 +29,7 @@ public class ButtonHandlerStudent implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent E) 
+    public void actionPerformed(ActionEvent E)
     {
         String buttonClicked = E.getActionCommand().trim();
 
@@ -47,7 +45,7 @@ public class ButtonHandlerStudent implements ActionListener
             frame.add(panels.get("main"), BorderLayout.CENTER);
         }
 
-        else if (buttonClicked.equals("Register Class"))
+        else if (buttonClicked.equals("Register Class") || buttonClicked.equals("Manage Classes"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("viewAlerts"));

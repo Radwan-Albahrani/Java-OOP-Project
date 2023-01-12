@@ -1,15 +1,14 @@
-package oop.project.screens.Student.Panels;
+package oop.project.screens.StudentScreen.Panels;
 
-import oop.project.screens.components.BlueButton;
-import oop.project.screens.components.ThemedPanel;
-import oop.project.screens.hooks.AddToBox;
+import oop.project.components.BlueButton;
+import oop.project.components.TransparentPanel;
+import oop.project.hooks.AddToBox;
 
 import java.awt.*;
 import javax.swing.*;
 import com.k33ptoo.components.*;
 
-
-public class registerClass extends ThemedPanel
+public class registerClass extends TransparentPanel
 {
     public registerClass(int Width, int Height)
     {
@@ -22,8 +21,7 @@ public class registerClass extends ThemedPanel
         JComboBox registerClassComboBox = new JComboBox();
         registerClassComboBox.setPreferredSize(new Dimension(150, 50));
 
-
-        JComponent[] registerClassComponents = {registerClassLabel, registerClassComboBox ,registerClassButton};
+        JComponent[] registerClassComponents = {registerClassLabel, registerClassComboBox, registerClassButton};
         Box registerClassBox = AddToBox.addToVerticalBox(registerClassComponents, 1);
 
         this.add(registerClassBox);

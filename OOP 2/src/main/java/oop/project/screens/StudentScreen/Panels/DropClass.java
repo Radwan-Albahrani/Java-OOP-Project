@@ -1,14 +1,14 @@
-package oop.project.screens.Student.Panels;
+package oop.project.screens.StudentScreen.Panels;
 
-import oop.project.screens.components.BlueButton;
-import oop.project.screens.components.ThemedPanel;
-import oop.project.screens.hooks.AddToBox;
+import oop.project.components.BlueButton;
+import oop.project.components.*;
+import oop.project.hooks.AddToBox;
 
 import java.awt.*;
 import javax.swing.*;
 import com.k33ptoo.components.*;
 
-public class DropClass extends ThemedPanel
+public class DropClass extends TransparentPanel
 {
     public DropClass(int Width, int Height)
     {
@@ -22,7 +22,7 @@ public class DropClass extends ThemedPanel
         KButton dropClassButton = new BlueButton("Drop Class");
         dropClassButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] dropClassComponents = {dropClassLabel,dropClassButton};
+        JComponent[] dropClassComponents = {dropClassLabel, dropClassButton};
         Box dropClassBox = AddToBox.addToVerticalBox(dropClassComponents, 1);
 
         this.add(dropClassBox);

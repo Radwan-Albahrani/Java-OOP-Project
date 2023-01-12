@@ -3,6 +3,7 @@ package oop.project;
 import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
+import oop.project.screens.StudentScreen.StudentScreen;
 
 public final class App
 {
@@ -13,6 +14,7 @@ public final class App
         new LoginScreen();
         new AdminScreen();
         new InstructorScreen();
+        new StudentScreen();
 
     }
 }
