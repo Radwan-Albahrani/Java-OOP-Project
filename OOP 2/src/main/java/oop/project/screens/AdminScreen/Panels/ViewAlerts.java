@@ -1,4 +1,4 @@
-package oop.project.screens.AdminScreen.panels;
+package oop.project.screens.AdminScreen.Panels;
 
 import oop.project.hooks.AddToBox;
 
@@ -22,10 +22,10 @@ public class ViewAlerts extends ThemedPanelAdmin
            alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
            alertTextArea.setLineWrap(true);
    
-           KButton refreshButton = new CustomButton(" Send ");
+           KButton refreshButton = new CustomButton(" Refresh ");
            refreshButton.setPreferredSize(new Dimension(150, 50));
    
-           JComponent[] announcementComponents = {alertsLabel, alertTextArea, refreshButton}; // Components for the Announcement Menu
+           JComponent[] announcementComponents = {alertsLabel, alertTextArea, refreshButton}; // Components for the Alerts Menu
            Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1);
    
            this.add(announcementBox);

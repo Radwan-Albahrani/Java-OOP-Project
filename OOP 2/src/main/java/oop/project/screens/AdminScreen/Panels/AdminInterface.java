@@ -1,4 +1,4 @@
-package oop.project.screens.AdminScreen.panels;
+package oop.project.screens.AdminScreen.Panels;
 
 
 import oop.project.components.ThemedPanelAdmin;

@@ -3,45 +3,53 @@ package oop.project.screens.AdminScreen;
 
 
 
-import oop.project.screens.AdminScreen.panels.*;
-
 import javax.swing.*;
 import java.awt.*;
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import com.k33ptoo.components.*;
 import oop.project.components.*;
 import oop.project.hooks.*;
+import oop.project.screens.AdminScreen.Panels.*;
 
 public class AdminScreen extends JFrame
 {
 
     public AdminScreen()
     {
+        
         FrameConfig.set(this, "Admin"); // creating the Admin Frame 
 
-        AdminInterface main_interface = new AdminInterface(getWidth(),getHeight());
-        EditUserInfo edit_info = new EditUserInfo(getWidth(),getHeight());
-        ViewProfile view_profile = new ViewProfile(getWidth(), getHeight());
-        ViewStudent view_student  = new ViewStudent(getWidth(), getHeight());
-        ViewInstructors view_Instructors = new ViewInstructors(getWidth(), getHeight());
-        AdminInterface admin_AdminInterface = new AdminInterface(getWidth(), getHeight());
-        ViewAlerts view_Alerts = new ViewAlerts(getWidth(),getHeight());
+        KGradientPanel main_interface = new AdminInterface(getWidth(),getHeight());
+        KGradientPanel edit_info = new EditUserInfo(getWidth(),getHeight());
+        KGradientPanel view_profile = new ViewProfile(getWidth(), getHeight());
+        KGradientPanel view_student  = new ViewStudent(getWidth(), getHeight());
+        KGradientPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());
+        KGradientPanel view_Alerts = new ViewAlerts(getWidth(),getHeight());
+        KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
 
-        add(main_interface);
-        add(edit_info);
-        add(view_profile);
-        add(view_student);
-        add(view_Instructors);
-        add(admin_AdminInterface);
-        add(view_Alerts);
-
-
-
-
-
-        // Adding Panel to Frame
-        JPanel navBar = new NavBar(this); // Creating the nav bar
-        add(navBar, BorderLayout.NORTH); // add the nav bar to the top
+        Dictionary<String, KGradientPanel> dictionary_panel= new Hashtable<String, KGradientPanel>();
         
+        dictionary_panel.put( "Main", main_interface);
+        dictionary_panel.put("Information", edit_info);
+        dictionary_panel.put( "Profile", view_profile);
+        dictionary_panel.put("Student", view_student);
+        dictionary_panel.put("Instructors", view_Instructors);
+        dictionary_panel.put("Alerts", view_Alerts);
+        dictionary_panel.put("button", pButtonPanel);
+
+        ((AdminButtonPanel) pButtonPanel).insertingPanels(dictionary_panel);
+
+        setLayout(new BorderLayout());
+        JPanel navBar = new NavBar(this); 
+
+
+        add(navBar, BorderLayout.NORTH); 
+        add(main_interface,BorderLayout.CENTER);
+        add(pButtonPanel,BorderLayout.WEST);
+
+
         setVisible(true);
 
     }
