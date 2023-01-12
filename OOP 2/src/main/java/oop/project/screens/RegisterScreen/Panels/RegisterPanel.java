@@ -10,7 +10,7 @@ import oop.project.components.*;
 import oop.project.handlers.GenerateUserAndEmail;
 import oop.project.hooks.*;
 
-public class RegisterPanel extends ThemedPanel
+public class RegisterPanel extends ThemedPanelGeneric
 {
     public RegisterPanel(int Width, int Height)
     {

@@ -10,7 +10,7 @@ import com.k33ptoo.components.*;
 
 import java.awt.*;
 
-public class ViewAlerts extends ThemedPanelAdmin
+public class ViewAlerts extends TransparentPanel
 {
     public ViewAlerts(int Width, int Height)
     {
@@ -21,7 +21,7 @@ public class ViewAlerts extends ThemedPanelAdmin
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
         alertTextArea.setLineWrap(true);
 
-        KButton refreshButton = new CustomButton(" Refresh ");
+        KButton refreshButton = new CustomButtonInstructor(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] announcementComponents = {alertsLabel, alertTextArea, refreshButton}; // Components for the Alerts Menu

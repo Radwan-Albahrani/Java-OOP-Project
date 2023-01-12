@@ -11,11 +11,11 @@ import oop.project.handlers.AdminButtonHandler;
 import oop.project.components.*;
 import oop.project.hooks.AddToBox;
 
-public class AdminButtonPanel extends ThemedPanel
+public class AdminButtonPanel extends ThemedPanelAdmin
 {
 
     Dictionary<String, KButton> myButtons = new Hashtable<String, KButton>();
-    Dictionary<String, KGradientPanel> panels = new Hashtable<String, KGradientPanel>();
+    Dictionary<String, JPanel> panels = new Hashtable<>();
 
     String[] All_buttons = {
             " Main Menu ",
@@ -34,7 +34,7 @@ public class AdminButtonPanel extends ThemedPanel
     Box user_info;
     Box mainButtonBox;
 
-    public void insertingPanels(Dictionary<String, KGradientPanel> panel)
+    public void insertingPanels(Dictionary<String, JPanel> panel)
     {
         this.panels = panel;
 
@@ -55,7 +55,7 @@ public class AdminButtonPanel extends ThemedPanel
         // Add all the buttons to the dictionary
         for (int i = 0; i < All_buttons.length; i++)
         {
-            myButtons.put(All_buttons[i].trim(), new CustomButton(All_buttons[i]));
+            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i]));
         }
         // Title JLabel
 

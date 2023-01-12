@@ -1,11 +1,11 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.ThemedPanelInstructor;
+import oop.project.components.TransparentPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ProfilePanel extends ThemedPanelInstructor
+public class ProfilePanel extends TransparentPanel
 {
     public ProfilePanel(int Width, int Height)
     {

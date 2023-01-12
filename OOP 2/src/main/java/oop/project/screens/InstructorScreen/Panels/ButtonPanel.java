@@ -11,11 +11,11 @@ import oop.project.handlers.ButtonHandlerInstructor;
 import oop.project.components.*;
 import oop.project.hooks.AddToBox;
 
-public class ButtonPanel extends ThemedPanel
+public class ButtonPanel extends ThemedPanelInstructor
 {
     // Dictionaries
     Dictionary<String, KButton> MainButtons = new Hashtable<String, KButton>();
-    Dictionary<String, KGradientPanel> panels;
+    Dictionary<String, JPanel> panels;
 
     // Array of button names
     String[] ButtonNames = {
@@ -35,7 +35,7 @@ public class ButtonPanel extends ThemedPanel
     Box mainButtonBox;
 
     // Button to set panel and initialize handlers
-    public void setPanels(Dictionary<String, KGradientPanel> panels)
+    public void setPanels(Dictionary<String, JPanel> panels)
     {
         this.panels = panels;
         for (int i = 0; i < MainButtons.size(); i++)
@@ -55,7 +55,7 @@ public class ButtonPanel extends ThemedPanel
         // Add all the buttons to the dictionary
         for (int i = 0; i < ButtonNames.length; i++)
         {
-            MainButtons.put(ButtonNames[i].trim(), new CustomButton(ButtonNames[i]));
+            MainButtons.put(ButtonNames[i].trim(), new CustomButtonInstructor(ButtonNames[i]));
         }
 
         // JLabel title

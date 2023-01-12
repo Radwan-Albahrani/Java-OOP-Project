@@ -6,22 +6,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import com.k33ptoo.components.KGradientPanel;
-
+import oop.project.hooks.FrameConfig;
+import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
 
 import java.util.*;
 
 public class AdminButtonHandler implements ActionListener
 {
-    Dictionary<String, KGradientPanel> panels;
+    Dictionary<String, JPanel> panels;
     JFrame frame;
     Box user_info;
     Box mainButtonBox;
 
     // Constructor
-    public AdminButtonHandler(JFrame frame, Dictionary<String, KGradientPanel> panels, Box user_info,
+    public AdminButtonHandler(JFrame frame, Dictionary<String, JPanel> panels, Box user_info,
             Box mainButtonBox)
     {
         this.frame = frame;
@@ -46,7 +47,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Profile"));
             frame.remove(panels.get("Student"));
-            frame.add(panels.get("Main"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/background.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Main"));
         }
 
         // If the button clicked is Add Announcement, Remove all the panels and add the announcement panel
@@ -58,7 +61,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Information"));
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Alerts"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Alerts"));
         }
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("Manage Users") || buttonClicked.equals("Edit Information"))
@@ -71,7 +76,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Alerts"));
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Information"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Information"));
         }
 
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel
@@ -82,7 +89,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Alerts"));
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Instructors"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Instructors"));
         }
 
         // If the button clicked is View Profile, Remove all the panels and add the View Profile panel
@@ -93,7 +102,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Alerts"));
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Student"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Student"));
         }
 
         // If the button clicked is Alert Admin, Remove all the panels and add the Alert Admin panel
@@ -104,7 +115,9 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Alerts"));
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Profile"), BorderLayout.CENTER);
+            frame.remove(panels.get("Registrations"));
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Profile"));
         }
 
         else if (buttonClicked.equals("View Registration Requests"))
@@ -114,7 +127,8 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Alerts"));
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Main"));
-            frame.add(panels.get("Registrations"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Registrations"));
         }
 
         // If the button clicked is Logout, Dispose of this frame and go back to login screen

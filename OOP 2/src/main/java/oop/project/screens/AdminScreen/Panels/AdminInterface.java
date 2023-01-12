@@ -1,10 +1,10 @@
 package oop.project.screens.AdminScreen.Panels;
 
-import oop.project.components.ThemedPanelAdmin;
+import oop.project.components.TransparentPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminInterface extends ThemedPanelAdmin
+public class AdminInterface extends TransparentPanel
 {
     public AdminInterface(int Width, int Height)
     {

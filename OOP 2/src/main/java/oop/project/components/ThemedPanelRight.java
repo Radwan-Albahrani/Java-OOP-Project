@@ -6,12 +6,12 @@ import oop.project.colors.ThemeColors;
 
 import javax.swing.BorderFactory;
 
-public class ThemedPanelInstructor extends KGradientPanel
+public class ThemedPanelRight extends KGradientPanel
 {
-    public ThemedPanelInstructor()
+    public ThemedPanelRight()
     {
-        this.setkStartColor(ThemeColors.DARK_GREYISH_BROWN);
-        this.setkEndColor(ThemeColors.BLACK);
+        this.setkStartColor(ThemeColors.KHAKI);
+        this.setkEndColor(ThemeColors.LIGHT_KHAKI);
         this.setkGradientFocus(0);
         this.setkBorderRadius(70);
         this.setkFillBackground(true);

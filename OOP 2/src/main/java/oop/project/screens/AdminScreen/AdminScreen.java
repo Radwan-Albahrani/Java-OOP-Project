@@ -6,6 +6,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import com.k33ptoo.components.*;
+
 import oop.project.components.*;
 import oop.project.hooks.*;
 import oop.project.screens.AdminScreen.Panels.*;
@@ -18,16 +19,18 @@ public class AdminScreen extends JFrame
 
         FrameConfig.set(this, "Admin"); // creating the Admin Frame
 
-        KGradientPanel main_interface = new AdminInterface(getWidth(), getHeight());
-        KGradientPanel edit_info = new EditUserInfo(getWidth(), getHeight());
-        KGradientPanel view_profile = new ViewProfile(getWidth(), getHeight());
-        KGradientPanel view_student = new ViewStudent(getWidth(), getHeight());
-        KGradientPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());
-        KGradientPanel view_Alerts = new ViewAlerts(getWidth(), getHeight());
-        KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
-        KGradientPanel viewRegistrations = new ViewRegistrationPanel(getWidth(), getHeight());
+        FrameConfig.setBackground(this, "AdminScreen/background.png");
 
-        Dictionary<String, KGradientPanel> dictionary_panel = new Hashtable<String, KGradientPanel>();
+        JPanel main_interface = new AdminInterface(getWidth(), getHeight());
+        JPanel edit_info = new EditUserInfo(getWidth(), getHeight());
+        JPanel view_profile = new ViewProfile(getWidth(), getHeight());
+        JPanel view_student = new ViewStudent(getWidth(), getHeight());
+        JPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());
+        JPanel view_Alerts = new ViewAlerts(getWidth(), getHeight());
+        KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
+        JPanel viewRegistrations = new ViewRegistrationPanel(getWidth(), getHeight());
+
+        Dictionary<String, JPanel> dictionary_panel = new Hashtable<>();
 
         dictionary_panel.put("Main", main_interface);
         dictionary_panel.put("Information", edit_info);
@@ -48,7 +51,16 @@ public class AdminScreen extends JFrame
         add(pButtonPanel, BorderLayout.WEST);
 
         setVisible(true);
+    }
 
+    public void resetFrame(JPanel buttons, JPanel main)
+    {
+        setLayout(new BorderLayout());
+        JPanel navBar = new NavBar(this);
+
+        add(navBar, BorderLayout.NORTH);
+        add(main, BorderLayout.CENTER);
+        add(buttons, BorderLayout.WEST);
     }
 
 }

@@ -6,10 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import com.k33ptoo.components.KGradientPanel;
-
+import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
+import oop.project.screens.InstructorScreen.InstructorScreen;
 
 import java.util.*;
 
@@ -17,13 +18,13 @@ import java.util.*;
 public class ButtonHandlerInstructor implements ActionListener
 {
     // Variables needed for the handler
-    Dictionary<String, KGradientPanel> panels;
+    Dictionary<String, JPanel> panels;
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
 
     // Constructor
-    public ButtonHandlerInstructor(JFrame frame, Dictionary<String, KGradientPanel> panels, Box studentButtonBox,
+    public ButtonHandlerInstructor(JFrame frame, Dictionary<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
     {
         this.frame = frame;
@@ -48,7 +49,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
-            frame.add(panels.get("main"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/background.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
 
         // If the button clicked is Add Announcement, Remove all the panels and add the announcement panel
@@ -59,7 +61,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
-            frame.add(panels.get("announcement"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("announcement"));
         }
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
@@ -72,7 +75,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("profile"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
-            frame.add(panels.get("viewStudents"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("viewStudents"));
         }
 
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel
@@ -83,7 +87,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("profile"));
             frame.remove(panels.get("alerts"));
-            frame.add(panels.get("editGrades"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("editGrades"));
         }
 
         // If the button clicked is View Profile, Remove all the panels and add the View Profile panel
@@ -94,7 +99,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
-            frame.add(panels.get("profile"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
         }
 
         // If the button clicked is Alert Admin, Remove all the panels and add the Alert Admin panel
@@ -105,7 +111,8 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("profile"));
-            frame.add(panels.get("alerts"), BorderLayout.CENTER);
+            FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
+            ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("alerts"));
         }
 
         // If the button clicked is Logout, Dispose of this frame and go back to login screen

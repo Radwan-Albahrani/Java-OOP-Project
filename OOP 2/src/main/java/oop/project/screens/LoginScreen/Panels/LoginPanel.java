@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class LoginPanel extends ThemedPanel
+public class LoginPanel extends ThemedPanelGeneric
 {
     public LoginPanel(JFrame frame, int Width, int Height)
     {

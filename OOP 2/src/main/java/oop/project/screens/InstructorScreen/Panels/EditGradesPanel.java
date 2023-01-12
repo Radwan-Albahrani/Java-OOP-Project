@@ -1,11 +1,11 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.ThemedPanelInstructor;
+import oop.project.components.TransparentPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EditGradesPanel extends ThemedPanelInstructor
+public class EditGradesPanel extends TransparentPanel
 {
     public EditGradesPanel(int Width, int Height)
     {

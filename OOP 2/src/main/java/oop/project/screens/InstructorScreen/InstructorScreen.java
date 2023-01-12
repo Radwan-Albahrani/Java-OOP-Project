@@ -34,17 +34,19 @@ public class InstructorScreen extends JFrame
         // Frame Setup
         FrameConfig.set(this, "Instructor"); // Creating the frame
 
+        FrameConfig.setBackground(this, "InstructorScreen/background.png");
+
         // Panels
-        KGradientPanel mainPanel = new MainPanel(getWidth(), getHeight());
+        JPanel mainPanel = new MainPanel(getWidth(), getHeight());
         KGradientPanel buttonPanel = new ButtonPanel(this, getWidth(), getHeight());
-        KGradientPanel announcementPanel = new AnnouncementPanel(getWidth(), getHeight());
-        KGradientPanel viewStudentsPanel = new ViewStudentsPanel(getWidth(), getHeight());
-        KGradientPanel editGradesPanel = new EditGradesPanel(getWidth(), getHeight());
-        KGradientPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
-        KGradientPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
+        JPanel announcementPanel = new AnnouncementPanel(getWidth(), getHeight());
+        JPanel viewStudentsPanel = new ViewStudentsPanel(getWidth(), getHeight());
+        JPanel editGradesPanel = new EditGradesPanel(getWidth(), getHeight());
+        JPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
+        JPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
         // Setting up a dictionary to store the panels
-        Dictionary<String, KGradientPanel> panels = new Hashtable<String, KGradientPanel>();
+        Dictionary<String, JPanel> panels = new Hashtable<>();
         panels.put("main", mainPanel);
         panels.put("announcement", announcementPanel);
         panels.put("viewStudents", viewStudentsPanel);
@@ -63,5 +65,15 @@ public class InstructorScreen extends JFrame
         add(mainPanel, BorderLayout.CENTER); // add the main panel to the center
 
         setVisible(true);
+    }
+
+    public void resetFrame(JPanel buttons, JPanel main)
+    {
+        setLayout(new BorderLayout());
+        JPanel navBar = new NavBar(this);
+
+        add(navBar, BorderLayout.NORTH);
+        add(main, BorderLayout.CENTER);
+        add(buttons, BorderLayout.WEST);
     }
 }
