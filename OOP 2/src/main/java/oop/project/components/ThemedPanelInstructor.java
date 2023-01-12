@@ -1,8 +1,8 @@
-package oop.project.screens.components;
+package oop.project.components;
 
 import com.k33ptoo.components.KGradientPanel;
 
-import oop.project.screens.colors.ThemeColors;
+import oop.project.colors.ThemeColors;
 
 import javax.swing.BorderFactory;
 

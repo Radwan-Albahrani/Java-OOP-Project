@@ -23,8 +23,8 @@ import java.util.Dictionary;
 
 import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
+import oop.project.components.*;
+import oop.project.hooks.*;
 import java.util.*;
 
 public class InstructorScreen extends JFrame

@@ -1,6 +1,6 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.screens.components.ThemedPanelInstructor;
+import oop.project.components.ThemedPanelInstructor;
 
 import javax.swing.*;
 import java.awt.*;

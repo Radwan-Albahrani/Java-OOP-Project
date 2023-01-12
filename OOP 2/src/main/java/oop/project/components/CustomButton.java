@@ -1,8 +1,8 @@
-package oop.project.screens.components;
+package oop.project.components;
 
 import com.k33ptoo.components.KButton;
 
-import oop.project.screens.colors.ThemeColors;
+import oop.project.colors.ThemeColors;
 
 import java.awt.Font;
 import java.awt.Dimension;

@@ -1,8 +1,8 @@
 package oop.project.screens.LoginScreen.Panels;
 
+import oop.project.components.*;
+import oop.project.hooks.*;
 import oop.project.screens.RegisterScreen.RegisterScreen;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
 
 import javax.swing.*;
 import java.awt.*;

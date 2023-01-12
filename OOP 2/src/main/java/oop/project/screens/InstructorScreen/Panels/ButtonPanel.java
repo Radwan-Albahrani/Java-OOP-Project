@@ -8,8 +8,8 @@ import javax.swing.*;
 import com.k33ptoo.components.*;
 
 import oop.project.handlers.ButtonHandlerInstructor;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.AddToBox;
+import oop.project.components.*;
+import oop.project.hooks.AddToBox;
 
 public class ButtonPanel extends ThemedPanel
 {

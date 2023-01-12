@@ -1,8 +1,8 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.screens.components.CustomButton;
-import oop.project.screens.components.ThemedPanelInstructor;
-import oop.project.screens.hooks.AddToBox;
+import oop.project.components.CustomButton;
+import oop.project.components.ThemedPanelInstructor;
+import oop.project.hooks.AddToBox;
 
 import javax.swing.*;
 
