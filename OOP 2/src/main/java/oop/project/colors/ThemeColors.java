@@ -32,7 +32,7 @@ public class ThemeColors
     public static final Color DARK_GREENISH_BROWN = new Color(54, 65, 64, 240);
     public static final Color LIGHT_GREENISH_BROWN = new Color(133, 125, 103);
     public static final Color DARK_GREYISH_BROWN = new Color(59, 57, 50);
-    public static final Color A_LITTLE_GREY = new Color(56, 58, 54);
-    public static final Color FLOOR_GREY = new Color(78, 63, 58);
+    public static final Color A_LITTLE_GREY = new Color(56, 58, 54, 240);
+    public static final Color FLOOR_GREY = new Color(78, 63, 58, 240);
 
 }
