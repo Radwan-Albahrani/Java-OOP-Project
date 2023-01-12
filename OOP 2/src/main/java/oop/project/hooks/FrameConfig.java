@@ -1,4 +1,4 @@
-package oop.project.screens.hooks;
+package oop.project.hooks;
 
 import java.awt.Dimension;
 import java.awt.Image;

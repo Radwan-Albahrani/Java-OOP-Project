@@ -1,23 +1,23 @@
-package oop.project.screens.components;
+package oop.project.components;
 
 import com.k33ptoo.components.KButton;
 
-import oop.project.screens.colors.ThemeColors;
+import oop.project.colors.ThemeColors;
 
 import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 
-public class ExitButton extends KButton
+public class MinimizeButton extends KButton
 {
-    public ExitButton()
+    public MinimizeButton()
     {
-        this.setText("X");
+        this.setText("-");
         this.setFont(new Font("Arial", Font.BOLD, 20));
-        this.setkStartColor(ThemeColors.RED);
-        this.setkEndColor(ThemeColors.DARK_RED);
-        this.setkHoverStartColor(ThemeColors.ORANGE);
-        this.setkHoverEndColor(ThemeColors.DARK_ORANGE);
+        this.setkStartColor(ThemeColors.YELLOW);
+        this.setkEndColor(ThemeColors.YELLOW_DARK);
+        this.setkHoverStartColor(ThemeColors.WHITE);
+        this.setkHoverEndColor(ThemeColors.LIGHT_GRAY);
         this.setkForeGround(ThemeColors.BLACK);
         this.setkHoverForeGround(ThemeColors.BLACK);
         this.setkBorderRadius(30);

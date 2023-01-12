@@ -1,14 +1,14 @@
-package oop.project.screens.components;
+package oop.project.components;
 
 import com.k33ptoo.components.KGradientPanel;
 
-import oop.project.screens.colors.ThemeColors;
+import oop.project.colors.ThemeColors;
 
 import javax.swing.BorderFactory;
 
-public class ThemedPanel extends KGradientPanel
+public class ThemedPanelGeneric extends KGradientPanel
 {
-    public ThemedPanel()
+    public ThemedPanelGeneric()
     {
         this.setkStartColor(ThemeColors.POWDER_BLUE);
         this.setkEndColor(ThemeColors.MEDIUM_SEA_GREEN);

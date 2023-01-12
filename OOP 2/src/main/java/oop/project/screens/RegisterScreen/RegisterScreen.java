@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import com.k33ptoo.components.*;
 
+import oop.project.components.*;
+import oop.project.hooks.*;
 import oop.project.screens.RegisterScreen.Panels.RegisterPanel;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
 
 public class RegisterScreen extends JFrame
 {

@@ -4,9 +4,9 @@ import javax.swing.*;
 
 import java.awt.*;
 
+import oop.project.components.*;
+import oop.project.hooks.*;
 import oop.project.screens.LoginScreen.Panels.LoginPanel;
-import oop.project.screens.components.*;
-import oop.project.screens.hooks.*;
 
 public class LoginScreen extends JFrame
 {
@@ -20,7 +20,7 @@ public class LoginScreen extends JFrame
         FrameConfig.setBackground(this, "LoginScreen/background.png");
 
         // Login Panel Setup
-        ThemedPanel loginPanel = new LoginPanel(this, getWidth(), getHeight());
+        ThemedPanelGeneric loginPanel = new LoginPanel(this, getWidth(), getHeight());
 
         // Login Panel Wrapper Setup
         JPanel loginPanelWrapper = new JPanel();
