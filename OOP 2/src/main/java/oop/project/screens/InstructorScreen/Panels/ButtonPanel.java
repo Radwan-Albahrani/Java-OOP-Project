@@ -55,7 +55,7 @@ public class ButtonPanel extends ThemedPanelInstructor
         // Add all the buttons to the dictionary
         for (int i = 0; i < ButtonNames.length; i++)
         {
-            MainButtons.put(ButtonNames[i].trim(), new CustomButtonInstructor(ButtonNames[i]));
+            MainButtons.put(ButtonNames[i].trim(), new CustomButton(ButtonNames[i]));
         }
 
         // JLabel title

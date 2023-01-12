@@ -1,6 +1,6 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.CustomButtonInstructor;
+import oop.project.components.CustomButton;
 import oop.project.components.TransparentPanel;
 import oop.project.hooks.AddToBox;
 
@@ -22,7 +22,7 @@ public class AlertsPanel extends TransparentPanel
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
         alertTextArea.setLineWrap(true);
 
-        KButton sendAlertButton = new CustomButtonInstructor(" Send ");
+        KButton sendAlertButton = new CustomButton(" Send ");
         sendAlertButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] alertButtonComponents = {alertLabel, alertTextArea, sendAlertButton}; // Components for the Announcement Menu

@@ -8,9 +8,9 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
-public class CustomButtonAdmin extends KButton
+public class CustomButton extends KButton
 {
-    public CustomButtonAdmin(String text)
+    public CustomButton(String text)
     {
         Border border = new LineBorder(ThemeColors.BLACK, 2, true);
 
