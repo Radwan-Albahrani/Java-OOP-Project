@@ -20,30 +20,19 @@ public class AdminScreen extends JFrame
 
         AdminInterface main_interface = new AdminInterface(getWidth(),getHeight());
         EditUserInfo edit_info = new EditUserInfo(getWidth(),getHeight());
-        
+        ViewProfile view_profile = new ViewProfile(getWidth(), getHeight());
+        ViewStudent view_student  = new ViewStudent(getWidth(), getHeight());
+        ViewInstructors view_Instructors = new ViewInstructors(getWidth(), getHeight());
+        AdminInterface admin_AdminInterface = new AdminInterface(getWidth(), getHeight());
+        ViewAlerts view_Alerts = new ViewAlerts(getWidth(),getHeight());
 
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        add(main_interface);
+        add(edit_info);
+        add(view_profile);
+        add(view_student);
+        add(view_Instructors);
+        add(admin_AdminInterface);
+        add(view_Alerts);
 
 
 

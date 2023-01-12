@@ -1,5 +1,6 @@
 package oop.project;
 
+import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
 
 public final class App
@@ -8,6 +9,6 @@ public final class App
 
     public static void main(String[] args)
     {
-        new LoginScreen();
+        new AdminScreen();
     }
 }
