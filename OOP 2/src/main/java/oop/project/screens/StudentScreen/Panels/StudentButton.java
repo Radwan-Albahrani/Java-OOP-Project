@@ -41,7 +41,7 @@ public class StudentButton extends ThemedPanelStudent
     public StudentButton(JFrame frame, int Width, int Height)
     {
         this.frame = frame;
-        this.setPreferredSize(new Dimension(400, 0));
+        this.setPreferredSize(new Dimension(440, 0));
 
         for (int i = 0; i < ButtonNames.length; i++)
         {
