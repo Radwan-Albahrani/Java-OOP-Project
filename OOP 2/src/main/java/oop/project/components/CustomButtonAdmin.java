@@ -1,12 +1,9 @@
 package oop.project.components;
 
-import com.k33ptoo.components.KButton;
-
 import oop.project.colors.ThemeColors;
 
 import java.awt.Font;
 import java.awt.Dimension;
-import javax.swing.border.*;
 
 public class CustomButtonAdmin extends RoundedButton
 {
