@@ -13,10 +13,6 @@ public class LoginPanel extends ThemedPanelGeneric
 {
     public LoginPanel(JFrame frame, int Width, int Height)
     {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-        this.setPreferredSize(new Dimension((int) (Width / 3), (int) (Height / 2)));
-        this.setSize(getPreferredSize());
-
         // Login Label Setup
         JLabel loginLabel = new TitleLabel("Student Information System");
 
@@ -75,9 +71,22 @@ public class LoginPanel extends ThemedPanelGeneric
         buttonBox.add(registerButton);
 
         // Adding Components to Login Panel
-        this.add(LoginTopBox);
-        this.add(userBox);
-        this.add(passBox);
-        this.add(buttonBox);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.insets = new Insets(0, 100, 0, 100);
+        this.add(LoginTopBox, c);
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.gridy = 1;
+        this.add(userBox, c);
+        c.gridy = 2;
+        this.add(passBox, c);
+        c.gridy = 3;
+        this.add(buttonBox, c);
     }
 }

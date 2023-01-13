@@ -24,7 +24,7 @@ public class AnnouncementPanel extends TransparentPanel
         announcementTextArea.setLineWrap(true);
         announcementTextArea.setBackground(ThemeColors.LIGHT_GRAY);
         announcementTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
-        announcementTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.DARK_GREYISH_BROWN, 5));
+        announcementTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
 
         KButton sendAnnouncementButton = new CustomButton(" Send ");
         sendAnnouncementButton.setPreferredSize(new Dimension(150, 50));

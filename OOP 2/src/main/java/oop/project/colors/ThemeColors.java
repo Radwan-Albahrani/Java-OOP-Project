@@ -27,10 +27,11 @@ public class ThemeColors
     public static final Color YELLOW = new Color(255, 255, 0);
     public static final Color YELLOW_DARK = new Color(255, 255, 0);
     public static final Color LIGHT_GRAY = new Color(211, 211, 211);
-    public static final Color SORT_OF_BROWN = new Color(106, 115, 99, 240);
-    public static final Color SLIGHTLY_BROWN = new Color(24, 28, 31, 240);
+    public static final Color BLUISH_CYAN = new Color(85, 173, 190, 240);
+    public static final Color PINKISH_MAGENTA = new Color(164, 106, 133, 240);
     public static final Color DARK_GREENISH_BROWN = new Color(54, 65, 64, 240);
     public static final Color LIGHT_GREENISH_BROWN = new Color(133, 125, 103);
-    public static final Color DARK_GREYISH_BROWN = new Color(59, 57, 50);
+    public static final Color LIGHT_GREY = new Color(173, 170, 170, 240);
+    public static final Color DARK_GREY = new Color(98, 98, 98, 240);
 
 }
