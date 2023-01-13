@@ -12,8 +12,6 @@ public class ThemedPanelAdmin extends KGradientPanel
     {
         this.setkStartColor(ThemeColors.BLUISH_CYAN);
         this.setkEndColor(ThemeColors.PINKISH_MAGENTA);
-        this.setkGradientFocus(0);
-        this.setkBorderRadius(70);
         this.setkFillBackground(true);
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.setOpaque(false);
