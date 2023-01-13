@@ -15,10 +15,12 @@ public class StudentButton extends ThemedPanelStudent
     Dictionary<String, JPanel> studentPanels;
 
     String[] ButtonNames = {
-            " Main Menu ",
+            " Send Alerts ",
+            " View Announcements",
             " Manage Classes ",
             " View Grades ",
-            " View Alerts ",
+            " Main Menu ",
+            " Select Course ",
             " Register Class ",
             " Drop Class ",
             "Logout"
@@ -54,12 +56,13 @@ public class StudentButton extends ThemedPanelStudent
         mainTitle.setVerticalAlignment(JLabel.CENTER);
         JComponent[] mainButtonComponents = {
                 mainTitle,
-                studentButtons.get("View Alerts"),
+                studentButtons.get("Send Alerts"),
+                studentButtons.get("View Announcements"),
                 studentButtons.get("Manage Classes"),
                 studentButtons.get("View Grades")
         };
 
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 4);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
         JLabel coursesTitle = new JLabel("Manage Courses");
         coursesTitle.setFont(new Font("Arial", Font.BOLD, 34));
         coursesTitle.setForeground(Color.BLACK);
@@ -68,11 +71,12 @@ public class StudentButton extends ThemedPanelStudent
         JComponent[] studentButtonComponents = {
                 coursesTitle,
                 studentButtons.get("Main Menu"),
+                studentButtons.get("Select Course"),
                 studentButtons.get("Register Class"),
                 studentButtons.get("Drop Class"),
         };
 
-        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 4);
+        studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 5);
 
         this.setLayout(new BorderLayout());
         this.add(mainButtonBox, BorderLayout.NORTH);
