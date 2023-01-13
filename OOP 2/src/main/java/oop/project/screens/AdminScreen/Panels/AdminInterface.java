@@ -10,7 +10,7 @@ public class AdminInterface extends TransparentPanel
     {
 
         JLabel GreetingsLabel = new JLabel("Greetings, Admin");
-        GreetingsLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        GreetingsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         this.add(GreetingsLabel);
     }

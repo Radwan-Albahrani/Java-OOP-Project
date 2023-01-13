@@ -26,21 +26,21 @@ public class RegisterPanel extends ThemedPanelGeneric
         // Name and Surname Label and Field Setup
         JLabel firstNameLabel = new JLabel("First Name");
         firstNameLabel.setForeground(Color.WHITE);
-        firstNameLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        firstNameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         firstNameLabel.setHorizontalAlignment(JLabel.CENTER);
         firstNameLabel.setHorizontalTextPosition(JLabel.CENTER);
 
         JTextField firstNameField = new JTextField(15);
-        firstNameField.setFont(new Font("Arial", Font.PLAIN, 20));
+        firstNameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         firstNameField.setHorizontalAlignment(JTextField.CENTER);
 
         JLabel lastNameLabel = new JLabel("Last Name");
         lastNameLabel.setForeground(Color.WHITE);
-        lastNameLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        lastNameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         lastNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
         JTextField lastNameField = new JTextField(15);
-        lastNameField.setFont(new Font("Arial", Font.PLAIN, 20));
+        lastNameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         lastNameField.setHorizontalAlignment(JTextField.CENTER);
 
         JComponent nameBoxComponents[] = {firstNameLabel, firstNameField, lastNameLabel, lastNameField};
@@ -49,19 +49,19 @@ public class RegisterPanel extends ThemedPanelGeneric
         // Username Label and Field Setup
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setForeground(Color.WHITE);
-        usernameLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
         JTextField usernameField = new JTextField(31);
-        usernameField.setFont(new Font("Arial", Font.PLAIN, 20));
+        usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
         usernameField.setEditable(false);
         // Email Label and Field Setup
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setForeground(Color.WHITE);
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
         JTextField emailField = new JTextField(31);
-        emailField.setFont(new Font("Arial", Font.PLAIN, 20));
+        emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         emailField.setHorizontalAlignment(JTextField.CENTER);
         emailField.setEditable(false);
 
@@ -74,18 +74,18 @@ public class RegisterPanel extends ThemedPanelGeneric
         // Password Label and Field Setup
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setForeground(Color.WHITE);
-        passwordLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        passwordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
         JPasswordField passwordField = new JPasswordField(15);
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 20));
+        passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         passwordField.setHorizontalAlignment(JTextField.CENTER);
 
         JLabel confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordLabel.setForeground(Color.WHITE);
-        confirmPasswordLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
         JPasswordField confirmPasswordField = new JPasswordField(10);
-        confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 20));
+        confirmPasswordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         confirmPasswordField.setHorizontalAlignment(JTextField.CENTER);
 
         JComponent passwordBoxComponents[] = {passwordLabel, passwordField, confirmPasswordLabel, confirmPasswordField};
@@ -95,9 +95,9 @@ public class RegisterPanel extends ThemedPanelGeneric
         String[] userTypes = {"", "Student", "Instructor", "Admin"};
         JLabel userTypeLabel = new JLabel("User Type");
         userTypeLabel.setForeground(Color.WHITE);
-        userTypeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        userTypeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         JComboBox<String> userTypeSelection = new JComboBox<>(userTypes);
-        userTypeSelection.setFont(new Font("Arial", Font.PLAIN, 20));
+        userTypeSelection.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         // userTypeSelection.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
         JComponent userTypeBoxComponents[] = {userTypeLabel, userTypeSelection};

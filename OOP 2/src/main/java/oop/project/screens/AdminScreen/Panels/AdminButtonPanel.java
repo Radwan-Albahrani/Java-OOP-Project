@@ -60,7 +60,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         // Title JLabel
 
         JLabel mainTitle = new JLabel("Admin Dashboard");
-        mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
+        mainTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         mainTitle.setForeground(Color.BLACK);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setVerticalAlignment(JLabel.CENTER);
@@ -78,7 +78,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
 
         // Buttons for the student Box
         JLabel editTitle = new JLabel("Edit User Information");
-        editTitle.setFont(new Font("Arial", Font.BOLD, 34));
+        editTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 34));
         editTitle.setForeground(Color.BLACK);
         editTitle.setHorizontalAlignment(JLabel.CENTER);
         editTitle.setVerticalAlignment(JLabel.CENTER);

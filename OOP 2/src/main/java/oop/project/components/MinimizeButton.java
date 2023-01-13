@@ -13,7 +13,7 @@ public class MinimizeButton extends KButton
     public MinimizeButton()
     {
         this.setText("-");
-        this.setFont(new Font("Arial", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.YELLOW);
         this.setkEndColor(ThemeColors.YELLOW_DARK);
         this.setkHoverStartColor(ThemeColors.WHITE);

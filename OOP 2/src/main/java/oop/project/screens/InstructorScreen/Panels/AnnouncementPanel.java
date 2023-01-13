@@ -17,7 +17,7 @@ public class AnnouncementPanel extends TransparentPanel
     {
         // Announcement Panel Setup (Will replace Main Panel when Announcement Button is clicked)
         JLabel announcementLabel = new JLabel("Send an Announcement to your Students");
-        announcementLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        announcementLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         JTextArea SubjectLine = new PromptedTextArea("Enter the subject of your announcement here.");
         SubjectLine.setPreferredSize(new Dimension(1000, 100));

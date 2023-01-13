@@ -15,7 +15,7 @@ public class CustomButton extends KButton
         Border border = new LineBorder(ThemeColors.BLACK, 2, true);
 
         this.setText(text);
-        this.setFont(new Font("Arial", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.LIGHT_GREENISH_BROWN);
         this.setkEndColor(ThemeColors.DARK_GREENISH_BROWN);
         this.setkHoverStartColor(ThemeColors.LIGHT_GREENISH_BROWN);
