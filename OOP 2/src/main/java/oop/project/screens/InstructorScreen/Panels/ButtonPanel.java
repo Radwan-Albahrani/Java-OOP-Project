@@ -62,7 +62,7 @@ public class ButtonPanel extends ThemedPanelInstructor
 
         JLabel mainTitle = new JLabel("Instructor Dashboard");
         mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
-        mainTitle.setForeground(Color.BLACK);
+        mainTitle.setForeground(Color.WHITE);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setVerticalAlignment(JLabel.CENTER);
         // Buttons for the main Box

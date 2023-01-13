@@ -24,7 +24,7 @@ public class AlertsPanel extends TransparentPanel
         alertTextArea.setLineWrap(true);
         alertTextArea.setBackground(ThemeColors.LIGHT_GRAY);
         alertTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
-        alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.DARK_GREYISH_BROWN, 5));
+        alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
 
         KButton sendAlertButton = new CustomButton(" Send ");
         sendAlertButton.setPreferredSize(new Dimension(150, 50));

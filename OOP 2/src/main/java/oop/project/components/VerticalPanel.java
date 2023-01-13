@@ -9,10 +9,17 @@ public class VerticalPanel extends JPanel
     public VerticalPanel(JComponent top, JComponent bottom)
     {
         this.setOpaque(false);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-        this.setPreferredSize(new Dimension(600, 250));
-        this.setSize(getPreferredSize());
-        this.add(top);
-        this.add(bottom);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.insets = new Insets(10, 0, 10, 0);
+        constraints.fill = GridBagConstraints.BOTH;
+        this.add(top, constraints);
+        constraints.insets = new Insets(10, 100, 10, 100);
+        constraints.gridy = 1;
+        this.add(bottom, constraints);
     }
 }

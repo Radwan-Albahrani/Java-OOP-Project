@@ -14,10 +14,6 @@ public class RegisterPanel extends ThemedPanelGeneric
 {
     public RegisterPanel(int Width, int Height)
     {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 10));
-        this.setPreferredSize(new Dimension((int) (Width / 2), (int) (Height / 1.4)));
-        this.setSize(getPreferredSize());
-
         // Register Label Setup
         JLabel registerLabel = new TitleLabel("Registration");
 
@@ -102,7 +98,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         userTypeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         JComboBox<String> userTypeSelection = new JComboBox<>(userTypes);
         userTypeSelection.setFont(new Font("Arial", Font.PLAIN, 20));
-        userTypeSelection.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        // userTypeSelection.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
         JComponent userTypeBoxComponents[] = {userTypeLabel, userTypeSelection};
         Box userTypeBox = AddToBox.addToHorizontalBox(userTypeBoxComponents, 1);
@@ -114,11 +110,25 @@ public class RegisterPanel extends ThemedPanelGeneric
         JPanel bottomPanel = new VerticalPanel(userTypeBox, registerButton);
 
         // Add Components to Register Panel
-        this.add(registerTopFrame);
-        this.add(nameBox);
-        this.add(userAndEmailBox);
-        this.add(authBox);
-        this.add(bottomPanel);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.insets = new Insets(0, 100, 0, 100);
+        this.add(registerTopFrame, c);
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.gridy = 1;
+        this.add(nameBox, c);
+        c.gridy = 2;
+        this.add(userAndEmailBox, c);
+        c.gridy = 3;
+        this.add(authBox, c);
+        c.gridy = 4;
+        this.add(bottomPanel, c);
     }
 
 }

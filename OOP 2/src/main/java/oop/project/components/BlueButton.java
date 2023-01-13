@@ -17,7 +17,7 @@ public class BlueButton extends KButton
         this.setkStartColor(ThemeColors.POWDER_BLUE);
         this.setkEndColor(ThemeColors.MEDIUM_SEA_GREEN);
         this.setkHoverStartColor(ThemeColors.DARK_POWDER_BLUE);
-        this.setkHoverEndColor(ThemeColors.DARK_SEA_GREEN);
+        this.setkHoverEndColor(ThemeColors.MEDIUM_SEA_GREEN);
         this.setkForeGround(ThemeColors.LIGHT_KHAKI);
         this.setkHoverForeGround(ThemeColors.KHAKI);
         this.setkBorderRadius(30);
