@@ -1,7 +1,7 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.colors.ThemeColors;
-import oop.project.components.CustomButton;
+import oop.project.components.CustomButtonInstructor;
+import oop.project.components.PromptedTextArea;
 import oop.project.components.TransparentPanel;
 import oop.project.hooks.AddToBox;
 
@@ -19,14 +19,10 @@ public class AlertsPanel extends TransparentPanel
         JLabel alertLabel = new JLabel("Send Alert to an Admin");
         alertLabel.setFont(new Font("Arial", Font.BOLD, 30));
 
-        JTextArea alertTextArea = new JTextArea();
+        JTextArea alertTextArea = new PromptedTextArea("Enter your alert to the admin here.");
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
-        alertTextArea.setLineWrap(true);
-        alertTextArea.setBackground(ThemeColors.LIGHT_GRAY);
-        alertTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
-        alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
 
-        KButton sendAlertButton = new CustomButton(" Send ");
+        KButton sendAlertButton = new CustomButtonInstructor(" Send ");
         sendAlertButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] alertButtonComponents = {alertLabel, alertTextArea, sendAlertButton}; // Components for the Announcement Menu
