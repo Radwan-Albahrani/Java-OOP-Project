@@ -14,10 +14,6 @@ public class AddToBox
         {
             verticalBox.add(Box.createVerticalStrut(10));
             verticalBox.add(jComponent);
-            if (counter != numberOfComponentsPerColumn - 1)
-            {
-                verticalBox.add(Box.createVerticalStrut(10));
-            }
             counter++;
             if (counter == numberOfComponentsPerColumn)
             {
@@ -38,10 +34,6 @@ public class AddToBox
         for (JComponent jComponent : component)
         {
             horizontalBox.add(jComponent);
-            if (counter != numberOfComponentsPerRow - 1)
-            {
-                horizontalBox.add(Box.createHorizontalStrut(10));
-            }
             counter++;
             if (counter == numberOfComponentsPerRow)
             {
