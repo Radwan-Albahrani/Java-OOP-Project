@@ -117,7 +117,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.insets = new Insets(0, 100, 0, 100);
+        c.insets = new Insets(0, 50, 0, 50);
         this.add(registerTopFrame, c);
         c.weightx = 0.5;
         c.weighty = 0.5;
