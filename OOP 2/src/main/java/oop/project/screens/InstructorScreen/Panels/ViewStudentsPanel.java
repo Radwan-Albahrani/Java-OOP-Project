@@ -11,7 +11,7 @@ public class ViewStudentsPanel extends TransparentPanel
     {
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new JLabel("Here are all the students");
-        viewStudentsLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
     }
 }

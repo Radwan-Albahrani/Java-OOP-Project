@@ -15,7 +15,7 @@ public class CustomButtonAdmin extends KButton
         Border border = new LineBorder(ThemeColors.BLACK, 2, true);
 
         this.setText(text);
-        this.setFont(new Font("Arial", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.BLUISH_CYAN);
         this.setkEndColor(ThemeColors.BLURPLE);
         this.setkHoverStartColor(ThemeColors.BLUISH_CYAN);

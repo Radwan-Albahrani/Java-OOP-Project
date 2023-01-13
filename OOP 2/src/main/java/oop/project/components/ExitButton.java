@@ -13,7 +13,7 @@ public class ExitButton extends KButton
     public ExitButton()
     {
         this.setText("X");
-        this.setFont(new Font("Arial", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.RED);
         this.setkEndColor(ThemeColors.DARK_RED);
         this.setkHoverStartColor(ThemeColors.ORANGE);

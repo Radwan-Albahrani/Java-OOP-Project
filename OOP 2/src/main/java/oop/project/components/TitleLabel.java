@@ -8,7 +8,7 @@ public class TitleLabel extends JLabel
     {
         super(text);
         setForeground(java.awt.Color.WHITE);
-        setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 30));
+        setFont(new java.awt.Font("Trebuchet MS", java.awt.Font.BOLD, 30));
         setHorizontalAlignment(JLabel.CENTER);
         setHorizontalTextPosition(JLabel.CENTER);
     }

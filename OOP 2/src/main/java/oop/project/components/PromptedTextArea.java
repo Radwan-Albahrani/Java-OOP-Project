@@ -14,7 +14,7 @@ public class PromptedTextArea extends JTextArea
     {
         this.setLineWrap(true);
         this.setBackground(ThemeColors.LIGHT_GRAY);
-        this.setFont(new Font("Arial", Font.PLAIN, 30));
+        this.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
         this.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
         this.setText(text);
         this.setForeground(ThemeColors.LIGHT_GREY);

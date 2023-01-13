@@ -17,7 +17,7 @@ public class AlertsPanel extends TransparentPanel
     {
         // Profile Panel Setup (Will replace Main Panel when Profile Button is clicked)
         JLabel alertLabel = new JLabel("Send Alert to an Admin");
-        alertLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        alertLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         JTextArea alertTextArea = new PromptedTextArea("Enter your alert to the admin here.");
         alertTextArea.setPreferredSize(new Dimension(1000, Height - 200));
