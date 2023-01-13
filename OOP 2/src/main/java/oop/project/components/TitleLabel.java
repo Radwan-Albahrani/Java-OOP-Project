@@ -1,14 +1,17 @@
 package oop.project.components;
 
 import javax.swing.JLabel;
+import java.awt.*;
+
+import oop.project.colors.ThemeColors;
 
 public class TitleLabel extends JLabel
 {
     public TitleLabel(String text)
     {
         super(text);
-        setForeground(java.awt.Color.WHITE);
-        setFont(new java.awt.Font("Trebuchet MS", java.awt.Font.BOLD, 30));
+        setForeground(ThemeColors.BLACK);
+        setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         setHorizontalAlignment(JLabel.CENTER);
         setHorizontalTextPosition(JLabel.CENTER);
     }
