@@ -19,7 +19,7 @@ public class CustomButton extends KButton
         this.setkStartColor(ThemeColors.LIGHT_GREENISH_BROWN);
         this.setkEndColor(ThemeColors.DARK_GREENISH_BROWN);
         this.setkHoverStartColor(ThemeColors.LIGHT_GREENISH_BROWN);
-        this.setkHoverEndColor(ThemeColors.PINKISH_MAGENTA);
+        this.setkHoverEndColor(ThemeColors.LIGHT_BROWN);
         this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
         this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
         this.setPreferredSize(new Dimension(400, 50));

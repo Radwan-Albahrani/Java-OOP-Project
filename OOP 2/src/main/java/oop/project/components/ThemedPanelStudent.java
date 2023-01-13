@@ -10,8 +10,8 @@ public class ThemedPanelStudent extends KGradientPanel
 {
     public ThemedPanelStudent()
     {
-        this.setkStartColor(ThemeColors.A_LITTLE_GREY);
-        this.setkEndColor(ThemeColors.FLOOR_GREY);
+        this.setkStartColor(ThemeColors.GREENISH);
+        this.setkEndColor(ThemeColors.LIGHT_BROWN);
         this.setkGradientFocus(0);
         this.setkBorderRadius(70);
         this.setkFillBackground(true);
