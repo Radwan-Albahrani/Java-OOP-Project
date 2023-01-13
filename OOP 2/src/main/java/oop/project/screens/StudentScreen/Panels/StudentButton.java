@@ -45,7 +45,7 @@ public class StudentButton extends ThemedPanelStudent
 
         for (int i = 0; i < ButtonNames.length; i++)
         {
-            studentButtons.put(ButtonNames[i].trim(), new CustomButton(ButtonNames[i]));
+            studentButtons.put(ButtonNames[i].trim(), new CustomButtonStudent(ButtonNames[i]));
         }
         JLabel mainTitle = new JLabel("Student Dashboard");
         mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
