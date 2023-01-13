@@ -18,7 +18,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         JLabel registerLabel = new TitleLabel("Registration");
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("RegisterScreen/RegisterScreenIcon.png", 0.4);
+        JLabel picture = FrameConfig.getPicture("RegisterScreen/RegisterScreenIcon.png", 0.5);
 
         // Register Top Frame Setup
         JPanel registerTopFrame = new VerticalPanel(registerLabel, picture);
