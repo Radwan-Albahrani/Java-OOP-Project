@@ -27,7 +27,7 @@ public class LoginPanel extends ThemedPanelGeneric
         usernameLabel.setForeground(Color.WHITE);
         usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JTextField usernameField = new JTextField(15);
+        RoundedJTextField usernameField = new RoundedJTextField(15);
         usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(JTextField.CENTER);
 
@@ -39,7 +39,7 @@ public class LoginPanel extends ThemedPanelGeneric
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JTextField passwordField = new JPasswordField(15);
+        RoundedJPasswordField passwordField = new RoundedJPasswordField(15);
         passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         passwordField.setHorizontalAlignment(JTextField.CENTER);
 

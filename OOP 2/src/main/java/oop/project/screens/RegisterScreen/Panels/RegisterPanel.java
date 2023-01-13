@@ -30,18 +30,18 @@ public class RegisterPanel extends ThemedPanelGeneric
         firstNameLabel.setHorizontalAlignment(JLabel.CENTER);
         firstNameLabel.setHorizontalTextPosition(JLabel.CENTER);
 
-        JTextField firstNameField = new JTextField(15);
+        RoundedJTextField firstNameField = new RoundedJTextField(15);
         firstNameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        firstNameField.setHorizontalAlignment(JTextField.CENTER);
+        firstNameField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
         JLabel lastNameLabel = new JLabel("Last Name");
         lastNameLabel.setForeground(Color.WHITE);
         lastNameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         lastNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JTextField lastNameField = new JTextField(15);
+        RoundedJTextField lastNameField = new RoundedJTextField(15);
         lastNameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        lastNameField.setHorizontalAlignment(JTextField.CENTER);
+        lastNameField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
         JComponent nameBoxComponents[] = {firstNameLabel, firstNameField, lastNameLabel, lastNameField};
         Box nameBox = AddToBox.addToHorizontalBox(nameBoxComponents, 2);
@@ -51,18 +51,18 @@ public class RegisterPanel extends ThemedPanelGeneric
         usernameLabel.setForeground(Color.WHITE);
         usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JTextField usernameField = new JTextField(31);
+        RoundedJTextField usernameField = new RoundedJTextField(31);
         usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        usernameField.setHorizontalAlignment(JTextField.CENTER);
+        usernameField.setHorizontalAlignment(RoundedJTextField.CENTER);
         usernameField.setEditable(false);
         // Email Label and Field Setup
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setForeground(Color.WHITE);
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JTextField emailField = new JTextField(31);
+        RoundedJTextField emailField = new RoundedJTextField(31);
         emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        emailField.setHorizontalAlignment(JTextField.CENTER);
+        emailField.setHorizontalAlignment(RoundedJTextField.CENTER);
         emailField.setEditable(false);
 
         JComponent userBoxComponents[] = {usernameLabel, usernameField, emailLabel, emailField};
@@ -76,17 +76,17 @@ public class RegisterPanel extends ThemedPanelGeneric
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JPasswordField passwordField = new JPasswordField(15);
+        RoundedJPasswordField passwordField = new RoundedJPasswordField(15);
         passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        passwordField.setHorizontalAlignment(JTextField.CENTER);
+        passwordField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
         JLabel confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordLabel.setForeground(Color.WHITE);
         confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
-        JPasswordField confirmPasswordField = new JPasswordField(10);
+        RoundedJPasswordField confirmPasswordField = new RoundedJPasswordField(10);
         confirmPasswordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        confirmPasswordField.setHorizontalAlignment(JTextField.CENTER);
+        confirmPasswordField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
         JComponent passwordBoxComponents[] = {passwordLabel, passwordField, confirmPasswordLabel, confirmPasswordField};
         Box authBox = AddToBox.addToHorizontalBox(passwordBoxComponents, 2);
@@ -117,7 +117,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.insets = new Insets(0, 100, 0, 100);
+        c.insets = new Insets(0, 50, 0, 50);
         this.add(registerTopFrame, c);
         c.weightx = 0.5;
         c.weighty = 0.5;

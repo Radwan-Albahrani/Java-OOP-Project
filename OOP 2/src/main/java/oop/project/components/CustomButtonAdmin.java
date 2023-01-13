@@ -8,11 +8,10 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
-public class CustomButtonAdmin extends KButton
+public class CustomButtonAdmin extends RoundedButton
 {
     public CustomButtonAdmin(String text)
     {
-        Border border = new LineBorder(ThemeColors.BLACK, 2, true);
 
         this.setText(text);
         this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -25,6 +24,6 @@ public class CustomButtonAdmin extends KButton
         this.setPreferredSize(new Dimension(400, 50));
         this.setMinimumSize(getPreferredSize());
         this.setMaximumSize(getPreferredSize());
-        this.setBorder(border);
+        this.setkBorderRadius(30);
     }
 }
