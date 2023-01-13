@@ -23,6 +23,7 @@ public class ViewAlerts extends TransparentPanel
         alertTextArea.setBackground(ThemeColors.LIGHT_GRAY);
         alertTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
         alertTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
+        alertTextArea.setEditable(false);
 
         KButton refreshButton = new CustomButton(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));

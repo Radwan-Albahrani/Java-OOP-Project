@@ -1,7 +1,7 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.colors.ThemeColors;
-import oop.project.components.CustomButton;
+import oop.project.components.CustomButtonInstructor;
+import oop.project.components.PromptedTextArea;
 import oop.project.components.TransparentPanel;
 import oop.project.hooks.AddToBox;
 
@@ -19,17 +19,16 @@ public class AnnouncementPanel extends TransparentPanel
         JLabel announcementLabel = new JLabel("Send an Announcement to your Students");
         announcementLabel.setFont(new Font("Arial", Font.BOLD, 30));
 
-        JTextArea announcementTextArea = new JTextArea();
-        announcementTextArea.setPreferredSize(new Dimension(1000, Height - 200));
-        announcementTextArea.setLineWrap(true);
-        announcementTextArea.setBackground(ThemeColors.LIGHT_GRAY);
-        announcementTextArea.setFont(new Font("Arial", Font.PLAIN, 30));
-        announcementTextArea.setBorder(BorderFactory.createLineBorder(ThemeColors.LIGHT_GREY, 5));
+        JTextArea SubjectLine = new PromptedTextArea("Enter the subject of your announcement here.");
+        SubjectLine.setPreferredSize(new Dimension(1000, 100));
 
-        KButton sendAnnouncementButton = new CustomButton(" Send ");
+        JTextArea announcementTextArea = new PromptedTextArea("Enter your announcement here.");
+        announcementTextArea.setPreferredSize(new Dimension(1000, Height - 300));
+
+        KButton sendAnnouncementButton = new CustomButtonInstructor(" Send ");
         sendAnnouncementButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] announcementComponents = {announcementLabel, announcementTextArea, sendAnnouncementButton}; // Components for the Announcement Menu
+        JComponent[] announcementComponents = {announcementLabel, SubjectLine, announcementTextArea, sendAnnouncementButton}; // Components for the Announcement Menu
         Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1);
 
         this.add(announcementBox);
