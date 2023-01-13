@@ -6,9 +6,9 @@ public class ThemeColors
 {
     public static final Color BLACK = new Color(0, 0, 0, 240);
     public static final Color WHITE = new Color(255, 255, 255);
-    public static final Color POWDER_BLUE = new Color(176, 224, 230);
+    public static final Color POWDER_BLUE = new Color(176, 224, 230, 240);
     public static final Color DARK_POWDER_BLUE = new Color(135, 206, 235);
-    public static final Color MEDIUM_SEA_GREEN = new Color(60, 179, 113);
+    public static final Color MEDIUM_SEA_GREEN = new Color(60, 179, 113, 240);
     public static final Color DARK_SEA_GREEN = new Color(143, 188, 143);
     public static final Color KHAKI = new Color(240, 230, 140);
     public static final Color LIGHT_KHAKI = new Color(255, 245, 155);
