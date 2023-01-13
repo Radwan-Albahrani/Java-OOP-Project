@@ -55,7 +55,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         // Add all the buttons to the dictionary
         for (int i = 0; i < All_buttons.length; i++)
         {
-            myButtons.put(All_buttons[i].trim(), new CustomButton(All_buttons[i]));
+            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i]));
         }
         // Title JLabel
 
