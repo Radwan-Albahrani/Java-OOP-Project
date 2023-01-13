@@ -20,14 +20,16 @@ public class StudentScreen extends JFrame
         JPanel mainPanel = new StudentMain(getWidth(), getHeight());
         KGradientPanel buttonPanel = new StudentButton(this, getWidth(), getHeight());
         JPanel registerClass = new registerClass(getWidth(), getHeight());
-        JPanel viewAlerts = new ViewAlerts(getWidth(), getHeight());
+        JPanel sendAlerts = new SendAlerts(getWidth(), getHeight());
         JPanel dropClass = new DropClass(getWidth(), getHeight());
         JPanel viewGrades = new ViewGrades(getWidth(), getHeight());
+        JPanel viewAnnouncements = new ViewAnnouncements(getWidth(), getHeight());
 
         Dictionary<String, JPanel> panels = new Hashtable<String, JPanel>();
         panels.put("main", mainPanel);
         panels.put("registerClass", registerClass);
-        panels.put("viewAlerts", viewAlerts);
+        panels.put("sendAlerts", sendAlerts);
+        panels.put("viewAnnouncements", viewAnnouncements);
         panels.put("dropClass", dropClass);
         panels.put("viewGrades", viewGrades);
         panels.put("button", buttonPanel);
