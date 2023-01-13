@@ -23,9 +23,9 @@ public class LoginPanel extends ThemedPanelGeneric
         JPanel LoginTopBox = new VerticalPanel(loginLabel, picture);
 
         // Username Label and Field Setup
-        JLabel usernameLabel = new JLabel("Username: ");
+        JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setForeground(Color.WHITE);
-        usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
         JTextField usernameField = new JTextField(15);
         usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -37,7 +37,7 @@ public class LoginPanel extends ThemedPanelGeneric
         // Password Label and Field Setup
         JLabel passwordLabel = new JLabel("Password: ");
         passwordLabel.setForeground(Color.WHITE);
-        passwordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        passwordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
 
         JTextField passwordField = new JPasswordField(15);
         passwordField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));

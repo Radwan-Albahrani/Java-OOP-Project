@@ -29,8 +29,8 @@ public class LoginScreen extends JFrame
         constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(getHeight() / 4, (int) (getWidth() / 3), getHeight() / 4,
-                (int) (getWidth() / 3));
+        constraints.insets = new Insets(getHeight() / 4, (int) (getWidth() / 3.5), getHeight() / 4,
+                (int) (getWidth() / 3.5));
         constraints.fill = GridBagConstraints.BOTH;
         loginPanelWrapper.setOpaque(false);
         loginPanelWrapper.setLayout(new GridBagLayout());
