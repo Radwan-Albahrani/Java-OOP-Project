@@ -13,7 +13,7 @@ public class DropClass extends TransparentPanel
     public DropClass(int Width, int Height)
     {
         JLabel dropClassLabel = new JLabel("Drop Class");
-        dropClassLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        dropClassLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(dropClassLabel);
 
         JComboBox dropClassComboBox = new JComboBox();

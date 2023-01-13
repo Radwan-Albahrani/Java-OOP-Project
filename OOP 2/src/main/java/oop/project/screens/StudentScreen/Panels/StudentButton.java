@@ -50,7 +50,7 @@ public class StudentButton extends ThemedPanelStudent
             studentButtons.put(ButtonNames[i].trim(), new CustomButtonStudent(ButtonNames[i]));
         }
         JLabel mainTitle = new JLabel("Student Dashboard");
-        mainTitle.setFont(new Font("Arial", Font.BOLD, 40));
+        mainTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         mainTitle.setForeground(Color.BLACK);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setVerticalAlignment(JLabel.CENTER);
@@ -64,7 +64,7 @@ public class StudentButton extends ThemedPanelStudent
 
         mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
         JLabel coursesTitle = new JLabel("Manage Courses");
-        coursesTitle.setFont(new Font("Arial", Font.BOLD, 34));
+        coursesTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 34));
         coursesTitle.setForeground(Color.BLACK);
         coursesTitle.setHorizontalAlignment(JLabel.CENTER);
         coursesTitle.setVerticalAlignment(JLabel.CENTER);

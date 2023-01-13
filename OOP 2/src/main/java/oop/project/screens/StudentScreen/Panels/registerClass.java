@@ -13,7 +13,7 @@ public class registerClass extends TransparentPanel
     public registerClass(int Width, int Height)
     {
         JLabel registerClassLabel = new JLabel("Register ");
-        registerClassLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        registerClassLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         KButton registerClassButton = new BlueButton(" Register Class");
         registerClassButton.setPreferredSize(new Dimension(150, 50));

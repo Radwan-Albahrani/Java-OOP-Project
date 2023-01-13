@@ -13,7 +13,7 @@ public class SendAlerts extends TransparentPanel
     public SendAlerts(int Width, int Height)
     {
         JLabel viewAlertsLabel = new JLabel("Alerts");
-        viewAlertsLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        viewAlertsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         KButton SendAlertsButton = new BlueButton(" Send Alerts");
         SendAlertsButton.setPreferredSize(new Dimension(150, 50));

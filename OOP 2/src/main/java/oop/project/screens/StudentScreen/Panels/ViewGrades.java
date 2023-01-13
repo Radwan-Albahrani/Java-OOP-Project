@@ -13,7 +13,7 @@ public class ViewGrades extends TransparentPanel
     public ViewGrades(int Width, int Height)
     {
         JLabel ViewGradesLabel = new JLabel("View Grades");
-        ViewGradesLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        ViewGradesLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         KButton ViewGradesButton = new BlueButton(" View Grades");
         ViewGradesButton.setPreferredSize(new Dimension(150, 50));
