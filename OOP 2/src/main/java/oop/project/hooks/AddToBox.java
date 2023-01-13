@@ -46,4 +46,28 @@ public class AddToBox
         return verticalBox;
     }
 
+    public static Box addToHorizontalBoxWithSpace(JComponent[] component, int numberOfComponentsPerColumn)
+    {
+        int counter = 0;
+        Box horizontalBoxWithSpace = Box.createHorizontalBox();
+        Box verticalBoxWithSpace = Box.createVerticalBox();
+        for (JComponent jComponent : component)
+        {
+            verticalBoxWithSpace.add(Box.createVerticalStrut(10));
+            verticalBoxWithSpace.add(jComponent);
+            if (counter != numberOfComponentsPerColumn - 1)
+            {
+                verticalBoxWithSpace.add(Box.createVerticalStrut(10));
+            }
+            counter++;
+            if (counter == numberOfComponentsPerColumn)
+            {
+                horizontalBoxWithSpace.add(verticalBoxWithSpace);
+                horizontalBoxWithSpace.add(Box.createHorizontalStrut(10));
+                verticalBoxWithSpace = Box.createVerticalBox();
+                counter = 0;
+            }
+        }
+        return horizontalBoxWithSpace;
+    }
 }

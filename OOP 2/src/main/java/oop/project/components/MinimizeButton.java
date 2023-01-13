@@ -20,8 +20,7 @@ public class MinimizeButton extends KButton
         this.setkHoverEndColor(ThemeColors.LIGHT_GRAY);
         this.setkForeGround(ThemeColors.BLACK);
         this.setkHoverForeGround(ThemeColors.BLACK);
-        this.setkBorderRadius(30);
         this.setPreferredSize(new Dimension(50, 50));
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
     }
 }

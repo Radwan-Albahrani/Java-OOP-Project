@@ -14,7 +14,6 @@ import oop.project.screens.InstructorScreen.InstructorScreen;
 
 import java.util.*;
 
-// TODO: use buttonPanel.remove() to remove the current panel and add the new one with an if statement assuming the button is clicked
 public class ButtonHandlerInstructor implements ActionListener
 {
     // Variables needed for the handler
