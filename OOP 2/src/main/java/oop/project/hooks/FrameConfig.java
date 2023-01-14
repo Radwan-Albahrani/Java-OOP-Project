@@ -13,7 +13,7 @@ public class FrameConfig
         // Frame Setup
         frame.setTitle(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1920, 1080);
+        frame.setSize(1600, 900);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
