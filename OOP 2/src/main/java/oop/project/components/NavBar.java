@@ -17,8 +17,8 @@ public class NavBar extends JPanel
 
         // Custom exit and minimize buttons
         JButton exitButton = new ExitButton();
-        exitButton.setSize(25, 25);
-        exitButton.setLocation(screenWidth - 25, 0);
+        exitButton.setSize(45, 24);
+        exitButton.setLocation(screenWidth - 45, 0);
         exitButton.setBorderPainted(false);
         exitButton.setContentAreaFilled(false);
         exitButton.setFocusPainted(false);
@@ -30,11 +30,11 @@ public class NavBar extends JPanel
         });
 
         JButton minimizeButton = new MinimizeButton();
-        minimizeButton.setSize(25, 25);
-        minimizeButton.setLocation(screenWidth - 50, 0);
+        minimizeButton.setSize(45, 24);
+        minimizeButton.setLocation(screenWidth - 91, 0);
         minimizeButton.setBorderPainted(false);
         minimizeButton.setContentAreaFilled(false);
-        minimizeButton.setFocusPainted(false);
+        minimizeButton.setFocusPainted(false); 
         minimizeButton.setOpaque(false);
 
         minimizeButton.addActionListener((ActionEvent e) ->
