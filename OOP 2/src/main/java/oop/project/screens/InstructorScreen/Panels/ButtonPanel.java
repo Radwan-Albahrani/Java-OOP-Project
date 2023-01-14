@@ -30,15 +30,15 @@ public class ButtonPanel extends ThemedPanelInstructor
     };
 
     String[] ButtonIconLocations = {
-        "/images/InstructorScreen/MainMenu.png",
-        "/images/InstructorScreen/Announcements.png",
-        "/images/InstructorScreen/Students.png",
-        "/images/InstructorScreen/Students.png",
-        "/images/InstructorScreen/Students.png",
-        "/images/InstructorScreen/ViewProfile.png",
-        "/images/InstructorScreen/AlertAdmin.png",
-        "/images/InstructorScreen/Logout.png"
-};
+            "InstructorScreen/MainMenu.png",
+            "InstructorScreen/Announcements.png",
+            "InstructorScreen/Students.png",
+            "InstructorScreen/Students.png",
+            "InstructorScreen/Students.png",
+            "InstructorScreen/ViewProfile.png",
+            "InstructorScreen/AlertAdmin.png",
+            "InstructorScreen/Logout.png"
+    };
 
     // Variables
     JFrame frame;

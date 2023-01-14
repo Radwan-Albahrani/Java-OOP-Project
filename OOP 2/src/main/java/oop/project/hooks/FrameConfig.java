@@ -48,4 +48,12 @@ public class FrameConfig
         JLabel picture = new JLabel(new ImageIcon(scaledImage));
         return picture;
     }
+
+    public static JLabel getPictureWithSize(String path, int width, int height)
+    {
+        Image image = new ImageIcon(App.Path + path).getImage();
+        Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        JLabel picture = new JLabel(new ImageIcon(scaledImage));
+        return picture;
+    }
 }
