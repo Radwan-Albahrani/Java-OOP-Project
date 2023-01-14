@@ -32,9 +32,9 @@ public class ButtonPanel extends ThemedPanelInstructor
     String[] ButtonIconLocations = {
             "InstructorScreen/MainMenu.png",
             "InstructorScreen/Announcements.png",
-            "InstructorScreen/Students.png",
-            "InstructorScreen/Students.png",
-            "InstructorScreen/Students.png",
+            "InstructorScreen/ManageStudents.png",
+            "InstructorScreen/ViewStudents.png",
+            "InstructorScreen/EditGrades.png",
             "InstructorScreen/ViewProfile.png",
             "InstructorScreen/AlertAdmin.png",
             "InstructorScreen/Logout.png"
@@ -108,5 +108,4 @@ public class ButtonPanel extends ThemedPanelInstructor
         this.add(mainButtonBox, BorderLayout.NORTH);
         this.add(MainButtons.get("Logout"), BorderLayout.SOUTH);
     }
-
 }
