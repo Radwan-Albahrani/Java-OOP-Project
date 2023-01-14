@@ -48,6 +48,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
+            
             FrameConfig.setBackground(frame, "InstructorScreen/background.png");
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }

@@ -1,33 +1,27 @@
 package oop.project.components;
 
-import com.k33ptoo.components.KButton;
-
-import oop.project.colors.ThemeColors;
-
-import java.awt.Font;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
 import java.awt.Image;
+import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
 
-public class ExitButton extends KButton
+public class ExitButton extends JButton
 {
     public ExitButton()
     {
         ImageIcon img = new ImageIcon(getClass().getResource("/images/ExitIcon.png"));
-        Image image = img.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        ImageIcon imgresized = new ImageIcon(newimg);  // transform it back
+        Image image = img.getImage(); 
+        Image newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon imgresized = new ImageIcon(newimg);
+
+        ImageIcon imgHover = new ImageIcon(getClass().getResource("/images/ExitHoverIcon.png"));
+        Image imageHover = imgHover.getImage(); 
+        Image newimgHover =  imageHover.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon imgHoverresized = new ImageIcon(newimgHover);
 
         this.setIcon(imgresized);
-        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        this.setkStartColor(ThemeColors.RED);
-        this.setkEndColor(ThemeColors.DARK_RED);
-        this.setkHoverStartColor(ThemeColors.ORANGE);
-        this.setkHoverEndColor(ThemeColors.DARK_ORANGE);
-        this.setkForeGround(ThemeColors.BLACK);
-        this.setkHoverForeGround(ThemeColors.BLACK);;
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        this.setRolloverIcon(imgHoverresized);
+        this.setBorder(BorderFactory.createEmptyBorder());
+
     }
 }
