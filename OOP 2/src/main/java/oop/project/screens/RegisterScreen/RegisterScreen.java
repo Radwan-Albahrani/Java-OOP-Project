@@ -30,7 +30,7 @@ public class RegisterScreen extends JFrame
         constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(getHeight() / 8, getWidth() / 3, getHeight() / 8, getWidth() / 3);
+        constraints.insets = new Insets(getHeight() / 12, getWidth() / 3, getHeight() / 12, getWidth() / 3);
         constraints.fill = GridBagConstraints.BOTH;
         wrapper.add(registerPanel, constraints);
 
