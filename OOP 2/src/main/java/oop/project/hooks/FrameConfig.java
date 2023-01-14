@@ -13,7 +13,6 @@ public class FrameConfig
         // Frame Setup
         frame.setTitle(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
