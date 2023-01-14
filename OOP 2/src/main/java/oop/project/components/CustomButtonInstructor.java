@@ -32,8 +32,8 @@ public class CustomButtonInstructor extends RoundedButton
         this.setLayout(new BorderLayout());
         this.add(icon, BorderLayout.WEST);
         this.setText(text);
-
         this.setIconTextGap(30);
+        
         this.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         this.setkStartColor(ThemeColors.LIGHT_GREY);
         this.setkEndColor(ThemeColors.DARK_GREY);
