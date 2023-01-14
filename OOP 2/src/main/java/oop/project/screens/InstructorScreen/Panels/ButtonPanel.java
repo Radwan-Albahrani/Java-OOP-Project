@@ -87,7 +87,7 @@ public class ButtonPanel extends ThemedPanelInstructor
         // Add the buttons to the mainButtonBox
         mainButtonBox = AddToBox.addToHorizontalBoxWithSpace(mainButtonComponents, 5);
 
-        JLabel studentTitle = new JLabel("Edit Student Grades");
+        JLabel studentTitle = new JLabel("Manage Students");
         studentTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         studentTitle.setForeground(Color.BLACK);
         studentTitle.setHorizontalAlignment(JLabel.CENTER);
