@@ -1,8 +1,6 @@
 package oop.project.hooks;
 
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Toolkit;
 
 import javax.swing.*;
 
@@ -14,12 +12,9 @@ public class FrameConfig
     {
         // Frame Setup
         frame.setTitle(title);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        frame.setSize(screenWidth, screenHeight);
+        frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
