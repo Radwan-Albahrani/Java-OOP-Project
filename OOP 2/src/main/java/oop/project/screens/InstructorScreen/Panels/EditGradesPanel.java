@@ -12,5 +12,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel editGradesLabel = new JLabel("Edit Grades");
         editGradesLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(editGradesLabel);
+
+        
     }
 }
