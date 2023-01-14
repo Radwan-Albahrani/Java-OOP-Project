@@ -26,7 +26,8 @@ public class CustomButtonInstructor extends RoundedButton
 
     public CustomButtonInstructor(String text, String iconLocation)
     {
-        JLabel icon = FrameConfig.getPictureWithSize(iconLocation, 40, 40);
+        Image image = FrameConfig.getPictureWithSize(iconLocation, 40, 40);
+        JLabel icon = new JLabel(new ImageIcon(image));
 
         this.setLayout(new BorderLayout());
         this.add(icon, BorderLayout.WEST);
