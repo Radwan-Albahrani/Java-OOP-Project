@@ -19,6 +19,7 @@ public class StudentScreen extends JFrame
 
         JPanel mainPanel = new StudentMain(getWidth(), getHeight());
         KGradientPanel buttonPanel = new StudentButton(this, getWidth(), getHeight());
+        JPanel profile = new ProfileStudent(getWidth(), getHeight());
         JPanel registerClass = new registerClass(getWidth(), getHeight());
         JPanel sendAlerts = new SendAlerts(getWidth(), getHeight());
         JPanel dropClass = new DropClass(getWidth(), getHeight());
@@ -27,6 +28,7 @@ public class StudentScreen extends JFrame
 
         Dictionary<String, JPanel> panels = new Hashtable<String, JPanel>();
         panels.put("main", mainPanel);
+        panels.put("profile", profile);
         panels.put("registerClass", registerClass);
         panels.put("sendAlerts", sendAlerts);
         panels.put("viewAnnouncements", viewAnnouncements);

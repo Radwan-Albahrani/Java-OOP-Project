@@ -16,6 +16,7 @@ public class StudentButton extends ThemedPanelStudent
 
     String[] ButtonNames = {
             " Send Alerts ",
+            "View Profile",
             " View Announcements",
             " Manage Classes ",
             " View Grades ",
@@ -57,6 +58,7 @@ public class StudentButton extends ThemedPanelStudent
         JComponent[] mainButtonComponents = {
                 mainTitle,
                 studentButtons.get("Send Alerts"),
+                studentButtons.get("View Profile"),
                 studentButtons.get("View Announcements"),
                 studentButtons.get("Manage Classes"),
                 studentButtons.get("View Grades")
