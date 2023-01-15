@@ -42,11 +42,12 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         JPanel registerTopFrame = new VerticalPanel(profileLabel, picture);
 
         // Name and Surname Label and Field Setup
-        JLabel sexLabel = new JLabel("Sex");
+        JLabel sexLabel = new JLabel("Sex               ");
         sexLabel.setForeground(Color.WHITE);
         sexLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        sexLabel.setHorizontalAlignment(JLabel.CENTER);
-        sexLabel.setHorizontalTextPosition(JLabel.CENTER);
+        sexLabel.setHorizontalAlignment(JLabel.LEFT);
+        sexLabel.setHorizontalTextPosition(JLabel.LEFT);
+        sexLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 
         String[] sexTypes = {"", "Male", "Female"};
         JComboBox<String> sexType = new JComboBox<>(sexTypes);
@@ -55,12 +56,14 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         JLabel birthdayLabel = new JLabel("Birthday");
         birthdayLabel.setForeground(Color.WHITE);
         birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        birthdayLabel.setHorizontalAlignment(JLabel.CENTER);
+        birthdayLabel.setHorizontalAlignment(JLabel.LEFT);
+        birthdayLabel.setHorizontalTextPosition(JLabel.LEFT);
+        birthdayLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 
         DatePicker birthdayField = new DatePicker();
 
-        JComponent nameBoxComponents[] = {sexLabel, sexType, birthdayLabel, birthdayField};
-        Box nameBox = AddToBox.addToHorizontalBox(nameBoxComponents, 2);
+        JComponent birthComponents[] = {sexLabel, sexType, birthdayLabel, birthdayField};
+        Box birthBox = AddToBox.addToHorizontalBox(birthComponents, 2);
 
         // Username Label and Field Setup
         JLabel MajorLabel = new JLabel("Major");
@@ -102,9 +105,9 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         phoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         phoneField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
-        JComponent userBoxComponents[] = {MajorLabel, MajorComboBox, PersonalEmailLabel, emailField, occupation,
+        JComponent professionalBoxComponents[] = {MajorLabel, MajorComboBox, PersonalEmailLabel, emailField, occupation,
                 occupationField, phoneLabel, phoneField};
-        Box userAndEmailBox = AddToBox.addToVerticalBox(userBoxComponents, 1);
+        Box professionalBox = AddToBox.addToVerticalBox(professionalBoxComponents, 1);
 
         // Add components
         components.add(sexType);
@@ -129,9 +132,9 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.gridy = 1;
-        this.add(nameBox, c);
+        this.add(birthBox, c);
         c.gridy = 2;
-        this.add(userAndEmailBox, c);
+        this.add(professionalBox, c);
         c.gridy = 3;
         c.insets = new Insets(10, 100, 0, 100);
         this.add(registerButton, c);
