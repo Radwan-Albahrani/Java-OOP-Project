@@ -40,7 +40,7 @@ public class EditGradesPanel extends TransparentPanel
         IDLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         IDLabel.setHorizontalAlignment(JLabel.CENTER);
         IDLabel.setHorizontalTextPosition(JLabel.CENTER);
-        IDLabel.setAlignmentX(LEFT_ALIGNMENT);
+        IDLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         JComboBox<String> IDJComboBoxList = new JComboBox<String>();
         IDJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -60,7 +60,7 @@ public class EditGradesPanel extends TransparentPanel
         // TODO: Combine First and Last Name into one field
         JLabel nameLabel = new JLabel("Name: ");
         nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        nameLabel.setAlignmentX(LEFT_ALIGNMENT);
+        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
