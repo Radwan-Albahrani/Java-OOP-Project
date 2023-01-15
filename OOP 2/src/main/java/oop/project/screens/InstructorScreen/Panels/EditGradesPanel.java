@@ -26,28 +26,29 @@ public class EditGradesPanel extends TransparentPanel
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("InstructorScreen/DefaultProfilePicture.png", 0.1);
+        JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.15);
+        picture.setAlignmentX(CENTER_ALIGNMENT);
 
         // ID
         //TODO: ID is a list of the students in the class
-        JLabel IDLabel = new JLabel("ID: ");
-        IDLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        IDLabel.setHorizontalAlignment(JLabel.CENTER);
-        IDLabel.setHorizontalTextPosition(JLabel.CENTER);
-        IDLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        JLabel idLabel = new JLabel("ID: ");
+        idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        idLabel.setHorizontalAlignment(JLabel.CENTER);
+        idLabel.setHorizontalTextPosition(JLabel.CENTER);
+        idLabel.setAlignmentX(RIGHT_ALIGNMENT);
 
-        JComboBox<String> IDJComboBoxList = new JComboBox<String>();
-        IDJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        IDJComboBoxList.setMinimumSize(new Dimension(1000, 50));
-        IDJComboBoxList.setMaximumSize(new Dimension(1000, 50));
-        IDJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
-        IDJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
+        JComboBox<String> idJComboBoxList = new JComboBox<String>();
+        idJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        idJComboBoxList.setMinimumSize(new Dimension(1000, 50));
+        idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
+        idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
+        idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
         for (int i = 0; i < 6; i++)
         {
-            IDJComboBoxList.addItem("" + i);
+            idJComboBoxList.addItem("" + i);
         }
 
-        JComponent[] idComponents = {IDLabel, IDJComboBoxList};
+        JComponent[] idComponents = {idLabel, idJComboBoxList};
         idBox = AddToBox.addToHorizontalBox(idComponents, 1);
 
         // Name Setup
@@ -59,8 +60,8 @@ public class EditGradesPanel extends TransparentPanel
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         nameField.setEditable(false);
-        nameField.setMinimumSize(new Dimension(1000, 50));
-        nameField.setMaximumSize(new Dimension(1000, 50));
+        nameField.setMinimumSize(new Dimension(500, 50));
+        nameField.setMaximumSize(new Dimension(500, 50));
         nameField.setAlignmentX(RIGHT_ALIGNMENT);
 
         JComponent[] nameComponents = {nameLabel, nameField};
