@@ -42,25 +42,28 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         JPanel registerTopFrame = new VerticalPanel(profileLabel, picture);
 
         // Name and Surname Label and Field Setup
-        JLabel sexLabel = new JLabel("Sex               ");
+        JLabel sexLabel = new JLabel("Sex");
         sexLabel.setForeground(Color.WHITE);
         sexLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         sexLabel.setHorizontalAlignment(JLabel.LEFT);
         sexLabel.setHorizontalTextPosition(JLabel.LEFT);
-        sexLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
+        sexLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
         String[] sexTypes = {"", "Male", "Female"};
         JComboBox<String> sexType = new JComboBox<>(sexTypes);
         sexType.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        sexType.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
         JLabel birthdayLabel = new JLabel("Birthday");
         birthdayLabel.setForeground(Color.WHITE);
         birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         birthdayLabel.setHorizontalAlignment(JLabel.LEFT);
         birthdayLabel.setHorizontalTextPosition(JLabel.LEFT);
-        birthdayLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
+        birthdayLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
         DatePicker birthdayField = new DatePicker();
+        birthdayField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        birthdayField.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
         JComponent birthComponents[] = {sexLabel, sexType, birthdayLabel, birthdayField};
         Box birthBox = AddToBox.addToHorizontalBox(birthComponents, 2);
