@@ -13,15 +13,8 @@ import oop.project.hooks.*;
 
 public class EditGradesPanel extends TransparentPanel
 {
-    List<String> info = new ArrayList<>();
-    JPanel wrapper;
-    List<JComponent> components = new ArrayList<>();
 
-    public void setWrapper(JPanel wrapper, JFrame frame)
-    {
-        this.wrapper = wrapper;
-    }
-
+//TODO: Could add a next and a back button to go through the students
     public EditGradesPanel(int Width, int Height)
     {
         Box idBox;
@@ -36,6 +29,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel picture = FrameConfig.getPicture("InstructorScreen/DefaultProfilePicture.png", 0.1);
 
         // ID
+        //TODO: ID is a list of the students in the class
         JLabel IDLabel = new JLabel("ID: ");
         IDLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         IDLabel.setHorizontalAlignment(JLabel.CENTER);
