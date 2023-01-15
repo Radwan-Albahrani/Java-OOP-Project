@@ -6,24 +6,24 @@ import oop.project.hooks.*;
 import javax.swing.*;
 import java.awt.*;
 
-
-/* TODO: Disable ability to move columns 
- *       Get Data from database
+/* View Students Panel
+TODO:
+      Get Data from database
 */
 
-  
 public class ViewStudentsPanel extends TransparentPanel
 {
     public ViewStudentsPanel(int Width, int Height)
     {
         Box viewStudentsBox;
-        
+
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new JLabel("Here are all the students");
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
-        String[] columnNames = {"ID", "First Name", "Last Name" , "Quiz Grade", "Midterm Grade", "Final Grade", "Project Grade", "Total Grade"};
+        String[] columnNames = {"ID", "First Name", "Last Name", "Quiz Grade", "Midterm Grade", "Final Grade",
+                "Project Grade", "Total Grade"};
 
         Object[][] data = {
                 {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
@@ -32,10 +32,11 @@ public class ViewStudentsPanel extends TransparentPanel
                 {4, "Jane", "White", 20, 25, 40, 15, 100},
                 {5, "Joe", "Brown", 20, 25, 40, 15, 100}
         };
-        
+
         JTable table = new JTable(data, columnNames)
         {
-            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+            public boolean editCellAt(int row, int column, java.util.EventObject e)
+            {
                 return false;
             }
         };
@@ -44,11 +45,10 @@ public class ViewStudentsPanel extends TransparentPanel
         table.setRowHeight(40);
         table.setCellSelectionEnabled(false);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+        table.getTableHeader().setReorderingAllowed(false);
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 100));
-  
 
         JComponent[] components = {viewStudentsLabel, scrollPaneTable};
         viewStudentsBox = AddToBox.addToHorizontalBoxWithSpace(components, 2);
