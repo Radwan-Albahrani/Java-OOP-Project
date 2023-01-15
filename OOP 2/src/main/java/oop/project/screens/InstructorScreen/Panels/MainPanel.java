@@ -15,7 +15,7 @@ public class MainPanel extends TransparentPanel
     public MainPanel(int Width, int Height)
     {
         boolean inCourse = false;
-
+        
         // TODO: Change to actual name
         // TODO: if the instructor is not in a course, show a message saying they are not in a course
         JLabel welcomeLabel = new TitleLabel("Welcome, [Name Here]");
@@ -34,6 +34,7 @@ public class MainPanel extends TransparentPanel
 
             ButtonHandler handler = new ButtonHandler();
             registerButton.addActionListener(handler);
+           
 
         }
         else //If the instructor is in a course
@@ -53,6 +54,7 @@ public class MainPanel extends TransparentPanel
             this.add(courseLabel);
         }
         
+        
     }
 
     private class ButtonHandler implements ActionListener
@@ -60,9 +62,12 @@ public class MainPanel extends TransparentPanel
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            if (e.getActionCommand().equals("Register Course"))
+            String buttonClicked = e.getActionCommand().trim();
+
+            if (buttonClicked.equals("Register Course"))
             {
-                new RegisterCoursePanel();
+                System.err.println("Register Course button clicked");
+
             }
         }
     }

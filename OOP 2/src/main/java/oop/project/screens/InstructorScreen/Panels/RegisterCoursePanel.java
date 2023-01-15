@@ -3,6 +3,7 @@ package oop.project.screens.InstructorScreen.Panels;
 import oop.project.components.TransparentPanel;
 import java.awt.Font;
 import oop.project.components.*;
+import oop.project.hooks.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +16,11 @@ import com.k33ptoo.components.KButton;
     *       
     *
 */
-public class RegisterCoursePanel extends TransparentPanel{
+public class RegisterCoursePanel extends JFrame{
 
     //TODO: Actually implement this
-    public RegisterCoursePanel()
+    public RegisterCoursePanel(int Width, int Height)
     {
-
         JLabel courseLabel = new JLabel("Course");
         courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(courseLabel);

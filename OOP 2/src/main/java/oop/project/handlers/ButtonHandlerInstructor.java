@@ -115,6 +115,7 @@ public class ButtonHandlerInstructor implements ActionListener
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("alerts"));
         }
 
+        
         // If the button clicked is Logout, Dispose of this frame and go back to login screen
         // TODO dispose of stored user as well
         else if (buttonClicked.equals("Logout"))
