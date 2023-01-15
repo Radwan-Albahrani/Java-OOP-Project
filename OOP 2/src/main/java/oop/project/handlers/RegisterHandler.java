@@ -174,13 +174,21 @@ public class RegisterHandler implements ActionListener
 
             // Validate Strength.
             String password = new String(((JPasswordField) component).getPassword());
-            int validateStrength = validateStrength(password);
-            if (validateStrength == -1)
+            if (passwords.size() == 0)
             {
-                return -1;
+                int validateStrength = validateStrength(password);
+                if (validateStrength == -1)
+                {
+                    return -1;
+                }
+                passwords.add(password);
+                return 1;
             }
-            passwords.add(password);
-            return 1;
+            else
+            {
+                passwords.add(password);
+                return 1;
+            }
         }
         else if (component instanceof EmailTextField)
         {
