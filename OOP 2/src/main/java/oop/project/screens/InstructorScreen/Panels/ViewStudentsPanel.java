@@ -1,9 +1,10 @@
 package oop.project.screens.InstructorScreen.Panels;
 
 import oop.project.components.TransparentPanel;
-
-import oop.project.hooks.*;
+import java.awt.Font;
 import javax.swing.*;
+import oop.project.components.*;
+import oop.project.hooks.*;
 import java.awt.*;
 
 /* View Students Panel
@@ -18,7 +19,7 @@ public class ViewStudentsPanel extends TransparentPanel
         Box viewStudentsBox;
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
-        JLabel viewStudentsLabel = new JLabel("Here are all the students");
+        JLabel viewStudentsLabel = new TitleLabel("Here are all the students");
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
