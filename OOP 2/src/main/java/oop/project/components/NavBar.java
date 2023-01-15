@@ -12,8 +12,7 @@ public class NavBar extends JPanel
 {
     public NavBar(JFrame frame)
     {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = screenSize.width;
+        int screenWidth = frame.getWidth();
 
         // Custom exit and minimize buttons
         JButton exitButton = new ExitButton();

@@ -1,24 +1,44 @@
 package oop.project.screens.RegisterScreen.Panels;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import java.util.*;
+
 import javax.swing.*;
 
-import com.k33ptoo.components.*;
-
-import java.awt.*;
+import com.k33ptoo.components.KButton;
 
 import oop.project.components.*;
+
 import oop.project.handlers.GenerateUserAndEmail;
+import oop.project.handlers.RegisterHandler;
 import oop.project.hooks.*;
 
 public class RegisterPanel extends ThemedPanelGeneric
 {
-    public RegisterPanel(int Width, int Height)
+    KButton nextButton;
+    List<String> info = new ArrayList<>();
+    JPanel wrapper;
+
+    List<JComponent> components = new ArrayList<>();
+
+    public void setWrapper(JPanel wrapper, JFrame frame)
+    {
+        this.wrapper = wrapper;
+        HandlerSetter(components, frame.getWidth(), frame.getHeight(), frame);
+    }
+
+    public RegisterPanel(int Width, int Height, JFrame frame)
     {
         // Register Label Setup
         JLabel registerLabel = new TitleLabel("Registration");
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("RegisterScreen/RegisterScreenIcon.png", 0.5);
+        JLabel picture = FrameConfig.getPicture("RegisterScreen/RegisterScreenIcon.png", 0.45);
 
         // Register Top Frame Setup
         JPanel registerTopFrame = new VerticalPanel(registerLabel, picture);
@@ -55,6 +75,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         usernameField.setHorizontalAlignment(RoundedJTextField.CENTER);
         usernameField.setEditable(false);
+
         // Email Label and Field Setup
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setForeground(Color.WHITE);
@@ -71,6 +92,7 @@ public class RegisterPanel extends ThemedPanelGeneric
         // Add Focus Listeners
         lastNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
         firstNameField.addFocusListener(new GenerateUserAndEmail(lastNameField, firstNameField, emailField, usernameField));
+
         // Password Label and Field Setup
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setForeground(Color.WHITE);
@@ -98,16 +120,23 @@ public class RegisterPanel extends ThemedPanelGeneric
         userTypeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         JComboBox<String> userTypeSelection = new JComboBox<>(userTypes);
         userTypeSelection.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        // userTypeSelection.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
         JComponent userTypeBoxComponents[] = {userTypeLabel, userTypeSelection};
         Box userTypeBox = AddToBox.addToHorizontalBox(userTypeBoxComponents, 1);
 
         // Register Button Setup
-        KButton registerButton = new BlueButton("Register");
+        nextButton = new BlueButton("Next");
+
+        components.add(firstNameField);
+        components.add(lastNameField);
+        components.add(usernameField);
+        components.add(emailField);
+        components.add(passwordField);
+        components.add(confirmPasswordField);
+        components.add(userTypeSelection);
 
         // JPanel for ComboBox and Register Button
-        JPanel bottomPanel = new VerticalPanel(userTypeBox, registerButton);
+        JPanel bottomPanel = new VerticalPanel(userTypeBox, nextButton);
 
         // Add Components to Register Panel
         this.setLayout(new GridBagLayout());
@@ -129,6 +158,15 @@ public class RegisterPanel extends ThemedPanelGeneric
         this.add(authBox, c);
         c.gridy = 4;
         this.add(bottomPanel, c);
+    }
+
+    private void HandlerSetter(List<JComponent> components, int Width, int Height, JFrame frame)
+    {
+        Dictionary<String, JPanel> panels = new Hashtable<>();
+
+        panels.put("previous", wrapper);
+
+        nextButton.addActionListener(new RegisterHandler(components, panels, frame));
     }
 
 }
