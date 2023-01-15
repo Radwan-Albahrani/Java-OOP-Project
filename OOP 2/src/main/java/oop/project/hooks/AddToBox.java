@@ -37,8 +37,8 @@ public class AddToBox
             counter++;
             if (counter == numberOfComponentsPerRow)
             {
-                verticalBox.add(horizontalBox);
                 verticalBox.add(Box.createVerticalStrut(10));
+                verticalBox.add(horizontalBox);
                 horizontalBox = Box.createHorizontalBox();
                 counter = 0;
             }
