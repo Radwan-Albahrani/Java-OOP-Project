@@ -11,8 +11,8 @@ public class ExitButton extends JButton
 {
     public ExitButton()
     {
-        Image image = FrameConfig.getPictureWithSize("ExitIcon.png", 53, 30);
-        Image imageHover = FrameConfig.getPictureWithSize("ExitHoverIcon.png", 53, 30);
+        Image image = FrameConfig.getPictureWithSize("NavBar/ExitIcon.png", 53, 30);
+        Image imageHover = FrameConfig.getPictureWithSize("NavBar/ExitHoverIcon.png", 53, 30);
 
         this.setIcon(new ImageIcon(image));
         this.setRolloverIcon(new ImageIcon(imageHover));

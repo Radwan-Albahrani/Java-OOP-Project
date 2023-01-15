@@ -52,5 +52,4 @@ public class NavBar extends JPanel
         frame.setLayout(new BorderLayout());
         frame.add(navBar, BorderLayout.NORTH);
     }
-
 }
