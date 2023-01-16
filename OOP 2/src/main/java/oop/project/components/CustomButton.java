@@ -8,13 +8,16 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.border.*;
 
+
 public class CustomButton extends KButton
 {
     public CustomButton(String text)
     {
+
         Border border = new LineBorder(ThemeColors.BLACK, 2, true);
 
         this.setText(text);
+
         this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         this.setkStartColor(ThemeColors.LIGHT_GREENISH_BROWN);
         this.setkEndColor(ThemeColors.DARK_GREENISH_BROWN);

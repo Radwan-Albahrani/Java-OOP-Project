@@ -1,27 +1,20 @@
 package oop.project.components;
 
-import com.k33ptoo.components.KButton;
+import java.awt.Image;
+import javax.swing.JButton;
 
-import oop.project.colors.ThemeColors;
+import oop.project.hooks.FrameConfig;
 
-import java.awt.Font;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
-public class MinimizeButton extends KButton
+public class MinimizeButton extends JButton
 {
     public MinimizeButton()
     {
-        this.setText("-");
-        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        this.setkStartColor(ThemeColors.YELLOW);
-        this.setkEndColor(ThemeColors.YELLOW_DARK);
-        this.setkHoverStartColor(ThemeColors.WHITE);
-        this.setkHoverEndColor(ThemeColors.LIGHT_GRAY);
-        this.setkForeGround(ThemeColors.BLACK);
-        this.setkHoverForeGround(ThemeColors.BLACK);
-        this.setkBorderRadius(30);
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        Image image = FrameConfig.getPictureWithSize("NavBar/MinimizeIcon.png", 53, 30);
+        Image imageHover = FrameConfig.getPictureWithSize("NavBar/MinimizeHoverIcon.png", 53, 30);
+
+        this.setIcon(new ImageIcon(image));
+        this.setRolloverIcon(new ImageIcon(imageHover));
     }
 }

@@ -52,6 +52,7 @@ public class RegisterHandler implements ActionListener
         // If the button clicked is Next
         if (buttonClicked.equals("Next"))
         {
+            System.err.println("Next button clicked - Register");
             // Validate the input
             for (JComponent component : components)
             {
@@ -83,6 +84,7 @@ public class RegisterHandler implements ActionListener
 
             // Remove the current panel
             frame.remove(panels.get("previous"));
+            System.err.println("Previous button clicked - Register");
 
             // Make new panel
             ProfileRegisterPanel profile = new ProfileRegisterPanel(frame.getWidth(), frame.getHeight());
@@ -99,6 +101,7 @@ public class RegisterHandler implements ActionListener
         // else if button clicked is Register
         else if (buttonClicked.equals("Register"))
         {
+            System.err.println("Register button clicked - Register");
             // Validate the input
             for (JComponent component : components)
             {

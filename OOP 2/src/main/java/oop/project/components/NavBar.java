@@ -3,6 +3,7 @@ package oop.project.components;
 import javax.swing.*;
 
 import oop.project.colors.ThemeColors;
+import com.k33ptoo.utils.ComponentMoverUtil;
 
 import java.awt.*;
 
@@ -16,12 +17,12 @@ public class NavBar extends JPanel
 
         // Custom exit and minimize buttons
         JButton exitButton = new ExitButton();
-        exitButton.setSize(25, 25);
-        exitButton.setLocation(screenWidth - 50, 0);
-        exitButton.setBorderPainted(true);
-        exitButton.setContentAreaFilled(true);
-        exitButton.setFocusPainted(true);
-        exitButton.setOpaque(true);
+        exitButton.setSize(53, 30);
+        exitButton.setLocation(screenWidth - 53, 0);
+        exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFocusPainted(false);
+        exitButton.setOpaque(false);
 
         exitButton.addActionListener((ActionEvent e) ->
         {
@@ -29,12 +30,12 @@ public class NavBar extends JPanel
         });
 
         JButton minimizeButton = new MinimizeButton();
-        minimizeButton.setSize(25, 25);
-        minimizeButton.setLocation(screenWidth - 75, 0);
-        minimizeButton.setBorderPainted(true);
-        minimizeButton.setContentAreaFilled(true);
-        minimizeButton.setFocusPainted(true);
-        minimizeButton.setOpaque(true);
+        minimizeButton.setSize(53, 30);
+        minimizeButton.setLocation(screenWidth - 106, 0);
+        minimizeButton.setBorderPainted(false);
+        minimizeButton.setContentAreaFilled(false);
+        minimizeButton.setFocusPainted(false);
+        minimizeButton.setOpaque(false);
 
         minimizeButton.addActionListener((ActionEvent e) ->
         {
@@ -42,7 +43,7 @@ public class NavBar extends JPanel
         });
 
         JPanel navBar = new JPanel();
-        navBar.setSize(screenWidth, 25);
+        navBar.setSize(screenWidth, 30);
         navBar.setLocation(0, 0);
         navBar.setOpaque(true);
         navBar.setLayout(null);
@@ -51,6 +52,19 @@ public class NavBar extends JPanel
         navBar.add(minimizeButton);
         frame.setLayout(new BorderLayout());
         frame.add(navBar, BorderLayout.NORTH);
+
+        resizeMoveFrame(frame, navBar);
+
+    }
+
+    private static void resizeMoveFrame(JFrame frame, JPanel panel)
+    {
+        // Resize and move
+        SwingUtilities.invokeLater(() ->
+        {
+            // Drag around your frame using below
+            ComponentMoverUtil.moveFrame(frame, false, panel);
+        });
     }
 
 }
