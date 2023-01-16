@@ -54,6 +54,7 @@ public class MainPanel extends TransparentPanel
             courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
             this.add(courseLabel);
+            this.add(informationLabel);
         }
         
         
