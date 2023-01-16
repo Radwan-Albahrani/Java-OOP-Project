@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -247,10 +248,30 @@ public class RegisterHandler implements ActionListener
         }
         else if (component instanceof DatePicker)
         {
-            ((DatePicker) component).validate();
             if (((DatePicker) component).getDate() == null)
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            else if (((DatePicker) component).getDate().isAfter(LocalDate.now()))
+            {
+                JOptionPane.showMessageDialog(frame, "Please enter a valid date");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            else if (((DatePicker) component).getDate().isBefore(LocalDate.now().minusYears(100)))
+            {
+                JOptionPane.showMessageDialog(frame, "Please enter a valid date");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            else if (((DatePicker) component).getDate().isAfter(LocalDate.now().minusYears(18)))
+            {
+                JOptionPane.showMessageDialog(frame, "You must be at least 18 years old to register");
                 info.clear();
                 passwords.clear();
                 return -1;
