@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.*;
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 import oop.project.components.*;
@@ -18,6 +17,7 @@ public class EditGradesPanel extends TransparentPanel
     public EditGradesPanel(int Width, int Height)
     {
         Box idBox;
+        Box emailBox;
         Box nameBox;
         Box gradesBox;
         Box buttonsBox;
@@ -26,7 +26,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.15);
+        JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
         // ID
@@ -60,38 +60,53 @@ public class EditGradesPanel extends TransparentPanel
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         nameField.setEditable(false);
-        nameField.setMinimumSize(new Dimension(500, 50));
-        nameField.setMaximumSize(new Dimension(500, 50));
+        nameField.setMinimumSize(new Dimension(400, 50));
+        nameField.setMaximumSize(new Dimension(400, 50));
         nameField.setAlignmentX(RIGHT_ALIGNMENT);
 
         JComponent[] nameComponents = {nameLabel, nameField};
         nameBox = AddToBox.addToHorizontalBox(nameComponents, 1);
 
+        // Email Setup
+        JLabel emailLabel = new JLabel("Email: ", SwingConstants.LEFT);
+        emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        emailLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        
+        RoundedJTextField emailField = new RoundedJTextField(15);
+        emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        emailField.setEditable(false);
+        emailField.setMinimumSize(new Dimension(400, 50));
+        emailField.setMaximumSize(new Dimension(400, 50));
+        emailField.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] emailComponents = {emailLabel, emailField};
+        emailBox = AddToBox.addToHorizontalBox(emailComponents, 1);
+
         // Picture Setup
-        JComponent[] idNameComponents = {idBox, nameBox};
+        JComponent[] idNameComponents = {idBox, emailBox ,nameBox};
         Box idNameBox = AddToBox.addToVerticalBox(idNameComponents, 1);
 
-        JComponent[] pictureComponents = {idNameBox, picture};
-        Box pictureBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
+        JLabel spacingLabel1 = new JLabel("         ");
+
+        JComponent[] pictureComponents = {idNameBox, spacingLabel1, picture};
+        idNameBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
 
         // Grades Setup
-        JLabel gradesLabel = new JLabel("Grades");
-        gradesLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-
-        JComponent[] gradesLabelComponents = {gradesLabel};
-        Box gradesLabelBox = AddToBox.addToVerticalBox(gradesLabelComponents, 1);
-
-        JLabel quizLabel = new JLabel("Quiz Grade:");
+        JLabel quizLabel = new JLabel("Quiz Grade:                   ");
         quizLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         quizLabel.setAlignmentX(LEFT_ALIGNMENT);
 
         RoundedJTextField quizField = new RoundedJTextField(15);
         quizField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         quizField.setAlignmentX(RIGHT_ALIGNMENT);
-        quizField.setMinimumSize(new Dimension(500, 50));
-        quizField.setMaximumSize(new Dimension(500, 50));
+        quizField.setMinimumSize(new Dimension(110, 50));
+        quizField.setMaximumSize(new Dimension(110, 50));
 
-        JComponent[] quizComponents = {quizLabel, quizField};
+        JLabel quizGrade = new JLabel("/10");
+        quizGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        quizGrade.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] quizComponents = {quizLabel, quizField, quizGrade};
         Box quizBox = AddToBox.addToHorizontalBox(quizComponents, 1);
 
         JLabel midtermLabel = new JLabel("Midterm Exam Grade:");
@@ -101,40 +116,80 @@ public class EditGradesPanel extends TransparentPanel
         RoundedJTextField midtermField = new RoundedJTextField(15);
         midtermField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         midtermField.setAlignmentX(RIGHT_ALIGNMENT);
-        midtermField.setMinimumSize(new Dimension(500, 50));
-        midtermField.setMaximumSize(new Dimension(500, 50));
+        midtermField.setMinimumSize(new Dimension(110, 50));
+        midtermField.setMaximumSize(new Dimension(110, 50));
 
-        JComponent[] midtermComponents = {midtermLabel, midtermField};
+        JLabel midtermGrade = new JLabel("/20");
+        midtermGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        midtermGrade.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] midtermComponents = {midtermLabel, midtermField, midtermGrade};
         Box midtermBox = AddToBox.addToHorizontalBox(midtermComponents, 1);
 
-        JLabel finalLabel = new JLabel("Final Exam Grade:");
+        JLabel finalLabel = new JLabel("Final Exam Grade:    ");
         finalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         finalLabel.setAlignmentX(LEFT_ALIGNMENT);
 
         RoundedJTextField finalField = new RoundedJTextField(15);
-        finalField.setMinimumSize(new Dimension(500, 50));
-        finalField.setMaximumSize(new Dimension(500, 50));
+        finalField.setMinimumSize(new Dimension(110, 50));
+        finalField.setMaximumSize(new Dimension(110, 50));
         finalField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         finalField.setAlignmentX(RIGHT_ALIGNMENT);
 
-        JComponent[] finalComponents = {finalLabel, finalField};
+        JLabel finalGrade = new JLabel("/40");
+        finalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        finalGrade.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] finalComponents = {finalLabel, finalField, finalGrade};
         Box finalBox = AddToBox.addToHorizontalBox(finalComponents, 1);
 
-        JLabel projectLabel = new JLabel("Project Grade:");
+        JLabel projectLabel = new JLabel("Project Grade:             ");
         projectLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         projectLabel.setAlignmentX(LEFT_ALIGNMENT);
 
         RoundedJTextField projectField = new RoundedJTextField(15);
         projectField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         projectField.setAlignmentX(RIGHT_ALIGNMENT);
-        projectField.setMinimumSize(new Dimension(500, 50));
-        projectField.setMaximumSize(new Dimension(500, 50));
+        projectField.setMinimumSize(new Dimension(110, 50));
+        projectField.setMaximumSize(new Dimension(110, 50));
 
-        JComponent[] projectComponents = {projectLabel, projectField};
+        JLabel projectGrade = new JLabel("/30");
+        projectGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        projectGrade.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] projectComponents = {projectLabel, projectField, projectGrade};
         Box projectBox = AddToBox.addToHorizontalBox(projectComponents, 1);
 
-        JComponent[] gradesComponents = {quizBox, midtermBox, finalBox, projectBox};
+
+        JLabel totalLabel = new JLabel("Total Grade:               ");
+        totalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
+        totalLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+        RoundedJTextField totalField = new RoundedJTextField(15);
+        totalField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        totalField.setAlignmentX(RIGHT_ALIGNMENT);
+        totalField.setMinimumSize(new Dimension(100, 50));
+        totalField.setMaximumSize(new Dimension(100, 50));
+        totalField.setEditable(false);
+
+        JLabel totalGrade = new JLabel("/100");
+        totalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        totalGrade.setAlignmentX(RIGHT_ALIGNMENT);
+        
+        JComponent[] totalComponents = {totalLabel, totalField, totalGrade};
+        Box totalBox = AddToBox.addToHorizontalBox(totalComponents, 1);
+
+        JComponent[] gradesComponents = {quizBox, midtermBox, finalBox, projectBox, totalBox};
         gradesBox = AddToBox.addToVerticalBox(gradesComponents, 1);
+
+        JLabel spacingLabel2 = new JLabel("    ");
+        spacingLabel2.setFont(new Font("Trebuchet MS", Font.BOLD, 200));
+        JLabel spacingLabel3 = new JLabel("    ");
+        spacingLabel3.setFont(new Font("Trebuchet MS", Font.BOLD, 200));
+
+        JComponent[] blankComponents = {spacingLabel2, gradesBox, spacingLabel3};
+        gradesBox = AddToBox.addToVerticalBox(blankComponents, 3);
+
 
         // Buttons
         KButton cancelButton = new CustomButtonInstructor("Cancel");
@@ -158,14 +213,12 @@ public class EditGradesPanel extends TransparentPanel
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.gridy = 1;
-        this.add(pictureBox, c);
+        c.insets = new Insets(0, 30, 0, 30);
+        this.add(idNameBox, c);
         c.gridy = 2;
-        this.add(gradesLabelBox, c);
-        c.insets = new Insets(0, 0, 0, 0);
-        c.gridy = 3;
         this.add(gradesBox, c);
-        c.insets = new Insets(0, 50, 0, 50);
-        c.gridy = 4;
+        c.insets = new Insets(0, 20, 0, 20);
+        c.gridy = 3;
         this.add(buttonsBox, c);
 
     }

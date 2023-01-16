@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
-import com.k33ptoo.components.KButton;
 import oop.project.components.*;
 import oop.project.hooks.*;
 
@@ -20,13 +19,14 @@ public class ProfilePanel extends TransparentPanel
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
+        JLabel spacingPicture = FrameConfig.getPicture("/blank.png", 0.2);
+
 
         // Personal Information Setup
         // ID Setup
-        JLabel idLabel = new JLabel("ID: " );
+        JLabel idLabel = new JLabel("ID");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        idLabel.setHorizontalAlignment(JLabel.CENTER);
-        idLabel.setHorizontalTextPosition(JLabel.CENTER);
+        idLabel.setAlignmentX(CENTER_ALIGNMENT);
 
 
         RoundedJTextField idField = new RoundedJTextField(15);
@@ -34,13 +34,16 @@ public class ProfilePanel extends TransparentPanel
         idField.setMinimumSize(new Dimension(400, 50));
         idField.setMaximumSize(new Dimension(400, 50));
         idField.setEditable(false);
+        idField.setAlignmentX(LEFT_ALIGNMENT);
+
 
         JComponent[] idComponents = {idLabel, idField};
-        Box idBox = AddToBox.addToHorizontalBox(idComponents, 1);
+        Box idBox = AddToBox.addToVerticalBox(idComponents, 1);
 
         // Name Setup
-        JLabel nameLabel = new JLabel("Name: ");
+        JLabel nameLabel = new JLabel("Name");
         nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -51,36 +54,38 @@ public class ProfilePanel extends TransparentPanel
         nameField.setAlignmentX(LEFT_ALIGNMENT);
 
         JComponent[] nameComponents = {nameLabel, nameField};
-        Box nameBox = AddToBox.addToHorizontalBox(nameComponents, 1);
+        Box nameBox = AddToBox.addToVerticalBox(nameComponents, 1);
 
 
         // Birthday Setup
-        JLabel birthdayLabel = new JLabel("Birthday: ");
+        JLabel birthdayLabel = new JLabel("Birthday");
         birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        birthdayLabel.setAlignmentX(RIGHT_ALIGNMENT);
 
         RoundedJTextField birthdayField = new RoundedJTextField(15);
         birthdayField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         birthdayField.setEditable(false);
-        birthdayField.setMinimumSize(new Dimension(300, 50));
-        birthdayField.setMaximumSize(new Dimension(300, 50));
+        birthdayField.setMinimumSize(new Dimension(400, 50));
+        birthdayField.setMaximumSize(new Dimension(400, 50));
         birthdayField.setAlignmentX(LEFT_ALIGNMENT);
 
         JComponent[] birthdayComponents = {birthdayLabel, birthdayField};
-        Box birthdayBox = AddToBox.addToHorizontalBox(birthdayComponents, 1);
+        Box birthdayBox = AddToBox.addToVerticalBox(birthdayComponents, 1);
 
         // Gender Setup
-        JLabel genderLabel = new JLabel("Gender: " );
+        JLabel genderLabel = new JLabel("Gender");
         genderLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        genderLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         RoundedJTextField genderField = new RoundedJTextField(15);
         genderField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         genderField.setEditable(false);
-        genderField.setMinimumSize(new Dimension(250, 50));
-        genderField.setMaximumSize(new Dimension(250, 50));
+        genderField.setMinimumSize(new Dimension(400, 50));
+        genderField.setMaximumSize(new Dimension(400, 50));
         genderField.setAlignmentX(LEFT_ALIGNMENT);
 
         JComponent[] genderComponents = {genderLabel, genderField};
-        Box genderBox = AddToBox.addToHorizontalBox(genderComponents, 1);
+        Box genderBox = AddToBox.addToVerticalBox(genderComponents, 1);
 
         // Personal Information Box Setup
         JComponent[] nameidComponents = {idBox, nameBox};
@@ -93,12 +98,13 @@ public class ProfilePanel extends TransparentPanel
         Box personalInfoBox = AddToBox.addToVerticalBox(personalInfoComponents, 1);
 
         JComponent[] pictureBoxComponents = {personalInfoBox, picture};
-        Box pictureBox = AddToBox.addToVerticalBox(pictureBoxComponents, 2);
+        personalInfoBox = AddToBox.addToVerticalBox(pictureBoxComponents, 2);
 
         // Work Information Setup
         // Occupation Setup
-        JLabel occupationLabel = new JLabel("Occupation: " );
+        JLabel occupationLabel = new JLabel("Occupation" );
         occupationLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        occupationLabel.setAlignmentX(CENTER_ALIGNMENT);
         
         RoundedJTextField occupationField = new RoundedJTextField(15);
         occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -108,11 +114,12 @@ public class ProfilePanel extends TransparentPanel
         occupationField.setAlignmentX(LEFT_ALIGNMENT);
 
         JComponent[] occupationComponents = {occupationLabel, occupationField};
-        Box occupationBox = AddToBox.addToHorizontalBox(occupationComponents, 1);
+        Box occupationBox = AddToBox.addToVerticalBox(occupationComponents, 1);
 
         // Major Setup
-        JLabel majorLabel = new JLabel("Major: " );
+        JLabel majorLabel = new JLabel("Major");
         majorLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        majorLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         RoundedJTextField majorField = new RoundedJTextField(15);
         majorField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -123,11 +130,12 @@ public class ProfilePanel extends TransparentPanel
 
 
         JComponent[] majorComponents = {majorLabel, majorField};
-        Box majorBox = AddToBox.addToHorizontalBox(majorComponents, 1);
+        Box majorBox = AddToBox.addToVerticalBox(majorComponents, 1);
 
         // Email Setup
         JLabel emailLabel = new JLabel("Emails", SwingConstants.LEFT);
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        emailLabel.setAlignmentX(CENTER_ALIGNMENT);
        
         RoundedJTextField workEmailField = new RoundedJTextField(15);
         workEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -141,32 +149,33 @@ public class ProfilePanel extends TransparentPanel
         personalEmailField.setEditable(false);
         personalEmailField.setMinimumSize(new Dimension(400, 50));
         personalEmailField.setMaximumSize(new Dimension(400, 50));
-        personalEmailField.setAlignmentX(CENTER_ALIGNMENT);
+        personalEmailField.setAlignmentX(LEFT_ALIGNMENT);
 
         JComponent[] emailComponents = {emailLabel, workEmailField, personalEmailField};
-        Box emailBox = AddToBox.addToHorizontalBox(emailComponents, 3);
+        Box emailBox = AddToBox.addToVerticalBox(emailComponents, 1);
 
         // Phone Setup
         JLabel phoneLabel = new JLabel("Phones", SwingConstants.LEFT);
         phoneLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        phoneLabel.setAlignmentX(RIGHT_ALIGNMENT);
 
         RoundedJTextField workPhoneField = new RoundedJTextField(15);
         workPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         workPhoneField.setEditable(false);
         workPhoneField.setMinimumSize(new Dimension(400, 50));
         workPhoneField.setMaximumSize(new Dimension(400, 50));
-        workPhoneField.setAlignmentX(CENTER_ALIGNMENT);
+        workPhoneField.setAlignmentX(LEFT_ALIGNMENT);
 
         RoundedJTextField personalPhoneField = new RoundedJTextField(15);
         personalPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         personalPhoneField.setEditable(false);
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
-        personalPhoneField.setAlignmentX(CENTER_ALIGNMENT);
+        personalPhoneField.setAlignmentX(LEFT_ALIGNMENT);
         
         
         JComponent[] phoneComponents = {phoneLabel, workPhoneField, personalPhoneField};
-        Box phoneBox = AddToBox.addToHorizontalBox(phoneComponents, 3);
+        Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
         // Work Information Box Setup
         JComponent[] occmajorComponents = {occupationBox, majorBox};
@@ -174,6 +183,12 @@ public class ProfilePanel extends TransparentPanel
 
         JComponent[] emailphoneComponents = {emailBox, phoneBox};
         Box emailphoneBox = AddToBox.addToVerticalBox(emailphoneComponents, 2);
+
+        JComponent[] workInfoComponents = {occmajorBox, emailphoneBox};
+        Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
+
+        JComponent[] spacingPictureComponents = {workInfoBox, spacingPicture};
+        workInfoBox = AddToBox.addToVerticalBox(spacingPictureComponents, 2); //TODO: Replace this with a button to change password
 
 
         // Add to Panel
@@ -184,16 +199,13 @@ public class ProfilePanel extends TransparentPanel
         c.gridy = 0;
         c.weightx = 0.2;
         c.weighty = 0.2;
-        c.insets = new Insets(0, 20, 0, 20);
+        c.insets = new Insets(0, 25, 0, 25);
         this.add(profileLabel, c);
         c.weightx = 0.2;
         c.weighty = 0.2;
         c.gridy = 1;
-        this.add(pictureBox, c);
+        this.add(personalInfoBox, c);
         c.gridy = 2;
-        this.add(occmajorBox, c);
-        c.gridy = 3;
-        this.add(emailphoneBox, c);
-        c.insets = new Insets(0, 0, 0, 0);
+        this.add(workInfoBox, c);
     }
 }
