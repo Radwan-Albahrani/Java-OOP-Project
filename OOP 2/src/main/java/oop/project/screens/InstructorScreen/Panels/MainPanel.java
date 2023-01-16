@@ -24,6 +24,7 @@ public class MainPanel extends TransparentPanel
         
         if(!inCourse) //IOf the instructor is not in a course
         {
+            System.out.println("This Instructor is not in a course - Instructor [UserID]");
             JLabel registerLabel = new JLabel("You are currently not registered in a course. Please click the 'Register Course' button to register in a course.");
             registerLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
@@ -39,6 +40,7 @@ public class MainPanel extends TransparentPanel
         }
         else //If the instructor is in a course
         {
+            System.out.println("This Instructor is registered in course [CourseID] - Instructor [UserID]");
             JLabel courseLabel = new JLabel("You are currently registered in [Course Name Here].");
             JLabel informationLabel = new JLabel("Here is some information about your course:");
             /* TODO:    Add information about the course
