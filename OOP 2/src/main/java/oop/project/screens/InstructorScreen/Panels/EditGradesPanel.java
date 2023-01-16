@@ -2,6 +2,7 @@ package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -36,6 +37,7 @@ public class EditGradesPanel extends TransparentPanel
         idLabel.setHorizontalAlignment(JLabel.CENTER);
         idLabel.setHorizontalTextPosition(JLabel.CENTER);
         idLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        idLabel.setForeground(ThemeColors.BLACK);
 
         JComboBox<String> idJComboBoxList = new JComboBox<String>();
         idJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -56,6 +58,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel nameLabel = new JLabel("Name: ");
         nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         nameLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        nameLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -71,6 +74,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel emailLabel = new JLabel("Email: ", SwingConstants.LEFT);
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         emailLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        emailLabel.setForeground(ThemeColors.BLACK);
         
         RoundedJTextField emailField = new RoundedJTextField(15);
         emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -95,6 +99,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel quizLabel = new JLabel("Quiz Grade:                   ");
         quizLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         quizLabel.setAlignmentX(LEFT_ALIGNMENT);
+        quizLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField quizField = new RoundedJTextField(15);
         quizField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -105,6 +110,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel quizGrade = new JLabel("/10");
         quizGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         quizGrade.setAlignmentX(RIGHT_ALIGNMENT);
+        quizGrade.setForeground(ThemeColors.BLACK);
 
         JComponent[] quizComponents = {quizLabel, quizField, quizGrade};
         Box quizBox = AddToBox.addToHorizontalBox(quizComponents, 1);
@@ -112,6 +118,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel midtermLabel = new JLabel("Midterm Exam Grade:");
         midtermLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         midtermLabel.setAlignmentX(LEFT_ALIGNMENT);
+        midtermLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField midtermField = new RoundedJTextField(15);
         midtermField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -129,6 +136,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel finalLabel = new JLabel("Final Exam Grade:    ");
         finalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         finalLabel.setAlignmentX(LEFT_ALIGNMENT);
+        finalLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField finalField = new RoundedJTextField(15);
         finalField.setMinimumSize(new Dimension(110, 50));
@@ -139,6 +147,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel finalGrade = new JLabel("/40");
         finalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         finalGrade.setAlignmentX(RIGHT_ALIGNMENT);
+        finalGrade.setForeground(ThemeColors.BLACK);
 
         JComponent[] finalComponents = {finalLabel, finalField, finalGrade};
         Box finalBox = AddToBox.addToHorizontalBox(finalComponents, 1);
@@ -146,6 +155,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel projectLabel = new JLabel("Project Grade:             ");
         projectLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         projectLabel.setAlignmentX(LEFT_ALIGNMENT);
+        projectLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField projectField = new RoundedJTextField(15);
         projectField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -156,6 +166,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel projectGrade = new JLabel("/30");
         projectGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         projectGrade.setAlignmentX(RIGHT_ALIGNMENT);
+        projectGrade.setForeground(ThemeColors.BLACK);
 
         JComponent[] projectComponents = {projectLabel, projectField, projectGrade};
         Box projectBox = AddToBox.addToHorizontalBox(projectComponents, 1);
@@ -164,6 +175,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel totalLabel = new JLabel("Total Grade:               ");
         totalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         totalLabel.setAlignmentX(LEFT_ALIGNMENT);
+        totalLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField totalField = new RoundedJTextField(15);
         totalField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -175,6 +187,7 @@ public class EditGradesPanel extends TransparentPanel
         JLabel totalGrade = new JLabel("/100");
         totalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         totalGrade.setAlignmentX(RIGHT_ALIGNMENT);
+        totalGrade.setForeground(ThemeColors.BLACK);
         
         JComponent[] totalComponents = {totalLabel, totalField, totalGrade};
         Box totalBox = AddToBox.addToHorizontalBox(totalComponents, 1);

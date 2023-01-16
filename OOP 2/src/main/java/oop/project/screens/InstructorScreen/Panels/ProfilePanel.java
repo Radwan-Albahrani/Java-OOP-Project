@@ -2,12 +2,14 @@ package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
 import oop.project.components.*;
 import oop.project.hooks.*;
+
 
 public class ProfilePanel extends TransparentPanel
 {
@@ -27,6 +29,8 @@ public class ProfilePanel extends TransparentPanel
         JLabel idLabel = new JLabel("ID");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         idLabel.setAlignmentX(CENTER_ALIGNMENT);
+        idLabel.setForeground(ThemeColors.BLACK);
+        
 
 
         RoundedJTextField idField = new RoundedJTextField(15);
@@ -44,6 +48,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel nameLabel = new JLabel("Name");
         nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        nameLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -61,6 +66,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel birthdayLabel = new JLabel("Birthday");
         birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         birthdayLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        birthdayLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField birthdayField = new RoundedJTextField(15);
         birthdayField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -76,6 +82,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel genderLabel = new JLabel("Gender");
         genderLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         genderLabel.setAlignmentX(CENTER_ALIGNMENT);
+        genderLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField genderField = new RoundedJTextField(15);
         genderField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -105,6 +112,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel occupationLabel = new JLabel("Occupation" );
         occupationLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         occupationLabel.setAlignmentX(CENTER_ALIGNMENT);
+        occupationLabel.setForeground(ThemeColors.BLACK);
         
         RoundedJTextField occupationField = new RoundedJTextField(15);
         occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -120,6 +128,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel majorLabel = new JLabel("Major");
         majorLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         majorLabel.setAlignmentX(CENTER_ALIGNMENT);
+        majorLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField majorField = new RoundedJTextField(15);
         majorField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -136,7 +145,8 @@ public class ProfilePanel extends TransparentPanel
         JLabel emailLabel = new JLabel("Emails", SwingConstants.LEFT);
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         emailLabel.setAlignmentX(CENTER_ALIGNMENT);
-       
+        emailLabel.setForeground(ThemeColors.BLACK);
+
         RoundedJTextField workEmailField = new RoundedJTextField(15);
         workEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         workEmailField.setEditable(false);
@@ -158,6 +168,7 @@ public class ProfilePanel extends TransparentPanel
         JLabel phoneLabel = new JLabel("Phones", SwingConstants.LEFT);
         phoneLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         phoneLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        phoneLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField workPhoneField = new RoundedJTextField(15);
         workPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
