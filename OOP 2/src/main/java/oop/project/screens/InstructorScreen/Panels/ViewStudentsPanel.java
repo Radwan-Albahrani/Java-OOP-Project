@@ -8,8 +8,7 @@ import oop.project.hooks.*;
 import java.awt.*;
 
 /* View Students Panel
-TODO:
-      Get Data from database
+TODO: Get Data from database and display it in the table
 */
 
 public class ViewStudentsPanel extends TransparentPanel
@@ -26,12 +25,28 @@ public class ViewStudentsPanel extends TransparentPanel
         String[] columnNames = {"ID", "First Name", "Last Name", "Quiz Grade", "Midterm Grade", "Final Grade",
                 "Project Grade", "Total Grade"};
 
-        Object[][] data = {
+        Object[][] data = { //temp data
                 {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
                 {2, "John", "Doe", 20, 25, 40, 15, 100},
                 {3, "Sue", "Black", 20, 25, 40, 15, 100},
                 {4, "Jane", "White", 20, 25, 40, 15, 100},
-                {5, "Joe", "Brown", 20, 25, 40, 15, 100}
+                {5, "Joe", "Brown", 20, 25, 40, 15, 100},
+                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
+                {2, "John", "Doe", 20, 25, 40, 15, 100},
+                {3, "Sue", "Black", 20, 25, 40, 15, 100},
+                {4, "Jane", "White", 20, 25, 40, 15, 100},
+                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
+                {2, "John", "Doe", 20, 25, 40, 15, 100},
+                {3, "Sue", "Black", 20, 25, 40, 15, 100},
+                {4, "Jane", "White", 20, 25, 40, 15, 100},
+                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
+                {2, "John", "Doe", 20, 25, 40, 15, 100},
+                {3, "Sue", "Black", 20, 25, 40, 15, 100},
+                {4, "Jane", "White", 20, 25, 40, 15, 100},
+                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
+                {2, "John", "Doe", 20, 25, 40, 15, 100},
+                {3, "Sue", "Black", 20, 25, 40, 15, 100},
+                {4, "Jane", "White", 20, 25, 40, 15, 100},
         };
 
         JTable table = new JTable(data, columnNames)

@@ -66,7 +66,7 @@ public class MainPanel extends TransparentPanel
 
             if (buttonClicked.equals("Register Course"))
             {
-                System.err.println("Register Course button clicked");
+                System.err.println("Register Course button clicked - Instructor");
 
             }
         }
