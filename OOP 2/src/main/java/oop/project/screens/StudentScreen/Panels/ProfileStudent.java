@@ -130,10 +130,56 @@ public class ProfileStudent extends TransparentPanel
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints s = new GridBagConstraints();
-        s.fill = GridBagConstraints.HORIZONTAL;
+        s.fill = GridBagConstraints.BOTH;
         s.gridx = 0;
         s.gridy = 0;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
         this.add(studentIdBox, s);
+        
+        s.gridx = 1;
+        s.gridy = 0;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentNameBox, s);
+
+        s.gridx = 0;
+        s.gridy = 1;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentEmailBox, s);
+
+        s.gridx = 1;
+        s.gridy = 1;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentPhoneBox, s);
+
+        s.gridx = 0;
+        s.gridy = 2;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentGenderBox, s);
+
+        s.gridx = 1;
+        s.gridy = 2;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentDOBBox, s);
+
+        s.gridx = 0;
+        s.gridy = 3;
+        s.weightx = 1;
+        s.weighty = 1;
+        s.insets = new Insets(0, 10, 0, 10);
+        this.add(studentMajorBox, s);
+
         
 
         KButton ViewProfileButton = new BlueButton(" View Profile");
