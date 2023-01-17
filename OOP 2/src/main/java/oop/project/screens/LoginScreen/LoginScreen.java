@@ -36,8 +36,9 @@ public class LoginScreen extends JFrame
         loginPanelWrapper.setLayout(new GridBagLayout());
         loginPanelWrapper.add(loginPanel, constraints);
 
-        new NavBar(this); // Add NavBar
         setLayout(new BorderLayout());
+        JPanel navBar = new NavBar(this); // Add NavBar
+        add(navBar, BorderLayout.NORTH);
         add(loginPanelWrapper, BorderLayout.CENTER);
 
         setVisible(true);
