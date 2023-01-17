@@ -14,7 +14,7 @@ public class SendAlerts extends TransparentPanel
         JLabel sendAlertsLabel = new JLabel("Alerts");
         sendAlertsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
-        JTextArea sendAlertsTextArea = new PromptedTextArea("Enter your alert to the admin here.");
+        JTextArea sendAlertsTextArea = new PromptedTextArea("Enter your alert text to the admin here.");
         sendAlertsTextArea.setPreferredSize(new Dimension(1000, Height - 200));
 
         KButton SendAlertsButton = new BlueButton(" Send ");
