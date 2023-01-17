@@ -10,7 +10,6 @@ import javax.swing.*;
 import oop.project.components.*;
 import oop.project.hooks.*;
 
-
 public class ProfilePanel extends TransparentPanel
 {
     public ProfilePanel(int Width, int Height)
@@ -21,8 +20,6 @@ public class ProfilePanel extends TransparentPanel
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
-        JLabel spacingPicture = FrameConfig.getPicture("/blank.png", 0.2);
-
 
         // Personal Information Setup
         // ID Setup
@@ -30,8 +27,6 @@ public class ProfilePanel extends TransparentPanel
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         idLabel.setAlignmentX(CENTER_ALIGNMENT);
         idLabel.setForeground(ThemeColors.BLACK);
-        
-
 
         RoundedJTextField idField = new RoundedJTextField(15);
         idField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -39,7 +34,6 @@ public class ProfilePanel extends TransparentPanel
         idField.setMaximumSize(new Dimension(400, 50));
         idField.setEditable(false);
         idField.setAlignmentX(LEFT_ALIGNMENT);
-
 
         JComponent[] idComponents = {idLabel, idField};
         Box idBox = AddToBox.addToVerticalBox(idComponents, 1);
@@ -60,7 +54,6 @@ public class ProfilePanel extends TransparentPanel
 
         JComponent[] nameComponents = {nameLabel, nameField};
         Box nameBox = AddToBox.addToVerticalBox(nameComponents, 1);
-
 
         // Birthday Setup
         JLabel birthdayLabel = new JLabel("Birthday");
@@ -109,11 +102,11 @@ public class ProfilePanel extends TransparentPanel
 
         // Work Information Setup
         // Occupation Setup
-        JLabel occupationLabel = new JLabel("Occupation" );
+        JLabel occupationLabel = new JLabel("Occupation");
         occupationLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         occupationLabel.setAlignmentX(CENTER_ALIGNMENT);
         occupationLabel.setForeground(ThemeColors.BLACK);
-        
+
         RoundedJTextField occupationField = new RoundedJTextField(15);
         occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         occupationField.setEditable(false);
@@ -136,7 +129,6 @@ public class ProfilePanel extends TransparentPanel
         majorField.setMinimumSize(new Dimension(400, 50));
         majorField.setMaximumSize(new Dimension(400, 50));
         majorField.setAlignmentX(LEFT_ALIGNMENT);
-
 
         JComponent[] majorComponents = {majorLabel, majorField};
         Box majorBox = AddToBox.addToVerticalBox(majorComponents, 1);
@@ -183,24 +175,19 @@ public class ProfilePanel extends TransparentPanel
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
         personalPhoneField.setAlignmentX(LEFT_ALIGNMENT);
-        
-        
+
         JComponent[] phoneComponents = {phoneLabel, workPhoneField, personalPhoneField};
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
         // Work Information Box Setup
-        JComponent[] occmajorComponents = {occupationBox, majorBox};
-        Box occmajorBox = AddToBox.addToVerticalBox(occmajorComponents, 2);
+        JComponent[] professionalInfoComponents = {occupationBox, majorBox};
+        Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
 
-        JComponent[] emailphoneComponents = {emailBox, phoneBox};
-        Box emailphoneBox = AddToBox.addToVerticalBox(emailphoneComponents, 2);
+        JComponent[] contactInfoComponents = {emailBox, phoneBox};
+        Box contactInfoBox = AddToBox.addToVerticalBox(contactInfoComponents, 2);
 
-        JComponent[] workInfoComponents = {occmajorBox, emailphoneBox};
-        Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
-
-        JComponent[] spacingPictureComponents = {workInfoBox, spacingPicture};
-        workInfoBox = AddToBox.addToVerticalBox(spacingPictureComponents, 2); //TODO: Replace this with a button to change password
-
+        JComponent[] workInfoComponents = {professionalInfoBox, contactInfoBox};
+        Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1); // TODO: Replace this with a button to change password
 
         // Add to Panel
         this.setLayout(new GridBagLayout());
@@ -216,6 +203,7 @@ public class ProfilePanel extends TransparentPanel
         c.weighty = 0.2;
         c.gridy = 1;
         this.add(personalInfoBox, c);
+        c.insets = new Insets(0, 25, 0, 300);
         c.gridy = 2;
         this.add(workInfoBox, c);
     }

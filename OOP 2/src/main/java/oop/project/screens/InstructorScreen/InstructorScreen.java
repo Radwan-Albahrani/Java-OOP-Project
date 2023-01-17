@@ -9,7 +9,6 @@
 *      -Send a message to the admin using Alerts
 */
 
-
 package oop.project.screens.InstructorScreen;
 
 import javax.swing.*;
