@@ -67,6 +67,11 @@ public class NavBar extends JPanel
 
     }
 
+    public NavBar(JFrame frame)
+    {
+        this(frame, false);
+    }
+
     private static void resizeMoveFrame(JFrame frame, JPanel panel)
     {
         // Resize and move

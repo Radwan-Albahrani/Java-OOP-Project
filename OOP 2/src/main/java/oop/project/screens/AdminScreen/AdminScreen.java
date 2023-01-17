@@ -56,7 +56,7 @@ public class AdminScreen extends JFrame
     public void resetFrame(JPanel buttons, JPanel main)
     {
         setLayout(new BorderLayout());
-        JPanel navBar = new NavBar(this, false);
+        JPanel navBar = new NavBar(this);
 
         add(navBar, BorderLayout.NORTH);
         add(main, BorderLayout.CENTER);

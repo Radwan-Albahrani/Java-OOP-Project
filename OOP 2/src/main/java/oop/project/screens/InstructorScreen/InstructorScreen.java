@@ -9,7 +9,6 @@
 *      -Send a message to the admin using Alerts
 */
 
-
 package oop.project.screens.InstructorScreen;
 
 import javax.swing.*;
@@ -54,7 +53,7 @@ public class InstructorScreen extends JFrame
         ((ButtonPanel) buttonPanel).setPanels(panels);
 
         // Adding Panel to Frame
-        JPanel navBar = new NavBar(this, false); // Creating the nav bar
+        JPanel navBar = new NavBar(this); // Creating the nav bar
         add(navBar, BorderLayout.NORTH); // add the nav bar to the top
         add(buttonPanel, BorderLayout.WEST); // add the button panel to the left
         add(mainPanel, BorderLayout.CENTER); // add the main panel to the center
@@ -65,7 +64,7 @@ public class InstructorScreen extends JFrame
     public void resetFrame(JPanel buttons, JPanel main)
     {
         setLayout(new BorderLayout());
-        JPanel navBar = new NavBar(this, false);
+        JPanel navBar = new NavBar(this);
 
         add(navBar, BorderLayout.NORTH);
         add(main, BorderLayout.CENTER);
