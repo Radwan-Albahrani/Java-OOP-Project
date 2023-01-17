@@ -14,7 +14,7 @@ import oop.project.hooks.*;
 public class EditGradesPanel extends TransparentPanel
 {
 
-    // TODO: Could add a next and a back button to go through the students
+//TODO: Could add a next and a back button to go through the students
     public EditGradesPanel(int Width, int Height)
     {
         Box idBox;
@@ -31,7 +31,7 @@ public class EditGradesPanel extends TransparentPanel
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
         // ID
-        // TODO: ID is a list of the students in the class
+        //TODO: ID is a list of the students in the class
         JLabel idLabel = new JLabel("ID: ");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         idLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -75,7 +75,7 @@ public class EditGradesPanel extends TransparentPanel
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         emailLabel.setAlignmentX(RIGHT_ALIGNMENT);
         emailLabel.setForeground(ThemeColors.BLACK);
-
+        
         RoundedJTextField emailField = new RoundedJTextField(15);
         emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         emailField.setEditable(false);
@@ -87,15 +87,16 @@ public class EditGradesPanel extends TransparentPanel
         emailBox = AddToBox.addToHorizontalBox(emailComponents, 1);
 
         // Picture Setup
-        JComponent[] idNameComponents = {idBox, emailBox, nameBox};
+        JComponent[] idNameComponents = {idBox, emailBox ,nameBox};
         Box idNameBox = AddToBox.addToVerticalBox(idNameComponents, 1);
-        idNameBox.setAlignmentX(CENTER_ALIGNMENT);
 
-        JComponent[] pictureComponents = {idNameBox, picture};
+        JLabel spacingLabel1 = new JLabel("         ");
+
+        JComponent[] pictureComponents = {idNameBox, spacingLabel1, picture};
         idNameBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
 
         // Grades Setup
-        JLabel quizLabel = new JLabel("Quiz Grade:");
+        JLabel quizLabel = new JLabel("Quiz Grade:                   ");
         quizLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         quizLabel.setAlignmentX(LEFT_ALIGNMENT);
         quizLabel.setForeground(ThemeColors.BLACK);
@@ -128,12 +129,11 @@ public class EditGradesPanel extends TransparentPanel
         JLabel midtermGrade = new JLabel("/20");
         midtermGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         midtermGrade.setAlignmentX(RIGHT_ALIGNMENT);
-        midtermGrade.setForeground(ThemeColors.BLACK);
 
         JComponent[] midtermComponents = {midtermLabel, midtermField, midtermGrade};
         Box midtermBox = AddToBox.addToHorizontalBox(midtermComponents, 1);
 
-        JLabel finalLabel = new JLabel("Final Exam Grade:");
+        JLabel finalLabel = new JLabel("Final Exam Grade:    ");
         finalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         finalLabel.setAlignmentX(LEFT_ALIGNMENT);
         finalLabel.setForeground(ThemeColors.BLACK);
@@ -152,7 +152,7 @@ public class EditGradesPanel extends TransparentPanel
         JComponent[] finalComponents = {finalLabel, finalField, finalGrade};
         Box finalBox = AddToBox.addToHorizontalBox(finalComponents, 1);
 
-        JLabel projectLabel = new JLabel("Project Grade:");
+        JLabel projectLabel = new JLabel("Project Grade:             ");
         projectLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         projectLabel.setAlignmentX(LEFT_ALIGNMENT);
         projectLabel.setForeground(ThemeColors.BLACK);
@@ -171,7 +171,8 @@ public class EditGradesPanel extends TransparentPanel
         JComponent[] projectComponents = {projectLabel, projectField, projectGrade};
         Box projectBox = AddToBox.addToHorizontalBox(projectComponents, 1);
 
-        JLabel totalLabel = new JLabel("Total Grade:");
+
+        JLabel totalLabel = new JLabel("Total Grade:               ");
         totalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         totalLabel.setAlignmentX(LEFT_ALIGNMENT);
         totalLabel.setForeground(ThemeColors.BLACK);
@@ -187,12 +188,21 @@ public class EditGradesPanel extends TransparentPanel
         totalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         totalGrade.setAlignmentX(RIGHT_ALIGNMENT);
         totalGrade.setForeground(ThemeColors.BLACK);
-
+        
         JComponent[] totalComponents = {totalLabel, totalField, totalGrade};
         Box totalBox = AddToBox.addToHorizontalBox(totalComponents, 1);
 
         JComponent[] gradesComponents = {quizBox, midtermBox, finalBox, projectBox, totalBox};
         gradesBox = AddToBox.addToVerticalBox(gradesComponents, 1);
+
+        JLabel spacingLabel2 = new JLabel("    ");
+        spacingLabel2.setFont(new Font("Trebuchet MS", Font.BOLD, 200));
+        JLabel spacingLabel3 = new JLabel("    ");
+        spacingLabel3.setFont(new Font("Trebuchet MS", Font.BOLD, 200));
+
+        JComponent[] blankComponents = {spacingLabel2, gradesBox, spacingLabel3};
+        gradesBox = AddToBox.addToVerticalBox(blankComponents, 3);
+
 
         // Buttons
         KButton cancelButton = new CustomButtonInstructor("Cancel");
@@ -218,10 +228,9 @@ public class EditGradesPanel extends TransparentPanel
         c.gridy = 1;
         c.insets = new Insets(0, 30, 0, 30);
         this.add(idNameBox, c);
-        c.insets = new Insets(0, 300, 0, 350);
         c.gridy = 2;
         this.add(gradesBox, c);
-        c.insets = new Insets(0, 100, 0, 100);
+        c.insets = new Insets(0, 20, 0, 20);
         c.gridy = 3;
         this.add(buttonsBox, c);
 

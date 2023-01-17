@@ -5,16 +5,24 @@ import java.awt.Font;
 import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 import java.awt.Insets;
 import javax.swing.*;
 import oop.project.components.*;
 import oop.project.hooks.*;
+import com.k33ptoo.components.KButton;
+import com.k33ptoo.components.KGradientPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
 
 public class ProfilePanel extends TransparentPanel
 {
     public ProfilePanel(int Width, int Height)
     {
-
         // Label Setup
         JLabel profileLabel = new TitleLabel("Here is your profile");
 
@@ -27,7 +35,7 @@ public class ProfilePanel extends TransparentPanel
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         idLabel.setAlignmentX(CENTER_ALIGNMENT);
         idLabel.setForeground(ThemeColors.BLACK);
-
+        
         RoundedJTextField idField = new RoundedJTextField(15);
         idField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         idField.setMinimumSize(new Dimension(400, 50));
@@ -102,11 +110,11 @@ public class ProfilePanel extends TransparentPanel
 
         // Work Information Setup
         // Occupation Setup
-        JLabel occupationLabel = new JLabel("Occupation");
+        JLabel occupationLabel = new JLabel("Occupation" );
         occupationLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         occupationLabel.setAlignmentX(CENTER_ALIGNMENT);
         occupationLabel.setForeground(ThemeColors.BLACK);
-
+        
         RoundedJTextField occupationField = new RoundedJTextField(15);
         occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         occupationField.setEditable(false);
@@ -129,6 +137,7 @@ public class ProfilePanel extends TransparentPanel
         majorField.setMinimumSize(new Dimension(400, 50));
         majorField.setMaximumSize(new Dimension(400, 50));
         majorField.setAlignmentX(LEFT_ALIGNMENT);
+
 
         JComponent[] majorComponents = {majorLabel, majorField};
         Box majorBox = AddToBox.addToVerticalBox(majorComponents, 1);
@@ -175,9 +184,22 @@ public class ProfilePanel extends TransparentPanel
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
         personalPhoneField.setAlignmentX(LEFT_ALIGNMENT);
-
+        
         JComponent[] phoneComponents = {phoneLabel, workPhoneField, personalPhoneField};
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
+
+
+        // Reset Password Button
+        KButton resetPasswordButton = new CustomButtonInstructor("Reset Password");
+        resetPasswordButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        resetPasswordButton.setMinimumSize(new Dimension(200, 50));
+        resetPasswordButton.setMaximumSize(new Dimension(200, 50));
+        resetPasswordButton.setAlignmentX(RIGHT_ALIGNMENT);
+        resetPasswordButton.setForeground(ThemeColors.BLACK);
+
+        JComponent[] resetPasswordComponents = {resetPasswordButton};
+        Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
+
 
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
@@ -206,5 +228,61 @@ public class ProfilePanel extends TransparentPanel
         c.insets = new Insets(0, 25, 0, 300);
         c.gridy = 2;
         this.add(workInfoBox, c);
+        c.gridy = 3;
+        this.add(resetPasswordBox,c );
+
+        // Button Handler
+        resetPasswordButton.addActionListener(new ButtonHandler());
+    }
+
+    private class ButtonHandler implements ActionListener 
+    {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            JFrame resetPasswordFrame = new JFrame();
+            String buttonClicked = e.getActionCommand().trim();
+            if (buttonClicked.equals("Reset Password")) 
+            {
+                System.err.println("Reset Password Button Clicked") ;
+                FrameConfig.set(resetPasswordFrame, "Reset Password", 500, 300);
+                
+                
+                //Panels 
+                KGradientPanel resetPasswordPanel = new ThemedPanelInstructor();
+                
+                JLabel oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
+                oldPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+                RoundedJTextField oldPasswordField = new RoundedJTextField(15);
+                JLabel newPasswordLabel = new JLabel("New Password", SwingConstants.CENTER);
+                newPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+                RoundedJTextField newPasswordField = new RoundedJTextField(15);
+                JLabel confirmPasswordLabel = new JLabel("Confirm Password", SwingConstants.CENTER);
+                confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+                RoundedJTextField confirmPasswordField = new RoundedJTextField(15);
+                KButton submitButton = new CustomButtonInstructor("Submit");
+
+                
+                //Add to Frame
+                setLayout(new BorderLayout()); // set the layout to border layout
+                JPanel navBar = new NavBar(resetPasswordFrame, true); // Creating the nav bar
+                resetPasswordFrame.add(navBar, BorderLayout.NORTH); // add the nav bar to the top
+
+                JComponent[] resetPasswordComponents = {oldPasswordLabel, oldPasswordField, newPasswordLabel, newPasswordField, confirmPasswordLabel, confirmPasswordField, submitButton};
+                Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
+
+
+                resetPasswordPanel.add(resetPasswordBox);
+                resetPasswordFrame.add(resetPasswordPanel);
+
+                resetPasswordFrame.setVisible(true);
+            }
+            else if (buttonClicked.equals("Submit")) 
+            {
+                System.err.println("Submit Button Clicked");
+                resetPasswordFrame.dispose();
+            }
+        }
     }
 }

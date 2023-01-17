@@ -21,6 +21,14 @@ public class FrameConfig
         frame.setLayout(null);
         frame.setUndecorated(true);
     }
+    
+    public static void set(JFrame frame, String title, int Width, int Height) // Custom size
+    {
+        // Frame Setup
+        set(frame, title);
+        frame.setSize( Width, Height);
+    }
+
 
     public static void setBackground(JFrame frame, String path)
     {

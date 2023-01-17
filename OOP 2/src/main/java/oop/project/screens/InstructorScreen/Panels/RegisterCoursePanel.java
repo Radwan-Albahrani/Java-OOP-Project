@@ -1,9 +1,7 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.TransparentPanel;
 import java.awt.Font;
 import oop.project.components.*;
-import oop.project.hooks.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
