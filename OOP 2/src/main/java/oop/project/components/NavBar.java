@@ -50,8 +50,6 @@ public class NavBar extends JPanel
         this.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
         this.add(exitButton);
         this.add(minimizeButton);
-        frame.setLayout(new BorderLayout());
-        frame.add(this, BorderLayout.NORTH);
 
         resizeMoveFrame(frame, this);
 
