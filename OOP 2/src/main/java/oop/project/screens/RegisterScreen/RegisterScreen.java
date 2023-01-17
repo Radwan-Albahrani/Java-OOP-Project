@@ -25,8 +25,7 @@ public class RegisterScreen extends JFrame
         JPanel wrapper = wrapperSetup(registerPanel);
 
         setLayout(new BorderLayout());
-        JPanel navBar = new NavBar(this);
-        add(navBar, BorderLayout.NORTH);
+        new NavBar(this);
         add(wrapper, BorderLayout.CENTER);
 
         setVisible(true);
