@@ -53,8 +53,7 @@ public class InstructorScreen extends JFrame
         ((ButtonPanel) buttonPanel).setPanels(panels);
 
         // Adding Panel to Frame
-        JPanel navBar = new NavBar(this); // Creating the nav bar
-        add(navBar, BorderLayout.NORTH); // add the nav bar to the top
+        new NavBar(this); // Creating the nav bar and adding it to the frame
         add(buttonPanel, BorderLayout.WEST); // add the button panel to the left
         add(mainPanel, BorderLayout.CENTER); // add the main panel to the center
 

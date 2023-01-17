@@ -44,9 +44,7 @@ public class AdminScreen extends JFrame
         ((AdminButtonPanel) pButtonPanel).insertingPanels(dictionary_panel);
 
         setLayout(new BorderLayout());
-        JPanel navBar = new NavBar(this);
-
-        add(navBar, BorderLayout.NORTH);
+        new NavBar(this);
         add(main_interface, BorderLayout.CENTER);
         add(pButtonPanel, BorderLayout.WEST);
 
