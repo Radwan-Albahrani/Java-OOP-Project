@@ -9,7 +9,6 @@ import oop.project.screens.InstructorScreen.Panels.ProfilePanel;
 
 public class ResetPasswordHandler implements ActionListener
 {
-
     private final JFrame resetPasswordFrame;
 
     public ResetPasswordHandler(ProfilePanel profilePanel)

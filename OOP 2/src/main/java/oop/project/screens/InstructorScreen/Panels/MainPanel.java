@@ -6,6 +6,7 @@ import oop.project.components.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import oop.project.handlers.RegisterCourseHandler;
 
 import com.k33ptoo.components.KButton;
 
@@ -33,8 +34,8 @@ public class MainPanel extends TransparentPanel
             this.add(registerLabel);
             this.add(registerButton);
 
-            ButtonHandler handler = new ButtonHandler();
-            registerButton.addActionListener(handler);
+            // Button Handler
+            registerButton.addActionListener(new RegisterCourseHandler(this));
            
 
         }
@@ -55,23 +56,6 @@ public class MainPanel extends TransparentPanel
 
             this.add(courseLabel);
             this.add(informationLabel);
-        }
-        
-        
-    }
-
-    private class ButtonHandler implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            String buttonClicked = e.getActionCommand().trim();
-
-            if (buttonClicked.equals("Register Course"))
-            {
-                System.err.println("Register Course button clicked - Instructor");
-
-            }
         }
     }
 }
