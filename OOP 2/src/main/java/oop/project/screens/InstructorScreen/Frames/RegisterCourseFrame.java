@@ -8,17 +8,18 @@ import oop.project.components.*;
 import oop.project.hooks.*;
 import oop.project.handlers.RegisterCourseHandler;
 
-
 /*TODO:     Have radio buttons for the course to select
     *       Have a button to register the course
     *       
     *
 */
 
-public class RegisterCourseFrame extends JFrame{
+public class RegisterCourseFrame extends JFrame
+{
     KButton registerButton;
+    boolean added = false;
 
-    //TODO: Actually implement this
+    // TODO: Actually implement this
     public RegisterCourseFrame(JPanel parent)
     {
         FrameConfig.set(this, "RegisterCourse", 700, 700);
@@ -27,10 +28,8 @@ public class RegisterCourseFrame extends JFrame{
         JLabel courseLabel = new JLabel("Course");
         courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
+        // Create a way to store the courses and use a for loop to create the radio buttons
 
-        //Create a way to store the courses and use a for loop to create the radio buttons
-       
-     
         JRadioButton course1 = new JRadioButton("Course 1");
         course1.setSelected(true);
         JRadioButton course2 = new JRadioButton("Course 2");
@@ -46,33 +45,29 @@ public class RegisterCourseFrame extends JFrame{
         group.add(course2);
         group.add(course3);
         group.add(course4);
+        registerButton = new CustomButtonInstructor("Register");
 
-       
         JComponent[] components = {courseLabel, course1, course2, course3, course4, registerButton};
+        Box box = AddToBox.addToHorizontalBox(components, 6);
 
         // Add to Frame
         this.setLayout(new BorderLayout()); // set the layout to border layout
         JPanel navBar = new NavBar(this, true); // Creating the nav bar
         this.add(navBar, BorderLayout.NORTH); // add the nav bar to the top
 
-        registerButton = new CustomButtonInstructor("Register");
-        
         registerCoursePanel.add(courseLabel);
-        registerCoursePanel.add(course1);
-        registerCoursePanel.add(course2);
-        registerCoursePanel.add(course3);
-        registerCoursePanel.add(course4);
-        registerCoursePanel.add(registerButton);
-        
+        registerCoursePanel.add(box);
 
         this.add(registerCoursePanel);
-
 
     }
 
     public void setHandler(RegisterCourseHandler handler)
     {
-        registerButton.addActionListener(handler);
+        if (!added)
+        {
+            registerButton.addActionListener(handler);
+            added = true;
+        }
     }
 }
-

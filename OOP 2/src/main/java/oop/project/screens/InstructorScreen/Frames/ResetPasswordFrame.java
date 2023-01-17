@@ -11,6 +11,7 @@ import oop.project.hooks.*;
 public class ResetPasswordFrame extends JFrame
 {
     KButton submitButton;
+    boolean added = false;
 
     public ResetPasswordFrame(JPanel parent)
     {
@@ -46,6 +47,10 @@ public class ResetPasswordFrame extends JFrame
 
     public void setHandler(ResetPasswordHandler handler)
     {
-        submitButton.addActionListener(handler);
+        if (!added)
+        {
+            submitButton.addActionListener(handler);
+            added = true;
+        }
     }
 }
