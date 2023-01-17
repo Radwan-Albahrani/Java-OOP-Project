@@ -48,9 +48,7 @@ public class RegisterCourseFrame extends JFrame{
         group.add(course4);
 
        
-
-
-
+        JComponent[] components = {courseLabel, course1, course2, course3, course4, registerButton};
 
         // Add to Frame
         this.setLayout(new BorderLayout()); // set the layout to border layout
