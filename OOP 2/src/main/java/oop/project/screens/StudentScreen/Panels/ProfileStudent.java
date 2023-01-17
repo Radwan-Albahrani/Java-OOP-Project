@@ -178,17 +178,6 @@ public class ProfileStudent extends TransparentPanel
         s.weightx = 1;
         s.weighty = 1;
         s.insets = new Insets(0, 10, 0, 10);
-        this.add(studentMajorBox, s);
-
-        
-
-        KButton ViewProfileButton = new BlueButton(" View Profile");
-        ViewProfileButton.setPreferredSize(new Dimension(150, 50));
-
-        JComponent[] ViewProfileComponents = {profileLabel, ViewProfileButton};
-        Box ViewProfileBox = AddToBox.addToVerticalBox(ViewProfileComponents, 1);
-
-        this.add(ViewProfileBox);
-        
+        this.add(studentMajorBox, s);     
     }
 }
