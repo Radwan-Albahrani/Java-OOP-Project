@@ -42,18 +42,18 @@ public class NavBar extends JPanel
             frame.setState(JFrame.ICONIFIED);
         });
 
-        JPanel navBar = new JPanel();
-        navBar.setSize(screenWidth, 30);
-        navBar.setLocation(0, 0);
-        navBar.setOpaque(true);
-        navBar.setLayout(null);
-        navBar.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
-        navBar.add(exitButton);
-        navBar.add(minimizeButton);
+        this.setSize(screenWidth, 30);
+        this.setPreferredSize(new Dimension(screenWidth, 30));
+        this.setLocation(0, 0);
+        this.setOpaque(true);
+        this.setLayout(null);
+        this.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
+        this.add(exitButton);
+        this.add(minimizeButton);
         frame.setLayout(new BorderLayout());
-        frame.add(navBar, BorderLayout.NORTH);
+        frame.add(this, BorderLayout.NORTH);
 
-        resizeMoveFrame(frame, navBar);
+        resizeMoveFrame(frame, this);
 
     }
 
