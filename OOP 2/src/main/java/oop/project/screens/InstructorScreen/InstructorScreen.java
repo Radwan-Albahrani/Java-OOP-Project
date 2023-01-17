@@ -9,12 +9,6 @@
 *      -Send a message to the admin using Alerts
 */
 
-//TODO: Current Issues:
-//      - Can only switch between the panels once before not being able to switch back
-//      - Need to add a way to add an announcement
-//      - Need to the student view panel
-//      - Need to add a way to edit grades
-
 package oop.project.screens.InstructorScreen;
 
 import javax.swing.*;

@@ -40,6 +40,7 @@ public class AdminButtonHandler implements ActionListener
         // if the button clicked is Main Menu, Replace button panel and add the main panel
         if (buttonClicked.equals("Main Menu"))
         {
+            System.err.println("Main Menu button clicked - Admin");
             panels.get("button").remove(user_info);
             panels.get("button").add(mainButtonBox, BorderLayout.NORTH);
 
@@ -55,7 +56,7 @@ public class AdminButtonHandler implements ActionListener
         // If the button clicked is Add Announcement, Remove all the panels and add the announcement panel
         else if (buttonClicked.equals("View Alerts"))
         {
-
+            System.err.println("View Alerts button clicked - Admin");
             frame.remove(panels.get("Profile"));
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Information"));
@@ -68,6 +69,7 @@ public class AdminButtonHandler implements ActionListener
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("Manage Users") || buttonClicked.equals("Edit Information"))
         {
+            System.err.println("Manage Users button clicked - Admin");
             panels.get("button").remove(mainButtonBox);
             panels.get("button").add(user_info, BorderLayout.NORTH);
 
@@ -84,6 +86,7 @@ public class AdminButtonHandler implements ActionListener
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel
         else if (buttonClicked.equals("View Instructors"))
         {
+            System.err.println("View Instructors button clicked - Admin");
             frame.remove(panels.get("Profile"));
             frame.remove(panels.get("Information"));
             frame.remove(panels.get("Alerts"));
@@ -97,6 +100,7 @@ public class AdminButtonHandler implements ActionListener
         // If the button clicked is View Profile, Remove all the panels and add the View Profile panel
         else if (buttonClicked.equals("View Students"))
         {
+            System.err.println("View Students button clicked - Admin");
             frame.remove(panels.get("Profile"));
             frame.remove(panels.get("Information"));
             frame.remove(panels.get("Alerts"));
@@ -110,6 +114,7 @@ public class AdminButtonHandler implements ActionListener
         // If the button clicked is Alert Admin, Remove all the panels and add the Alert Admin panel
         else if (buttonClicked.equals("View Profile"))
         {
+            System.err.println("View Profile button clicked - Admin");
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Information"));
             frame.remove(panels.get("Alerts"));
@@ -122,6 +127,7 @@ public class AdminButtonHandler implements ActionListener
 
         else if (buttonClicked.equals("View Registration Requests"))
         {
+            System.err.println("View Registration Requests button clicked - Admin");
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Information"));
             frame.remove(panels.get("Alerts"));
@@ -135,6 +141,7 @@ public class AdminButtonHandler implements ActionListener
 
         else if (buttonClicked.equals("Logout"))
         {
+            System.err.println("Logout button clicked - Admin");
             frame.dispose();
             new LoginScreen();
         }

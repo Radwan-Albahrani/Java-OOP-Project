@@ -1,27 +1,20 @@
 package oop.project.components;
 
-import com.k33ptoo.components.KButton;
+import java.awt.Image;
+import javax.swing.JButton;
 
-import oop.project.colors.ThemeColors;
+import oop.project.hooks.FrameConfig;
 
-import java.awt.Font;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
-public class ExitButton extends KButton
+public class ExitButton extends JButton
 {
     public ExitButton()
     {
-        this.setText("X");
-        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        this.setkStartColor(ThemeColors.RED);
-        this.setkEndColor(ThemeColors.DARK_RED);
-        this.setkHoverStartColor(ThemeColors.ORANGE);
-        this.setkHoverEndColor(ThemeColors.DARK_ORANGE);
-        this.setkForeGround(ThemeColors.BLACK);
-        this.setkHoverForeGround(ThemeColors.BLACK);
-        this.setkBorderRadius(30);
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        Image image = FrameConfig.getPictureWithSize("NavBar/ExitIcon.png", 53, 30);
+        Image imageHover = FrameConfig.getPictureWithSize("NavBar/ExitHoverIcon.png", 53, 30);
+
+        this.setIcon(new ImageIcon(image));
+        this.setRolloverIcon(new ImageIcon(imageHover));
     }
 }
