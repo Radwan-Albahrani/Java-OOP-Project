@@ -36,13 +36,10 @@ public class ThemeColors
     public static final Color LIGHT_GREENISH_BROWN = new Color(133, 125, 103);
     public static final Color LIGHT_GREY = new Color(173, 170, 170, 240);
     public static final Color DARK_GREY = new Color(98, 98, 98, 240);
-<<<<<<< HEAD
     public static final Color GREENISH = new Color(86, 123, 106, 240);
     public static final Color LIGHT_BROWN = new Color(213, 151, 104, 240);
-=======
     public static final Color LIGHT_BLUE = new Color(0, 191, 255);
     public static final Color SAPPHIRE_BLUE = new Color(12, 98, 145);
     public static final Color GAMBOGE = new Color(229, 149, 0);
->>>>>>> ff52fb3e5c286126781311295948d1d608cf27f0
 
 }
