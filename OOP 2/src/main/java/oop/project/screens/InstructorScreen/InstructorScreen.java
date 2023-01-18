@@ -18,6 +18,7 @@ import java.util.Map;
 import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
 import oop.project.components.*;
+import oop.project.components.core.NavBar;
 import oop.project.hooks.*;
 import java.util.*;
 

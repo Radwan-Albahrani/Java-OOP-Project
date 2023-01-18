@@ -1,4 +1,4 @@
-package oop.project.components;
+package oop.project.components.panels;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;

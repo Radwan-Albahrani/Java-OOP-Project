@@ -5,6 +5,10 @@ import java.awt.*;
 
 import com.k33ptoo.components.*;
 import oop.project.components.*;
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.core.NavBar;
+import oop.project.components.core.RoundedJTextField;
+import oop.project.components.panels.ThemedPanelInstructor;
 import oop.project.handlers.ResetPasswordHandler;
 import oop.project.hooks.*;
 

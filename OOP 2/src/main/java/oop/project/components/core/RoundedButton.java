@@ -1,4 +1,4 @@
-package oop.project.components;
+package oop.project.components.core;
 
 import com.k33ptoo.components.KButton;
 

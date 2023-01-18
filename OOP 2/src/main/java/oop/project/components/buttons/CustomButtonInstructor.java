@@ -1,6 +1,7 @@
-package oop.project.components;
+package oop.project.components.buttons;
 
 import oop.project.colors.ThemeColors;
+import oop.project.components.core.RoundedButton;
 import oop.project.hooks.FrameConfig;
 
 import java.awt.*;
@@ -33,7 +34,7 @@ public class CustomButtonInstructor extends RoundedButton
         this.add(icon, BorderLayout.WEST);
         this.setText(text);
         this.setIconTextGap(30);
-        
+
         this.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         this.setkStartColor(ThemeColors.LIGHT_GREY);
         this.setkEndColor(ThemeColors.DARK_GREY);

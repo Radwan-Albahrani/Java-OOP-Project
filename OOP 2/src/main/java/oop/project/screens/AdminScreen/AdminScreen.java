@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import com.k33ptoo.components.*;
 
 import oop.project.components.*;
+import oop.project.components.core.NavBar;
 import oop.project.hooks.*;
 import oop.project.screens.AdminScreen.Panels.*;
 

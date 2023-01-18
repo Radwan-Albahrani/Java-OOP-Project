@@ -9,6 +9,8 @@ import com.k33ptoo.components.*;
 
 import oop.project.handlers.AdminButtonHandler;
 import oop.project.components.*;
+import oop.project.components.buttons.CustomButtonAdmin;
+import oop.project.components.panels.ThemedPanelAdmin;
 import oop.project.hooks.AddToBox;
 
 public class AdminButtonPanel extends ThemedPanelAdmin

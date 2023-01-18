@@ -9,6 +9,8 @@ import com.k33ptoo.components.*;
 
 import oop.project.handlers.ButtonHandlerInstructor;
 import oop.project.components.*;
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.panels.ThemedPanelInstructor;
 import oop.project.hooks.AddToBox;
 
 public class ButtonPanel extends ThemedPanelInstructor

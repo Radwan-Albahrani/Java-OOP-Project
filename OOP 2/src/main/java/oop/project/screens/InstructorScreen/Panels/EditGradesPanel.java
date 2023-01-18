@@ -9,6 +9,10 @@ import java.awt.Insets;
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 import oop.project.components.*;
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.core.RoundedJTextField;
+import oop.project.components.core.TitleLabel;
+import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;
 
 public class EditGradesPanel extends TransparentPanel

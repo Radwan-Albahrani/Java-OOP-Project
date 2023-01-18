@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import oop.project.components.*;
+import oop.project.components.core.NavBar;
+import oop.project.components.panels.ThemedPanelGeneric;
 import oop.project.hooks.*;
 import oop.project.screens.LoginScreen.Panels.LoginPanel;
 

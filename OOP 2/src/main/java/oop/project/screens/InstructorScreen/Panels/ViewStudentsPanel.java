@@ -1,9 +1,10 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.TransparentPanel;
 import java.awt.Font;
 import javax.swing.*;
 import oop.project.components.*;
+import oop.project.components.core.TitleLabel;
+import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;
 import java.awt.*;
 
@@ -25,7 +26,7 @@ public class ViewStudentsPanel extends TransparentPanel
         String[] columnNames = {"ID", "First Name", "Last Name", "Quiz Grade", "Midterm Grade", "Final Grade",
                 "Project Grade", "Total Grade"};
 
-        Object[][] data = { //temp data
+        Object[][] data = { // temp data
                 {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
                 {2, "John", "Doe", 20, 25, 40, 15, 100},
                 {3, "Sue", "Black", 20, 25, 40, 15, 100},
