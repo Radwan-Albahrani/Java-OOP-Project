@@ -12,9 +12,12 @@ import javax.swing.*;
 import com.github.lgooddatepicker.components.*;
 import com.k33ptoo.components.*;
 
-import oop.project.components.*;
-import oop.project.components.MiniComponents.EmailTextField;
 import oop.project.components.MiniComponents.PhoneTextField;
+import oop.project.components.buttons.BlueButton;
+import oop.project.components.core.RoundedJTextField;
+import oop.project.components.core.TitleLabel;
+import oop.project.components.panels.ThemedPanelGeneric;
+import oop.project.components.panels.VerticalPanel;
 import oop.project.handlers.RegisterHandler;
 import oop.project.hooks.*;
 
@@ -28,7 +31,7 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         this.wrapper = wrapper;
     }
 
-    List<JComponent> components = new ArrayList<>();
+    Map<String, JComponent> components = new Hashtable<>();
 
     public ProfileRegisterPanel(int Width, int Height)
     {
@@ -80,16 +83,6 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         sexLabel.setHorizontalAlignment(JLabel.CENTER);
         sexLabel.setHorizontalTextPosition(JLabel.CENTER);
 
-        // Email Label and Field Setup
-        JLabel PersonalEmailLabel = new JLabel("Personal Email");
-        PersonalEmailLabel.setForeground(Color.WHITE);
-        PersonalEmailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        PersonalEmailLabel.setHorizontalAlignment(JLabel.LEFT);
-
-        EmailTextField emailField = new EmailTextField(31);
-        emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        emailField.setHorizontalAlignment(RoundedJTextField.CENTER);
-
         JLabel occupation = new JLabel("Occupation");
         occupation.setForeground(Color.WHITE);
         occupation.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
@@ -108,17 +101,14 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         phoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         phoneField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
-        JComponent professionalBoxComponents[] = {MajorLabel, MajorComboBox, PersonalEmailLabel, emailField, occupation,
-                occupationField, phoneLabel, phoneField};
+        JComponent professionalBoxComponents[] = {MajorLabel, MajorComboBox, phoneLabel, phoneField};
         Box professionalBox = AddToBox.addToVerticalBox(professionalBoxComponents, 1);
 
         // Add components
-        components.add(sexType);
-        components.add(birthdayField);
-        components.add(MajorComboBox);
-        components.add(emailField);
-        components.add(occupationField);
-        components.add(phoneField);
+        components.put("sex", sexType);
+        components.put("birthday", birthdayField);
+        components.put("major", MajorComboBox);
+        components.put("phoneNumber", phoneField);
 
         registerButton = new BlueButton("Register");
 

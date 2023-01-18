@@ -1,6 +1,11 @@
 package oop.project.screens.LoginScreen.Panels;
 
-import oop.project.components.*;
+import oop.project.components.buttons.BlueButton;
+import oop.project.components.core.RoundedJPasswordField;
+import oop.project.components.core.RoundedJTextField;
+import oop.project.components.core.TitleLabel;
+import oop.project.components.panels.ThemedPanelGeneric;
+import oop.project.components.panels.VerticalPanel;
 import oop.project.hooks.*;
 import oop.project.screens.RegisterScreen.RegisterScreen;
 

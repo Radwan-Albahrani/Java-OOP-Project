@@ -1,6 +1,6 @@
 package oop.project.components.MiniComponents;
 
-import oop.project.components.RoundedJTextField;
+import oop.project.components.core.RoundedJTextField;
 
 public class PhoneTextField extends RoundedJTextField
 {

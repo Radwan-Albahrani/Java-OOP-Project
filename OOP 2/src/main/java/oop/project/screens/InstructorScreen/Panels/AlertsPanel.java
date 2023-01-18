@@ -1,8 +1,8 @@
 package oop.project.screens.InstructorScreen.Panels;
 
-import oop.project.components.CustomButtonInstructor;
-import oop.project.components.PromptedTextArea;
-import oop.project.components.TransparentPanel;
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.core.PromptedTextArea;
+import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.AddToBox;
 
 import javax.swing.*;

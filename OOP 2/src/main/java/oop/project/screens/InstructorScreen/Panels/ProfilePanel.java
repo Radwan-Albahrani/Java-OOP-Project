@@ -7,14 +7,19 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
-import oop.project.components.*;
+
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.core.RoundedJTextField;
+import oop.project.components.core.TitleLabel;
+import oop.project.components.panels.TransparentPanel;
+import oop.project.handlers.ResetPasswordHandler;
 import oop.project.hooks.*;
+import com.k33ptoo.components.KButton;
 
 public class ProfilePanel extends TransparentPanel
 {
     public ProfilePanel(int Width, int Height)
     {
-
         // Label Setup
         JLabel profileLabel = new TitleLabel("Here is your profile");
 
@@ -88,13 +93,13 @@ public class ProfilePanel extends TransparentPanel
         Box genderBox = AddToBox.addToVerticalBox(genderComponents, 1);
 
         // Personal Information Box Setup
-        JComponent[] nameidComponents = {idBox, nameBox};
-        Box nameidBox = AddToBox.addToVerticalBox(nameidComponents, 2);
+        JComponent[] nameIdComponents = {idBox, nameBox};
+        Box nameIdBox = AddToBox.addToVerticalBox(nameIdComponents, 2);
 
-        JComponent[] birthgenderComponents = {birthdayBox, genderBox};
-        Box birthgenderBox = AddToBox.addToVerticalBox(birthgenderComponents, 2);
+        JComponent[] birthGenderComponents = {birthdayBox, genderBox};
+        Box birthGenderBox = AddToBox.addToVerticalBox(birthGenderComponents, 2);
 
-        JComponent[] personalInfoComponents = {nameidBox, birthgenderBox};
+        JComponent[] personalInfoComponents = {nameIdBox, birthGenderBox};
         Box personalInfoBox = AddToBox.addToVerticalBox(personalInfoComponents, 1);
 
         JComponent[] pictureBoxComponents = {personalInfoBox, picture};
@@ -179,6 +184,17 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] phoneComponents = {phoneLabel, workPhoneField, personalPhoneField};
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
+        // Reset Password Button
+        KButton resetPasswordButton = new CustomButtonInstructor("Reset Password");
+        resetPasswordButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        resetPasswordButton.setMinimumSize(new Dimension(200, 50));
+        resetPasswordButton.setMaximumSize(new Dimension(200, 50));
+        resetPasswordButton.setAlignmentX(RIGHT_ALIGNMENT);
+        resetPasswordButton.setForeground(ThemeColors.BLACK);
+
+        JComponent[] resetPasswordComponents = {resetPasswordButton};
+        Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
+
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
         Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
@@ -206,5 +222,10 @@ public class ProfilePanel extends TransparentPanel
         c.insets = new Insets(0, 25, 0, 300);
         c.gridy = 2;
         this.add(workInfoBox, c);
+        c.gridy = 3;
+        this.add(resetPasswordBox, c);
+
+        // Button Handler
+        resetPasswordButton.addActionListener(new ResetPasswordHandler(this));
     }
 }

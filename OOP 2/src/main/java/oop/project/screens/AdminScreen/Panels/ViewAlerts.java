@@ -2,7 +2,9 @@ package oop.project.screens.AdminScreen.Panels;
 
 import oop.project.hooks.AddToBox;
 import oop.project.colors.ThemeColors;
-import oop.project.components.*;
+
+import oop.project.components.buttons.CustomButton;
+import oop.project.components.panels.TransparentPanel;
 
 import javax.swing.*;
 

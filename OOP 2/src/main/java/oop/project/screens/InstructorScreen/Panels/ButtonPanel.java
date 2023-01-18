@@ -8,14 +8,16 @@ import javax.swing.*;
 import com.k33ptoo.components.*;
 
 import oop.project.handlers.ButtonHandlerInstructor;
-import oop.project.components.*;
+
+import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.panels.ThemedPanelInstructor;
 import oop.project.hooks.AddToBox;
 
 public class ButtonPanel extends ThemedPanelInstructor
 {
     // Dictionaries
-    Dictionary<String, KButton> MainButtons = new Hashtable<String, KButton>();
-    Dictionary<String, JPanel> panels;
+    Map<String, KButton> MainButtons = new Hashtable<String, KButton>();
+    Map<String, JPanel> panels;
 
     // Array of button names
     String[] ButtonNames = {
@@ -46,7 +48,7 @@ public class ButtonPanel extends ThemedPanelInstructor
     Box mainButtonBox;
 
     // Button to set panel and initialize handlers
-    public void setPanels(Dictionary<String, JPanel> panels)
+    public void setPanels(Map<String, JPanel> panels)
     {
         this.panels = panels;
         for (int i = 0; i < MainButtons.size(); i++)
@@ -63,7 +65,7 @@ public class ButtonPanel extends ThemedPanelInstructor
         this.frame = frame;
         this.setPreferredSize(new Dimension(440, 0));
 
-        // Add all the buttons to the dictionary
+        // Add all the buttons to the Map
         for (int i = 0; i < ButtonNames.length; i++)
         {
             MainButtons.put(ButtonNames[i].trim(), new CustomButtonInstructor(ButtonNames[i], ButtonIconLocations[i]));

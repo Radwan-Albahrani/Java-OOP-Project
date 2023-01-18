@@ -20,22 +20,22 @@ import oop.project.screens.RegisterScreen.Panels.ProfileRegisterPanel;
 
 public class RegisterHandler implements ActionListener
 {
-    List<JComponent> components;
+    Map<String, JComponent> components;
 
     List<String> passwords = new ArrayList<>();
 
-    public void setComponents(List<JComponent> components)
+    public void setComponents(Map<String, JComponent> components)
     {
         this.components = components;
     }
 
-    List<String> info = new ArrayList<>();
-    List<String> allInfo = new ArrayList<>();
+    Map<String, String> info = new Hashtable<>();
+    Map<String, String> allInfo = new Hashtable<>();
 
-    Dictionary<String, JPanel> panels;
+    Map<String, JPanel> panels;
     JFrame frame;
 
-    public RegisterHandler(List<JComponent> components, Dictionary<String, JPanel> panels, JFrame frame)
+    public RegisterHandler(Map<String, JComponent> components, Map<String, JPanel> panels, JFrame frame)
     {
         this.components = components;
         this.panels = panels;
@@ -54,7 +54,7 @@ public class RegisterHandler implements ActionListener
         {
             System.err.println("Next button clicked - Register");
             // Validate the input
-            for (JComponent component : components)
+            for (Map.Entry<String, JComponent> component : components.entrySet())
             {
                 int result = Validation(component);
                 if (result == -1)
@@ -65,7 +65,7 @@ public class RegisterHandler implements ActionListener
                 {
                     if (passwords.get(0).equals(passwords.get(1)))
                     {
-                        info.add(passwords.get(0));
+                        info.put("password", passwords.get(0));
                         passwords.clear();
                     }
                     else
@@ -79,12 +79,12 @@ public class RegisterHandler implements ActionListener
             }
 
             // Add the info to the list
-            allInfo.addAll(info);
+            allInfo.putAll(info);
             info.clear();
 
             // Remove the current panel
             frame.remove(panels.get("previous"));
-            System.err.println("Previous button clicked - Register");
+            System.err.println("Previous Panel Removed");
 
             // Make new panel
             ProfileRegisterPanel profile = new ProfileRegisterPanel(frame.getWidth(), frame.getHeight());
@@ -93,7 +93,7 @@ public class RegisterHandler implements ActionListener
             // Give it the handler
             profile.setHandler(this);
 
-            // Add it to the dictionary and display it
+            // Add it to the Map and display it
             panels.put("profile", wrapper);
             frame.add(panels.get("profile"));
         }
@@ -103,7 +103,7 @@ public class RegisterHandler implements ActionListener
         {
             System.err.println("Register button clicked - Register");
             // Validate the input
-            for (JComponent component : components)
+            for (Map.Entry<String, JComponent> component : components.entrySet())
             {
                 int result = Validation(component);
                 if (result == -1)
@@ -112,12 +112,19 @@ public class RegisterHandler implements ActionListener
                 }
             }
             // Add the info to the list
-            allInfo.addAll(info);
+            allInfo.putAll(info);
             info.clear();
 
-            UserModel user = new UserModel(allInfo.get(0), allInfo.get(1), allInfo.get(6), allInfo.get(3), allInfo.get(9),
-                    allInfo.get(5), allInfo.get(7), allInfo.get(8), allInfo.get(10), allInfo.get(11),
-                    new Auth(allInfo.get(2), allInfo.get(4)));
+            UserModel user = new UserModel();
+            user.setFirstName(allInfo.get("firstName"));
+            user.setLastName(allInfo.get("lastName"));
+            user.setEmail(allInfo.get("email"));
+            user.setPhoneNumber(allInfo.get("phoneNumber"));
+            user.setAuth(new Auth(allInfo.get("username"), allInfo.get("password")));
+            user.setBirthDate(allInfo.get("birthday"));
+            user.setMajor(allInfo.get("major"));
+            user.setSex(allInfo.get("sex"));
+            user.setRole(allInfo.get("role"));
 
             System.out.println(user.toString());
 
@@ -143,7 +150,7 @@ public class RegisterHandler implements ActionListener
         constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(frame.getHeight() / 16, frame.getWidth() / 3, frame.getHeight() / 16,
+        constraints.insets = new Insets(frame.getHeight() / 8, frame.getWidth() / 3, frame.getHeight() / 8,
                 frame.getWidth() / 3);
         constraints.fill = GridBagConstraints.BOTH;
         ((ProfileRegisterPanel) panel).setWrapper(wrapper);
@@ -151,24 +158,23 @@ public class RegisterHandler implements ActionListener
         return wrapper;
     }
 
-    private int Validation(JComponent component)
+    private int Validation(Map.Entry<String, JComponent> component)
     {
-        if (component instanceof JTextField && !(component instanceof JPasswordField || component instanceof EmailTextField
-                || component instanceof PhoneTextField))
+        if (component.getValue() instanceof JTextField && !(component.getValue() instanceof JPasswordField))
         {
-            if (((JTextField) component).getText().equals(""))
+            if (((JTextField) component.getValue()).getText().equals(""))
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            info.add(((JTextField) component).getText());
+            info.put(component.getKey(), ((JTextField) component.getValue()).getText());
             return 1;
         }
-        else if (component instanceof JPasswordField)
+        else if (component.getValue() instanceof JPasswordField)
         {
-            if (((JPasswordField) component).getPassword().length == 0)
+            if (((JPasswordField) component.getValue()).getPassword().length == 0)
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
                 info.clear();
@@ -177,7 +183,7 @@ public class RegisterHandler implements ActionListener
             }
 
             // Validate Strength.
-            String password = new String(((JPasswordField) component).getPassword());
+            String password = new String(((JPasswordField) component.getValue()).getPassword());
             if (passwords.size() == 0)
             {
                 int validateStrength = validateStrength(password);
@@ -194,36 +200,16 @@ public class RegisterHandler implements ActionListener
                 return 1;
             }
         }
-        else if (component instanceof EmailTextField)
+        else if (component.getValue() instanceof PhoneTextField)
         {
-            if (((EmailTextField) component).getText().equals(""))
+            if (((PhoneTextField) component.getValue()).getText().equals(""))
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            int result = ((EmailTextField) component).Validate();
-            if (result != 0)
-            {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid email address");
-                info.clear();
-                passwords.clear();
-                return -1;
-            }
-            info.add(((EmailTextField) component).getText());
-            return 1;
-        }
-        else if (component instanceof PhoneTextField)
-        {
-            if (((PhoneTextField) component).getText().equals(""))
-            {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
-                info.clear();
-                passwords.clear();
-                return -1;
-            }
-            int result = ((PhoneTextField) component).Validate();
+            int result = ((PhoneTextField) component.getValue()).Validate();
             if (result != 0)
             {
                 JOptionPane.showMessageDialog(frame, "Please enter a valid phone number");
@@ -231,52 +217,52 @@ public class RegisterHandler implements ActionListener
                 passwords.clear();
                 return -1;
             }
-            info.add(((PhoneTextField) component).getText());
+            info.put(component.getKey(), ((PhoneTextField) component.getValue()).getText());
             return 1;
         }
-        else if (component instanceof JComboBox<?>)
+        else if (component.getValue() instanceof JComboBox<?>)
         {
-            if (((JComboBox<?>) component).getSelectedItem().equals(""))
+            if (((JComboBox<?>) component.getValue()).getSelectedItem().equals(""))
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            info.add((String) ((JComboBox<?>) component).getSelectedItem());
+            info.put(component.getKey(), (String) ((JComboBox<?>) component.getValue()).getSelectedItem());
             return 1;
         }
-        else if (component instanceof DatePicker)
+        else if (component.getValue() instanceof DatePicker)
         {
-            if (((DatePicker) component).getDate() == null)
+            if (((DatePicker) component.getValue()).getDate() == null)
             {
                 JOptionPane.showMessageDialog(frame, "Please fill out all fields");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            else if (((DatePicker) component).getDate().isAfter(LocalDate.now()))
+            else if (((DatePicker) component.getValue()).getDate().isAfter(LocalDate.now()))
             {
                 JOptionPane.showMessageDialog(frame, "Please enter a valid date");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            else if (((DatePicker) component).getDate().isBefore(LocalDate.now().minusYears(100)))
+            else if (((DatePicker) component.getValue()).getDate().isBefore(LocalDate.now().minusYears(100)))
             {
                 JOptionPane.showMessageDialog(frame, "Please enter a valid date");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            else if (((DatePicker) component).getDate().isAfter(LocalDate.now().minusYears(18)))
+            else if (((DatePicker) component.getValue()).getDate().isAfter(LocalDate.now().minusYears(18)))
             {
                 JOptionPane.showMessageDialog(frame, "You must be at least 18 years old to register");
                 info.clear();
                 passwords.clear();
                 return -1;
             }
-            info.add(((DatePicker) component).getDate().toString());
+            info.put(component.getKey(), ((DatePicker) component.getValue()).getDate().toString());
             return 1;
         }
         return 0;

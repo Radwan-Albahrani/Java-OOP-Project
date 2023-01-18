@@ -17,13 +17,13 @@ import java.util.*;
 public class ButtonHandlerInstructor implements ActionListener
 {
     // Variables needed for the handler
-    Dictionary<String, JPanel> panels;
+    Map<String, JPanel> panels;
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
 
     // Constructor
-    public ButtonHandlerInstructor(JFrame frame, Dictionary<String, JPanel> panels, Box studentButtonBox,
+    public ButtonHandlerInstructor(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
     {
         this.frame = frame;
@@ -49,7 +49,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
-            
+
             FrameConfig.setBackground(frame, "InstructorScreen/background.png");
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
@@ -122,7 +122,6 @@ public class ButtonHandlerInstructor implements ActionListener
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("alerts"));
         }
 
-        
         // If the button clicked is Logout, Dispose of this frame and go back to login screen
         // TODO dispose of stored user as well
         else if (buttonClicked.equals("Logout"))
