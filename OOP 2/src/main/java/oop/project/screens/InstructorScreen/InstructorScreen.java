@@ -19,6 +19,7 @@ import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
 
 import oop.project.components.core.NavBar;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.*;
 import java.util.*;
 

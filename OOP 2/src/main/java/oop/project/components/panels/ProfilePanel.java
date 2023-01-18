@@ -1,4 +1,4 @@
-package oop.project.screens.InstructorScreen.Panels;
+package oop.project.components.panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,7 +11,6 @@ import javax.swing.*;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
-import oop.project.components.panels.TransparentPanel;
 import oop.project.handlers.ResetPasswordHandler;
 import oop.project.hooks.*;
 import com.k33ptoo.components.KButton;
