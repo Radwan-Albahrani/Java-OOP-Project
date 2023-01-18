@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import oop.project.components.*;
+import oop.project.components.core.NavBar;
+import oop.project.components.panels.ThemedPanelGeneric;
 import oop.project.hooks.*;
 import oop.project.screens.LoginScreen.Panels.LoginPanel;
 
@@ -36,8 +38,8 @@ public class LoginScreen extends JFrame
         loginPanelWrapper.setLayout(new GridBagLayout());
         loginPanelWrapper.add(loginPanel, constraints);
 
+        JPanel navBar = new NavBar(this);
         setLayout(new BorderLayout());
-        JPanel navBar = new NavBar(this); // Add NavBar
         add(navBar, BorderLayout.NORTH);
         add(loginPanelWrapper, BorderLayout.CENTER);
 

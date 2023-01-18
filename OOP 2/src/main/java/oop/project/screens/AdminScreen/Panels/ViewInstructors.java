@@ -1,8 +1,9 @@
 package oop.project.screens.AdminScreen.Panels;
 
-import oop.project.components.TransparentPanel;
-
 import javax.swing.*;
+
+import oop.project.components.panels.TransparentPanel;
+
 import java.awt.*;
 
 public class ViewInstructors extends TransparentPanel

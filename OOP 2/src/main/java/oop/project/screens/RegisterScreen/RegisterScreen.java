@@ -5,6 +5,7 @@ import java.awt.*;
 import com.k33ptoo.components.*;
 
 import oop.project.components.*;
+import oop.project.components.core.NavBar;
 import oop.project.hooks.*;
 import oop.project.screens.RegisterScreen.Panels.*;
 
@@ -25,8 +26,8 @@ public class RegisterScreen extends JFrame
         JPanel wrapper = wrapperSetup(registerPanel);
 
         setLayout(new BorderLayout());
-        JPanel navbar = new NavBar(this);
-        add(navbar, BorderLayout.NORTH);
+        JPanel navBar = new NavBar(this);
+        add(navBar, BorderLayout.NORTH);
         add(wrapper, BorderLayout.CENTER);
 
         setVisible(true);

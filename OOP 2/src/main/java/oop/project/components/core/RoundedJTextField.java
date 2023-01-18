@@ -1,14 +1,14 @@
-package oop.project.components;
+package oop.project.components.core;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 
-public class RoundedJPasswordField extends JPasswordField
+public class RoundedJTextField extends JTextField
 {
     private Shape shape;
 
-    public RoundedJPasswordField(int size)
+    public RoundedJTextField(int size)
     {
         super(size);
         setOpaque(false); // As suggested by @AVD in comment.

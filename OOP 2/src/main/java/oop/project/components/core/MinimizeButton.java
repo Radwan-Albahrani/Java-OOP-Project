@@ -1,4 +1,4 @@
-package oop.project.components;
+package oop.project.components.core;
 
 import java.awt.Image;
 import javax.swing.JButton;

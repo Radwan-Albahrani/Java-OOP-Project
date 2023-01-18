@@ -1,4 +1,4 @@
-package oop.project.components;
+package oop.project.components.core;
 
 import javax.swing.*;
 
@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 
 public class NavBar extends JPanel
 {
-    public NavBar(JFrame frame)
+    public NavBar(JFrame frame, boolean dispose)
     {
         int screenWidth = frame.getWidth();
 
@@ -24,10 +24,20 @@ public class NavBar extends JPanel
         exitButton.setFocusPainted(false);
         exitButton.setOpaque(false);
 
-        exitButton.addActionListener((ActionEvent e) ->
+        if (dispose) // Dispose the frame
         {
-            System.exit(0);
-        });
+            exitButton.addActionListener((ActionEvent e) ->
+            {
+                frame.dispose();
+            });
+        }
+        else // Exit the program
+        {
+            exitButton.addActionListener((ActionEvent e) ->
+            {
+                System.exit(0);
+            });
+        }
 
         JButton minimizeButton = new MinimizeButton();
         minimizeButton.setSize(53, 30);
@@ -42,17 +52,24 @@ public class NavBar extends JPanel
             frame.setState(JFrame.ICONIFIED);
         });
 
-        this.setSize(screenWidth, 30);
-        this.setPreferredSize(new Dimension(screenWidth, 30));
-        this.setLocation(0, 0);
-        this.setOpaque(true);
-        this.setLayout(null);
-        this.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
-        this.add(exitButton);
-        this.add(minimizeButton);
+        JPanel navBar = new JPanel();
+        navBar.setSize(screenWidth, 30);
+        navBar.setLocation(0, 0);
+        navBar.setOpaque(true);
+        navBar.setLayout(null);
+        navBar.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
+        navBar.add(exitButton);
+        navBar.add(minimizeButton);
+        frame.setLayout(new BorderLayout());
+        frame.add(navBar, BorderLayout.NORTH);
 
-        resizeMoveFrame(frame, this);
+        resizeMoveFrame(frame, navBar);
 
+    }
+
+    public NavBar(JFrame frame)
+    {
+        this(frame, false);
     }
 
     private static void resizeMoveFrame(JFrame frame, JPanel panel)
