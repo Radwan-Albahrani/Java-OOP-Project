@@ -38,7 +38,7 @@ public class InstructorScreen extends JFrame
         JPanel announcementPanel = new AnnouncementPanel(getWidth(), getHeight());
         JPanel viewStudentsPanel = new ViewStudentsPanel(getWidth(), getHeight());
         JPanel editGradesPanel = new EditGradesPanel(getWidth(), getHeight());
-        JPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
+        JPanel profilePanel = new ProfilePanel(getWidth(), getHeight(), 1);
         JPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
         // Setting up a Map to store the panels
