@@ -12,7 +12,6 @@ import javax.swing.*;
 
 import com.k33ptoo.components.KButton;
 
-import oop.project.components.*;
 import oop.project.components.buttons.BlueButton;
 import oop.project.components.core.RoundedJPasswordField;
 import oop.project.components.core.RoundedJTextField;

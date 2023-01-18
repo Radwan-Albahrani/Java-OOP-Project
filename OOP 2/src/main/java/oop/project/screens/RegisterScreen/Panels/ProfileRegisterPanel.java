@@ -12,7 +12,6 @@ import javax.swing.*;
 import com.github.lgooddatepicker.components.*;
 import com.k33ptoo.components.*;
 
-import oop.project.components.*;
 import oop.project.components.MiniComponents.PhoneTextField;
 import oop.project.components.buttons.BlueButton;
 import oop.project.components.core.RoundedJTextField;

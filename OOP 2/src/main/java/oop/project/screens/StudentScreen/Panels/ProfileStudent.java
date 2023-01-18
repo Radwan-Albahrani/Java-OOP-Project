@@ -5,7 +5,6 @@ import oop.project.hooks.AddToBox;
 
 import java.awt.*;
 import javax.swing.*;
-import com.k33ptoo.components.*;
 
 public class ProfileStudent extends TransparentPanel
 {

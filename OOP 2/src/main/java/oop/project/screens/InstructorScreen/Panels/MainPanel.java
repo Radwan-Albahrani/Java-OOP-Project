@@ -5,10 +5,8 @@ import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.TransparentPanel;
 
 import java.awt.Font;
-import oop.project.components.*;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import oop.project.handlers.RegisterCourseHandler;
 
 import com.k33ptoo.components.KButton;

@@ -2,7 +2,7 @@ package oop.project.screens.StudentScreen.Panels;
 
 import oop.project.components.buttons.BlueButton;
 import oop.project.components.panels.TransparentPanel;
-import oop.project.components.*;
+
 import oop.project.hooks.AddToBox;
 
 import java.awt.*;

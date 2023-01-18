@@ -1,7 +1,7 @@
 package oop.project.screens.StudentScreen.Panels;
 
 import oop.project.handlers.ButtonHandlerStudent;
-import oop.project.components.*;
+
 import oop.project.components.buttons.CustomButtonStudent;
 import oop.project.components.panels.ThemedPanelStudent;
 import oop.project.hooks.AddToBox;
