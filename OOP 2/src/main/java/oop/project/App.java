@@ -8,13 +8,13 @@ import oop.project.screens.StudentScreen.StudentScreen;
 
 public final class App
 {
-        public static String Path = "src/main/resources/images/";
-        // public static String Path = "./classes/images/"; // PATH FOR JAR
+    public static String Path = "src/main/resources/images/";
+    // public static String Path = "./classes/images/"; // PATH FOR JAR
 
-        public static void main(String[] args)
-        {
-                // new LoginScreen();
-                // new AdminScreen();
-                new StudentScreen();
-        }
+    public static void main(String[] args)
+    {
+        // new LoginScreen();
+        // new AdminScreen();
+        new StudentScreen();
+    }
 }

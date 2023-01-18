@@ -1,6 +1,7 @@
-package oop.project.components;
+package oop.project.components.buttons;
 
 import oop.project.colors.ThemeColors;
+import oop.project.components.core.RoundedButton;
 
 import java.awt.Font;
 import java.awt.Dimension;

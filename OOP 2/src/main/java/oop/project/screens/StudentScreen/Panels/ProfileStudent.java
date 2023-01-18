@@ -1,7 +1,6 @@
 package oop.project.screens.StudentScreen.Panels;
 
-import oop.project.components.BlueButton;
-import oop.project.components.TransparentPanel;
+import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.AddToBox;
 
 import java.awt.*;
@@ -30,7 +29,6 @@ public class ProfileStudent extends TransparentPanel
         JComponent[] studentIdComponents = {studentId, studentIdField};
         Box studentIdBox = AddToBox.addToVerticalBox(studentIdComponents, 1);
 
-
         JLabel studentName = new JLabel("Student Name");
         studentName.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         studentName.setAlignmentX(CENTER_ALIGNMENT);
@@ -45,7 +43,6 @@ public class ProfileStudent extends TransparentPanel
 
         JComponent[] studentNameComponents = {studentName, studentNameField};
         Box studentNameBox = AddToBox.addToVerticalBox(studentNameComponents, 1);
-
 
         JLabel studentEmail = new JLabel("Student Email");
         studentEmail.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -62,7 +59,6 @@ public class ProfileStudent extends TransparentPanel
         JComponent[] studentEmailComponents = {studentEmail, studentEmailField};
         Box studentEmailBox = AddToBox.addToVerticalBox(studentEmailComponents, 1);
 
-
         JLabel studentPhone = new JLabel("Student Phone");
         studentPhone.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         studentPhone.setAlignmentX(CENTER_ALIGNMENT);
@@ -77,7 +73,6 @@ public class ProfileStudent extends TransparentPanel
 
         JComponent[] studentPhoneComponents = {studentPhone, studentPhoneField};
         Box studentPhoneBox = AddToBox.addToVerticalBox(studentPhoneComponents, 1);
-        
 
         JLabel studentGender = new JLabel("Gender");
         studentGender.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -91,9 +86,8 @@ public class ProfileStudent extends TransparentPanel
         studentGenderField.setMaximumSize(new Dimension(400, 50));
         studentGenderField.setAlignmentX(LEFT_ALIGNMENT);
 
-        JComponent [] studentGenderComponents = {studentGender, studentGenderField};
+        JComponent[] studentGenderComponents = {studentGender, studentGenderField};
         Box studentGenderBox = AddToBox.addToVerticalBox(studentGenderComponents, 1);
-
 
         JLabel studentDOB = new JLabel("Date of Birth");
         studentDOB.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -109,9 +103,8 @@ public class ProfileStudent extends TransparentPanel
 
         JComponent[] studentDOBComponents = {studentDOB, studentDOBField};
         Box studentDOBBox = AddToBox.addToVerticalBox(studentDOBComponents, 1);
-        
 
-        //Major
+        // Major
         JLabel studentMajor = new JLabel("Major");
         studentMajor.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         studentMajor.setAlignmentX(CENTER_ALIGNMENT);
@@ -127,7 +120,6 @@ public class ProfileStudent extends TransparentPanel
         JComponent[] studentMajorComponents = {studentMajor, studentMajorField};
         Box studentMajorBox = AddToBox.addToVerticalBox(studentMajorComponents, 1);
 
-
         this.setLayout(new GridBagLayout());
         GridBagConstraints s = new GridBagConstraints();
         s.fill = GridBagConstraints.BOTH;
@@ -137,7 +129,7 @@ public class ProfileStudent extends TransparentPanel
         s.weighty = 1;
         s.insets = new Insets(0, 10, 0, 10);
         this.add(studentIdBox, s);
-        
+
         s.gridx = 1;
         s.gridy = 0;
         s.weightx = 1;
@@ -178,6 +170,6 @@ public class ProfileStudent extends TransparentPanel
         s.weightx = 1;
         s.weighty = 1;
         s.insets = new Insets(0, 10, 0, 10);
-        this.add(studentMajorBox, s);     
+        this.add(studentMajorBox, s);
     }
 }

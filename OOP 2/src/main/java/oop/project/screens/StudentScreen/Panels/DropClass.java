@@ -1,6 +1,7 @@
 package oop.project.screens.StudentScreen.Panels;
 
-import oop.project.components.BlueButton;
+import oop.project.components.buttons.BlueButton;
+import oop.project.components.panels.TransparentPanel;
 import oop.project.components.*;
 import oop.project.hooks.AddToBox;
 
@@ -22,7 +23,6 @@ public class DropClass extends TransparentPanel
         JComboBox dropClassComboBox = new JComboBox();
         dropClassComboBox.setPreferredSize(new Dimension(150, 50));
 
-    
         JComponent[] dropClassComponents = {dropClassLabel, dropClassButton};
         Box dropClassBox = AddToBox.addToVerticalBox(dropClassComponents, 1);
 
