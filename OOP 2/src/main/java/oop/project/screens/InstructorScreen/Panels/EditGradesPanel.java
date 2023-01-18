@@ -13,6 +13,7 @@ import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.TransparentPanel;
+import oop.project.handlers.*;
 import oop.project.hooks.*;
 
 public class EditGradesPanel extends TransparentPanel
@@ -229,5 +230,8 @@ public class EditGradesPanel extends TransparentPanel
         c.gridy = 3;
         this.add(buttonsBox, c);
 
+        // Button Handlers
+        cancelButton.addActionListener(new SaveChangesHandler());
+        saveButton.addActionListener(new SaveChangesHandler());
     }
 }
