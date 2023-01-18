@@ -1,9 +1,10 @@
 package oop.project.hooks;
 
+import oop.project.colors.ThemeColors;
 import java.awt.Image;
 
 import javax.swing.*;
-
+import javax.swing.border.*;
 import oop.project.App;
 
 public class FrameConfig
@@ -20,6 +21,7 @@ public class FrameConfig
         frame.setIconImage(icon);
         frame.setLayout(null);
         frame.setUndecorated(true);
+        frame.getRootPane().setBorder(new LineBorder(ThemeColors.MEDIUM_SEA_GREEN, 2));
     }
     
     public static void set(JFrame frame, String title, int Width, int Height) // Custom size

@@ -13,7 +13,7 @@ public class ThemedPanelInstructor extends KGradientPanel
         this.setkStartColor(ThemeColors.LIGHT_GREY);
         this.setkEndColor(ThemeColors.DARK_GREY);
         this.setkFillBackground(true);
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         this.setOpaque(false);
     }
 }
