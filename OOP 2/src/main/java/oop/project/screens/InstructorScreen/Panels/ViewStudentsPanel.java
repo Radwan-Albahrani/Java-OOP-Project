@@ -2,7 +2,7 @@ package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
 import javax.swing.*;
-import oop.project.components.*;
+
 import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;

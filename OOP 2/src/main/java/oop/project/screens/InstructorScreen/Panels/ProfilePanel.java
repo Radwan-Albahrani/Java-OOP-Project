@@ -7,7 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
-import oop.project.components.*;
+
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;

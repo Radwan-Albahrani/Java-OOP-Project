@@ -1,6 +1,5 @@
 package oop.project.screens.LoginScreen.Panels;
 
-import oop.project.components.*;
 import oop.project.components.buttons.BlueButton;
 import oop.project.components.core.RoundedJPasswordField;
 import oop.project.components.core.RoundedJTextField;
