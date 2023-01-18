@@ -20,9 +20,8 @@ import oop.project.handlers.*;
 import oop.project.hooks.*;
 
 public class EditGradesPanel extends TransparentPanel
-{
-    int maxEntryIndex = 5; //TODO: Change to actual max value of students in course
-    int currentEntryIndex;
+{// TODO: Change to actual max value of students in course
+    public int currentEntryIndex;
 
     // TODO: Could add a next and a back button to go through the students
     public EditGradesPanel(int Width, int Height)
@@ -55,11 +54,10 @@ public class EditGradesPanel extends TransparentPanel
         idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
         idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
         idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
-        for (int i = 0; i < maxEntryIndex; i++)
+        for (int i = 0; i < 5; i++)
         {
             idJComboBoxList.addItem("" + i);
         }
-        
 
         JComponent[] idComponents = {idLabel, idJComboBoxList};
         idBox = AddToBox.addToHorizontalBox(idComponents, 1);
@@ -207,9 +205,11 @@ public class EditGradesPanel extends TransparentPanel
 
         // Buttons
         KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
+        nextButton.setActionCommand("next");
         nextButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         nextButton.setAlignmentX(LEFT_ALIGNMENT);
         KButton previousButton = new CustomButtonInstructor("<—", 100, 50);
+        previousButton.setActionCommand("previous");
         previousButton.setAlignmentX(RIGHT_ALIGNMENT);
         previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
@@ -218,7 +218,7 @@ public class EditGradesPanel extends TransparentPanel
         KButton saveButton = new CustomButtonInstructor("Save");
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton };
+        JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton};
         buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
 
         // Add to Panel
@@ -248,53 +248,25 @@ public class EditGradesPanel extends TransparentPanel
         saveButton.addActionListener(new SaveChangesHandler());
 
         idJComboBoxList.addActionListener(
-            new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentEntryIndex = idJComboBoxList.getSelectedIndex();
-            }
-        });
+                new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        currentEntryIndex = idJComboBoxList.getSelectedIndex();
+                    }
+                });
 
         nextButton.addActionListener(
-            new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (currentEntryIndex < maxEntryIndex) {
-                        currentEntryIndex++;
-
-                    if (currentEntryIndex == maxEntryIndex) 
-                    {
-                        currentEntryIndex = 0;
-                    }
-                    idJComboBoxList.setSelectedIndex(currentEntryIndex);
-                    System.err.println("Next Button Clicked");
-                    }
-                }
-            }
-        );
+                new NextPreviousHandler(this, idJComboBoxList));
 
         previousButton.addActionListener(
-            new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    currentEntryIndex--;
+                new NextPreviousHandler(this, idJComboBoxList));
 
-                    if (currentEntryIndex < 0) 
-                    {
-                        currentEntryIndex = maxEntryIndex - 1;
-                    }
-                    idJComboBoxList.setSelectedIndex(currentEntryIndex);
-                    System.err.println("Previous Button Clicked");
-                }
-            }
-        );
-
-        /*nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
-
-        previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));*/
+        /*
+         * nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
+         * previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
+         */
 
     }
 }
