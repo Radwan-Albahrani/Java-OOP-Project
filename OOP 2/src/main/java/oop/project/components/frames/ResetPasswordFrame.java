@@ -1,4 +1,4 @@
-package oop.project.screens.InstructorScreen.Frames;
+package oop.project.components.frames;
 
 import javax.swing.*;
 import java.awt.*;
