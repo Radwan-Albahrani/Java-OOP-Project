@@ -20,7 +20,7 @@ public class StudentScreen extends JFrame
 
         JPanel mainPanel = new StudentMain(getWidth(), getHeight());
         KGradientPanel buttonPanel = new StudentButton(this, getWidth(), getHeight());
-        JPanel profile = new ProfilePanel(getWidth(), getHeight());
+        JPanel profile = new ProfilePanel(getWidth(), getHeight(), 2);
         JPanel registerClass = new registerClass(getWidth(), getHeight());
         JPanel sendAlerts = new SendAlerts(getWidth(), getHeight());
         JPanel dropClass = new DropClass(getWidth(), getHeight());
