@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
 
+import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
@@ -17,10 +18,14 @@ import com.k33ptoo.components.KButton;
 
 public class ProfilePanel extends TransparentPanel
 {
-    public ProfilePanel(int Width, int Height)
+    KButton resetPasswordButton;
+    KButton saveChangesButton;
+
+    public ProfilePanel(int Width, int Height, int type)
     {
         // Label Setup
         JLabel profileLabel = new TitleLabel("Here is your profile");
+        setButtonsType(type);
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
@@ -182,7 +187,6 @@ public class ProfilePanel extends TransparentPanel
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
         // Reset Password Button
-        KButton resetPasswordButton = new CustomButtonInstructor("Reset Password");
         resetPasswordButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         resetPasswordButton.setMinimumSize(new Dimension(200, 50));
         resetPasswordButton.setMaximumSize(new Dimension(200, 50));
@@ -193,7 +197,6 @@ public class ProfilePanel extends TransparentPanel
         Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
 
         // Save Changes Button
-        KButton saveChangesButton = new CustomButtonInstructor("Save Changes");
         saveChangesButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         saveChangesButton.setMinimumSize(new Dimension(200, 50));
         saveChangesButton.setMaximumSize(new Dimension(200, 50));
@@ -239,5 +242,24 @@ public class ProfilePanel extends TransparentPanel
         // Button Handler
         resetPasswordButton.addActionListener(new ResetPasswordHandler(this));
         saveChangesButton.addActionListener(new SaveChangesHandler());
+    }
+
+    public void setButtonsType(int type)
+    {
+        if (type == 0)
+        {
+            resetPasswordButton = new CustomButtonAdmin("Reset Password");
+            saveChangesButton = new CustomButtonAdmin("Save Changes");
+        }
+        else if (type == 1)
+        {
+            resetPasswordButton = new CustomButtonInstructor("Reset Password");
+            saveChangesButton = new CustomButtonInstructor("Save Changes");
+        }
+        // else if (type == 2)
+        // {
+        // resetPasswordButton = new CustomButtonStudent("Reset Password");
+        // saveChangesButton = new CustomButtonStudent("Save Changes");
+        // }
     }
 }

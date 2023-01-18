@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import com.k33ptoo.components.*;
 
 import oop.project.components.core.NavBar;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.*;
 import oop.project.screens.AdminScreen.Panels.*;
 
@@ -23,7 +24,7 @@ public class AdminScreen extends JFrame
 
         JPanel main_interface = new AdminInterface(getWidth(), getHeight());
         JPanel edit_info = new EditUserInfo(getWidth(), getHeight());
-        JPanel view_profile = new ViewProfile(getWidth(), getHeight());
+        JPanel view_profile = new ProfilePanel(getWidth(), getHeight(), 0);
         JPanel view_student = new ViewStudent(getWidth(), getHeight());
         JPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());
         JPanel view_Alerts = new ViewAlerts(getWidth(), getHeight());
