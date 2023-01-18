@@ -9,10 +9,11 @@ import oop.project.screens.StudentScreen.StudentScreen;
 public final class App
 {
     public static String Path = "src/main/resources/images/";
-    // public static String Path = "./classes/images/";
+    // public static String Path = "./classes/images/"; // PATH FOR JAR
 
     public static void main(String[] args)
     {
+<<<<<<< HEAD
         new LoginScreen();
 <<<<<<< HEAD
         //new AdminScreen();
@@ -24,5 +25,10 @@ public final class App
         new AdminScreen();
 >>>>>>> 265bad2e34f5cd4c50255702f0424288ca52d854
         new InstructorScreen();
+=======
+        // new LoginScreen();
+        // new AdminScreen();
+        new StudentScreen();
+>>>>>>> efc9853419d181541c6a782234985cdfe12a5405
     }
 }
