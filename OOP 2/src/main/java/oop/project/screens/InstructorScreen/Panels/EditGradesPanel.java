@@ -6,6 +6,9 @@ import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 
@@ -18,6 +21,7 @@ import oop.project.hooks.*;
 
 public class EditGradesPanel extends TransparentPanel
 {
+    int maxEntryIndex = 5; //TODO: Change to actual max value of students in course
 
     // TODO: Could add a next and a back button to go through the students
     public EditGradesPanel(int Width, int Height)
@@ -50,10 +54,11 @@ public class EditGradesPanel extends TransparentPanel
         idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
         idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
         idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < maxEntryIndex; i++)
         {
             idJComboBoxList.addItem("" + i);
         }
+        
 
         JComponent[] idComponents = {idLabel, idJComboBoxList};
         idBox = AddToBox.addToHorizontalBox(idComponents, 1);
@@ -200,12 +205,19 @@ public class EditGradesPanel extends TransparentPanel
         gradesBox = AddToBox.addToVerticalBox(gradesComponents, 1);
 
         // Buttons
+        KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
+        nextButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        nextButton.setAlignmentX(LEFT_ALIGNMENT);
+        KButton previousButton = new CustomButtonInstructor("<—", 100, 50);
+        previousButton.setAlignmentX(RIGHT_ALIGNMENT);
+        previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+
         KButton cancelButton = new CustomButtonInstructor("Cancel");
         cancelButton.setAlignmentX(CENTER_ALIGNMENT);
         KButton saveButton = new CustomButtonInstructor("Save");
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        JComponent[] buttonsComponents = {cancelButton, saveButton};
+        JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton };
         buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
 
         // Add to Panel
@@ -223,15 +235,18 @@ public class EditGradesPanel extends TransparentPanel
         c.gridy = 1;
         c.insets = new Insets(0, 30, 0, 30);
         this.add(idNameBox, c);
-        c.insets = new Insets(0, 300, 0, 350);
+        c.insets = new Insets(0, 330, 0, 330);
         c.gridy = 2;
         this.add(gradesBox, c);
-        c.insets = new Insets(0, 100, 0, 100);
+        c.insets = new Insets(0, 70, 0, 70);
         c.gridy = 3;
         this.add(buttonsBox, c);
 
         // Button Handlers
         cancelButton.addActionListener(new SaveChangesHandler());
         saveButton.addActionListener(new SaveChangesHandler());
+
+        nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, idJComboBoxList.getSelectedIndex(), maxEntryIndex));
+        previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, idJComboBoxList.getSelectedIndex(), maxEntryIndex));
     }
 }
