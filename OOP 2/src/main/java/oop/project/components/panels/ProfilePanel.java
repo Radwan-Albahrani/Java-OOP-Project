@@ -25,6 +25,8 @@ public class ProfilePanel extends TransparentPanel
     {
         // Label Setup
         JLabel profileLabel = new TitleLabel("Here is your profile");
+
+        // Button Setup
         setButtonsType(type);
 
         // Picture Setup
@@ -240,7 +242,7 @@ public class ProfilePanel extends TransparentPanel
         this.add(buttonBox, c);
 
         // Button Handler
-        resetPasswordButton.addActionListener(new ResetPasswordHandler(this));
+        resetPasswordButton.addActionListener(new ResetPasswordHandler(this, type));
         saveChangesButton.addActionListener(new SaveChangesHandler());
     }
 
