@@ -6,6 +6,7 @@ import javax.swing.*;
 import com.k33ptoo.components.*;
 
 import oop.project.components.core.NavBar;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.*;
 import oop.project.screens.StudentScreen.Panels.*;
 
@@ -19,7 +20,7 @@ public class StudentScreen extends JFrame
 
         JPanel mainPanel = new StudentMain(getWidth(), getHeight());
         KGradientPanel buttonPanel = new StudentButton(this, getWidth(), getHeight());
-        JPanel profile = new ProfileStudent(getWidth(), getHeight());
+        JPanel profile = new ProfilePanel(getWidth(), getHeight());
         JPanel registerClass = new registerClass(getWidth(), getHeight());
         JPanel sendAlerts = new SendAlerts(getWidth(), getHeight());
         JPanel dropClass = new DropClass(getWidth(), getHeight());
