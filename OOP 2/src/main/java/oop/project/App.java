@@ -11,8 +11,9 @@ public final class App
 
         public static void main(String[] args)
         {
-                new LoginScreen();
-                new AdminScreen();
+                // new LoginScreen();
+                // new AdminScreen();
                 new InstructorScreen();
         }
 }
+ 
