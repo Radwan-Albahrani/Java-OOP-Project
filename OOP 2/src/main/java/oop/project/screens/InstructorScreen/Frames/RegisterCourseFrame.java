@@ -22,11 +22,12 @@ public class RegisterCourseFrame extends JFrame
     // TODO: Actually implement this
     public RegisterCourseFrame(JPanel parent)
     {
-        FrameConfig.set(this, "RegisterCourse", 700, 700);
+        FrameConfig.set(this, "RegisterCourse", 500, 500);
         KGradientPanel registerCoursePanel = new ThemedPanelInstructor();
 
         JLabel courseLabel = new JLabel("Course");
         courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        this.setLocationRelativeTo(registerButton);
 
         // Create a way to store the courses and use a for loop to create the radio buttons
 
@@ -59,7 +60,6 @@ public class RegisterCourseFrame extends JFrame
         registerCoursePanel.add(box);
 
         this.add(registerCoursePanel);
-
     }
 
     public void setHandler(RegisterCourseHandler handler)
