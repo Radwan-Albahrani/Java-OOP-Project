@@ -24,7 +24,7 @@ public class RegisterPanel extends ThemedPanelGeneric
     List<String> info = new ArrayList<>();
     JPanel wrapper;
 
-    List<JComponent> components = new ArrayList<>();
+    Map<String, JComponent> components = new Hashtable<>();
 
     public void setWrapper(JPanel wrapper, JFrame frame)
     {
@@ -127,13 +127,13 @@ public class RegisterPanel extends ThemedPanelGeneric
         // Register Button Setup
         nextButton = new BlueButton("Next");
 
-        components.add(firstNameField);
-        components.add(lastNameField);
-        components.add(usernameField);
-        components.add(emailField);
-        components.add(passwordField);
-        components.add(confirmPasswordField);
-        components.add(userTypeSelection);
+        components.put("firstName", firstNameField);
+        components.put("lastName", lastNameField);
+        components.put("username", usernameField);
+        components.put("email", emailField);
+        components.put("password", passwordField);
+        components.put("confirmPassword", confirmPasswordField);
+        components.put("role", userTypeSelection);
 
         // JPanel for ComboBox and Register Button
         JPanel bottomPanel = new VerticalPanel(userTypeBox, nextButton);
@@ -160,9 +160,9 @@ public class RegisterPanel extends ThemedPanelGeneric
         this.add(bottomPanel, c);
     }
 
-    private void HandlerSetter(List<JComponent> components, int Width, int Height, JFrame frame)
+    private void HandlerSetter(Map<String, JComponent> components, int Width, int Height, JFrame frame)
     {
-        Dictionary<String, JPanel> panels = new Hashtable<>();
+        Map<String, JPanel> panels = new Hashtable<>();
 
         panels.put("previous", wrapper);
 

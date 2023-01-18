@@ -14,8 +14,8 @@ import oop.project.hooks.AddToBox;
 public class AdminButtonPanel extends ThemedPanelAdmin
 {
 
-    Dictionary<String, KButton> myButtons = new Hashtable<String, KButton>();
-    Dictionary<String, JPanel> panels = new Hashtable<>();
+    Map<String, KButton> myButtons = new Hashtable<String, KButton>();
+    Map<String, JPanel> panels = new Hashtable<>();
 
     String[] All_buttons = {
             " Main Menu ",
@@ -34,7 +34,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     Box user_info;
     Box mainButtonBox;
 
-    public void insertingPanels(Dictionary<String, JPanel> panel)
+    public void insertingPanels(Map<String, JPanel> panel)
     {
         this.panels = panel;
 
@@ -52,7 +52,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         this.frame = frame;
         this.setPreferredSize(new Dimension(440, 0));
 
-        // Add all the buttons to the dictionary
+        // Add all the buttons to the Map
         for (int i = 0; i < All_buttons.length; i++)
         {
             myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i]));

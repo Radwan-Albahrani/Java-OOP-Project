@@ -2,7 +2,7 @@ package oop.project.screens.AdminScreen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Dictionary;
+import java.util.Map;
 import java.util.Hashtable;
 
 import com.k33ptoo.components.*;
@@ -30,18 +30,18 @@ public class AdminScreen extends JFrame
         KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
         JPanel viewRegistrations = new ViewRegistrationPanel(getWidth(), getHeight());
 
-        Dictionary<String, JPanel> dictionary_panel = new Hashtable<>();
+        Map<String, JPanel> Map_panel = new Hashtable<>();
 
-        dictionary_panel.put("Main", main_interface);
-        dictionary_panel.put("Information", edit_info);
-        dictionary_panel.put("Profile", view_profile);
-        dictionary_panel.put("Student", view_student);
-        dictionary_panel.put("Instructors", view_Instructors);
-        dictionary_panel.put("Alerts", view_Alerts);
-        dictionary_panel.put("button", pButtonPanel);
-        dictionary_panel.put("Registrations", viewRegistrations);
+        Map_panel.put("Main", main_interface);
+        Map_panel.put("Information", edit_info);
+        Map_panel.put("Profile", view_profile);
+        Map_panel.put("Student", view_student);
+        Map_panel.put("Instructors", view_Instructors);
+        Map_panel.put("Alerts", view_Alerts);
+        Map_panel.put("button", pButtonPanel);
+        Map_panel.put("Registrations", viewRegistrations);
 
-        ((AdminButtonPanel) pButtonPanel).insertingPanels(dictionary_panel);
+        ((AdminButtonPanel) pButtonPanel).insertingPanels(Map_panel);
 
         setLayout(new BorderLayout());
         JPanel navBar = new NavBar(this, false);

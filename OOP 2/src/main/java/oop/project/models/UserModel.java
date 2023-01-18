@@ -6,28 +6,60 @@ public class UserModel
     private String lastName;
     private String sex;
     private String email;
-    private String personalEmail;
     private String role;
     private String birthDate;
     private String major;
-    private String occupation;
     private String phoneNumber;
     private Auth auth;
 
-    public UserModel(String firstName, String lastName, String sex, String email, String personalEmail, String role,
-            String birthDate, String major, String occupation, String phoneNumber, Auth auth)
+    public void setFirstName(String firstName)
     {
         this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
+    }
+
+    public void setSex(String sex)
+    {
         this.sex = sex;
+    }
+
+    public void setEmail(String email)
+    {
         this.email = email;
-        this.personalEmail = personalEmail;
+    }
+
+    public void setRole(String role)
+    {
         this.role = role;
+    }
+
+    public void setBirthDate(String birthDate)
+    {
         this.birthDate = birthDate;
+    }
+
+    public void setMajor(String major)
+    {
         this.major = major;
-        this.occupation = occupation;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setAuth(Auth auth)
+    {
         this.auth = auth;
+    }
+
+    public UserModel()
+    {
+
     }
 
     @Override
@@ -38,11 +70,9 @@ public class UserModel
         profile += "Last Name: " + this.lastName + "\n";
         profile += "Sex: " + this.sex + "\n";
         profile += "Email: " + this.email + "\n";
-        profile += "Personal Email: " + this.personalEmail + "\n";
         profile += "Role: " + this.role + "\n";
         profile += "Birth Date: " + this.birthDate + "\n";
         profile += "Major: " + this.major + "\n";
-        profile += "Occupation: " + this.occupation + "\n";
         profile += "Phone Number: " + this.phoneNumber + "\n";
         profile += "Username: " + this.auth.getUsername() + "\n";
         profile += "Password: " + this.auth.getPassword() + "\n";
@@ -69,11 +99,6 @@ public class UserModel
         return email;
     }
 
-    public String getPersonalEmail()
-    {
-        return personalEmail;
-    }
-
     public String getRole()
     {
         return role;
@@ -87,11 +112,6 @@ public class UserModel
     public String getMajor()
     {
         return major;
-    }
-
-    public String getOccupation()
-    {
-        return occupation;
     }
 
     public String getPhoneNumber()

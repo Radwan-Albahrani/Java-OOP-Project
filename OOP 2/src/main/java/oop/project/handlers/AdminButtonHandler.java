@@ -16,13 +16,13 @@ import java.util.*;
 
 public class AdminButtonHandler implements ActionListener
 {
-    Dictionary<String, JPanel> panels;
+    Map<String, JPanel> panels;
     JFrame frame;
     Box user_info;
     Box mainButtonBox;
 
     // Constructor
-    public AdminButtonHandler(JFrame frame, Dictionary<String, JPanel> panels, Box user_info,
+    public AdminButtonHandler(JFrame frame, Map<String, JPanel> panels, Box user_info,
             Box mainButtonBox)
     {
         this.frame = frame;

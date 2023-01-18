@@ -13,7 +13,7 @@ package oop.project.screens.InstructorScreen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Dictionary;
+import java.util.Map;
 
 import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
@@ -39,8 +39,8 @@ public class InstructorScreen extends JFrame
         JPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
         JPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
-        // Setting up a dictionary to store the panels
-        Dictionary<String, JPanel> panels = new Hashtable<>();
+        // Setting up a Map to store the panels
+        Map<String, JPanel> panels = new Hashtable<>();
         panels.put("main", mainPanel);
         panels.put("announcement", announcementPanel);
         panels.put("viewStudents", viewStudentsPanel);
