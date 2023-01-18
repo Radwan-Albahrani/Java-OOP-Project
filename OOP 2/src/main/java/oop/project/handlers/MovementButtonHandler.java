@@ -5,17 +5,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-
 public class MovementButtonHandler implements ActionListener
 {
-    private int currentEntryindex;
-    private int maxEntryIndex;
-    private JComboBox<String> list;
+    int currentEntryIndex;
+    int maxEntryIndex;
+    JComboBox<String> list;
 
     public MovementButtonHandler(JComboBox<String> list, int currentEntryIndex, int maxEntryIndex)
     {
         this.list = list;
-        this.currentEntryindex = currentEntryIndex;
+        this.currentEntryIndex = currentEntryIndex;
         this.maxEntryIndex = maxEntryIndex;
     }
 
@@ -25,24 +24,44 @@ public class MovementButtonHandler implements ActionListener
         String buttonClicked = e.getActionCommand().trim();
         if (buttonClicked.equals("—>"))
         {
-            currentEntryindex++;
-            if (currentEntryindex == maxEntryIndex) 
+            currentEntryIndex++;
+
+            if (currentEntryIndex == maxEntryIndex) 
             {
-                currentEntryindex = 0;
+                currentEntryIndex = 0;
             }
-            list.setSelectedIndex(currentEntryindex);
+            list.setSelectedIndex(currentEntryIndex);
             System.err.println("Next Button Clicked");
         }
         else if (buttonClicked.equals("<—"))
         {
-            currentEntryindex--;
-            if (currentEntryindex < 0) 
+            currentEntryIndex--;
+
+            if (currentEntryIndex < 0) 
             {
-                currentEntryindex = maxEntryIndex - 1;
+                currentEntryIndex = maxEntryIndex - 1;
             }
-            list.setSelectedIndex(currentEntryindex);
+            list.setSelectedIndex(currentEntryIndex);
             System.err.println("Previous Button Clicked");
         }
-        System.err.println("Current Entry Index: " + currentEntryindex);
     }
 }
+        
+/*
+        //TODO: Change the values of the text fields to the values of the current entry
+        currentEntryIndex = list.getSelectedIndex();
+      
+        if (maxEntryIndex != 0 && currentEntryIndex < maxEntryIndex)
+        {
+             
+            currentEntry = results.get(currentEntryindex);
+            idTextField.setText("" + currentEntry.getAddressID());
+            firstNameTextField.setText(currentEntry.getFirstName());
+            lastNameTextField.setText(currentEntry.getLastName());
+            emailTextField.setText(currentEntry.getEmail());
+            phoneTextField.setText(currentEntry.getPhoneNumber());
+            maxTextField.setText("" + numberOfEntries);
+            indexTextField.setText("" + (currentEntryindex + 1));
+      } 
+*/
+   

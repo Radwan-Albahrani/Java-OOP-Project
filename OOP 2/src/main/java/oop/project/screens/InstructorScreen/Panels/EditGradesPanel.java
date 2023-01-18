@@ -22,6 +22,7 @@ import oop.project.hooks.*;
 public class EditGradesPanel extends TransparentPanel
 {
     int maxEntryIndex = 5; //TODO: Change to actual max value of students in course
+    int currentEntryIndex;
 
     // TODO: Could add a next and a back button to go through the students
     public EditGradesPanel(int Width, int Height)
@@ -246,7 +247,54 @@ public class EditGradesPanel extends TransparentPanel
         cancelButton.addActionListener(new SaveChangesHandler());
         saveButton.addActionListener(new SaveChangesHandler());
 
-        nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, idJComboBoxList.getSelectedIndex(), maxEntryIndex));
-        previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, idJComboBoxList.getSelectedIndex(), maxEntryIndex));
+        idJComboBoxList.addActionListener(
+            new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentEntryIndex = idJComboBoxList.getSelectedIndex();
+            }
+        });
+
+        nextButton.addActionListener(
+            new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (currentEntryIndex < maxEntryIndex) {
+                        currentEntryIndex++;
+
+                    if (currentEntryIndex == maxEntryIndex) 
+                    {
+                        currentEntryIndex = 0;
+                    }
+                    idJComboBoxList.setSelectedIndex(currentEntryIndex);
+                    System.err.println("Next Button Clicked");
+                    }
+                }
+            }
+        );
+
+        previousButton.addActionListener(
+            new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    currentEntryIndex--;
+
+                    if (currentEntryIndex < 0) 
+                    {
+                        currentEntryIndex = maxEntryIndex - 1;
+                    }
+                    idJComboBoxList.setSelectedIndex(currentEntryIndex);
+                    System.err.println("Previous Button Clicked");
+                }
+            }
+        );
+
+        /*nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
+
+        previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));*/
+
     }
 }
