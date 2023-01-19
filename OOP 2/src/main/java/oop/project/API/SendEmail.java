@@ -77,10 +77,9 @@ public class SendEmail
     public static void sendEmail(String to)
     {
         String emailMessage = """
-
                 Dear User
 
-                Thank you for completing your registration with Our esteemed Student Information System.
+                Thank you for completing your registration with our esteemed Student Information System.
 
                 Please note that your account is not yet activated. You will receive an email once your account is activated.
 
