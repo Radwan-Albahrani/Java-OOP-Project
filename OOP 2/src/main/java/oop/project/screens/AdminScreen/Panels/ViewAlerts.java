@@ -67,13 +67,7 @@ public class ViewAlerts extends TransparentPanel
         alertTextArea.append(dumbyAlert5);
         alertTextArea.append(sperator);
         alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-        alertTextArea.append(dumbyAlert6);
-
+       
 
 
 

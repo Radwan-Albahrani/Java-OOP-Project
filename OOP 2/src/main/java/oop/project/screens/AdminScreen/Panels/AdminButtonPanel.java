@@ -28,7 +28,9 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " View Profile ",      //done
             " Edit Information ",         //done
             " Registration Requests ", //done
-            "Logout"                //done
+            "Logout" //,
+            //"Creat Course"
+                          //done
 
     };
 
@@ -85,12 +87,10 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("View Alerts"),
                 myButtons.get("Manage Users"),
                 myButtons.get("Registration Requests"),
-                myButtons.get("View Instructors"),
-                myButtons.get("View Students"),
                 myButtons.get("View Profile")
         };
         // Add the buttons to the mainButtonBox
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 7);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
 
         // Buttons for the student Box
         JLabel editTitle = new JLabel("Edit User Information");
@@ -101,11 +101,13 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         JComponent[] profileJComponents = {
                 editTitle,
                 myButtons.get("Main Menu"),
-                myButtons.get("Edit Information")
+                myButtons.get("Edit Information"),  
+                myButtons.get("View Instructors"),
+                myButtons.get("View Students"),
         };
 
         // Add the buttons to the studentButtonBox
-        user_info = AddToBox.addToHorizontalBox(profileJComponents, 3);
+        user_info = AddToBox.addToHorizontalBox(profileJComponents, 5);
 
         // Add the main box and the logout button during panel initialization
         this.setLayout(new BorderLayout());
