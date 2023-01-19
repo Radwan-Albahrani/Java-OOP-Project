@@ -5,53 +5,51 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-import oop.project.screens.InstructorScreen.Panels.EditGradesPanel;
-
 public class NextPreviousHandler implements ActionListener
 {
     /**
      *
      */
-    private final EditGradesPanel editGradesPanel;
+
     private final JComboBox<String> idJComboBoxList;
 
-    public NextPreviousHandler(EditGradesPanel editGradesPanel, JComboBox<String> idJComboBoxList)
+    public NextPreviousHandler(JComboBox<String> idJComboBoxList)
     {
-        this.editGradesPanel = editGradesPanel;
         this.idJComboBoxList = idJComboBoxList;
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        int currentEntryIndex = idJComboBoxList.getSelectedIndex();
         if (e.getActionCommand().equals("previous"))
         {
-            if (this.editGradesPanel.currentEntryIndex > 0)
+            if (currentEntryIndex > 0)
             {
-                this.editGradesPanel.currentEntryIndex--;
+                currentEntryIndex--;
 
-                idJComboBoxList.setSelectedIndex(this.editGradesPanel.currentEntryIndex);
+                idJComboBoxList.setSelectedIndex(currentEntryIndex);
                 System.err.println("Previous Button Clicked");
             }
-            else if (this.editGradesPanel.currentEntryIndex == 0)
+            else
             {
-                this.editGradesPanel.currentEntryIndex = idJComboBoxList.getItemCount() - 1;
-                idJComboBoxList.setSelectedIndex(this.editGradesPanel.currentEntryIndex);
+                currentEntryIndex = idJComboBoxList.getItemCount() - 1;
+                idJComboBoxList.setSelectedIndex(currentEntryIndex);
             }
         }
         else if (e.getActionCommand().equals("next"))
         {
-            if (this.editGradesPanel.currentEntryIndex < idJComboBoxList.getItemCount() - 1)
+            if (currentEntryIndex < idJComboBoxList.getItemCount() - 1)
             {
-                this.editGradesPanel.currentEntryIndex++;
+                currentEntryIndex++;
 
-                idJComboBoxList.setSelectedIndex(this.editGradesPanel.currentEntryIndex);
+                idJComboBoxList.setSelectedIndex(currentEntryIndex);
                 System.err.println("Next Button Clicked");
             }
-            else if (this.editGradesPanel.currentEntryIndex == idJComboBoxList.getItemCount() - 1)
+            else
             {
-                this.editGradesPanel.currentEntryIndex = 0;
-                idJComboBoxList.setSelectedIndex(this.editGradesPanel.currentEntryIndex);
+                currentEntryIndex = 0;
+                idJComboBoxList.setSelectedIndex(currentEntryIndex);
             }
         }
     }
