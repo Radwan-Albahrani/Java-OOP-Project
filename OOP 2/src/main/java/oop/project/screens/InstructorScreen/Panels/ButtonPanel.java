@@ -21,6 +21,7 @@ public class ButtonPanel extends ThemedPanelInstructor
 
     // Array of button names
     String[] ButtonNames = {
+            " Home ",
             " Main Menu ",
             " Add Announcement ",
             " Manage Students ",
@@ -32,6 +33,7 @@ public class ButtonPanel extends ThemedPanelInstructor
     };
 
     String[] ButtonIconLocations = {
+            "InstructorScreen/MainMenu.png",
             "InstructorScreen/MainMenu.png",
             "InstructorScreen/Announcements.png",
             "InstructorScreen/ManageStudents.png",
@@ -81,13 +83,14 @@ public class ButtonPanel extends ThemedPanelInstructor
         // Buttons for the main Box
         JComponent[] mainButtonComponents = {
                 mainTitle,
+                MainButtons.get("Home"),
                 MainButtons.get("Add Announcement"),
                 MainButtons.get("Manage Students"),
                 MainButtons.get("View Profile"),
                 MainButtons.get("Alert Admin")
         };
         // Add the buttons to the mainButtonBox
-        mainButtonBox = AddToBox.addToHorizontalBoxWithSpace(mainButtonComponents, 5);
+        mainButtonBox = AddToBox.addToHorizontalBoxWithSpace(mainButtonComponents, 6);
 
         JLabel studentTitle = new JLabel("Manage Students");
         studentTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
