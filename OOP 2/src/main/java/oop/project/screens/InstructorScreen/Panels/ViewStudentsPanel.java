@@ -17,7 +17,7 @@ TODO: Get Data from database and display it in the table
 
 public class ViewStudentsPanel extends TransparentPanel
 {
-    
+
 
     public ViewStudentsPanel(int Width, int Height)
     {
@@ -54,7 +54,7 @@ public class ViewStudentsPanel extends TransparentPanel
                 {3, "Sue", "Black", 20, 25, 40, 15, 100},
                 {4, "Jane", "White", 20, 25, 40, 15, 100},
         };
-        
+
         JTable table = new JTable(data, columnNames)
         {
             public boolean editCellAt(int row, int column, java.util.EventObject e)
@@ -69,8 +69,7 @@ public class ViewStudentsPanel extends TransparentPanel
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-        // table.setAutoCreateRowSorter(true); TODO: Add sorting for each column equally either through RowSorter
-
+        table.setAutoCreateRowSorter(true);
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 460, Height - 200));
@@ -80,10 +79,10 @@ public class ViewStudentsPanel extends TransparentPanel
         filterButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         filterButton.setPreferredSize(new Dimension(150, 50));
         filterButton.setAlignmentX(CENTER_ALIGNMENT);
-        
+
 
         JComponent[] components = {viewStudentsLabel, scrollPaneTable, filterButton};
-        viewStudentsBox = AddToBox.addToHorizontalBoxWithSpace(components, 3);
+        viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(viewStudentsBox);
 
         //Button Handler
