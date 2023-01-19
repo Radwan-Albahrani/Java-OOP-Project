@@ -20,16 +20,29 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     Map<String, JPanel> panels = new Hashtable<>();
 
     String[] All_buttons = {
-            " Main Menu ",
-            " View Alerts ",
-            " Manage Users ",
-            " View Instructors ",
-            " View Students ",
-            " View Profile ",
-            " Edit Information ",
-            " View Registration Requests ",
-            "Logout"
+            " Main Menu ",      //done
+            " View Alerts ",    //done
+            " Manage Users ",   //done
+            " View Instructors ", //done   
+            " View Students ",    //done           
+            " View Profile ",      //done
+            " Edit Information ",         //done
+            " View Registration Requests ", //done
+            "Logout"                //done
 
+    };
+
+    String[] ButtonIconLocations = 
+    {
+        "AdminScreen/MainMenu.png",
+        "AdminScreen/ViewAlerts.png",
+        "AdminScreen/ManageUsers.png",
+        "AdminScreen/ViewInstructors.png",
+        "AdminScreen/ViewStudents.png",
+        "AdminScreen/ViewProfile.png",
+        "AdminScreen/EditInfo.png",
+        "AdminScreen/ViewRegisteration.png",
+        "AdminScreen/Logout.png"
     };
 
     JFrame frame;
@@ -57,7 +70,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         // Add all the buttons to the Map
         for (int i = 0; i < All_buttons.length; i++)
         {
-            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i]));
+            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i], ButtonIconLocations[i] ));
         }
         // Title JLabel
 
@@ -73,10 +86,11 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("Manage Users"),
                 myButtons.get("View Registration Requests"),
                 myButtons.get("View Instructors"),
-                myButtons.get("View Students")
+                myButtons.get("View Students"),
+                myButtons.get("View Profile")
         };
         // Add the buttons to the mainButtonBox
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 6);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 7);
 
         // Buttons for the student Box
         JLabel editTitle = new JLabel("Edit User Information");
@@ -87,12 +101,11 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         JComponent[] profileJComponents = {
                 editTitle,
                 myButtons.get("Main Menu"),
-                myButtons.get("Edit Information"),
-                myButtons.get("View Profile")
+                myButtons.get("Edit Information")
         };
 
         // Add the buttons to the studentButtonBox
-        user_info = AddToBox.addToHorizontalBox(profileJComponents, 4);
+        user_info = AddToBox.addToHorizontalBox(profileJComponents, 3);
 
         // Add the main box and the logout button during panel initialization
         this.setLayout(new BorderLayout());
