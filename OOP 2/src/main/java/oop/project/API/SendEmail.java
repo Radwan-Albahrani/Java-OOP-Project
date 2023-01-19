@@ -74,10 +74,10 @@ public class SendEmail
 
     }
 
-    public static void sendEmail(String to)
+    public static void sendEmail(String to, String name)
     {
         String emailMessage = """
-                Dear User
+                Dear %s
 
                 Thank you for completing your registration with our esteemed Student Information System.
 
@@ -85,7 +85,7 @@ public class SendEmail
 
                 Regards,
                 The SIS team
-                        """;
+                        """.formatted(name);
         String subject = "Registration Successful";
 
         sendEmail(to, emailMessage, subject);
