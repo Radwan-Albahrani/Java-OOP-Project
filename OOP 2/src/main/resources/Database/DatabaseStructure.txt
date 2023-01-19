@@ -10,8 +10,9 @@ PersonalContactDetails(UserID, Email, Phone)
 •	Both are required
 Admins(AdminID, UserID)
 •	Relationship Table, used to store those whose Type is ‘Admin’
-•	AdminID primary key, foreign key to Profile.UserID 
+•	AdminID primary key, foreign key to Profile.UserID
 •	AdminID format A0001, A0002
+
 Instructors(InstructorID, UserID)
 •	Relationship Table, used to store those whose Type is ‘Instructor’
 •	InstructorID primary key, foreign key to Profile.UserID
@@ -29,3 +30,7 @@ Courses(CourseID, CourseName, MaxCap, InstructorID)
 Announcements(AnnouncementID, Announcement, CourseID)
 
 Alerts(AlertID, Alerts)
+
+ViewAlerts(Type, AlertID)
+•	Type must be 'Admin'
+
