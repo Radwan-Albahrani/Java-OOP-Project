@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import com.k33ptoo.components.*;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
-
-
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.NavBar;
 import oop.project.components.core.RoundedJTextField;
@@ -23,7 +21,6 @@ import oop.project.handlers.FilterButtonHandler;
  *      - By Last Name
  */
 
-
 public class FilterFrame extends JFrame
 {
 
@@ -31,15 +28,15 @@ public class FilterFrame extends JFrame
     JComboBox<String> filterOptionsID = new JComboBox<String>();
     JComboBox<String> filterOptionsFirstName = new JComboBox<String>();
     JComboBox<String> filterOptionsLastName = new JComboBox<String>();
-    JTextField idFieldbetween = new RoundedJTextField(10);
-    JTextField firstNameFieldbetween = new RoundedJTextField(10);
-    JTextField lastNameFieldbetween = new RoundedJTextField(10);
+    JTextField idFieldBetween = new RoundedJTextField(10);
+    JTextField firstNameFieldBetween = new RoundedJTextField(10);
+    JTextField lastNameFieldBetween = new RoundedJTextField(10);
 
     public FilterFrame(JPanel parent)
     {
-        idFieldbetween.setVisible(false);
-        firstNameFieldbetween.setVisible(false);
-        lastNameFieldbetween.setVisible(false);
+        idFieldBetween.setVisible(false);
+        firstNameFieldBetween.setVisible(false);
+        lastNameFieldBetween.setVisible(false);
 
         FrameConfig.set(this, "Filter by", 500, 400);
         KGradientPanel filterPanel = new ThemedPanelInstructor();
@@ -52,7 +49,7 @@ public class FilterFrame extends JFrame
         filterButton = new CustomButtonInstructor("Filter");
         JLabel idLabel = new JLabel("ID:               ");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        JTextField idField = new  RoundedJTextField(10);
+        JTextField idField = new RoundedJTextField(10);
         idField.setMaximumSize(getPreferredSize());
         idField.setMinimumSize(getPreferredSize());
 
@@ -67,7 +64,6 @@ public class FilterFrame extends JFrame
         JTextField lastNameField = new RoundedJTextField(10);
         lastNameField.setMaximumSize(getPreferredSize());
         lastNameField.setMinimumSize(getPreferredSize());
-
 
         String[] filterOptionsArray = {"=", "!=", "<", "<=", ">", ">=", "begins with", "ends with", "contains", "between"};
         for (String option : filterOptionsArray)
@@ -87,28 +83,25 @@ public class FilterFrame extends JFrame
         filterOptionsFirstName.setMaximumRowCount(10);
         filterOptionsLastName.setMaximumRowCount(10);
 
-
-
-        JComponent []  idFieldComponents = {idField, idFieldbetween};
+        JComponent[] idFieldComponents = {idField, idFieldBetween};
         Box idFieldBox = AddToBox.addToVerticalBox(idFieldComponents, 1);
 
-        JComponent []  firstNameFieldComponents = {firstNameField, firstNameFieldbetween};
+        JComponent[] firstNameFieldComponents = {firstNameField, firstNameFieldBetween};
         Box firstNameFieldBox = AddToBox.addToVerticalBox(firstNameFieldComponents, 1);
 
-        JComponent []  lastNameFieldComponents = {lastNameField, lastNameFieldbetween};
+        JComponent[] lastNameFieldComponents = {lastNameField, lastNameFieldBetween};
         Box lastNameFieldBox = AddToBox.addToVerticalBox(lastNameFieldComponents, 1);
 
-        JComponent [] filterComponents = {idLabel, filterOptionsID, idFieldBox, firstNameLabel, filterOptionsFirstName, firstNameFieldBox, lastNameLabel, filterOptionsLastName, lastNameFieldBox};
+        JComponent[] filterComponents = {idLabel, filterOptionsID, idFieldBox, firstNameLabel, filterOptionsFirstName,
+                firstNameFieldBox, lastNameLabel, filterOptionsLastName, lastNameFieldBox};
         Box filterBox = AddToBox.addToVerticalBox(filterComponents, 3);
-
 
         JLabel paddingLeft = new JLabel("");
         JLabel paddingRight = new JLabel("");
-        JComponent [] spacingComponents = {paddingLeft, filterBox, paddingRight};
+        JComponent[] spacingComponents = {paddingLeft, filterBox, paddingRight};
         Box spacingBox = AddToBox.addToHorizontalBox(spacingComponents, 1);
 
         filterBox.setAlignmentX(CENTER_ALIGNMENT);
-
 
         JComponent[] components = {filterLabel, spacingBox, filterButton};
         Box box = AddToBox.addToVerticalBox(components, 1);
@@ -119,59 +112,63 @@ public class FilterFrame extends JFrame
         JPanel navBar = new NavBar(this, true); // Creating the nav bar
         this.add(navBar, BorderLayout.NORTH); // add the nav bar to the top
 
-
         this.add(filterPanel);
 
-
         // Button Handler
-        filterOptionsID.addActionListener(new ActionListener() {
+        filterOptionsID.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 if (filterOptionsID.getSelectedItem().equals("between"))
                 {
-                    idFieldbetween.setVisible(true);
+                    idFieldBetween.setVisible(true);
                 }
                 else
                 {
-                    idFieldbetween.setVisible(false);
+                    idFieldBetween.setVisible(false);
                 }
                 revalidate();
                 repaint();
             }
         });
-        filterOptionsFirstName.addActionListener(new ActionListener() {
+        filterOptionsFirstName.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 if (filterOptionsFirstName.getSelectedItem().equals("between"))
                 {
-                    firstNameFieldbetween.setVisible(true);
+                    firstNameFieldBetween.setVisible(true);
                 }
                 else
                 {
-                    firstNameFieldbetween.setVisible(false);
+                    firstNameFieldBetween.setVisible(false);
                 }
                 revalidate();
                 repaint();
             }
         });
-        filterOptionsLastName.addActionListener(new ActionListener() {
+        filterOptionsLastName.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 if (filterOptionsLastName.getSelectedItem().equals("between"))
                 {
-                    lastNameFieldbetween.setVisible(true);
+                    lastNameFieldBetween.setVisible(true);
                 }
                 else
                 {
-                    lastNameFieldbetween.setVisible(false);
+                    lastNameFieldBetween.setVisible(false);
                 }
                 revalidate();
                 repaint();
             }
         });
 
-
     }
+
     public void setHandler(FilterButtonHandler handler)
     {
         filterButton.addActionListener(handler);
