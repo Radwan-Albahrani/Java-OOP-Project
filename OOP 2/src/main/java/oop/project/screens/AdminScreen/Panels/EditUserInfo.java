@@ -23,7 +23,6 @@ import oop.project.hooks.*;
 
 public class EditUserInfo extends TransparentPanel
 {
-    public int currentEntryIndex;
 
     public EditUserInfo(int Width, int Height)
     {
@@ -32,22 +31,14 @@ public class EditUserInfo extends TransparentPanel
         Box nameBox;
         Box buttonsBox;
 
-
-
-
         JLabel Edit_User_info = new JLabel("Edit Information");
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        this.add(Edit_User_info);
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
-        //type of user JComboBox : student or instructor
-
-
-
-
+        // type of user JComboBox : student or instructor
 
         JLabel idLabel = new JLabel("ID: ");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
@@ -83,7 +74,6 @@ public class EditUserInfo extends TransparentPanel
         nameField.setMaximumSize(new Dimension(400, 50));
         nameField.setAlignmentX(RIGHT_ALIGNMENT);
 
-        
         JComponent[] nameComponents = {nameLabel, nameField};
         nameBox = AddToBox.addToHorizontalBox(nameComponents, 1);
 
@@ -110,14 +100,11 @@ public class EditUserInfo extends TransparentPanel
         JComponent[] pictureComponents = {idNameBox, picture};
         idNameBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
 
-        //Major Box: general or majored
+        // Major Box: general or majored
 
-        //occupation box
+        // occupation box
 
-
-
-
-        //Operational Buttons
+        // Operational Buttons
         KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
         nextButton.setActionCommand("next");
         nextButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
@@ -134,41 +121,34 @@ public class EditUserInfo extends TransparentPanel
 
         JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton};
         buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
+        buttonsBox.setAlignmentX(CENTER_ALIGNMENT);
 
-           // Add to Panel
-           this.setLayout(new GridBagLayout());
-           GridBagConstraints c = new GridBagConstraints();
-           c.fill = GridBagConstraints.BOTH;
-           c.gridx = 0;
-           c.gridy = 0;
-           c.weightx = 0.2;
-           c.weighty = 0.2;
-           c.insets = new Insets(0, 50, 0, 50);
-           this.add(idNameBox, c);
-           c.insets = new Insets(0, 330, 0, 330);
-           c.gridy = 2;
-           c.gridy = 3;
-           this.add(buttonsBox, c);
+        // Add to Panel
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.2;
+        c.weighty = 0.2;
+        c.insets = new Insets(0, 50, 0, 50);
+        this.add(Edit_User_info, c);
+        c.insets = new Insets(0, 0, 0, 0);
+        c.gridy = 1;
+        this.add(idNameBox, c);
+        c.insets = new Insets(0, 70, 0, 70);
+        c.gridy = 2;
+        this.add(buttonsBox, c);
 
-            // Button Handlers
+        // Button Handlers
         cancelButton.addActionListener(new SaveChangesHandler());
         saveButton.addActionListener(new SaveChangesHandler());
-
-        idJComboBoxList.addActionListener(
-                new ActionListener()
-                {
-                    @Override
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        currentEntryIndex = idJComboBoxList.getSelectedIndex();
-                    }
-                });
 
         nextButton.addActionListener(
                 new NextPreviousHandler(this, idJComboBoxList));
 
         previousButton.addActionListener(
                 new NextPreviousHandler(this, idJComboBoxList));
- 
+
     }
 }
