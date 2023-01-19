@@ -76,7 +76,7 @@ public class ViewStudentsPanel extends TransparentPanel
         scrollPaneTable.setAlignmentX(CENTER_ALIGNMENT);
 
         KButton filterButton = new CustomButtonInstructor("Filter By");
-        filterButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        filterButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         filterButton.setPreferredSize(new Dimension(150, 50));
         filterButton.setAlignmentX(CENTER_ALIGNMENT);
 
@@ -88,6 +88,7 @@ public class ViewStudentsPanel extends TransparentPanel
         //Button Handler
         filterButton.addActionListener(new FilterButtonHandler(this));
     }
+
 
 
 }

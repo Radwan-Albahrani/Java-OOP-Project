@@ -90,13 +90,13 @@ public class FilterFrame extends JFrame
 
 
         JComponent []  idFieldComponents = {idField, idFieldbetween};
-        Box idFieldBox = AddToBox.addToHorizontalBox(idFieldComponents, 1);
+        Box idFieldBox = AddToBox.addToVerticalBox(idFieldComponents, 1);
 
         JComponent []  firstNameFieldComponents = {firstNameField, firstNameFieldbetween};
-        Box firstNameFieldBox = AddToBox.addToHorizontalBox(firstNameFieldComponents, 1);
+        Box firstNameFieldBox = AddToBox.addToVerticalBox(firstNameFieldComponents, 1);
 
         JComponent []  lastNameFieldComponents = {lastNameField, lastNameFieldbetween};
-        Box lastNameFieldBox = AddToBox.addToHorizontalBox(lastNameFieldComponents, 1);
+        Box lastNameFieldBox = AddToBox.addToVerticalBox(lastNameFieldComponents, 1);
 
         JComponent [] filterComponents = {idLabel, filterOptionsID, idFieldBox, firstNameLabel, filterOptionsFirstName, firstNameFieldBox, lastNameLabel, filterOptionsLastName, lastNameFieldBox};
         Box filterBox = AddToBox.addToVerticalBox(filterComponents, 3);
@@ -170,7 +170,6 @@ public class FilterFrame extends JFrame
             }
         });
 
-       
 
     }
     public void setHandler(FilterButtonHandler handler)
