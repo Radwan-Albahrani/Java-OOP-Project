@@ -54,7 +54,7 @@ public class ViewStudentsPanel extends TransparentPanel
                 {3, "Sue", "Black", 20, 25, 40, 15, 100},
                 {4, "Jane", "White", 20, 25, 40, 15, 100},
         };
-
+        
         JTable table = new JTable(data, columnNames)
         {
             public boolean editCellAt(int row, int column, java.util.EventObject e)
@@ -69,7 +69,8 @@ public class ViewStudentsPanel extends TransparentPanel
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-        table.setAutoCreateRowSorter(true);
+        // table.setAutoCreateRowSorter(true); TODO: Add sorting for each column equally either through RowSorter
+
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 460, Height - 200));
