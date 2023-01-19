@@ -121,9 +121,9 @@ public class RegisterHandler implements ActionListener
             user.setEmail(allInfo.get("email"));
             user.setPhoneNumber(allInfo.get("phoneNumber"));
             user.setAuth(new Auth(allInfo.get("username"), allInfo.get("password")));
-            user.setBirthDate(allInfo.get("birthday"));
+            user.setBirthDate(allInfo.get("dob"));
             user.setMajor(allInfo.get("major"));
-            user.setSex(allInfo.get("sex"));
+            user.setGender(allInfo.get("gender"));
             user.setRole(allInfo.get("role"));
 
             System.out.println(user.toString());
