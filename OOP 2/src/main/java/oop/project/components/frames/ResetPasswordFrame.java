@@ -11,6 +11,7 @@ import oop.project.components.core.NavBar;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.panels.ThemedPanelAdmin;
 import oop.project.components.panels.ThemedPanelInstructor;
+import oop.project.components.panels.ThemedPanelStudent;
 import oop.project.handlers.ResetPasswordHandler;
 import oop.project.hooks.*;
 
@@ -62,10 +63,10 @@ public class ResetPasswordFrame extends JFrame
         {
             resetPasswordPanel = new ThemedPanelInstructor();
         }
-        // else if(buttonsType == 2)
-        // {
-        // resetPasswordPanel = new ThemedPanelStudent();
-        // }
+        else if (type == 2)
+        {
+            resetPasswordPanel = new ThemedPanelStudent();
+        }
     }
 
     public void setHandler(ResetPasswordHandler handler)
@@ -87,9 +88,9 @@ public class ResetPasswordFrame extends JFrame
         {
             submitButton = new CustomButtonInstructor("Submit");
         }
-        // else if(buttonsType == 2)
-        // {
-        // submitButton = new CustomButtonInstructor("Reset");
-        // }
+        else if (buttonsType == 2)
+        {
+            submitButton = new CustomButtonInstructor("Reset");
+        }
     }
 }
