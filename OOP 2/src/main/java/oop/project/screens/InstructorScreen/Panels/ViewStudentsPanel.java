@@ -69,7 +69,7 @@ public class ViewStudentsPanel extends TransparentPanel
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-        // table.setAutoCreateRowSorter(true); TODO: Add sorting for each column equally either through RowSorter
+        table.setAutoCreateRowSorter(true);
 
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
