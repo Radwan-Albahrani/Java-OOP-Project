@@ -1,0 +1,36 @@
+User(UserID, Username, Password, Type)
+•	Type is Enum(‘Admin’, ‘Instructor’, ‘Student’)
+•	UserID format: [23000]0001, [23000]0002
+Profile(UserID, Name(FirstName, LastName), Sex, Birthdate, Major)
+•	Name is composite attribute from FirstName, LastName
+WorkContactDetails(UserID, Email, Phone)
+•	Phone is only required for Admins and Instructor, so can be null for Students
+•	Email is required for all
+PersonalContactDetails(UserID, Email, Phone)
+•	Both are required
+Admins(AdminID, UserID)
+•	Relationship Table, used to store those whose Type is ‘Admin’
+•	AdminID primary key, foreign key to Profile.UserID
+•	AdminID format A0001, A0002
+
+Instructors(InstructorID, UserID)
+•	Relationship Table, used to store those whose Type is ‘Instructor’
+•	InstructorID primary key, foreign key to Profile.UserID
+•	InstructorID format: T0001, T0002
+Students(StudentID, UserID)
+•	Relationship Table, used to store those whose Type is ‘Student’
+•	StudentID primary key, foreign key to Profile.UserID
+•	StudentID format: S0001, S0002
+
+StudentCourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade)
+•	Student (1,N) – Courses (N,N) 		Total Many to Many
+•	TotalGrade is derived from QuizGrade MidtermGrade FinalGrade and ProjectGrade
+Courses(CourseID, CourseName, MaxCap, InstructorID)
+•	Instructor (1,1) – Courses (1,1) 		Total One to One
+Announcements(AnnouncementID, Announcement, CourseID)
+
+Alerts(AlertID, Alerts)
+
+ViewAlerts(Type, AlertID)
+•	Type must be 'Admin'
+

@@ -26,5 +26,6 @@ public class FilterButtonHandler implements ActionListener
             ((FilterFrame) filterFrame).setHandler(this);
             filterFrame.setVisible(true);
         }
+        //TODO: Add query options
     }
 }

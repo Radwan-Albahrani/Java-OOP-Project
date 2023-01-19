@@ -43,6 +43,7 @@ public class InstructorScreen extends JFrame
 
         // Setting up a Map to store the panels
         Map<String, JPanel> panels = new Hashtable<>();
+        panels.put("home", mainPanel);
         panels.put("main", mainPanel);
         panels.put("announcement", announcementPanel);
         panels.put("viewStudents", viewStudentsPanel);
