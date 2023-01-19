@@ -22,7 +22,6 @@ public class RegisterCourseFrame extends JFrame
     KButton registerButton;
     boolean added = false;
 
-    // TODO: Actually implement this
     public RegisterCourseFrame(JPanel parent)
     {
         FrameConfig.set(this, "RegisterCourse", 500, 500);

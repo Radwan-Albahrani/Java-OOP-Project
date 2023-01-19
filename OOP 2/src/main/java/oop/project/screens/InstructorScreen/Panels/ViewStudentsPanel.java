@@ -68,6 +68,7 @@ public class ViewStudentsPanel extends TransparentPanel
         table.setCellSelectionEnabled(false);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
+        table.setAutoCreateRowSorter(true);
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 200));
