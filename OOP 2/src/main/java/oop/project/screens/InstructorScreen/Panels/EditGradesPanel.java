@@ -248,10 +248,10 @@ public class EditGradesPanel extends TransparentPanel
         saveButton.addActionListener(new SaveChangesHandler());
 
         nextButton.addActionListener(
-                new NextPreviousHandler(this, idJComboBoxList));
+                new NextPreviousHandler(idJComboBoxList));
 
         previousButton.addActionListener(
-                new NextPreviousHandler(this, idJComboBoxList));
+                new NextPreviousHandler(idJComboBoxList));
 
         /*
          * nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));

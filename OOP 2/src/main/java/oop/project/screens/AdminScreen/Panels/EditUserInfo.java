@@ -26,24 +26,16 @@ public class EditUserInfo extends TransparentPanel
 
     public EditUserInfo(int Width, int Height)
     {
-        Box idBox;
-        Box emailBox;
-        Box nameBox;
-        Box buttonsBox;
 
-        JLabel Edit_User_info = new JLabel("Edit Information");
+        JLabel Edit_User_info = new TitleLabel("Edit Information");
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
-        // type of user JComboBox : student or instructor
-
         JLabel idLabel = new JLabel("ID: ");
         idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        idLabel.setHorizontalAlignment(JLabel.CENTER);
-        idLabel.setHorizontalTextPosition(JLabel.CENTER);
         idLabel.setAlignmentX(RIGHT_ALIGNMENT);
         idLabel.setForeground(ThemeColors.BLACK);
 
@@ -54,29 +46,32 @@ public class EditUserInfo extends TransparentPanel
         idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
         idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
 
+        // TODO fill jcombobox with real info
         for (int i = 0; i < 5; i++)
         {
             idJComboBoxList.addItem("" + i);
         }
 
         JComponent[] idComponents = {idLabel, idJComboBoxList};
-        idBox = AddToBox.addToHorizontalBox(idComponents, 1);
+        Box idBox = AddToBox.addToHorizontalBox(idComponents, 1);
 
-        JLabel nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        nameLabel.setAlignmentX(RIGHT_ALIGNMENT);
-        nameLabel.setForeground(ThemeColors.BLACK);
+        // type of user Box
+        JLabel typeOfUserLabel = new JLabel("Type of User: ");
+        typeOfUserLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        typeOfUserLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        typeOfUserLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField nameField = new RoundedJTextField(15);
-        nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        nameField.setEditable(false);
-        nameField.setMinimumSize(new Dimension(400, 50));
-        nameField.setMaximumSize(new Dimension(400, 50));
-        nameField.setAlignmentX(RIGHT_ALIGNMENT);
+        RoundedJTextField typeOfUserTextField = new RoundedJTextField(20);
+        typeOfUserTextField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        typeOfUserTextField.setEditable(false);
+        typeOfUserTextField.setMinimumSize(new Dimension(400, 50));
+        typeOfUserTextField.setMaximumSize(new Dimension(400, 50));
+        typeOfUserTextField.setAlignmentX(RIGHT_ALIGNMENT);
 
-        JComponent[] nameComponents = {nameLabel, nameField};
-        nameBox = AddToBox.addToHorizontalBox(nameComponents, 1);
+        JComponent[] typeOfUserComponents = {typeOfUserLabel, typeOfUserTextField};
+        Box typeOfUserBox = AddToBox.addToHorizontalBox(typeOfUserComponents, 1);
 
+        // Email Box
         JLabel emailLabel = new JLabel("Email: ", SwingConstants.LEFT);
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         emailLabel.setAlignmentX(RIGHT_ALIGNMENT);
@@ -90,19 +85,79 @@ public class EditUserInfo extends TransparentPanel
         emailField.setAlignmentX(RIGHT_ALIGNMENT);
 
         JComponent[] emailComponents = {emailLabel, emailField};
-        emailBox = AddToBox.addToHorizontalBox(emailComponents, 1);
+        Box emailBox = AddToBox.addToHorizontalBox(emailComponents, 1);
 
-        // Picture Setup
-        JComponent[] idNameComponents = {idBox, emailBox, nameBox};
-        Box idNameBox = AddToBox.addToVerticalBox(idNameComponents, 1);
-        idNameBox.setAlignmentX(CENTER_ALIGNMENT);
+        // Username Box
+        JLabel usernameLabel = new JLabel("Username: ");
+        usernameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        usernameLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        usernameLabel.setForeground(ThemeColors.BLACK);
 
-        JComponent[] pictureComponents = {idNameBox, picture};
-        idNameBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
+        RoundedJTextField usernameField = new RoundedJTextField(15);
+        usernameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        usernameField.setEditable(false);
+        usernameField.setMinimumSize(new Dimension(400, 50));
+        usernameField.setMaximumSize(new Dimension(400, 50));
+        usernameField.setAlignmentX(RIGHT_ALIGNMENT);
 
-        // Major Box: general or majored
+        JComponent[] usernameComponents = {usernameLabel, usernameField};
+        Box usernameBox = AddToBox.addToHorizontalBox(usernameComponents, 1);
 
-        // occupation box
+        // Name Box
+        JLabel nameLabel = new JLabel("Name: ");
+        nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        nameLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        nameLabel.setForeground(ThemeColors.BLACK);
+
+        RoundedJTextField nameField = new RoundedJTextField(15);
+        nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        nameField.setEditable(false);
+        nameField.setMinimumSize(new Dimension(400, 50));
+        nameField.setMaximumSize(new Dimension(400, 50));
+        nameField.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] nameComponents = {nameLabel, nameField};
+        Box nameBox = AddToBox.addToHorizontalBox(nameComponents, 1);
+
+        // Major Box
+        JLabel majorLabel = new JLabel("Major: ");
+        majorLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        majorLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        majorLabel.setForeground(ThemeColors.BLACK);
+
+        RoundedJTextField majorField = new RoundedJTextField(15);
+        majorField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        majorField.setEditable(false);
+        majorField.setMinimumSize(new Dimension(400, 50));
+        majorField.setMaximumSize(new Dimension(400, 50));
+        majorField.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] majorComponents = {majorLabel, majorField};
+        Box majorBox = AddToBox.addToHorizontalBox(majorComponents, 1);
+
+        // Occupation box
+        JLabel occupationLabel = new JLabel("Occupation: ");
+        occupationLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        occupationLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        occupationLabel.setForeground(ThemeColors.BLACK);
+
+        RoundedJTextField occupationField = new RoundedJTextField(15);
+        occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        occupationField.setEditable(false);
+        occupationField.setMinimumSize(new Dimension(400, 50));
+        occupationField.setMaximumSize(new Dimension(400, 50));
+        occupationField.setAlignmentX(RIGHT_ALIGNMENT);
+
+        JComponent[] occupationComponents = {occupationLabel, occupationField};
+        Box occupationBox = AddToBox.addToHorizontalBox(occupationComponents, 1);
+
+        // User info Box setup
+        JComponent[] userInfoComponents = {idBox, typeOfUserBox, emailBox, usernameBox, nameBox, majorBox, occupationBox};
+        Box userInfoBox = AddToBox.addToVerticalBox(userInfoComponents, 1);
+        userInfoBox.setAlignmentX(CENTER_ALIGNMENT);
+
+        JComponent[] pictureComponents = {userInfoBox, picture};
+        userInfoBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
 
         // Operational Buttons
         KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
@@ -114,13 +169,14 @@ public class EditUserInfo extends TransparentPanel
         previousButton.setAlignmentX(RIGHT_ALIGNMENT);
         previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
+        // Cancel Save Buttons
         KButton cancelButton = new CustomButtonInstructor("Cancel");
         cancelButton.setAlignmentX(CENTER_ALIGNMENT);
         KButton saveButton = new CustomButtonInstructor("Save");
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
 
         JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton};
-        buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
+        Box buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
         buttonsBox.setAlignmentX(CENTER_ALIGNMENT);
 
         // Add to Panel
@@ -135,7 +191,7 @@ public class EditUserInfo extends TransparentPanel
         this.add(Edit_User_info, c);
         c.insets = new Insets(0, 0, 0, 0);
         c.gridy = 1;
-        this.add(idNameBox, c);
+        this.add(userInfoBox, c);
         c.insets = new Insets(0, 70, 0, 70);
         c.gridy = 2;
         this.add(buttonsBox, c);
@@ -145,10 +201,10 @@ public class EditUserInfo extends TransparentPanel
         saveButton.addActionListener(new SaveChangesHandler());
 
         nextButton.addActionListener(
-                new NextPreviousHandler(this, idJComboBoxList));
+                new NextPreviousHandler(idJComboBoxList));
 
         previousButton.addActionListener(
-                new NextPreviousHandler(this, idJComboBoxList));
+                new NextPreviousHandler(idJComboBoxList));
 
     }
 }
