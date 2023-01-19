@@ -8,7 +8,7 @@ import com.k33ptoo.components.*;
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.NavBar;
-import oop.project.components.core.RoundedJTextField;
+import oop.project.components.core.RoundedJPasswordField;
 import oop.project.components.panels.ThemedPanelAdmin;
 import oop.project.components.panels.ThemedPanelInstructor;
 import oop.project.handlers.ResetPasswordHandler;
@@ -30,13 +30,13 @@ public class ResetPasswordFrame extends JFrame
 
         JLabel oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
         oldPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJTextField oldPasswordField = new RoundedJTextField(15);
+        RoundedJPasswordField oldPasswordField = new RoundedJPasswordField(15);
         JLabel newPasswordLabel = new JLabel("New Password", SwingConstants.CENTER);
         newPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJTextField newPasswordField = new RoundedJTextField(15);
+        RoundedJPasswordField newPasswordField = new RoundedJPasswordField(15);
         JLabel confirmPasswordLabel = new JLabel("Confirm Password", SwingConstants.CENTER);
         confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJTextField confirmPasswordField = new RoundedJTextField(15);
+        RoundedJPasswordField confirmPasswordField = new RoundedJPasswordField(15);
 
         // Add to Frame
         this.setLayout(new BorderLayout()); // set the layout to border layout
