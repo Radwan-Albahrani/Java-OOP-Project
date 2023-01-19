@@ -27,7 +27,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " View Students ",    //done           
             " View Profile ",      //done
             " Edit Information ",         //done
-            " View Registration Requests ", //done
+            " Registration Requests ", //done
             "Logout"                //done
 
     };
@@ -84,7 +84,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 mainTitle,
                 myButtons.get("View Alerts"),
                 myButtons.get("Manage Users"),
-                myButtons.get("View Registration Requests"),
+                myButtons.get("Registration Requests"),
                 myButtons.get("View Instructors"),
                 myButtons.get("View Students"),
                 myButtons.get("View Profile")
