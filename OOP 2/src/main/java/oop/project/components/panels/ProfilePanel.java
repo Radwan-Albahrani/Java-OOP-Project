@@ -66,21 +66,21 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] nameComponents = {nameLabel, nameField};
         Box nameBox = AddToBox.addToVerticalBox(nameComponents, 1);
 
-        // Birthday Setup
-        JLabel birthdayLabel = new JLabel("Birthday");
-        birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        birthdayLabel.setAlignmentX(RIGHT_ALIGNMENT);
-        birthdayLabel.setForeground(ThemeColors.BLACK);
+        // BirthDate Setup
+        JLabel birthDateLabel = new JLabel("Date Of Birth");
+        birthDateLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        birthDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        birthDateLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField birthdayField = new RoundedJTextField(15);
-        birthdayField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        birthdayField.setEditable(false);
-        birthdayField.setMinimumSize(new Dimension(400, 50));
-        birthdayField.setMaximumSize(new Dimension(400, 50));
-        birthdayField.setAlignmentX(LEFT_ALIGNMENT);
+        RoundedJTextField birthDateField = new RoundedJTextField(15);
+        birthDateField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        birthDateField.setEditable(false);
+        birthDateField.setMinimumSize(new Dimension(400, 50));
+        birthDateField.setMaximumSize(new Dimension(400, 50));
+        birthDateField.setAlignmentX(LEFT_ALIGNMENT);
 
-        JComponent[] birthdayComponents = {birthdayLabel, birthdayField};
-        Box birthdayBox = AddToBox.addToVerticalBox(birthdayComponents, 1);
+        JComponent[] birthDateComponents = {birthDateLabel, birthDateField};
+        Box birthDateBox = AddToBox.addToVerticalBox(birthDateComponents, 1);
 
         // Gender Setup
         JLabel genderLabel = new JLabel("Gender");
@@ -102,7 +102,7 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] nameIdComponents = {idBox, nameBox};
         Box nameIdBox = AddToBox.addToVerticalBox(nameIdComponents, 2);
 
-        JComponent[] birthGenderComponents = {birthdayBox, genderBox};
+        JComponent[] birthGenderComponents = {birthDateBox, genderBox};
         Box birthGenderBox = AddToBox.addToVerticalBox(birthGenderComponents, 2);
 
         JComponent[] personalInfoComponents = {nameIdBox, birthGenderBox};
