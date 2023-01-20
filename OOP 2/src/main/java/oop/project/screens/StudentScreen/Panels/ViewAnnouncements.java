@@ -1,6 +1,6 @@
 package oop.project.screens.StudentScreen.Panels;
 
-import oop.project.components.buttons.BlueButton;
+
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;
 import java.awt.*;
@@ -17,12 +17,10 @@ public class ViewAnnouncements extends TransparentPanel
         JTextArea ViewAnnouncementsTextArea = new JTextArea("Announcements will be displayed here.");
         ViewAnnouncementsTextArea.setPreferredSize(new Dimension(1000, Height - 300));
 
-        KButton ViewAnnouncementsButton = new BlueButton(" View Announcements");
-        ViewAnnouncementsButton.setPreferredSize(new Dimension(150, 50));
-
-        JComponent[] ViewAnnouncementsComponents = {ViewAnnouncementsLabel, ViewAnnouncementsTextArea ,ViewAnnouncementsButton};
+        JComponent[] ViewAnnouncementsComponents = {ViewAnnouncementsLabel, ViewAnnouncementsTextArea};
         Box ViewAnnouncementsBox = AddToBox.addToVerticalBox(ViewAnnouncementsComponents, 1);
 
         this.add(ViewAnnouncementsBox);
+        
     }
 }
