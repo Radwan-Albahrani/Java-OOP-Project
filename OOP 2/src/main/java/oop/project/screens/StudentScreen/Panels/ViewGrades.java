@@ -32,6 +32,13 @@ public class ViewGrades extends TransparentPanel
         id.setAlignmentX(RIGHT_ALIGNMENT);
         id.setForeground(ThemeColors.BLACK);
 
+        RoundedJTextField idField = new RoundedJTextField(10);
+        idField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        idField.setAlignmentX(RIGHT_ALIGNMENT);
+        idField.setMinimumSize( new Dimension(400, 50));
+        idField.setMaximumSize( new Dimension(400, 50));
+        idField.setEditable(false);
+
         JLabel name = new JLabel("Name");
         name.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         name.setAlignmentX(JLabel.LEFT);
@@ -39,7 +46,14 @@ public class ViewGrades extends TransparentPanel
         name.setAlignmentX(RIGHT_ALIGNMENT);
         name.setForeground(ThemeColors.BLACK);
 
-        JComponent [] profileComponents = {id, name};
+        RoundedJTextField nameField = new RoundedJTextField(10);
+        nameField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        nameField.setAlignmentX(RIGHT_ALIGNMENT);
+        nameField.setMinimumSize( new Dimension(400, 50));
+        nameField.setMaximumSize( new Dimension(400, 50));
+        nameField.setEditable(false);
+
+        JComponent [] profileComponents = {id, idField, name, nameField};
         studentProfile = AddToBox.addToHorizontalBox(profileComponents, 1);
 
 
