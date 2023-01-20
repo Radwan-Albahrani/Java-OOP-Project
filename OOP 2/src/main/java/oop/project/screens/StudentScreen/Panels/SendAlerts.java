@@ -22,7 +22,7 @@ public class SendAlerts extends TransparentPanel
         KButton SendAlertsButton = new BlueButton(" Send ");
         SendAlertsButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] SendAlertsComponents = {sendAlertsLabel, SendAlertsButton};
+        JComponent[] SendAlertsComponents = {sendAlertsLabel,sendAlertsTextArea, SendAlertsButton};
         Box SendAlertsBox = AddToBox.addToVerticalBox(SendAlertsComponents, 1);
 
         this.add(SendAlertsBox);
