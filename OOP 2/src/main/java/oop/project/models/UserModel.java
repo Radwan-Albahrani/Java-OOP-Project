@@ -4,7 +4,7 @@ public class UserModel
 {
     private String firstName;
     private String lastName;
-    private String sex;
+    private String gender;
     private String email;
     private String role;
     private String birthDate;
@@ -22,9 +22,9 @@ public class UserModel
         this.lastName = lastName;
     }
 
-    public void setSex(String sex)
+    public void setGender(String gender)
     {
-        this.sex = sex;
+        this.gender = gender;
     }
 
     public void setEmail(String email)
@@ -68,7 +68,7 @@ public class UserModel
         String profile = "";
         profile += "First Name: " + this.firstName + "\n";
         profile += "Last Name: " + this.lastName + "\n";
-        profile += "Sex: " + this.sex + "\n";
+        profile += "Gender: " + this.gender + "\n";
         profile += "Email: " + this.email + "\n";
         profile += "Role: " + this.role + "\n";
         profile += "Birth Date: " + this.birthDate + "\n";
@@ -89,9 +89,9 @@ public class UserModel
         return lastName;
     }
 
-    public String getSex()
+    public String getGender()
     {
-        return sex;
+        return gender;
     }
 
     public String getEmail()

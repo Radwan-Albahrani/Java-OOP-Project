@@ -19,6 +19,7 @@ import com.k33ptoo.components.*;
 import oop.project.screens.InstructorScreen.Panels.*;
 
 import oop.project.components.core.NavBar;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.*;
 import java.util.*;
 
@@ -37,11 +38,12 @@ public class InstructorScreen extends JFrame
         JPanel announcementPanel = new AnnouncementPanel(getWidth(), getHeight());
         JPanel viewStudentsPanel = new ViewStudentsPanel(getWidth(), getHeight());
         JPanel editGradesPanel = new EditGradesPanel(getWidth(), getHeight());
-        JPanel profilePanel = new ProfilePanel(getWidth(), getHeight());
+        JPanel profilePanel = new ProfilePanel(getWidth(), getHeight(), 1);
         JPanel alertsPanel = new AlertsPanel(getWidth(), getHeight());
 
         // Setting up a Map to store the panels
         Map<String, JPanel> panels = new Hashtable<>();
+        panels.put("home", mainPanel);
         panels.put("main", mainPanel);
         panels.put("announcement", announcementPanel);
         panels.put("viewStudents", viewStudentsPanel);

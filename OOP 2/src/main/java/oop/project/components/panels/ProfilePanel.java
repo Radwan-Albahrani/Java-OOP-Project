@@ -1,4 +1,4 @@
-package oop.project.screens.InstructorScreen.Panels;
+package oop.project.components.panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,20 +8,27 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
 
+import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.buttons.CustomButtonStudent;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
-import oop.project.components.panels.TransparentPanel;
-import oop.project.handlers.ResetPasswordHandler;
+import oop.project.handlers.*;
 import oop.project.hooks.*;
 import com.k33ptoo.components.KButton;
 
 public class ProfilePanel extends TransparentPanel
 {
-    public ProfilePanel(int Width, int Height)
+    KButton resetPasswordButton;
+    KButton saveChangesButton;
+
+    public ProfilePanel(int Width, int Height, int type)
     {
         // Label Setup
         JLabel profileLabel = new TitleLabel("Here is your profile");
+
+        // Button Setup
+        setButtonsType(type);
 
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
@@ -60,21 +67,21 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] nameComponents = {nameLabel, nameField};
         Box nameBox = AddToBox.addToVerticalBox(nameComponents, 1);
 
-        // Birthday Setup
-        JLabel birthdayLabel = new JLabel("Birthday");
-        birthdayLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        birthdayLabel.setAlignmentX(RIGHT_ALIGNMENT);
-        birthdayLabel.setForeground(ThemeColors.BLACK);
+        // BirthDate Setup
+        JLabel birthDateLabel = new JLabel("Date Of Birth");
+        birthDateLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        birthDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        birthDateLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField birthdayField = new RoundedJTextField(15);
-        birthdayField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        birthdayField.setEditable(false);
-        birthdayField.setMinimumSize(new Dimension(400, 50));
-        birthdayField.setMaximumSize(new Dimension(400, 50));
-        birthdayField.setAlignmentX(LEFT_ALIGNMENT);
+        RoundedJTextField birthDateField = new RoundedJTextField(15);
+        birthDateField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        birthDateField.setEditable(false);
+        birthDateField.setMinimumSize(new Dimension(400, 50));
+        birthDateField.setMaximumSize(new Dimension(400, 50));
+        birthDateField.setAlignmentX(LEFT_ALIGNMENT);
 
-        JComponent[] birthdayComponents = {birthdayLabel, birthdayField};
-        Box birthdayBox = AddToBox.addToVerticalBox(birthdayComponents, 1);
+        JComponent[] birthDateComponents = {birthDateLabel, birthDateField};
+        Box birthDateBox = AddToBox.addToVerticalBox(birthDateComponents, 1);
 
         // Gender Setup
         JLabel genderLabel = new JLabel("Gender");
@@ -96,7 +103,7 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] nameIdComponents = {idBox, nameBox};
         Box nameIdBox = AddToBox.addToVerticalBox(nameIdComponents, 2);
 
-        JComponent[] birthGenderComponents = {birthdayBox, genderBox};
+        JComponent[] birthGenderComponents = {birthDateBox, genderBox};
         Box birthGenderBox = AddToBox.addToVerticalBox(birthGenderComponents, 2);
 
         JComponent[] personalInfoComponents = {nameIdBox, birthGenderBox};
@@ -153,7 +160,6 @@ public class ProfilePanel extends TransparentPanel
 
         RoundedJTextField personalEmailField = new RoundedJTextField(15);
         personalEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        personalEmailField.setEditable(false);
         personalEmailField.setMinimumSize(new Dimension(400, 50));
         personalEmailField.setMaximumSize(new Dimension(400, 50));
         personalEmailField.setAlignmentX(LEFT_ALIGNMENT);
@@ -176,7 +182,6 @@ public class ProfilePanel extends TransparentPanel
 
         RoundedJTextField personalPhoneField = new RoundedJTextField(15);
         personalPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        personalPhoneField.setEditable(false);
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
         personalPhoneField.setAlignmentX(LEFT_ALIGNMENT);
@@ -185,7 +190,6 @@ public class ProfilePanel extends TransparentPanel
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
         // Reset Password Button
-        KButton resetPasswordButton = new CustomButtonInstructor("Reset Password");
         resetPasswordButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         resetPasswordButton.setMinimumSize(new Dimension(200, 50));
         resetPasswordButton.setMaximumSize(new Dimension(200, 50));
@@ -195,6 +199,16 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] resetPasswordComponents = {resetPasswordButton};
         Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
 
+        // Save Changes Button
+        saveChangesButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        saveChangesButton.setMinimumSize(new Dimension(200, 50));
+        saveChangesButton.setMaximumSize(new Dimension(200, 50));
+        saveChangesButton.setAlignmentX(RIGHT_ALIGNMENT);
+        saveChangesButton.setForeground(ThemeColors.BLACK);
+
+        JComponent[] saveChangesComponents = {saveChangesButton};
+        Box saveChangesBox = AddToBox.addToVerticalBox(saveChangesComponents, 1);
+
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
         Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
@@ -203,7 +217,10 @@ public class ProfilePanel extends TransparentPanel
         Box contactInfoBox = AddToBox.addToVerticalBox(contactInfoComponents, 2);
 
         JComponent[] workInfoComponents = {professionalInfoBox, contactInfoBox};
-        Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1); // TODO: Replace this with a button to change password
+        Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
+
+        JComponent[] buttonComponents = {resetPasswordBox, saveChangesBox};
+        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 1);
 
         // Add to Panel
         this.setLayout(new GridBagLayout());
@@ -223,9 +240,29 @@ public class ProfilePanel extends TransparentPanel
         c.gridy = 2;
         this.add(workInfoBox, c);
         c.gridy = 3;
-        this.add(resetPasswordBox, c);
+        this.add(buttonBox, c);
 
         // Button Handler
-        resetPasswordButton.addActionListener(new ResetPasswordHandler(this));
+        resetPasswordButton.addActionListener(new ResetPasswordHandler(this, type));
+        saveChangesButton.addActionListener(new SaveChangesHandler());
+    }
+
+    public void setButtonsType(int type)
+    {
+        if (type == 0)
+        {
+            resetPasswordButton = new CustomButtonAdmin("Reset Password");
+            saveChangesButton = new CustomButtonAdmin("Save Changes");
+        }
+        else if (type == 1)
+        {
+            resetPasswordButton = new CustomButtonInstructor("Reset Password");
+            saveChangesButton = new CustomButtonInstructor("Save Changes");
+        }
+        else if (type == 2)
+        {
+            resetPasswordButton = new CustomButtonStudent("Reset Password");
+            saveChangesButton = new CustomButtonStudent("Save Changes");
+        }
     }
 }

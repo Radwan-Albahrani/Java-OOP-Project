@@ -39,7 +39,7 @@ public class ButtonHandlerInstructor implements ActionListener
         String buttonClicked = e.getActionCommand().trim();
 
         // if the button clicked is Main Menu, Replace button panel and add the main panel
-        if (buttonClicked.equals("Main Menu"))
+        if (buttonClicked.equals("Main Menu") || buttonClicked.equals("Home"))
         {
             System.err.println("Main Menu button clicked - Instructor");
             panels.get("button").remove(studentButtonBox);
@@ -70,8 +70,8 @@ public class ButtonHandlerInstructor implements ActionListener
         else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
         {
             System.err.println("View Students button clicked - Instructor");
-            panels.get("button").remove(mainButtonBox);
-            panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
+            panels.get("button").remove(mainButtonBox); // Remove the main menu button box
+            panels.get("button").add(studentButtonBox, BorderLayout.NORTH); // Add the student button box
 
             frame.remove(panels.get("main"));
             frame.remove(panels.get("announcement"));

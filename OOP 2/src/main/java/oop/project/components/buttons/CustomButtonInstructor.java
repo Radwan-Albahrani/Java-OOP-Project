@@ -25,6 +25,23 @@ public class CustomButtonInstructor extends RoundedButton
         this.setkBorderRadius(30);
     }
 
+    public CustomButtonInstructor(String text, int Width, int Height)
+    {
+        this.setText(text);
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+        this.setkStartColor(ThemeColors.LIGHT_GREY);
+        this.setkEndColor(ThemeColors.DARK_GREY);
+        this.setkHoverStartColor(ThemeColors.DARK_GREY);
+        this.setkHoverEndColor(ThemeColors.DARK_GREY);
+        this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
+        this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
+        this.setPreferredSize(new Dimension(Width, Height));
+        this.setMinimumSize(getPreferredSize());
+        this.setMaximumSize(getPreferredSize());
+        this.setkBorderRadius(30);
+    }
+
+
     public CustomButtonInstructor(String text, String iconLocation)
     {
         Image image = FrameConfig.getPictureWithSize(iconLocation, 40, 40);

@@ -4,16 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import oop.project.screens.InstructorScreen.Frames.ResetPasswordFrame;
-import oop.project.screens.InstructorScreen.Panels.ProfilePanel;
+
+import oop.project.components.frames.ResetPasswordFrame;
+import oop.project.components.panels.ProfilePanel;
 
 public class ResetPasswordHandler implements ActionListener
 {
     private final JFrame resetPasswordFrame;
 
-    public ResetPasswordHandler(ProfilePanel profilePanel)
+    public ResetPasswordHandler(ProfilePanel profilePanel, int type)
     {
-        this.resetPasswordFrame = new ResetPasswordFrame(profilePanel);
+        this.resetPasswordFrame = new ResetPasswordFrame(profilePanel, type);
     }
 
     @Override
