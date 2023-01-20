@@ -21,8 +21,8 @@ public class ViewGrades extends TransparentPanel
         Box totalGrade;
 
 
-        JLabel ViewquizGradesLabel = new JLabel("View quizGrades");
-        ViewquizGradesLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        JLabel ViewGradesLabel = new JLabel("View Grades");
+        ViewGradesLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         JLabel id = new JLabel("ID");
         id.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -126,10 +126,10 @@ public class ViewGrades extends TransparentPanel
         this.add(totalGrade, c);
 
 
-        KButton ViewGradesButton = new BlueButton(" View quizGrades");
+        KButton ViewGradesButton = new BlueButton(" View Grades");
         ViewGradesButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] ViewGradesComponents = {ViewquizGradesLabel, ViewGradesButton};
+        JComponent[] ViewGradesComponents = {ViewGradesLabel, ViewGradesButton};
         Box ViewGradesBox = AddToBox.addToVerticalBox(ViewGradesComponents, 1);
 
         this.add(ViewGradesBox);
