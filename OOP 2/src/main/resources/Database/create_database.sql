@@ -154,13 +154,14 @@ DELIMITER $$
 CREATE PROCEDURE generate_user_id(IN username varchar(255), IN password varchar(255), IN type ENUM('Admin','Instructor','Student'))
 BEGIN
     DECLARE last_id INT;
-    SET @last_id = (SELECT MAX(UserID) FROM User);
+    SET @last_id = COALESCE((SELECT MAX(UserID) FROM User), 0);
     SET @last_id = @last_id + 1;
     SET @year = YEAR(CURRENT_DATE);
     SET @custom_id = CONCAT(LEFT(CONCAT(@year,''),1), RIGHT(CONCAT(@year,''),2), LPAD(@last_id, 7, '0'));
-    INSERT INTO User (UserID, Username, Password, Type) VALUES (@custom_id, username, password, type);
+    INSERT INTO User (UserID, Username, Password, Type, Status) VALUES (@custom_id, username, password, type, "Inactive");
 END $$
 DELIMITER ;
+
 
 
 
