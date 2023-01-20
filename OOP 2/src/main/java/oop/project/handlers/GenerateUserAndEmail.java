@@ -9,16 +9,21 @@ import java.awt.event.FocusListener;
 
 public class GenerateUserAndEmail implements FocusListener
 {
-    private JTextField firstName;
-    private JTextField lastName;
     private JTextField email;
     private JTextField username;
-    private long ID = DatabaseCon.generateID();
+    private long ID;
 
-    public GenerateUserAndEmail(JTextField firstName, JTextField lastName, JTextField email, JTextField username)
+    public GenerateUserAndEmail(JTextField email, JTextField username)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        try
+        {
+            this.ID = DatabaseCon.generateID();
+        }
+        catch (Exception e)
+        {
+            System.err.println("Error: " + e.getMessage());
+        }
+        this.ID = DatabaseCon.generateID();
         this.email = email;
         this.username = username;
     }
@@ -26,29 +31,9 @@ public class GenerateUserAndEmail implements FocusListener
     @Override
     public void focusGained(FocusEvent arg0)
     {
-        String firstNameText = firstName.getText();
-        String lastNameText = lastName.getText();
 
-        if (firstNameText.length() > 0)
-        {
-            firstNameText = firstNameText.substring(0, 1).toUpperCase();
-        }
-        else
-        {
-            firstNameText = firstNameText.toUpperCase();
-        }
-        if (lastNameText.length() > 0)
-        {
-            lastNameText = lastNameText.substring(0, 1).toUpperCase();
-        }
-        else
-        {
-            lastNameText = lastNameText.toUpperCase();
-        }
-
-        String emailText = firstNameText + "." + lastNameText
-                + "." + ID + "@University.com";
-        String usernameText = firstNameText + "." + lastNameText + "." + ID;
+        String emailText = ID + "@University.com";
+        String usernameText = Long.toString(ID);
         email.setText(emailText);
         username.setText(usernameText);
     }
@@ -56,30 +41,9 @@ public class GenerateUserAndEmail implements FocusListener
     @Override
     public void focusLost(FocusEvent arg0)
     {
-        String firstNameText = firstName.getText();
-        String lastNameText = lastName.getText();
 
-        if (firstNameText.length() > 0)
-        {
-            firstNameText = firstNameText.substring(0, 1).toUpperCase();
-        }
-        else
-        {
-            firstNameText = firstNameText.toUpperCase();
-        }
-        if (lastNameText.length() > 0)
-        {
-            lastNameText = lastNameText.substring(0, 1).toUpperCase();
-        }
-        else
-        {
-            lastNameText = lastNameText.toUpperCase();
-        }
-
-        String emailText = firstNameText + "." + lastNameText
-                + "." + ID + "@University.com";
-        String usernameText = firstNameText + "." + lastNameText + "." + ID;
-
+        String emailText = ID + "@University.com";
+        String usernameText = Long.toString(ID);
         email.setText(emailText);
         username.setText(usernameText);
     }

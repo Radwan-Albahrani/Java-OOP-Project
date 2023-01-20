@@ -94,8 +94,8 @@ public class RegisterPanel extends ThemedPanelGeneric
         Box userAndEmailBox = AddToBox.addToHorizontalBox(userBoxComponents, 4);
 
         // Add Focus Listeners
-        lastNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
-        firstNameField.addFocusListener(new GenerateUserAndEmail(firstNameField, lastNameField, emailField, usernameField));
+        lastNameField.addFocusListener(new GenerateUserAndEmail(emailField, usernameField));
+        firstNameField.addFocusListener(new GenerateUserAndEmail(emailField, usernameField));
 
         // Password Label and Field Setup
         JLabel passwordLabel = new JLabel("Password");

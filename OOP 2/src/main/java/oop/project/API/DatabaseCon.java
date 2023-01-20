@@ -29,7 +29,7 @@ public class DatabaseCon
         }
         catch (SQLException sqlException)
         {
-            sqlException.printStackTrace();
+            System.err.println("Error: " + sqlException.getMessage());
         }
         return null;
     }
@@ -44,7 +44,7 @@ public class DatabaseCon
         }
         catch (SQLException sqlException)
         {
-            sqlException.printStackTrace();
+            System.err.println("Error: " + sqlException.getMessage());
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Error registering user: " + e.getMessage());
             return 0;
         }
     }
@@ -113,7 +113,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Error generating ID: " + e.getMessage());
             return 0;
         } finally
         {
@@ -172,7 +172,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type: " + e.getMessage());
         } finally
         {
             try
@@ -181,7 +181,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
         return users;
@@ -206,7 +206,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
         }
         return null;
     }
@@ -254,7 +254,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting All Users: " + e.getMessage());
         } finally
         {
             try
@@ -263,7 +263,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
         return users;
@@ -288,7 +288,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type as ResultSet: " + e.getMessage());
         }
         return null;
     }
@@ -336,7 +336,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Status: " + e.getMessage());
         } finally
         {
             try
@@ -369,7 +369,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Status as ResultSet: " + e.getMessage());
         } finally
         {
             try
@@ -401,7 +401,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Checking Email: " + e.getMessage());
         }
         return 0;
     }
@@ -467,7 +467,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Logging in: " + e.getMessage());
             return -1;
         } finally
         {
@@ -477,7 +477,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
     }
@@ -501,7 +501,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Activating User: " + e.getMessage());
         }
     }
 
