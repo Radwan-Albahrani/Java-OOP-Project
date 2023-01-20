@@ -12,6 +12,7 @@ import javax.swing.*;
 
 import com.github.lgooddatepicker.components.*;
 
+import oop.project.API.DatabaseCon;
 import oop.project.API.SendEmail;
 import oop.project.components.MiniComponents.*;
 import oop.project.models.Auth;
@@ -132,11 +133,26 @@ public class RegisterHandler implements ActionListener
 
             // Show the user that the registration was successful
             SendEmail.sendEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
-            JOptionPane.showMessageDialog(frame,
-                    "Registration Successful. Please wait for Validation from Admin before logging in", "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
 
             // TODO: Add the info to the database
+            try
+            {
+                int result = DatabaseCon.registerUser(user);
+                if (result == 1)
+                {
+                    JOptionPane.showMessageDialog(frame,
+                            "Registration Successful, Please Wait for the Admin to Activate your Account", "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(frame, "Registration Failed", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
             frame.dispose();
             new LoginScreen();
         }

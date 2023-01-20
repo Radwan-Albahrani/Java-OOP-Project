@@ -4,6 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import oop.project.models.Auth;
@@ -31,7 +33,7 @@ public class DatabaseCon
         return null;
     }
 
-    public static void registerUser(UserModel user)
+    public static int registerUser(UserModel user)
     {
         // Get the connection
         Connection con = connectDB();
@@ -55,12 +57,50 @@ public class DatabaseCon
 
             // Execute the statement
             call.execute();
+            return 1;
 
         }
         catch (SQLException e)
         {
             e.printStackTrace();
+            return 0;
         }
+    }
+
+    public static long generateID()
+    {
+        Connection con = connectDB();
+        try (Statement stmt = con.createStatement();)
+        {
+            ResultSet rs = stmt.executeQuery("SELECT MAX(UserID) FROM User");
+            if (rs.next())
+            {
+                if (rs.getLong(1) == 0)
+                {
+                    long currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                    String year = Long.toString(currentYear);
+                    String firstDigit = year.substring(0, 1);
+                    String lastTwoDigits = year.substring(year.length() - 2);
+                    String id = firstDigit + lastTwoDigits + String.format("%07d", 1);
+                    return Long.parseLong(id);
+                }
+                else
+                {
+                    long id = rs.getLong(1) + 1;
+                    return id;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+
     }
 
     public static List<UserModel> getAllWithType(String type)
