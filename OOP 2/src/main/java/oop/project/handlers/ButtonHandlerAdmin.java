@@ -146,6 +146,7 @@ public class ButtonHandlerAdmin implements ActionListener
         else if (buttonClicked.equals("Logout"))
         {
             System.err.println("Logout button clicked - Admin");
+            DatabaseCon.Logout();
             frame.dispose();
             new LoginScreen();
         }
