@@ -41,9 +41,9 @@ public class ButtonHandlerStudent implements ActionListener
             panels.get("button").add(mainButtonBox, BorderLayout.NORTH);
 
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("DropClass"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("dropClass"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/background.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
@@ -54,9 +54,9 @@ public class ButtonHandlerStudent implements ActionListener
             panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
 
             frame.remove(panels.get("main"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("DropClass"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("dropClass"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("registerClass"));
         }
@@ -65,29 +65,29 @@ public class ButtonHandlerStudent implements ActionListener
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("DropClass"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("dropClass"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("SendAlerts"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("sendAlerts"));
         }
 
         else if (buttonClicked.equals("Drop Class"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("DropClass"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("dropClass"));
         }
 
         else if (buttonClicked.equals("View Profile"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("DropClass"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("dropClass"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
         }
@@ -106,9 +106,9 @@ public class ButtonHandlerStudent implements ActionListener
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("DropClass"));
-            frame.remove(panels.get("ViewGrades"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("dropClass"));
+            frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("ViewAnnouncements"));
         }
