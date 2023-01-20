@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
+import oop.project.components.buttons.CustomButtonStudent;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
 import oop.project.handlers.*;
@@ -270,11 +271,11 @@ public class ProfilePanel extends TransparentPanel
             resetPasswordButton = new CustomButtonInstructor("Reset Password");
             saveChangesButton = new CustomButtonInstructor("Save Changes");
         }
-        // else if (type == 2)
-        // {
-        // resetPasswordButton = new CustomButtonStudent("Reset Password");
-        // saveChangesButton = new CustomButtonStudent("Save Changes");
-        // }
+        else if (type == 2)
+        {
+            resetPasswordButton = new CustomButtonStudent("Reset Password");
+            saveChangesButton = new CustomButtonStudent("Save Changes");
+        }
     }
 
     public void setProfile(UserModel user)
