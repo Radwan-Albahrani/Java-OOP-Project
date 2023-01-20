@@ -157,10 +157,11 @@ BEGIN
     SET @last_id = (SELECT MAX(UserID) FROM User);
     SET @last_id = @last_id + 1;
     SET @year = YEAR(CURRENT_DATE);
-    SET @custom_id = CONCAT(RIGHT(CONCAT(@year,''),2), LPAD(@last_id, 8, '0'));
-    INSERT INTO User (UserID, Username, Password, Type, status) VALUES (@custom_id, username, password, type, "Inactive");
+    SET @custom_id = CONCAT(LEFT(CONCAT(@year,''),1), RIGHT(CONCAT(@year,''),2), LPAD(@last_id, 7, '0'));
+    INSERT INTO User (UserID, Username, Password, Type) VALUES (@custom_id, username, password, type);
 END $$
 DELIMITER ;
+
 
 
 
