@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import oop.project.models.Auth;
@@ -99,6 +98,16 @@ public class DatabaseCon
         {
             e.printStackTrace();
             return 0;
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -154,6 +163,16 @@ public class DatabaseCon
         catch (SQLException e)
         {
             e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         }
         return users;
     }
