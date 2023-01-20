@@ -21,6 +21,7 @@ public class ViewGrades extends TransparentPanel
         Box studentProjectGrade;
         Box totalGrade;
         Box studentGradeBox;
+        Box coursesList;
 
 
         JLabel ViewGradesLabel = new JLabel("View Grades");
@@ -167,6 +168,23 @@ public class ViewGrades extends TransparentPanel
         studentGradeBox = AddToBox.addToVerticalBox(gradComponents, 1);
 
 
+        JLabel courseLabel = new JLabel("Courses");
+        courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        courseLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        courseLabel.setForeground(ThemeColors.BLACK);
+
+        JComboBox<String> courseCombo= new JComboBox();
+        courseCombo.setMinimumSize(new Dimension(150, 50));
+        courseCombo.setMaximumSize(new Dimension(150, 50));
+        courseCombo.addItem("Course 1");
+        courseCombo.addItem("Course 2");
+        courseCombo.addItem("Course 3");
+        courseCombo.addItem("Course 4");
+        courseCombo.addItem("Course 5");
+
+        JComponent[] courseComponents = {courseLabel, courseCombo};
+        coursesList = AddToBox.addToHorizontalBox(courseComponents, 1);
+
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -178,6 +196,9 @@ public class ViewGrades extends TransparentPanel
         c.insets = new Insets(0, 30, 0, 30);
         this.add(studentProfile, c);
         c.gridy = 1;
+        c.insets = new Insets(0, 330, 0, 330);
+        this.add(coursesList, c);
+        c.gridy = 2;
         c.insets = new Insets(0, 330, 0, 330);
         this.add(studentGradeBox, c);
 
