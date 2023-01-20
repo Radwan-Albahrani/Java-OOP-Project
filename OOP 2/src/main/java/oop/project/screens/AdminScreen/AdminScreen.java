@@ -43,6 +43,7 @@ public class AdminScreen extends JFrame
         Map_panel.put("Alerts", view_Alerts);
         Map_panel.put("button", pButtonPanel);
         Map_panel.put("Registrations", viewRegistrations);
+        Map_panel.put("Courses", viewRegistrations);
 
         ((AdminButtonPanel) pButtonPanel).insertingPanels(Map_panel);
 

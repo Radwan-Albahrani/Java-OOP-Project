@@ -35,8 +35,8 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " Courses "   ,                 //done
             " Creat Course(s) ",        //done
             " Delete Course(s) ",       //done
-            " View Courses "            //done
-           
+            " View Courses ",            //done
+             "HOME"
 
     };
 
@@ -53,7 +53,9 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             "AdminScreen/Courses.png",
             "AdminScreen/AddCourses.png",
             "AdminScreen/DeleteCourses.png",
-            "AdminScreen/View Courses.png"
+            "AdminScreen/View Courses.png",
+            "AdminScreen/MainMenu.png" 
+
     };
 
     JFrame frame;
@@ -68,7 +70,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         for (int i = 0; i < All_buttons.length; i++)
         {
             myButtons.get(All_buttons[i].trim())
-                    .addActionListener(new ButtonHandlerAdmin(frame, this.panels, user_info, mainButtonBox));
+                    .addActionListener(new ButtonHandlerAdmin(frame, this.panels, user_info, mainButtonBox, coursesBox));
         }
 
     }
@@ -130,7 +132,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         JComponent [] coursesComponents =
         {
             coursesJLabel,
-            myButtons.get("Main Menu"),
+            myButtons.get("HOME"),
             myButtons.get("Creat Course(s)"),
             myButtons.get("Delete Course(s)"),
             myButtons.get("View Courses")

@@ -14,7 +14,7 @@ public final class App
         {
                 // new InstructorScreen();
                 // new StudentScreen();
-                new LoginScreen();
-                // new AdminScreen();
+               //new LoginScreen();
+                new AdminScreen();
         }
 }
