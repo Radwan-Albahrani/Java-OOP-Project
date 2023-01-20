@@ -17,13 +17,13 @@ public class DropClass extends TransparentPanel
         dropClassLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(dropClassLabel);
 
-        KButton dropClassButton = new BlueButton("Drop Class");
-        dropClassButton.setPreferredSize(new Dimension(150, 50));
-
         JComboBox dropClassComboBox = new JComboBox();
         dropClassComboBox.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] dropClassComponents = {dropClassLabel, dropClassButton};
+        KButton dropClassButton = new BlueButton("Drop Class");
+        dropClassButton.setPreferredSize(new Dimension(150, 50));
+
+        JComponent[] dropClassComponents = {dropClassLabel, dropClassButton, dropClassComboBox};
         Box dropClassBox = AddToBox.addToVerticalBox(dropClassComponents, 1);
 
         this.add(dropClassBox);
