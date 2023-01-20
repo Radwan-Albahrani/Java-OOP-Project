@@ -29,7 +29,7 @@ public class StudentButton extends ThemedPanelStudent
             "Logout"
     };
 
-    String[] buttonIcon = 
+    String[] ButtonIcon = 
     {
         "StudentScreen/Alerts.png",
         "StudentScreen/ViewProfile.png",
@@ -60,7 +60,7 @@ public class StudentButton extends ThemedPanelStudent
 
         for (int i = 0; i < ButtonNames.length; i++)
         {
-            studentButtons.put(ButtonNames[i].trim(), new CustomButtonStudent(ButtonNames[i], buttonIcon[i]));
+            studentButtons.put(ButtonNames[i].trim(), new CustomButtonStudent(ButtonNames[i], ButtonIcon[i]));
         }
         JLabel mainTitle = new JLabel("Student Dashboard");
         mainTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
