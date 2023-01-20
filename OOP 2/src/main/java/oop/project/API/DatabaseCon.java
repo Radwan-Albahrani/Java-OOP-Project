@@ -187,7 +187,7 @@ public class DatabaseCon
         return users;
     }
 
-    public static List<UserModel> getAllUsers(String type)
+    public static List<UserModel> getAllUsers()
     {
         // Set up the list
         List<UserModel> users = new ArrayList<>();
@@ -195,6 +195,64 @@ public class DatabaseCon
         // Get the connection
         Connection con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all users`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(
+                view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            // Get the results
+            while (rs.next())
+            {
+                // Create the user from the results
+                UserModel user = new UserModel();
+                user.setUserID(rs.getLong(1));
+                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
+                user.setRole(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthDate(rs.getString(7));
+                user.setMajor(rs.getString(8));
+                user.setEmail(rs.getString(9));
+                user.setPhoneNumber(rs.getString(10));
+                user.setPersonalEmail(rs.getString(11));
+                user.setPersonalPhoneNumber(rs.getString(12));
+                user.setStatus(rs.getString(13));
+
+                // Add the user to the list
+                users.add(user);
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return users;
+    }
+
+    public static List<UserModel> getAllUsersWithStatus(String status)
+    {
+        // Set up the list
+        List<UserModel> users = new ArrayList<>();
+
+        // Get the connection
+        Connection con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
         try (PreparedStatement stmt = con.prepareStatement(
@@ -344,10 +402,44 @@ public class DatabaseCon
         }
     }
 
+    private static void RegisterTesting(String email)
+    {
+        UserModel user = new UserModel();
+        user.setFirstName("firstName");
+        user.setLastName("lastName");
+        user.setEmail("TestEmail");
+        user.setPersonalEmail(email);
+        user.setPhoneNumber("phoneNumber");
+        user.setAuth(new Auth("username", "password"));
+        user.setBirthDate("2001-01-01");
+        user.setMajor("major");
+        user.setGender("Male");
+        user.setRole("Admin");
+        user.setPersonalPhoneNumber("personalPhoneNumber");
+        registerUser(user);
+
+    }
+
     public static void main(String[] args)
     {
-        Login("R.A.2230000001", "radwanQ12@");
-        System.out.println(currentUser.toString());
+        // for (int i = 0; i < 100; i++)
+        // {
+        // RegisterTesting(i + "@university.com");
+        // }
+        List<UserModel> users = getAllUsersWithStatus("Active");
+        for (UserModel userModel : users)
+        {
+            activateUser(userModel.getUserID() + "");
+            System.out.println(userModel.toString());
+        }
+
+        users = getAllUsersWithStatus("Inactive");
+
+        for (UserModel userModel : users)
+        {
+            activateUser(userModel.getUserID() + "");
+            System.out.println(userModel.toString());
+        }
     }
 
 }
