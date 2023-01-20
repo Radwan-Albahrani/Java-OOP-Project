@@ -47,7 +47,7 @@ CREATE TABLE Instructors (
 );
 
 CREATE TABLE Students (
-    StudentID INT PRIMARY KEY,
+    StudentID varchar(255) PRIMARY KEY,
     UserID varchar(255) NOT NULL,
     FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
@@ -63,7 +63,7 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE StudentCourses (
-    StudID INT NOT NULL,
+    StudID varchar(255) NOT NULL,
     CourseID INT NOT NULL,
     QuizGrade FLOAT NOT NULL,
     MidtermGrade FLOAT NOT NULL,
