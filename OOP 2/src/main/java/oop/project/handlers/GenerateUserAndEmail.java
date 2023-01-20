@@ -31,7 +31,7 @@ public class GenerateUserAndEmail implements FocusListener
 
         if (firstNameText.length() > 0)
         {
-            firstNameText = firstNameText.substring(0, 1).toUpperCase() + firstNameText.substring(1).toLowerCase();
+            firstNameText = firstNameText.substring(0, 1).toUpperCase();
         }
         else
         {
@@ -47,9 +47,8 @@ public class GenerateUserAndEmail implements FocusListener
         }
 
         String emailText = firstNameText + "." + lastNameText
-                + ID + "@University.com";
-        String usernameText = firstNameText + "." + lastNameText + ID;
-
+                + "." + ID + "@University.com";
+        String usernameText = firstNameText + "." + lastNameText + "." + ID;
         email.setText(emailText);
         username.setText(usernameText);
     }
@@ -62,7 +61,7 @@ public class GenerateUserAndEmail implements FocusListener
 
         if (firstNameText.length() > 0)
         {
-            firstNameText = firstNameText.substring(0, 1).toUpperCase() + firstNameText.substring(1).toLowerCase();
+            firstNameText = firstNameText.substring(0, 1).toUpperCase();
         }
         else
         {
@@ -78,8 +77,8 @@ public class GenerateUserAndEmail implements FocusListener
         }
 
         String emailText = firstNameText + "." + lastNameText
-                + ID + "@University.com";
-        String usernameText = firstNameText + "." + lastNameText + ID;
+                + "." + ID + "@University.com";
+        String usernameText = firstNameText + "." + lastNameText + "." + ID;
 
         email.setText(emailText);
         username.setText(usernameText);

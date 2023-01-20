@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import com.k33ptoo.components.*;
 
-import oop.project.handlers.ButtonHandlerInstructor;
+import oop.project.handlers.InstructorButtonHandler;
 
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.panels.ThemedPanelInstructor;
@@ -56,7 +56,7 @@ public class ButtonPanel extends ThemedPanelInstructor
         for (int i = 0; i < MainButtons.size(); i++)
         {
             MainButtons.get(ButtonNames[i].trim())
-                    .addActionListener(new ButtonHandlerInstructor(frame, this.panels, studentButtonBox, mainButtonBox));
+                    .addActionListener(new InstructorButtonHandler(frame, this.panels, studentButtonBox, mainButtonBox));
         }
     }
 

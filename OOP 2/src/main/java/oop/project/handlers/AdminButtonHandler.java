@@ -14,6 +14,9 @@ import oop.project.screens.LoginScreen.LoginScreen;
 
 import java.util.*;
 
+import oop.project.API.DatabaseCon;
+import oop.project.components.panels.*;
+
 public class AdminButtonHandler implements ActionListener
 {
     Map<String, JPanel> panels;
@@ -121,6 +124,7 @@ public class AdminButtonHandler implements ActionListener
             frame.remove(panels.get("Instructors"));
             frame.remove(panels.get("Main"));
             frame.remove(panels.get("Registrations"));
+            ((ProfilePanel) panels.get("Profile")).setProfile(DatabaseCon.currentUser);
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Profile"));
         }

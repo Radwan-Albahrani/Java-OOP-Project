@@ -6,6 +6,7 @@ import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.ThemedPanelGeneric;
 import oop.project.components.panels.VerticalPanel;
+import oop.project.handlers.LoginHandler;
 import oop.project.hooks.*;
 import oop.project.screens.RegisterScreen.RegisterScreen;
 
@@ -58,6 +59,8 @@ public class LoginPanel extends ThemedPanelGeneric
 
         // Login Button Setup
         JButton loginButton = new BlueButton("Login");
+
+        loginButton.addActionListener(new LoginHandler(usernameField, passwordField, frame));
 
         // Register Button Setup
         JButton registerButton = new BlueButton("Register");

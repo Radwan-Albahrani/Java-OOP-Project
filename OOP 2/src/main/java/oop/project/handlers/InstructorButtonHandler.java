@@ -8,13 +8,15 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import oop.project.API.DatabaseCon;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
 
 import java.util.*;
 
-public class ButtonHandlerInstructor implements ActionListener
+public class InstructorButtonHandler implements ActionListener
 {
     // Variables needed for the handler
     Map<String, JPanel> panels;
@@ -23,7 +25,7 @@ public class ButtonHandlerInstructor implements ActionListener
     Box mainButtonBox;
 
     // Constructor
-    public ButtonHandlerInstructor(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
+    public InstructorButtonHandler(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
     {
         this.frame = frame;
@@ -105,6 +107,7 @@ public class ButtonHandlerInstructor implements ActionListener
             frame.remove(panels.get("viewStudents"));
             frame.remove(panels.get("editGrades"));
             frame.remove(panels.get("alerts"));
+            ((ProfilePanel) panels.get("profile")).setProfile(DatabaseCon.currentUser);
             FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
         }
