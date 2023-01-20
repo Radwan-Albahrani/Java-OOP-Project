@@ -1,6 +1,8 @@
 package oop.project;
 
+// import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
+// import oop.project.screens.LoginScreen.LoginScreen;
 
 public final class App
 {

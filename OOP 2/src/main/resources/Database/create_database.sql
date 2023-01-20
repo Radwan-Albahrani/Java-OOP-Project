@@ -23,14 +23,14 @@ CREATE TABLE Profile (
 CREATE TABLE WorkContactDetails (
     UserID varchar(255) PRIMARY KEY,
     Email VARCHAR(255) NOT NULL,
-    Phone VARCHAR(255) NULL,
+    Phone VARCHAR(255) NOT NULL,
     FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 
 CREATE TABLE PersonalContactDetails (
     UserID varchar(255) PRIMARY KEY,
-    Email VARCHAR(255) NOT NULL,
-    Phone VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Phone VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 
