@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 
 public class SendEmail
 {
-    public static void sendEmail(String to, String emailMessage, String subject)
+    private static void sendEmail(String to, String emailMessage, String subject)
     {
 
         // Sender's email ID needs to be mentioned
@@ -74,7 +74,7 @@ public class SendEmail
 
     }
 
-    public static void sendEmail(String to, String name)
+    public static void sendRegistrationEmail(String to, String name)
     {
         String emailMessage = """
                 Dear %s
@@ -88,7 +88,12 @@ public class SendEmail
                         """.formatted(name);
         String subject = "Registration Successful";
 
-        sendEmail(to, emailMessage, subject);
+        new Thread(() -> sendEmail(to, emailMessage, subject)).start();
+    }
+
+    public static void sendEmailWithMessage(String to, String emailMessage, String subject)
+    {
+        new Thread(() -> sendEmail(to, emailMessage, subject)).start();
     }
 
     private static Map<?, ?> readJson()

@@ -132,7 +132,7 @@ public class RegisterHandler implements ActionListener
             System.out.println(user.toString());
 
             // Show the user that the registration was successful
-            SendEmail.sendEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
+            SendEmail.sendRegistrationEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
 
             int result = DatabaseCon.registerUser(user);
             if (result == 1)
