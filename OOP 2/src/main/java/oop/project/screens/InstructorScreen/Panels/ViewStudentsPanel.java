@@ -2,8 +2,10 @@ package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
@@ -31,32 +33,15 @@ public class ViewStudentsPanel extends TransparentPanel
         user = DatabaseCon.currentUser;
         String userID = Long.toString(user.getUserID());
 
-        // Get Instructors Course ID from database
-
-        ResultSet courseIDRS = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + userID + ";");
-        String[] courseIDArray = new String[1];
-        try
-            {
-                while(courseIDRS.next())
-                {
-                    courseIDArray = courseIDRS.getString("CourseID").split(",");
-                }
-            }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new TitleLabel("Here are all the students");
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
 
-        ResultSet tablers = DatabaseCon.customQuery( "SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade' " +
+        ResultSet tablers = DatabaseCon.customQuery("SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade' " +
                                                 "FROM studentcourses, profile " +
-                                                "WHERE StudID = UserID && CourseID = " + courseIDArray[0] + ";"); //TODO: Get course ID from whatever Instructor is logged in
+                                                "WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = " + userID + ");");
         JTable table = new JTable();
         table.setModel(DbUtils.resultSetToTableModel(tablers));
 

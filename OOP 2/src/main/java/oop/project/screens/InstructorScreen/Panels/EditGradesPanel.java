@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -18,6 +19,9 @@ import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.handlers.*;
 import oop.project.hooks.*;
+
+import oop.project.models.UserModel;
+import oop.project.API.*;
 
 public class EditGradesPanel extends TransparentPanel
 {// TODO: Change to actual max value of students in course
@@ -31,6 +35,18 @@ public class EditGradesPanel extends TransparentPanel
         Box nameBox;
         Box gradesBox;
         Box buttonsBox;
+
+        // Getting Grades from Database
+        String queryGrades = """
+            SELECT profile.UserID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
+            FROM studentcourses, workcontactdetails, profile
+            WHERE   profile.UserID = workcontactdetails.UserID
+                    StudID = profile.UserID && CourseID IN
+                                                (SELECT CourseID FROM courses WHERE InstructorID = '" + userID + "';
+                """;
+
+        ResultSet studentRS = DatabaseCon.customQuery(queryGrades);
+
 
         // Label Setup
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
@@ -253,10 +269,7 @@ public class EditGradesPanel extends TransparentPanel
         previousButton.addActionListener(
                 new NextPreviousHandler(idJComboBoxList));
 
-        /*
-         * nextButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
-         * previousButton.addActionListener(new MovementButtonHandler(idJComboBoxList, currentEntryIndex, maxEntryIndex));
-         */
-
     }
+
+
 }

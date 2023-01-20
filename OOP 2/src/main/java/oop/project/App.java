@@ -5,8 +5,7 @@ import oop.project.screens.InstructorScreen.InstructorScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
 
-import oop.project.models.UserModel;
-import oop.project.API.*;
+
 
 public final class App
 {
@@ -15,12 +14,11 @@ public final class App
 
         public static void main(String[] args)
         {
-                 // new InstructorScreen();
-                // new StudentScreen();
                 new LoginScreen();
+                // new InstructorScreen();
+                // new StudentScreen();
                 // new AdminScreen();
 
-                
-                
+
         }
 }
