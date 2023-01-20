@@ -129,7 +129,6 @@ public class DatabaseCon
 
     }
 
-
     public static List<UserModel> getAllWithType(String type)
     {
         // Set up the list
@@ -182,7 +181,6 @@ public class DatabaseCon
         }
         return users;
     }
-
 
     public static ResultSet customQuery(String query)
     {
@@ -567,6 +565,27 @@ public class DatabaseCon
         }
     }
 
+    public static ResultSet getStudentsOfInstructor(String userID)
+    {
+        String query = """
+                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
+                FROM studentcourses, profile
+                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                    """.formatted(userID);
+        Connection con = connectDB();
+        try
+        {
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
+        }
+        return null;
+    }
+
     public static void Logout()
     {
         currentUser = null;
@@ -602,7 +621,7 @@ public class DatabaseCon
         user.setBirthDate("2001-01-01");
         user.setMajor("major");
         user.setGender("Male");
-        user.setRole("Instructor");
+        user.setRole("Student");
         user.setPersonalPhoneNumber("personalPhoneNumber");
         registerUser(user);
 
@@ -621,7 +640,7 @@ public class DatabaseCon
 
     public static void main(String[] args)
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 1; i < 2; i++)
         {
             RegisterTesting(i + "@university.com");
         }

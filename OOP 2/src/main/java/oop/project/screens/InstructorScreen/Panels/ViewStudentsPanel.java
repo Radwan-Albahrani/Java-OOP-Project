@@ -38,10 +38,7 @@ public class ViewStudentsPanel extends TransparentPanel
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
-
-        ResultSet tablers = DatabaseCon.customQuery("SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade' " +
-                                                "FROM studentcourses, profile " +
-                                                "WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = " + userID + ");");
+        ResultSet tablers = DatabaseCon.getStudentsOfInstructor(userID);
         JTable table = new JTable();
         table.setModel(DbUtils.resultSetToTableModel(tablers));
 
@@ -63,15 +60,12 @@ public class ViewStudentsPanel extends TransparentPanel
         filterButton.setPreferredSize(new Dimension(150, 50));
         filterButton.setAlignmentX(CENTER_ALIGNMENT);
 
-
         JComponent[] components = {viewStudentsLabel, scrollPaneTable, filterButton};
         viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(viewStudentsBox);
 
-        //Button Handler
+        // Button Handler
         filterButton.addActionListener(new FilterButtonHandler(this));
     }
-
-
 
 }
