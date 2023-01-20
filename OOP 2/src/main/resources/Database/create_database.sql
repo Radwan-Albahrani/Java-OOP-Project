@@ -14,7 +14,7 @@ CREATE TABLE Profile (
     UserID varchar(255) PRIMARY KEY,
     FirstName VARCHAR(255) NOT NULL,
     LastName VARCHAR(255) NOT NULL,
-    Sex ENUM("M", "F") NOT NULL,
+    Sex ENUM("Male", "Female") NOT NULL,
     Birthdate DATE NOT NULL,
     Major VARCHAR(255) NOT NULL,
     FOREIGN KEY (UserID) REFERENCES User(UserID)
@@ -151,14 +151,24 @@ ADD CONSTRAINT project_grade_check CHECK (ProjectGrade >= 0 AND ProjectGrade <= 
 ADD CONSTRAINT total_grade_check CHECK (TotalGrade <= 100);
 
 DELIMITER $$
-CREATE PROCEDURE generate_user_id(IN username varchar(255), IN password varchar(255), IN type ENUM('Admin','Instructor','Student'))
+CREATE PROCEDURE generate_user(IN username varchar(255), IN password varchar(255), IN type ENUM('Admin','Instructor','Student'), IN firstName VARCHAR(255), IN lastName VARCHAR(255), IN sex ENUM('Male','Female','Other'), IN birthdate DATE, IN major VARCHAR(255), IN email VARCHAR(255), IN phone VARCHAR(255), IN personalEmail VARCHAR(255))
 BEGIN
     DECLARE last_id INT;
-    SET @last_id = COALESCE((SELECT MAX(UserID) FROM User), 0);
+    SET @last_id = (SELECT COALESCE(MAX(SUBSTR(UserID, -7)), 0) FROM User);
     SET @last_id = @last_id + 1;
     SET @year = YEAR(CURRENT_DATE);
     SET @custom_id = CONCAT(LEFT(CONCAT(@year,''),1), RIGHT(CONCAT(@year,''),2), LPAD(@last_id, 7, '0'));
     INSERT INTO User (UserID, Username, Password, Type, Status) VALUES (@custom_id, username, password, type, "Inactive");
+    INSERT INTO Profile (UserID,FirstName, LastName,Sex, Birthdate,Major) VALUES (@custom_id, firstName, lastName,sex, birthdate, major);
+    INSERT INTO WorkContactDetails (UserID, Email, Phone) VALUES (@custom_id, email, phone);
+    INSERT INTO PersonalContactDetails (UserID, Email) VALUES (@custom_id, personalEmail);
+    IF type='Admin' THEN
+        INSERT INTO Admins (AdminID, UserID) VALUES (@custom_id, @custom_id);
+    ELSEIF type='Instructor' THEN
+        INSERT INTO Instructors (InstructorID, UserID) VALUES (@custom_id, @custom_id);
+    ELSEIF type='Student' THEN
+        INSERT INTO Students (StudentID, UserID) VALUES (@custom_id, @custom_id);
+    END IF;
 END $$
 DELIMITER ;
 
