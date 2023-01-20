@@ -15,12 +15,24 @@ import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
 import oop.project.handlers.*;
 import oop.project.hooks.*;
+import oop.project.models.UserModel;
+
 import com.k33ptoo.components.KButton;
 
 public class ProfilePanel extends TransparentPanel
 {
     KButton resetPasswordButton;
     KButton saveChangesButton;
+    RoundedJTextField nameField;
+    RoundedJTextField idField;
+    RoundedJTextField birthDateField;
+    RoundedJTextField genderField;
+    RoundedJTextField occupationField;
+    RoundedJTextField majorField;
+    RoundedJTextField workEmailField;
+    RoundedJTextField personalEmailField;
+    RoundedJTextField workPhoneField;
+    RoundedJTextField personalPhoneField;
 
     public ProfilePanel(int Width, int Height, int type)
     {
@@ -40,7 +52,7 @@ public class ProfilePanel extends TransparentPanel
         idLabel.setAlignmentX(CENTER_ALIGNMENT);
         idLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField idField = new RoundedJTextField(15);
+        idField = new RoundedJTextField(15);
         idField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         idField.setMinimumSize(new Dimension(400, 50));
         idField.setMaximumSize(new Dimension(400, 50));
@@ -56,7 +68,7 @@ public class ProfilePanel extends TransparentPanel
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         nameLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField nameField = new RoundedJTextField(15);
+        nameField = new RoundedJTextField(15);
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         nameField.setEditable(false);
@@ -73,7 +85,7 @@ public class ProfilePanel extends TransparentPanel
         birthDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
         birthDateLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField birthDateField = new RoundedJTextField(15);
+        birthDateField = new RoundedJTextField(15);
         birthDateField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         birthDateField.setEditable(false);
         birthDateField.setMinimumSize(new Dimension(400, 50));
@@ -89,7 +101,7 @@ public class ProfilePanel extends TransparentPanel
         genderLabel.setAlignmentX(CENTER_ALIGNMENT);
         genderLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField genderField = new RoundedJTextField(15);
+        genderField = new RoundedJTextField(15);
         genderField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         genderField.setEditable(false);
         genderField.setMinimumSize(new Dimension(400, 50));
@@ -119,7 +131,7 @@ public class ProfilePanel extends TransparentPanel
         occupationLabel.setAlignmentX(CENTER_ALIGNMENT);
         occupationLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField occupationField = new RoundedJTextField(15);
+        occupationField = new RoundedJTextField(15);
         occupationField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         occupationField.setEditable(false);
         occupationField.setMinimumSize(new Dimension(400, 50));
@@ -135,7 +147,7 @@ public class ProfilePanel extends TransparentPanel
         majorLabel.setAlignmentX(CENTER_ALIGNMENT);
         majorLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField majorField = new RoundedJTextField(15);
+        majorField = new RoundedJTextField(15);
         majorField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         majorField.setEditable(false);
         majorField.setMinimumSize(new Dimension(400, 50));
@@ -151,14 +163,14 @@ public class ProfilePanel extends TransparentPanel
         emailLabel.setAlignmentX(CENTER_ALIGNMENT);
         emailLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField workEmailField = new RoundedJTextField(15);
+        workEmailField = new RoundedJTextField(15);
         workEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         workEmailField.setEditable(false);
         workEmailField.setMinimumSize(new Dimension(400, 50));
         workEmailField.setMaximumSize(new Dimension(400, 50));
         workEmailField.setAlignmentX(CENTER_ALIGNMENT);
 
-        RoundedJTextField personalEmailField = new RoundedJTextField(15);
+        personalEmailField = new RoundedJTextField(15);
         personalEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         personalEmailField.setMinimumSize(new Dimension(400, 50));
         personalEmailField.setMaximumSize(new Dimension(400, 50));
@@ -173,14 +185,14 @@ public class ProfilePanel extends TransparentPanel
         phoneLabel.setAlignmentX(RIGHT_ALIGNMENT);
         phoneLabel.setForeground(ThemeColors.BLACK);
 
-        RoundedJTextField workPhoneField = new RoundedJTextField(15);
+        workPhoneField = new RoundedJTextField(15);
         workPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         workPhoneField.setEditable(false);
         workPhoneField.setMinimumSize(new Dimension(400, 50));
         workPhoneField.setMaximumSize(new Dimension(400, 50));
         workPhoneField.setAlignmentX(LEFT_ALIGNMENT);
 
-        RoundedJTextField personalPhoneField = new RoundedJTextField(15);
+        personalPhoneField = new RoundedJTextField(15);
         personalPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
@@ -264,5 +276,38 @@ public class ProfilePanel extends TransparentPanel
             resetPasswordButton = new CustomButtonStudent("Reset Password");
             saveChangesButton = new CustomButtonStudent("Save Changes");
         }
+    }
+
+    public void setProfile(UserModel user)
+    {
+        // Set Name
+        nameField.setText(user.getFirstName() + " " + user.getLastName());
+
+        // Set ID
+        idField.setText(Long.toString(user.getUserID()));
+
+        // Set Birth Date
+        birthDateField.setText(user.getBirthDate());
+
+        // set gender
+        genderField.setText(user.getGender());
+
+        // Set Occupation
+        occupationField.setText(user.getRole());
+
+        // Set Major
+        majorField.setText(user.getMajor());
+
+        // Set Work Email
+        workEmailField.setText(user.getEmail());
+
+        // Set Personal Email
+        personalEmailField.setText(user.getPersonalEmail());
+
+        // Set Work Phone
+        workPhoneField.setText(user.getPhoneNumber());
+
+        // Set Personal Phone
+        personalPhoneField.setText(user.getPersonalPhoneNumber());
     }
 }

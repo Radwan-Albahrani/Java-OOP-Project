@@ -58,7 +58,7 @@ CREATE TABLE Courses (
     CourseName VARCHAR(255) NOT NULL,
     CreditHours INT NOT NULL,
     MaxCap INT NOT NULL,
-    InstructorID VARCHAR(255) NOT NULL,
+    InstructorID VARCHAR(255),
     FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID)
 );
 
@@ -172,7 +172,33 @@ BEGIN
 END $$
 DELIMITER ;
 
+CREATE VIEW `View All Admin` AS
+SELECT User.UserID, User.Username, User.Password, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Admin";
 
+CREATE VIEW `View All Student` AS
+SELECT User.UserID, User.Username, User.Password, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Student";
 
+CREATE VIEW `View All Instructor` AS
+SELECT User.UserID, User.Username, User.Password, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Instructor";
 
-
+CREATE VIEW `View All Users` AS
+SELECT User.UserID, User.Username, User.Password, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID;
