@@ -134,25 +134,18 @@ public class RegisterHandler implements ActionListener
             // Show the user that the registration was successful
             SendEmail.sendEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
 
-            // TODO: Add the info to the database
-            try
+            int result = DatabaseCon.registerUser(user);
+            if (result == 1)
             {
-                int result = DatabaseCon.registerUser(user);
-                if (result == 1)
-                {
-                    JOptionPane.showMessageDialog(frame,
-                            "Registration Successful, Please Wait for the Admin to Activate your Account", "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(frame, "Registration Failed", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(frame,
+                        "Registration Successful, Please Wait for the Admin to Activate your Account", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
-            catch (Exception ex)
+            else
             {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(frame, "Registration Failed", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
             frame.dispose();
             new LoginScreen();
         }
