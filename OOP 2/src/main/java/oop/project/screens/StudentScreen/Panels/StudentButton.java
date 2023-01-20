@@ -31,12 +31,16 @@ public class StudentButton extends ThemedPanelStudent
 
     String[] ButtonIcon = 
     {
-        "StudentScreen/Alerts.png",
+        "StudentScreen/SendAlerts.png",
         "StudentScreen/ViewProfile.png",
-        "StudentScreen/Announcements.png",
-        "StudentScreen/ManageClasses.png",
+        "StudentScreen/ViewAnnouncements.png",
+        "StudentScreen/ManageClass.png",
         "StudentScreen/ViewGrades.png",
-        "StudentScreen/MainMenu.png"
+        "StudentScreen/MainMenu.png",
+        "StudentScreen/SelectCourse.png",
+        "StudentScreen/RegisterClass.png",
+        "StudentScreen/DropClass.jpg",
+        "StudentScreen/Logout.png",            
     };
 
     JFrame frame;
