@@ -123,7 +123,7 @@ public class DatabaseCon
         // Create the statement
         try (PreparedStatement stmt = con.prepareStatement(
                 """
-                            SELECT User.UserID, User.Username, User.Password, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as 'Personal Email', personalcontactdetails.Phone as 'Personal Phone'
+                            SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as 'Personal Email', personalcontactdetails.Phone as 'Personal Phone'
                             FROM User
                             JOIN Profile ON User.UserID = Profile.UserID
                             JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
@@ -143,17 +143,17 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), rs.getString(3)));
-                user.setRole(rs.getString(4));
-                user.setFirstName(rs.getString(5));
-                user.setLastName(rs.getString(6));
-                user.setGender(rs.getString(7));
-                user.setBirthDate(rs.getString(8));
-                user.setMajor(rs.getString(9));
-                user.setEmail(rs.getString(10));
-                user.setPhoneNumber(rs.getString(11));
-                user.setPersonalEmail(rs.getString(12));
-                user.setPersonalPhoneNumber(rs.getString(13));
+                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
+                user.setRole(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthDate(rs.getString(7));
+                user.setMajor(rs.getString(8));
+                user.setEmail(rs.getString(9));
+                user.setPhoneNumber(rs.getString(10));
+                user.setPersonalEmail(rs.getString(11));
+                user.setPersonalPhoneNumber(rs.getString(12));
 
                 // Add the user to the list
                 users.add(user);
