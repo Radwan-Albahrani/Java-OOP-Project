@@ -68,7 +68,7 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("sendAlerts"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("SendAlerts"));
         }
 
         else if (buttonClicked.equals("Drop Class"))
@@ -78,7 +78,7 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("sendAlerts"));
             frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("dropClass"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("DropClass"));
         }
 
         else if (buttonClicked.equals("View Profile"))
@@ -110,7 +110,7 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewAnnouncements"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("ViewAnnouncements"));
         }
 
         else if (buttonClicked.equals("Logout"))
