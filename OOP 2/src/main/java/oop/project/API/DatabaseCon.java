@@ -152,18 +152,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -234,18 +229,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -292,6 +282,82 @@ public class DatabaseCon
         return null;
     }
 
+    public static UserModel getOneUser(String ID)
+    {
+        // Set up the list
+        UserModel user = new UserModel();
+
+        // Get the connection
+        Connection con = connectDBViews();
+        String statement = """
+                SELECT
+                User.UserID,
+                User.Username,
+                User.Password
+                User.Type,
+                Profile.FirstName,
+                Profile.LastName,
+                Profile.Sex,
+                Profile.Birthdate,
+                Profile.Major,
+                WorkContactDetails.Email,
+                workcontactdetails.Phone,
+                personalcontactdetails.Email as 'Personal Email',
+                personalcontactdetails.Phone as 'Personal Phone',
+                User.Status
+                FROM User INNER JOIN Profile ON User.UserID = Profile.UserID
+                INNER JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+                INNER JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+                WHERE User.UserID = ?;
+                    """;;
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(
+                statement);)
+        {
+            stmt.setString(1, ID);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            // Get the results
+            while (rs.next())
+            {
+                // Create the user from the results
+                user.setUserID(rs.getLong(1));
+                user.setAuth(new Auth(rs.getString(2), rs.getString(3)));
+                user.setRole(rs.getString(4));
+                user.setFirstName(rs.getString(5));
+                user.setLastName(rs.getString(6));
+                user.setGender(rs.getString(7));
+                user.setBirthDate(rs.getString(8));
+                user.setMajor(rs.getString(9));
+                user.setEmail(rs.getString(10));
+                user.setPhoneNumber(rs.getString(11));
+                user.setPersonalEmail(rs.getString(12));
+                user.setPersonalPhoneNumber(rs.getString(13));
+                user.setStatus(rs.getString(14));
+                return user;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting All Users: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return user;
+    }
+
     public static List<UserModel> getAllUsersWithStatus(String status)
     {
         // Set up the list
@@ -315,18 +381,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -516,7 +577,7 @@ public class DatabaseCon
         user.setBirthDate("2001-01-01");
         user.setMajor("major");
         user.setGender("Male");
-        user.setRole("Admin");
+        user.setRole("Instructor");
         user.setPersonalPhoneNumber("personalPhoneNumber");
         registerUser(user);
 
@@ -535,10 +596,10 @@ public class DatabaseCon
 
     public static void main(String[] args)
     {
-        // for (int i = 0; i < 100; i++)
-        // {
-        // RegisterTesting(i + "@university.com");
-        // }
+        for (int i = 0; i < 100; i++)
+        {
+            RegisterTesting(i + "@university.com");
+        }
         ActivateAllUsers();
     }
 
