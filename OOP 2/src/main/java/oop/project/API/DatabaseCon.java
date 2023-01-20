@@ -187,6 +187,30 @@ public class DatabaseCon
         return users;
     }
 
+    public static ResultSet getAllWithTypeRS(String type)
+    {
+
+        // Get the connection
+        Connection con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(
+                view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static List<UserModel> getAllUsers()
     {
         // Set up the list
@@ -245,6 +269,30 @@ public class DatabaseCon
         return users;
     }
 
+    public static ResultSet getAllUsersRS()
+    {
+
+        // Get the connection
+        Connection con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all users`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(
+                view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static List<UserModel> getAllUsersWithStatus(String status)
     {
         // Set up the list
@@ -301,6 +349,39 @@ public class DatabaseCon
             }
         }
         return users;
+    }
+
+    public static ResultSet getAllUsersWithStatusRS(String status)
+    {
+        // Get the connection
+        Connection con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(
+                view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public static int checkEmail(String email)
