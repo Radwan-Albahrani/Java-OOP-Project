@@ -39,11 +39,11 @@ public class ViewStudentsPanel extends TransparentPanel
         this.add(viewStudentsLabel);
 
 
-        ResultSet tablers = DatabaseCon.customQuery("SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade' " +
+        ResultSet tableQuery = DatabaseCon.customQuery("SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade' " +
                                                 "FROM studentcourses, profile " +
                                                 "WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = " + userID + ");");
         JTable table = new JTable();
-        table.setModel(DbUtils.resultSetToTableModel(tablers));
+        table.setModel(DbUtils.resultSetToTableModel(tableQuery));
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.setDragEnabled(false);
@@ -71,7 +71,4 @@ public class ViewStudentsPanel extends TransparentPanel
         //Button Handler
         filterButton.addActionListener(new FilterButtonHandler(this));
     }
-
-
-
 }
