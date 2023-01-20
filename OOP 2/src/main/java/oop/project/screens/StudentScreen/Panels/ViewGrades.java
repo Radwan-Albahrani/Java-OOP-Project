@@ -1,7 +1,7 @@
 package oop.project.screens.StudentScreen.Panels;
 
 import oop.project.colors.ThemeColors;
-import oop.project.components.buttons.BlueButton;
+import oop.project.components.buttons.*;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.AddToBox;
@@ -18,6 +18,7 @@ public class ViewGrades extends TransparentPanel
         Box studentquizGrade;
         Box studentmidtermGrade;
         Box studentfinalGrade;
+        Box studentProjectGrade;
         Box totalGrade;
 
 
@@ -26,83 +27,126 @@ public class ViewGrades extends TransparentPanel
 
         JLabel id = new JLabel("ID");
         id.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        id.setHorizontalAlignment(JLabel.CENTER);
-        id.setHorizontalTextPosition(JLabel.CENTER);
+        id.setAlignmentX(JLabel.LEFT);
+        id.setHorizontalTextPosition(JLabel.LEFT);
         id.setAlignmentX(RIGHT_ALIGNMENT);
-        id.setForeground(ThemeColors.BLUE);
+        id.setForeground(ThemeColors.BLACK);
 
         JLabel name = new JLabel("Name");
         name.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        name.setHorizontalAlignment(JLabel.CENTER);
-        name.setHorizontalTextPosition(JLabel.CENTER);
+        name.setAlignmentX(JLabel.LEFT);
+        name.setHorizontalTextPosition(JLabel.LEFT);
         name.setAlignmentX(RIGHT_ALIGNMENT);
-        name.setForeground(ThemeColors.BLUE);
+        name.setForeground(ThemeColors.BLACK);
 
         JComponent [] profileComponents = {id, name};
         studentProfile = AddToBox.addToHorizontalBox(profileComponents, 1);
 
 
-        JLabel quizGrade = new JLabel("quizGrade");
+        JLabel quizGrade = new JLabel("Quiz Grade");
         quizGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        quizGrade.setHorizontalAlignment(JLabel.CENTER);
-        quizGrade.setHorizontalTextPosition(JLabel.CENTER);
-        quizGrade.setAlignmentX(RIGHT_ALIGNMENT);
-        quizGrade.setForeground(ThemeColors.BLUE);
+        quizGrade.setAlignmentX(LEFT_ALIGNMENT);
+        quizGrade.setForeground(ThemeColors.BLACK);
+        
 
         RoundedJTextField quizGradeField = new RoundedJTextField(10);
         quizGradeField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        quizGradeField.setHorizontalAlignment(JTextField.CENTER);
-        quizGradeField.setPreferredSize(new Dimension(100, 50));
+        quizGradeField.setAlignmentX(RIGHT_ALIGNMENT);
+        quizGradeField.setMinimumSize( new Dimension(100, 50));
+        quizGradeField.setMaximumSize( new Dimension(100, 50));
+        quizGradeField.setEditable(false);
 
-        JComponent [] quizGradeComponents = {quizGrade, quizGradeField};
+        JLabel quizGradeLabel = new JLabel("/10");
+        quizGradeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        quizGradeLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        quizGradeLabel.setForeground(ThemeColors.BLACK);
+
+
+        JComponent [] quizGradeComponents = {quizGrade, quizGradeField, quizGradeLabel};
         studentquizGrade = AddToBox.addToHorizontalBox(quizGradeComponents, 1);
 
 
-        JLabel midtermGrade = new JLabel("quizGrade");
+        JLabel midtermGrade = new JLabel("Midterm Grade");
         midtermGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        midtermGrade.setHorizontalAlignment(JLabel.CENTER);
-        midtermGrade.setHorizontalTextPosition(JLabel.CENTER);
-        midtermGrade.setAlignmentX(RIGHT_ALIGNMENT);
-        midtermGrade.setForeground(ThemeColors.BLUE);
+        midtermGrade.setAlignmentX(LEFT_ALIGNMENT);
+        midtermGrade.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField midtermGradeField = new RoundedJTextField(10);
         midtermGradeField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        midtermGradeField.setHorizontalAlignment(JTextField.CENTER);
-        midtermGradeField.setPreferredSize(new Dimension(100, 50));
+        midtermGradeField.setAlignmentX(RIGHT_ALIGNMENT);
+        midtermGradeField.setMinimumSize(new Dimension(100, 50));
+        midtermGradeField.setMaximumSize(new Dimension(100, 50));
+        midtermGradeField.setEditable(false);
 
-        JComponent [] midtermGradeComponents = {midtermGrade, midtermGradeField};
+        JLabel midtermGradeLabel = new JLabel("/20");
+        midtermGradeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        midtermGradeLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        midtermGradeLabel.setForeground(ThemeColors.BLACK);
+
+        JComponent [] midtermGradeComponents = {midtermGrade, midtermGradeField, midtermGradeLabel};
         studentmidtermGrade = AddToBox.addToHorizontalBox(midtermGradeComponents, 1);
 
 
-        JLabel finalGrade = new JLabel("quizGrade");
+        JLabel finalGrade = new JLabel("Final Grade");
         finalGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        finalGrade.setHorizontalAlignment(JLabel.CENTER);
-        finalGrade.setHorizontalTextPosition(JLabel.CENTER);
-        finalGrade.setAlignmentX(RIGHT_ALIGNMENT);
-        finalGrade.setForeground(ThemeColors.BLUE);
+        finalGrade.setAlignmentX(LEFT_ALIGNMENT);
+        finalGrade.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField finalGradeField = new RoundedJTextField(10);
         finalGradeField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        finalGradeField.setHorizontalAlignment(JTextField.CENTER);
-        finalGradeField.setPreferredSize(new Dimension(100, 50));
+        finalGradeField.setAlignmentX(RIGHT_ALIGNMENT);
+        finalGradeField.setMinimumSize(new Dimension(100, 50));
+        finalGradeField.setMaximumSize(new Dimension(100, 50));
+        finalGradeField.setEditable(false);
 
-        JComponent [] finalGradeComponents = {finalGrade, finalGradeField};
+        JLabel finalGradeLabel = new JLabel("/40");
+        finalGradeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        finalGradeLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        finalGradeLabel.setForeground(ThemeColors.BLACK);
+
+        JComponent [] finalGradeComponents = {finalGrade, finalGradeField, finalGradeLabel};
         studentfinalGrade = AddToBox.addToHorizontalBox(finalGradeComponents, 1);
-        
 
-        JLabel total = new JLabel("/100");
+
+        JLabel projectGrade = new JLabel("Project Grade");
+        projectGrade.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        projectGrade.setAlignmentX(LEFT_ALIGNMENT);
+        projectGrade.setForeground(ThemeColors.BLACK);
+
+        RoundedJTextField projectGradeField = new RoundedJTextField(10);
+        projectGradeField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        projectGradeField.setAlignmentX(RIGHT_ALIGNMENT);
+        projectGradeField.setMinimumSize(new Dimension(100, 50));
+        projectGradeField.setMaximumSize(new Dimension(100, 50));
+        projectGradeField.setEditable(false);
+
+        JLabel projectGradeLabel = new JLabel("/30");
+        projectGradeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        projectGradeLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        projectGradeLabel.setForeground(ThemeColors.BLACK);
+
+        JComponent [] projectGradeComponents = {projectGrade, projectGradeField, projectGradeLabel};
+        studentProjectGrade = AddToBox.addToHorizontalBox(projectGradeComponents, 1);
+
+
+        JLabel total = new JLabel("Total:");
         total.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        total.setHorizontalAlignment(JLabel.CENTER);
-        total.setHorizontalTextPosition(JLabel.CENTER);
-        total.setAlignmentX(RIGHT_ALIGNMENT);
-        total.setForeground(ThemeColors.BLUE);
+        total.setAlignmentX(LEFT_ALIGNMENT);
+        total.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField totalField = new RoundedJTextField(10);
         totalField.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        totalField.setHorizontalAlignment(JTextField.CENTER);
-        totalField.setPreferredSize(new Dimension(100, 50));
+        totalField.setAlignmentX(RIGHT_ALIGNMENT);
+        totalField.setMinimumSize(new Dimension(100, 50));
+        totalField.setMaximumSize(new Dimension(100, 50));
+        totalField.setEditable(false);
 
-        JComponent [] totalComponents = {total, totalField};
+        JLabel totalLabel = new JLabel("/100");
+        totalLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        totalLabel.setAlignmentX(RIGHT_ALIGNMENT);
+        totalLabel.setForeground(ThemeColors.BLACK);
+
+        JComponent [] totalComponents = {total, totalField, totalLabel};
         totalGrade = AddToBox.addToHorizontalBox(totalComponents, 1);
 
 
@@ -124,14 +168,6 @@ public class ViewGrades extends TransparentPanel
         this.add(studentfinalGrade, c);
         c.gridy = 4;
         this.add(totalGrade, c);
-
-
-        KButton ViewGradesButton = new BlueButton("View Grades");
-        ViewGradesButton.setPreferredSize(new Dimension(150, 50));
-
-        JComponent[] ViewGradesComponents = {ViewGradesLabel, ViewGradesButton};
-        Box ViewGradesBox = AddToBox.addToVerticalBox(ViewGradesComponents, 1);
-
-        this.add(ViewGradesBox);
+  
     }
 }
