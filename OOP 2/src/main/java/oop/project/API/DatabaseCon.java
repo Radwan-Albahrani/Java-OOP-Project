@@ -129,6 +129,7 @@ public class DatabaseCon
 
     }
 
+
     public static List<UserModel> getAllWithType(String type)
     {
         // Set up the list
@@ -185,6 +186,30 @@ public class DatabaseCon
             }
         }
         return users;
+    }
+
+
+    public static ResultSet customQuery(String query)
+    {
+        // Get the connection
+        Connection con = connectDB();
+        String view = query;
+
+        // Create the statement
+        try
+        {
+            PreparedStatement stmt = con.prepareStatement(view);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
+        }
+        return null;
     }
 
     public static ResultSet getAllWithTypeRS(String type)
