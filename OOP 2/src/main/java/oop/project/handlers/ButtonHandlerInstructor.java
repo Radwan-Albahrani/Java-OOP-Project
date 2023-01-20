@@ -130,6 +130,7 @@ public class ButtonHandlerInstructor implements ActionListener
         else if (buttonClicked.equals("Logout"))
         {
             System.out.println("Logout button clicked - Instructor");
+            DatabaseCon.Logout();
             frame.dispose();
             new LoginScreen();
         }
