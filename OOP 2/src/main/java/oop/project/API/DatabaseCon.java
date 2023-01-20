@@ -195,9 +195,9 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
+            PreparedStatement stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -277,10 +277,9 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
-
+            PreparedStatement stmt = con.prepareStatement(view);
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
             return rs;
@@ -358,9 +357,9 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
+            PreparedStatement stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
