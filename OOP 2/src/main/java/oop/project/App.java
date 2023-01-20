@@ -5,6 +5,9 @@ import oop.project.screens.InstructorScreen.InstructorScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
 
+import oop.project.models.UserModel;
+import oop.project.API.*;
+
 public final class App
 {
         public static String Path = "src/main/resources/images/";
@@ -12,9 +15,12 @@ public final class App
 
         public static void main(String[] args)
         {
-                 new InstructorScreen();
+                 // new InstructorScreen();
                 // new StudentScreen();
-                //.new LoginScreen();
+                new LoginScreen();
                 // new AdminScreen();
+
+                
+                
         }
 }

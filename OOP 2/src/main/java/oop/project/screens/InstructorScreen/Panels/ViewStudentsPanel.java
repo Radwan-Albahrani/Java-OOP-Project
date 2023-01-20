@@ -11,10 +11,9 @@ import com.k33ptoo.components.KButton;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.handlers.FilterButtonHandler;
 import oop.project.hooks.*;
-import oop.project.models.UserModel;
-
 import java.awt.*;
 
+import oop.project.models.UserModel;
 import oop.project.API.*;
 
 /* View Students Panel
@@ -23,14 +22,19 @@ TODO: Get Data from database and display it in the table
 
 public class ViewStudentsPanel extends TransparentPanel
 {
+    Box viewStudentsBox;
 
-    // Get Instructors Course ID from database
-    UserModel user = DatabaseCon.currentUser;
-    user.getUserID();
-
-    ResultSet courseIDRS = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = \"1\";");
-    String[] courseIDArray;
+    public ViewStudentsPanel(int Width, int Height)
     {
+
+        UserModel user = new UserModel();
+        user = DatabaseCon.currentUser;
+        String userID = Long.toString(user.getUserID());
+
+        // Get Instructors Course ID from database
+
+        ResultSet courseIDRS = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + userID + ";");
+        String[] courseIDArray = new String[1];
         try
             {
                 while(courseIDRS.next())
@@ -42,11 +46,7 @@ public class ViewStudentsPanel extends TransparentPanel
         {
             e.printStackTrace();
         }
-    }
 
-    public ViewStudentsPanel(int Width, int Height)
-    {
-        Box viewStudentsBox;
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new TitleLabel("Here are all the students");
