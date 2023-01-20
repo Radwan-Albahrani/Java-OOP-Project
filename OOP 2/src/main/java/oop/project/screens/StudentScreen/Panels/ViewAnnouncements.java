@@ -14,10 +14,13 @@ public class ViewAnnouncements extends TransparentPanel
         JLabel ViewAnnouncementsLabel = new JLabel("View Announcements");
         ViewAnnouncementsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
+        JTextArea ViewAnnouncementsTextArea = new JTextArea("Announcements will be displayed here.");
+        ViewAnnouncementsTextArea.setPreferredSize(new Dimension(1000, Height - 300));
+
         KButton ViewAnnouncementsButton = new BlueButton(" View Announcements");
         ViewAnnouncementsButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] ViewAnnouncementsComponents = {ViewAnnouncementsLabel, ViewAnnouncementsButton};
+        JComponent[] ViewAnnouncementsComponents = {ViewAnnouncementsLabel, ViewAnnouncementsTextArea ,ViewAnnouncementsButton};
         Box ViewAnnouncementsBox = AddToBox.addToVerticalBox(ViewAnnouncementsComponents, 1);
 
         this.add(ViewAnnouncementsBox);
