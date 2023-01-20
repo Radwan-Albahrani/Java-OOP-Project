@@ -8,6 +8,8 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import oop.project.API.DatabaseCon;
+import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
@@ -88,6 +90,7 @@ public class ButtonHandlerStudent implements ActionListener
             frame.remove(panels.get("sendAlerts"));
             frame.remove(panels.get("dropClass"));
             frame.remove(panels.get("viewGrades"));
+            ((ProfilePanel) panels.get("profile")).setProfile(DatabaseCon.currentUser);
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
         }

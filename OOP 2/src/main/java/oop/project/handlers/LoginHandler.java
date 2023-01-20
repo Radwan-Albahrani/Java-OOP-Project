@@ -8,6 +8,7 @@ import javax.swing.*;
 import oop.project.API.DatabaseCon;
 import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
+import oop.project.screens.StudentScreen.StudentScreen;
 
 public class LoginHandler implements ActionListener
 {
@@ -41,11 +42,11 @@ public class LoginHandler implements ActionListener
                 frame.dispose();
                 new InstructorScreen();
             }
-            // else if(DatabaseCon.currentUser.getRole().equals("Student"))
-            // {
-            // frame.dispose();
-            // new StudentScreen();
-            // }
+            else if (DatabaseCon.currentUser.getRole().equals("Student"))
+            {
+                frame.dispose();
+                new StudentScreen();
+            }
 
         }
         else if (result == 1)

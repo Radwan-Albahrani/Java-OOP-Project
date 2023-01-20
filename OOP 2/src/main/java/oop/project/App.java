@@ -1,10 +1,9 @@
 package oop.project;
 
-// import oop.project.screens.AdminScreen.AdminScreen;
+import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
-// import oop.project.screens.LoginScreen.LoginScreen;
 
 public final class App
 {
@@ -13,8 +12,7 @@ public final class App
 
         public static void main(String[] args)
         {
-                // new AdminScreen();
-                new InstructorScreen();
+                // new InstructorScreen();
                 new StudentScreen();
                 // new LoginScreen();
                 // new AdminScreen();
