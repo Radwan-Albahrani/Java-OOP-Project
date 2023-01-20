@@ -16,7 +16,7 @@ import oop.project.screens.InstructorScreen.InstructorScreen;
 
 import java.util.*;
 
-public class InstructorButtonHandler implements ActionListener
+public class ButtonHandlerInstructor implements ActionListener
 {
     // Variables needed for the handler
     Map<String, JPanel> panels;
@@ -25,7 +25,7 @@ public class InstructorButtonHandler implements ActionListener
     Box mainButtonBox;
 
     // Constructor
-    public InstructorButtonHandler(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
+    public ButtonHandlerInstructor(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
     {
         this.frame = frame;

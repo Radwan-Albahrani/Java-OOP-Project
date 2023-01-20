@@ -17,7 +17,7 @@ import java.util.*;
 import oop.project.API.DatabaseCon;
 import oop.project.components.panels.*;
 
-public class AdminButtonHandler implements ActionListener
+public class ButtonHandlerAdmin implements ActionListener
 {
     Map<String, JPanel> panels;
     JFrame frame;
@@ -25,7 +25,7 @@ public class AdminButtonHandler implements ActionListener
     Box mainButtonBox;
 
     // Constructor
-    public AdminButtonHandler(JFrame frame, Map<String, JPanel> panels, Box user_info,
+    public ButtonHandlerAdmin(JFrame frame, Map<String, JPanel> panels, Box user_info,
             Box mainButtonBox)
     {
         this.frame = frame;

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import com.k33ptoo.components.*;
 
-import oop.project.handlers.AdminButtonHandler;
+import oop.project.handlers.ButtonHandlerAdmin;
 
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.panels.ThemedPanelAdmin;
@@ -20,31 +20,30 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     Map<String, JPanel> panels = new Hashtable<>();
 
     String[] All_buttons = {
-            " Main Menu ",      //done
-            " View Alerts ",    //done
-            " Manage Users ",   //done
-            " View Instructors ", //done   
-            " View Students ",    //done           
-            " View Profile ",      //done
-            " Edit Information ",         //done
-            " Registration Requests ", //done
-            "Logout" //,
-            //"Creat Course"
-                          //done
+            " Main Menu ", // done
+            " View Alerts ", // done
+            " Manage Users ", // done
+            " View Instructors ", // done
+            " View Students ", // done
+            " View Profile ", // done
+            " Edit Information ", // done
+            " Registration Requests ", // done
+            "Logout" // ,
+            // "Creat Course"
+            // done
 
     };
 
-    String[] ButtonIconLocations = 
-    {
-        "AdminScreen/MainMenu.png",
-        "AdminScreen/ViewAlerts.png",
-        "AdminScreen/ManageUsers.png",
-        "AdminScreen/ViewInstructors.png",
-        "AdminScreen/ViewStudents.png",
-        "AdminScreen/ViewProfile.png",
-        "AdminScreen/EditInfo.png",
-        "AdminScreen/ViewRegisteration.png",
-        "AdminScreen/Logout.png"
+    String[] ButtonIconLocations = {
+            "AdminScreen/MainMenu.png",
+            "AdminScreen/ViewAlerts.png",
+            "AdminScreen/ManageUsers.png",
+            "AdminScreen/ViewInstructors.png",
+            "AdminScreen/ViewStudents.png",
+            "AdminScreen/ViewProfile.png",
+            "AdminScreen/EditInfo.png",
+            "AdminScreen/ViewRegisteration.png",
+            "AdminScreen/Logout.png"
     };
 
     JFrame frame;
@@ -58,7 +57,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         for (int i = 0; i < All_buttons.length; i++)
         {
             myButtons.get(All_buttons[i].trim())
-                    .addActionListener(new AdminButtonHandler(frame, this.panels, user_info, mainButtonBox));
+                    .addActionListener(new ButtonHandlerAdmin(frame, this.panels, user_info, mainButtonBox));
         }
 
     }
@@ -72,7 +71,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         // Add all the buttons to the Map
         for (int i = 0; i < All_buttons.length; i++)
         {
-            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i], ButtonIconLocations[i] ));
+            myButtons.put(All_buttons[i].trim(), new CustomButtonAdmin(All_buttons[i], ButtonIconLocations[i]));
         }
         // Title JLabel
 
@@ -101,7 +100,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         JComponent[] profileJComponents = {
                 editTitle,
                 myButtons.get("Main Menu"),
-                myButtons.get("Edit Information"),  
+                myButtons.get("Edit Information"),
                 myButtons.get("View Instructors"),
                 myButtons.get("View Students"),
         };
