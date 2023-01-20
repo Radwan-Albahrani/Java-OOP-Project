@@ -38,9 +38,9 @@ public class ViewStudentsPanel extends TransparentPanel
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
-        ResultSet tablers = DatabaseCon.getStudentsOfInstructor(userID);
+        ResultSet students = DatabaseCon.getStudentsOfInstructor(userID);
         JTable table = new JTable();
-        table.setModel(DbUtils.resultSetToTableModel(tablers));
+        table.setModel(DbUtils.resultSetToTableModel(students));
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.setDragEnabled(false);
