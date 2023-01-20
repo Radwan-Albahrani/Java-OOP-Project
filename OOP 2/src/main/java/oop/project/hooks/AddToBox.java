@@ -12,6 +12,11 @@ public class AddToBox
         Box verticalBox = Box.createVerticalBox();
         for (JComponent jComponent : component)
         {
+            if (jComponent == null)
+            {
+                System.out.println("Component at position " + counter + " is null");
+                continue;
+            }
             verticalBox.add(Box.createVerticalStrut(10));
             verticalBox.add(jComponent);
             counter++;
@@ -33,6 +38,11 @@ public class AddToBox
         Box horizontalBox = Box.createHorizontalBox();
         for (JComponent jComponent : component)
         {
+            if (jComponent == null)
+            {
+                System.out.println("Component at position " + counter + " is null");
+                continue;
+            }
             horizontalBox.add(jComponent);
             counter++;
             if (counter == numberOfComponentsPerRow)
@@ -53,6 +63,11 @@ public class AddToBox
         Box verticalBoxWithSpace = Box.createVerticalBox();
         for (JComponent jComponent : component)
         {
+            if (jComponent == null)
+            {
+                System.out.println("Component at position " + counter + " is null");
+                continue;
+            }
             verticalBoxWithSpace.add(Box.createVerticalStrut(10));
             verticalBoxWithSpace.add(jComponent);
             if (counter != numberOfComponentsPerColumn - 1)
