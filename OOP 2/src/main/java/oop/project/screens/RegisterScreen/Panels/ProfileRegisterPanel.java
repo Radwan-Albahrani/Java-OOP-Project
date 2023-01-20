@@ -71,6 +71,16 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         JComponent birthComponents[] = {genderLabel, genderType, birthDate, birthDateField};
         Box birthBox = AddToBox.addToHorizontalBox(birthComponents, 2);
 
+        // Email
+        JLabel emailLabel = new JLabel("Email");
+        emailLabel.setForeground(Color.WHITE);
+        emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+        emailLabel.setHorizontalAlignment(JLabel.LEFT);
+
+        RoundedJTextField emailField = new RoundedJTextField(31);
+        emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        emailField.setHorizontalAlignment(RoundedJTextField.CENTER);
+
         // Username Label and Field Setup
         JLabel MajorLabel = new JLabel("Major");
         MajorLabel.setForeground(Color.WHITE);
@@ -101,7 +111,7 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         phoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         phoneField.setHorizontalAlignment(RoundedJTextField.CENTER);
 
-        JComponent professionalBoxComponents[] = {MajorLabel, MajorComboBox, phoneLabel, phoneField};
+        JComponent professionalBoxComponents[] = {emailLabel, emailField, MajorLabel, MajorComboBox, phoneLabel, phoneField};
         Box professionalBox = AddToBox.addToVerticalBox(professionalBoxComponents, 1);
 
         // Add components
@@ -109,6 +119,7 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         components.put("dob", birthDateField);
         components.put("major", MajorComboBox);
         components.put("phoneNumber", phoneField);
+        components.put("personalEmail", emailField);
 
         registerButton = new BlueButton("Register");
 

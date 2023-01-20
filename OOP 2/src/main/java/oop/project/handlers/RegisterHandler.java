@@ -12,6 +12,7 @@ import javax.swing.*;
 
 import com.github.lgooddatepicker.components.*;
 
+import oop.project.API.SendEmail;
 import oop.project.components.MiniComponents.*;
 import oop.project.models.Auth;
 import oop.project.models.UserModel;
@@ -119,6 +120,7 @@ public class RegisterHandler implements ActionListener
             user.setFirstName(allInfo.get("firstName"));
             user.setLastName(allInfo.get("lastName"));
             user.setEmail(allInfo.get("email"));
+            user.setPersonalEmail(allInfo.get("personalEmail"));
             user.setPhoneNumber(allInfo.get("phoneNumber"));
             user.setAuth(new Auth(allInfo.get("username"), allInfo.get("password")));
             user.setBirthDate(allInfo.get("dob"));
@@ -129,7 +131,10 @@ public class RegisterHandler implements ActionListener
             System.out.println(user.toString());
 
             // Show the user that the registration was successful
-            JOptionPane.showMessageDialog(frame, "Registration Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+            SendEmail.sendEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
+            JOptionPane.showMessageDialog(frame,
+                    "Registration Successful. Please wait for Validation from Admin before logging in", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
 
             // TODO: Add the info to the database
             frame.dispose();
@@ -150,7 +155,7 @@ public class RegisterHandler implements ActionListener
         constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(frame.getHeight() / 8, frame.getWidth() / 3, frame.getHeight() / 8,
+        constraints.insets = new Insets(frame.getHeight() / 12, frame.getWidth() / 3, frame.getHeight() / 12,
                 frame.getWidth() / 3);
         constraints.fill = GridBagConstraints.BOTH;
         ((ProfileRegisterPanel) panel).setWrapper(wrapper);
