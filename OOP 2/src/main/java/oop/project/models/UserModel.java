@@ -113,7 +113,7 @@ public class UserModel
 
     public UserModel()
     {
-
+        this.auth = new Auth();
     }
 
     public String getPersonalEmail()
