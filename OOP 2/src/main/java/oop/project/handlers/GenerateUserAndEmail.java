@@ -1,6 +1,9 @@
 package oop.project.handlers;
 
 import javax.swing.*;
+
+import oop.project.API.DatabaseCon;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -10,7 +13,7 @@ public class GenerateUserAndEmail implements FocusListener
     private JTextField lastName;
     private JTextField email;
     private JTextField username;
-    private int ID;
+    private long ID = DatabaseCon.generateID();
 
     public GenerateUserAndEmail(JTextField firstName, JTextField lastName, JTextField email, JTextField username)
     {
@@ -26,9 +29,26 @@ public class GenerateUserAndEmail implements FocusListener
         String firstNameText = firstName.getText();
         String lastNameText = lastName.getText();
 
-        String emailText = firstNameText.toLowerCase() + "." + lastNameText.toLowerCase() + "@University.com";
-        String usernameText = firstNameText.toLowerCase() + "." + lastNameText.toLowerCase() + ID;
+        if (firstNameText.length() > 0)
+        {
+            firstNameText = firstNameText.substring(0, 1).toUpperCase();
+        }
+        else
+        {
+            firstNameText = firstNameText.toUpperCase();
+        }
+        if (lastNameText.length() > 0)
+        {
+            lastNameText = lastNameText.substring(0, 1).toUpperCase();
+        }
+        else
+        {
+            lastNameText = lastNameText.toUpperCase();
+        }
 
+        String emailText = firstNameText + "." + lastNameText
+                + "." + ID + "@University.com";
+        String usernameText = firstNameText + "." + lastNameText + "." + ID;
         email.setText(emailText);
         username.setText(usernameText);
     }
@@ -39,8 +59,26 @@ public class GenerateUserAndEmail implements FocusListener
         String firstNameText = firstName.getText();
         String lastNameText = lastName.getText();
 
-        String emailText = firstNameText.toLowerCase() + "." + lastNameText.toLowerCase() + "@University.com";
-        String usernameText = firstNameText.toLowerCase() + "." + lastNameText.toLowerCase() + ID;
+        if (firstNameText.length() > 0)
+        {
+            firstNameText = firstNameText.substring(0, 1).toUpperCase();
+        }
+        else
+        {
+            firstNameText = firstNameText.toUpperCase();
+        }
+        if (lastNameText.length() > 0)
+        {
+            lastNameText = lastNameText.substring(0, 1).toUpperCase();
+        }
+        else
+        {
+            lastNameText = lastNameText.toUpperCase();
+        }
+
+        String emailText = firstNameText + "." + lastNameText
+                + "." + ID + "@University.com";
+        String usernameText = firstNameText + "." + lastNameText + "." + ID;
 
         email.setText(emailText);
         username.setText(usernameText);

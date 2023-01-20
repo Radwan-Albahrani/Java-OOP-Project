@@ -11,7 +11,10 @@ public class UserModel
     private String birthDate;
     private String major;
     private String phoneNumber;
+    private String personalPhoneNumber;
     private Auth auth;
+    private String status;
+    private long userID;
 
     @Override
     public String toString()
@@ -26,9 +29,41 @@ public class UserModel
         profile += "Birth Date: " + this.birthDate + "\n";
         profile += "Major: " + this.major + "\n";
         profile += "Phone Number: " + this.phoneNumber + "\n";
+        profile += "Personal Phone Number: " + this.personalPhoneNumber + "\n";
         profile += "Username: " + this.auth.getUsername() + "\n";
         profile += "Password: " + this.auth.getPassword() + "\n";
+        profile += "Status: " + this.status + "\n";
         return profile;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    public String getPersonalPhoneNumber()
+    {
+        return personalPhoneNumber;
+    }
+
+    public void setPersonalPhoneNumber(String personalPhoneNumber)
+    {
+        this.personalPhoneNumber = personalPhoneNumber;
+    }
+
+    public long getUserID()
+    {
+        return userID;
+    }
+
+    public void setUserID(long userID)
+    {
+        this.userID = userID;
     }
 
     public void setFirstName(String firstName)
