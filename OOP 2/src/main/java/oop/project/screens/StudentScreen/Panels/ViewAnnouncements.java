@@ -1,6 +1,7 @@
 package oop.project.screens.StudentScreen.Panels;
 
 
+import oop.project.components.core.PromptedTextArea;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;
 import java.awt.*;
@@ -14,13 +15,13 @@ public class ViewAnnouncements extends TransparentPanel
         JLabel ViewAnnouncementsLabel = new JLabel("View Announcements");
         ViewAnnouncementsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
-        JTextArea ViewAnnouncementsTextArea = new JTextArea("Announcements will be displayed here.");
+        JTextArea ViewAnnouncementsTextArea = new PromptedTextArea("Announcements will be displayed here.");
         ViewAnnouncementsTextArea.setPreferredSize(new Dimension(1000, Height - 300));
 
         JComponent[] ViewAnnouncementsComponents = {ViewAnnouncementsLabel, ViewAnnouncementsTextArea};
         Box ViewAnnouncementsBox = AddToBox.addToVerticalBox(ViewAnnouncementsComponents, 1);
 
         this.add(ViewAnnouncementsBox);
-        
+
     }
 }

@@ -102,7 +102,7 @@ public class ButtonHandlerStudent implements ActionListener
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
-        else if (buttonClicked.equals("View announcements"))
+        else if (buttonClicked.equals("View Announcements"))
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
