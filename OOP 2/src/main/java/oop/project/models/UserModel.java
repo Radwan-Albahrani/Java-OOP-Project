@@ -13,6 +13,7 @@ public class UserModel
     private String phoneNumber;
     private String personalPhoneNumber;
     private Auth auth;
+    private String status;
     private long userID;
 
     @Override
@@ -31,7 +32,18 @@ public class UserModel
         profile += "Personal Phone Number: " + this.personalPhoneNumber + "\n";
         profile += "Username: " + this.auth.getUsername() + "\n";
         profile += "Password: " + this.auth.getPassword() + "\n";
+        profile += "Status: " + this.status + "\n";
         return profile;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
     }
 
     public String getPersonalPhoneNumber()
