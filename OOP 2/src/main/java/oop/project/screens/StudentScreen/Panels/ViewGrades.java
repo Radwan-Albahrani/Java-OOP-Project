@@ -14,8 +14,6 @@ public class ViewGrades extends TransparentPanel
 {
     public ViewGrades(int Width, int Height)
     {
-        Box studentId;
-        Box studentName;
         Box studentProfile;
         Box studentquizGrade;
         Box studentmidtermGrade;
@@ -53,12 +51,6 @@ public class ViewGrades extends TransparentPanel
         nameField.setMinimumSize(new Dimension(400, 50));
         nameField.setMaximumSize(new Dimension(400, 50));
         nameField.setEditable(false);
-
-        JComponent [] idComponents = {id, idField};
-        studentId = AddToBox.addToHorizontalBox(idComponents, 1);
-
-        JComponent[] nameComponents = {name, nameField};
-        studentName = AddToBox.addToHorizontalBox(nameComponents, 1);
 
         JComponent[] profileComponents = {id, idField, name, nameField};
         studentProfile = AddToBox.addToVerticalBox(profileComponents, 1);
