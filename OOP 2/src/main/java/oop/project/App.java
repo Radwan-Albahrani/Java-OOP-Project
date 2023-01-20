@@ -2,12 +2,9 @@ package oop.project;
 
 // import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
-<<<<<<< HEAD
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
-=======
 // import oop.project.screens.LoginScreen.LoginScreen;
->>>>>>> eeb9a6040a5f60a930c52f1737cdbcc9dc0be707
 
 public final class App
 {

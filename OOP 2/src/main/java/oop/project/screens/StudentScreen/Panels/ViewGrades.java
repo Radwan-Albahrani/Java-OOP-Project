@@ -126,7 +126,7 @@ public class ViewGrades extends TransparentPanel
         this.add(totalGrade, c);
 
 
-        KButton ViewGradesButton = new BlueButton(" View Grades");
+        KButton ViewGradesButton = new BlueButton("View Grades");
         ViewGradesButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] ViewGradesComponents = {ViewGradesLabel, ViewGradesButton};

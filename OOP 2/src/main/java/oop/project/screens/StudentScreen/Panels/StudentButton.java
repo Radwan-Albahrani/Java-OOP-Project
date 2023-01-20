@@ -21,7 +21,7 @@ public class StudentButton extends ThemedPanelStudent
             "View Profile",
             " View Announcements",
             " Manage Classes ",
-            " View Grades ",
+            "View Grades",
             " Main Menu ",
             " Select Course ",
             " Register Class ",
