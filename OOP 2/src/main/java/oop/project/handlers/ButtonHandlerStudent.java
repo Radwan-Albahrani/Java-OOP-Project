@@ -96,10 +96,10 @@ public class ButtonHandlerStudent implements ActionListener
         {
             frame.remove(panels.get("main"));
             frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("SendAlerts"));
-            frame.remove(panels.get("DropClass"));
+            frame.remove(panels.get("sendAlerts"));
+            frame.remove(panels.get("dropClass"));
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("ViewGrades"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
         else if (buttonClicked.equals("View announcements"))

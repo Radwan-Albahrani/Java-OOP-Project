@@ -66,7 +66,7 @@ public class StudentButton extends ThemedPanelStudent
                 studentButtons.get("View Grades")
         };
 
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 6);
         JLabel coursesTitle = new JLabel("Manage Courses");
         coursesTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 34));
         coursesTitle.setForeground(Color.BLACK);
