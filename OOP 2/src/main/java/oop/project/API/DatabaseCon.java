@@ -303,6 +303,28 @@ public class DatabaseCon
         return users;
     }
 
+    public static int checkEmail(String email)
+    {
+        Connection con = connectDB();
+        try (PreparedStatement stmt = con.prepareStatement("""
+                SELECT COUNT(*)
+                FROM User
+                JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+                WHERE PersonalContactDetails.Email = ?
+                """))
+        {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public static int Login(String username, String password)
     {
         Connection con = connectDB();
@@ -420,26 +442,24 @@ public class DatabaseCon
 
     }
 
+    private static void ActivateAllUsers()
+    {
+        List<UserModel> users = getAllUsersWithStatus("Inactive");
+
+        for (UserModel userModel : users)
+        {
+            activateUser(userModel.getUserID() + "");
+            System.out.println(userModel.toString());
+        }
+    }
+
     public static void main(String[] args)
     {
         // for (int i = 0; i < 100; i++)
         // {
         // RegisterTesting(i + "@university.com");
         // }
-        List<UserModel> users = getAllUsersWithStatus("Active");
-        for (UserModel userModel : users)
-        {
-            activateUser(userModel.getUserID() + "");
-            System.out.println(userModel.toString());
-        }
-
-        users = getAllUsersWithStatus("Inactive");
-
-        for (UserModel userModel : users)
-        {
-            activateUser(userModel.getUserID() + "");
-            System.out.println(userModel.toString());
-        }
+        ActivateAllUsers();
     }
 
 }

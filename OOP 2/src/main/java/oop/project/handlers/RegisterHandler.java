@@ -140,14 +140,14 @@ public class RegisterHandler implements ActionListener
                 JOptionPane.showMessageDialog(frame,
                         "Registration Successful, Please Wait for the Admin to Activate your Account", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                new LoginScreen();
             }
             else
             {
-                JOptionPane.showMessageDialog(frame, "Registration Failed", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Registration Failed. Email Already Registered", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
-
-            frame.dispose();
-            new LoginScreen();
         }
 
         frame.revalidate();
@@ -174,7 +174,8 @@ public class RegisterHandler implements ActionListener
 
     private int Validation(Map.Entry<String, JComponent> component)
     {
-        if (component.getValue() instanceof JTextField && !(component.getValue() instanceof JPasswordField))
+        if (component.getValue() instanceof JTextField
+                && !(component.getValue() instanceof JPasswordField || component.getValue() instanceof EmailTextField))
         {
             if (((JTextField) component.getValue()).getText().equals(""))
             {
@@ -232,6 +233,33 @@ public class RegisterHandler implements ActionListener
                 return -1;
             }
             info.put(component.getKey(), ((PhoneTextField) component.getValue()).getText());
+            return 1;
+        }
+        else if (component.getValue() instanceof EmailTextField)
+        {
+            if (((EmailTextField) component.getValue()).getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            int result = ((EmailTextField) component.getValue()).Validate();
+            if (result == 1)
+            {
+                JOptionPane.showMessageDialog(frame, "Email Already Registered");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            if (result != 0)
+            {
+                JOptionPane.showMessageDialog(frame, "Please enter a valid email");
+                info.clear();
+                passwords.clear();
+                return -1;
+            }
+            info.put(component.getKey(), ((EmailTextField) component.getValue()).getText());
             return 1;
         }
         else if (component.getValue() instanceof JComboBox<?>)

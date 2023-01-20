@@ -12,6 +12,7 @@ import javax.swing.*;
 import com.github.lgooddatepicker.components.*;
 import com.k33ptoo.components.*;
 
+import oop.project.components.MiniComponents.EmailTextField;
 import oop.project.components.MiniComponents.PhoneTextField;
 import oop.project.components.buttons.BlueButton;
 import oop.project.components.core.RoundedJTextField;
@@ -77,9 +78,9 @@ public class ProfileRegisterPanel extends ThemedPanelGeneric
         emailLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         emailLabel.setHorizontalAlignment(JLabel.LEFT);
 
-        RoundedJTextField emailField = new RoundedJTextField(31);
+        EmailTextField emailField = new EmailTextField(31);
         emailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        emailField.setHorizontalAlignment(RoundedJTextField.CENTER);
+        emailField.setHorizontalAlignment(EmailTextField.CENTER);
 
         // Username Label and Field Setup
         JLabel MajorLabel = new JLabel("Major");
