@@ -279,6 +279,10 @@ public class ProfilePanel extends TransparentPanel
 
     public void setProfile(UserModel user)
     {
+        if (user == null)
+        {
+            return;
+        }
         // Set Name
         nameField.setText(user.getFirstName() + " " + user.getLastName());
 
