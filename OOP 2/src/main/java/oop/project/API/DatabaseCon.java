@@ -17,6 +17,8 @@ import java.sql.SQLException;
 
 public class DatabaseCon
 {
+    private static Connection con;
+    private static PreparedStatement stmt;
     public static UserModel currentUser;
 
     private static Connection connectDB()
@@ -24,8 +26,8 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/informationsystem";
         try
         {
-            Connection connection = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            return connection;
+            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            return con;
         }
         catch (SQLException sqlException)
         {
@@ -39,8 +41,8 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/";
         try
         {
-            Connection connection = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            return connection;
+            Connection con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            return con;
         }
         catch (SQLException sqlException)
         {
@@ -52,7 +54,7 @@ public class DatabaseCon
     public static int registerUser(UserModel user)
     {
         // Get the connection
-        Connection con = connectDB();
+        con = connectDB();
 
         // Create the statement
         try (CallableStatement call = con.prepareCall("CALL generate_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -85,7 +87,7 @@ public class DatabaseCon
 
     public static long generateID()
     {
-        Connection con = connectDB();
+        con = connectDB();
         try (Statement stmt = con.createStatement();)
         {
             ResultSet rs = stmt.executeQuery("SELECT MAX(UserID) FROM User");
@@ -135,7 +137,7 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
 
         // Create the statement
@@ -185,13 +187,13 @@ public class DatabaseCon
     public static ResultSet customQuery(String query)
     {
         // Get the connection
-        Connection con = connectDB();
+        con = connectDB();
         String view = query;
 
         // Create the statement
         try
         {
-            PreparedStatement stmt = con.prepareStatement(view);
+            stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -209,13 +211,13 @@ public class DatabaseCon
     {
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
 
         // Create the statement
         try
         {
-            PreparedStatement stmt = con.prepareStatement(view);
+            stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -235,12 +237,11 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try (PreparedStatement stmt = con.prepareStatement(view);)
         {
 
             // Execute the statement
@@ -286,13 +287,13 @@ public class DatabaseCon
     {
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
         try
         {
-            PreparedStatement stmt = con.prepareStatement(view);
+            stmt = con.prepareStatement(view);
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
             return rs;
@@ -311,7 +312,7 @@ public class DatabaseCon
         UserModel user = new UserModel();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String statement = """
                 SELECT
                 User.UserID,
@@ -335,8 +336,7 @@ public class DatabaseCon
                     """;;
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                statement);)
+        try (PreparedStatement tmt = con.prepareStatement(statement);)
         {
             stmt.setString(1, ID);
 
@@ -387,7 +387,7 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
@@ -437,13 +437,13 @@ public class DatabaseCon
     public static ResultSet getAllUsersWithStatusRS(String status)
     {
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
         try
         {
-            PreparedStatement stmt = con.prepareStatement(view);
+            stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -469,13 +469,14 @@ public class DatabaseCon
 
     public static int checkEmail(String email)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 SELECT COUNT(*)
                 FROM User
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 WHERE PersonalContactDetails.Email = ?
-                """))
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query))
         {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -491,8 +492,8 @@ public class DatabaseCon
 
     public static int Login(String username, String password)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 SELECT User.UserID,
                 User.Username,
                 User.Type,
@@ -512,7 +513,8 @@ public class DatabaseCon
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 Where user.Username = ?
                 AND user.Password = ?;
-                    """);)
+                    """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -572,10 +574,10 @@ public class DatabaseCon
                 FROM studentcourses, profile
                 WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
                     """.formatted(userID);
-        Connection con = connectDB();
+        con = connectDB();
         try
         {
-            PreparedStatement stmt = con.prepareStatement(query);
+            stmt = con.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             return rs;
         }
@@ -593,12 +595,13 @@ public class DatabaseCon
 
     public static void activateUser(String userID)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 UPDATE User
                 SET Status = 'Active'
                 WHERE UserID = ?;
-                """);)
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, userID);
             stmt.executeUpdate();
@@ -635,6 +638,18 @@ public class DatabaseCon
         {
             activateUser(userModel.getUserID() + "");
             System.out.println(userModel.toString());
+        }
+    }
+
+    public static void closeDatabase()
+    {
+        try
+        {
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
         }
     }
 

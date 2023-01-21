@@ -2,6 +2,7 @@ package oop.project.components.core;
 
 import javax.swing.*;
 
+import oop.project.API.DatabaseCon;
 import oop.project.colors.ThemeColors;
 import com.k33ptoo.utils.ComponentMoverUtil;
 
@@ -35,6 +36,7 @@ public class NavBar extends JPanel
         {
             exitButton.addActionListener((ActionEvent e) ->
             {
+                DatabaseCon.closeDatabase();
                 System.exit(0);
             });
         }
