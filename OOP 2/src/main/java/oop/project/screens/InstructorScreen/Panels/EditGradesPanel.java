@@ -37,15 +37,22 @@ public class EditGradesPanel extends TransparentPanel
         Box buttonsBox;
 
         // Getting Grades from Database
-        String queryGrades = """
+
+        String queryGradesInfo = """
                 SELECT profile.UserID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
                 FROM studentcourses, workcontactdetails, profile
                 WHERE   profile.UserID = workcontactdetails.UserID
                         StudID = profile.UserID && CourseID IN
                                                     (SELECT CourseID FROM courses WHERE InstructorID = '" + userID + "';
-                    """;
+                                """;
 
-        // ResultSet studentRS = DatabaseCon.customQuery(queryGrades);
+        String queryID = """
+                        SELECT StudentID
+                        FROM students;
+                                        """;
+
+
+        ResultSet studentRS = DatabaseCon.customQuery(queryGradesInfo);
 
         // Label Setup
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
