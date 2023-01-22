@@ -30,20 +30,27 @@ public class SendEmail
         properties.put("mail.smtp.starttls.required", "true");
         properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-        // Get the Session object.// and pass username and password
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator()
+        Session session = null;
+        try
         {
-
-            protected PasswordAuthentication getPasswordAuthentication()
+            session = Session.getInstance(properties, new javax.mail.Authenticator()
             {
-                Map<?, ?> secrets = readJson();
 
-                return new PasswordAuthentication((String) secrets.get("USERNAME"), (String) secrets.get("PASSWORD"));
+                protected PasswordAuthentication getPasswordAuthentication()
+                {
+                    Map<?, ?> secrets = readJson();
 
-            }
+                    return new PasswordAuthentication((String) secrets.get("USERNAME"), (String) secrets.get("PASSWORD"));
 
-        });
+                }
+
+            });
+        }
+        catch (Exception e)
+        {
+            System.err.println("Error: " + e.getMessage());
+            return;
+        } // Get the Session object.// and pass username and password
 
         try
         {

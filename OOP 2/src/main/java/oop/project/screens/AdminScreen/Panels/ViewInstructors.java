@@ -2,9 +2,12 @@ package oop.project.screens.AdminScreen.Panels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.*;
+import oop.project.API.DatabaseCon;
+import oop.project.API.DbUtils;
 import oop.project.components.core.TitleLabel;
 
 public class ViewInstructors extends TransparentPanel
@@ -46,13 +49,17 @@ public class ViewInstructors extends TransparentPanel
 
         };
 
-        JTable table = new JTable(Data, Attributes)
-        {
-            public boolean editCellAt(int row, int column, java.util.EventObject e)
-            {
-                return false;
-            }
-        };
+        // JTable table = new JTable(Data, Attributes)
+        // {
+        // public boolean editCellAt(int row, int column, java.util.EventObject e)
+        // {
+        // return false;
+        // }
+        // };
+
+        JTable table = new JTable();
+        ResultSet resultSet = DatabaseCon.getAllWithTypeRS("Instructor");
+        table.setModel(DbUtils.resultSetToTableModel(resultSet));
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.setDragEnabled(false);

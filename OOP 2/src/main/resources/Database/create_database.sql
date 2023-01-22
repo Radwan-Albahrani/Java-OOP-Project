@@ -173,6 +173,14 @@ END $$
 DELIMITER ;
 
 CREATE VIEW `View All Admin` AS
+SELECT User.UserID, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email"
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Admin";
+
+CREATE VIEW `View All Admin Full` AS
 SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
@@ -181,6 +189,14 @@ JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 Where user.Type = "Admin";
 
 CREATE VIEW `View All Student` AS
+SELECT User.UserID, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email"
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Student";
+
+CREATE VIEW `View All Student Full` AS
 SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
@@ -189,6 +205,14 @@ JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 Where user.Type = "Student";
 
 CREATE VIEW `View All Instructor` AS
+SELECT User.UserID, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email"
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+Where user.Type = "Instructor";
+
+CREATE VIEW `View All Instructor Full` AS
 SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
@@ -197,6 +221,13 @@ JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 Where user.Type = "Instructor";
 
 CREATE VIEW `View All Users` AS
+SELECT User.UserID, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone
+FROM User
+JOIN Profile ON User.UserID = Profile.UserID
+JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID;
+
+CREATE VIEW `View All Users Full` AS
 SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
@@ -204,7 +235,7 @@ JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID;
 
 CREATE VIEW `View All Inactive Users` AS
-SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
@@ -212,7 +243,7 @@ JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 WHERE User.Status = "Inactive";
 
 CREATE VIEW `View All Active Users` AS
-SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email", personalcontactdetails.Phone as "Personal Phone", User.Status
+SELECT User.UserID, User.Username, User.Type, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, User.Status
 FROM User
 JOIN Profile ON User.UserID = Profile.UserID
 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID

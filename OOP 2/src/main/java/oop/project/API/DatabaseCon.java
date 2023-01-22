@@ -17,6 +17,8 @@ import java.sql.SQLException;
 
 public class DatabaseCon
 {
+    private static Connection con;
+    private static PreparedStatement stmt;
     public static UserModel currentUser;
 
     private static Connection connectDB()
@@ -24,12 +26,12 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/informationsystem";
         try
         {
-            Connection connection = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            return connection;
+            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            return con;
         }
         catch (SQLException sqlException)
         {
-            sqlException.printStackTrace();
+            System.err.println("Error: " + sqlException.getMessage());
         }
         return null;
     }
@@ -39,12 +41,12 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/";
         try
         {
-            Connection connection = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            return connection;
+            Connection con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            return con;
         }
         catch (SQLException sqlException)
         {
-            sqlException.printStackTrace();
+            System.err.println("Error: " + sqlException.getMessage());
         }
         return null;
     }
@@ -52,7 +54,7 @@ public class DatabaseCon
     public static int registerUser(UserModel user)
     {
         // Get the connection
-        Connection con = connectDB();
+        con = connectDB();
 
         // Create the statement
         try (CallableStatement call = con.prepareCall("CALL generate_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -78,14 +80,14 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Error registering user: " + e.getMessage());
             return 0;
         }
     }
 
     public static long generateID()
     {
-        Connection con = connectDB();
+        con = connectDB();
         try (Statement stmt = con.createStatement();)
         {
             ResultSet rs = stmt.executeQuery("SELECT MAX(UserID) FROM User");
@@ -113,7 +115,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Error generating ID: " + e.getMessage());
             return 0;
         } finally
         {
@@ -135,7 +137,7 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
 
         // Create the statement
@@ -152,18 +154,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -172,7 +169,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type: " + e.getMessage());
         } finally
         {
             try
@@ -181,23 +178,22 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
         return users;
     }
 
-    public static ResultSet getAllWithTypeRS(String type)
+    public static ResultSet customQuery(String query)
     {
-
         // Get the connection
-        Connection con = connectDBViews();
-        String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
+        con = connectDB();
+        String view = query;
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
+            stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -206,7 +202,31 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static ResultSet getAllWithTypeRS(String type)
+    {
+
+        // Get the connection
+        con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
+
+        // Create the statement
+        try
+        {
+            stmt = con.prepareStatement(view);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
         }
         return null;
     }
@@ -217,12 +237,11 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try (PreparedStatement stmt = con.prepareStatement(view);)
         {
 
             // Execute the statement
@@ -234,18 +253,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -254,7 +268,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting All Users: " + e.getMessage());
         } finally
         {
             try
@@ -263,7 +277,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
         return users;
@@ -273,14 +287,13 @@ public class DatabaseCon
     {
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
-
+            stmt = con.prepareStatement(view);
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
             return rs;
@@ -288,9 +301,84 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Type as ResultSet: " + e.getMessage());
         }
         return null;
+    }
+
+    public static UserModel getOneUser(String ID)
+    {
+        // Set up the list
+        UserModel user = new UserModel();
+
+        // Get the connection
+        con = connectDBViews();
+        String statement = """
+                SELECT
+                User.UserID,
+                User.Username,
+                User.Password
+                User.Type,
+                Profile.FirstName,
+                Profile.LastName,
+                Profile.Sex,
+                Profile.Birthdate,
+                Profile.Major,
+                WorkContactDetails.Email,
+                workcontactdetails.Phone,
+                personalcontactdetails.Email as 'Personal Email',
+                personalcontactdetails.Phone as 'Personal Phone',
+                User.Status
+                FROM User INNER JOIN Profile ON User.UserID = Profile.UserID
+                INNER JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+                INNER JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+                WHERE User.UserID = ?;
+                    """;;
+
+        // Create the statement
+        try (PreparedStatement tmt = con.prepareStatement(statement);)
+        {
+            stmt.setString(1, ID);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            // Get the results
+            while (rs.next())
+            {
+                // Create the user from the results
+                user.setUserID(rs.getLong(1));
+                user.setAuth(new Auth(rs.getString(2), rs.getString(3)));
+                user.setRole(rs.getString(4));
+                user.setFirstName(rs.getString(5));
+                user.setLastName(rs.getString(6));
+                user.setGender(rs.getString(7));
+                user.setBirthDate(rs.getString(8));
+                user.setMajor(rs.getString(9));
+                user.setEmail(rs.getString(10));
+                user.setPhoneNumber(rs.getString(11));
+                user.setPersonalEmail(rs.getString(12));
+                user.setPersonalPhoneNumber(rs.getString(13));
+                user.setStatus(rs.getString(14));
+                return user;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting All Users: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return user;
     }
 
     public static List<UserModel> getAllUsersWithStatus(String status)
@@ -299,7 +387,7 @@ public class DatabaseCon
         List<UserModel> users = new ArrayList<>();
 
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
@@ -316,18 +404,13 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setAuth(new Auth(rs.getString(2), "HIDDEN"));
-                user.setRole(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6));
-                user.setBirthDate(rs.getString(7));
-                user.setMajor(rs.getString(8));
-                user.setEmail(rs.getString(9));
-                user.setPhoneNumber(rs.getString(10));
-                user.setPersonalEmail(rs.getString(11));
-                user.setPersonalPhoneNumber(rs.getString(12));
-                user.setStatus(rs.getString(13));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(6));
+                user.setPhoneNumber(rs.getString(8));
 
                 // Add the user to the list
                 users.add(user);
@@ -336,7 +419,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Status: " + e.getMessage());
         } finally
         {
             try
@@ -354,13 +437,13 @@ public class DatabaseCon
     public static ResultSet getAllUsersWithStatusRS(String status)
     {
         // Get the connection
-        Connection con = connectDBViews();
+        con = connectDBViews();
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try
         {
+            stmt = con.prepareStatement(view);
 
             // Execute the statement
             ResultSet rs = stmt.executeQuery();
@@ -369,7 +452,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Getting Users of Status as ResultSet: " + e.getMessage());
         } finally
         {
             try
@@ -386,13 +469,14 @@ public class DatabaseCon
 
     public static int checkEmail(String email)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 SELECT COUNT(*)
                 FROM User
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 WHERE PersonalContactDetails.Email = ?
-                """))
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query))
         {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -401,15 +485,15 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Checking Email: " + e.getMessage());
         }
         return 0;
     }
 
     public static int Login(String username, String password)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 SELECT User.UserID,
                 User.Username,
                 User.Type,
@@ -429,7 +513,8 @@ public class DatabaseCon
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 Where user.Username = ?
                 AND user.Password = ?;
-                    """);)
+                    """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -467,7 +552,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Logging in: " + e.getMessage());
             return -1;
         } finally
         {
@@ -477,9 +562,30 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
+    }
+
+    public static ResultSet getStudentsOfInstructor(String userID)
+    {
+        String query = """
+                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
+                FROM studentcourses, profile
+                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                    """.formatted(userID);
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
+        }
+        return null;
     }
 
     public static void Logout()
@@ -489,19 +595,20 @@ public class DatabaseCon
 
     public static void activateUser(String userID)
     {
-        Connection con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement("""
+        con = connectDB();
+        String query = """
                 UPDATE User
                 SET Status = 'Active'
                 WHERE UserID = ?;
-                """);)
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, userID);
             stmt.executeUpdate();
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.err.println("Error Activating User: " + e.getMessage());
         }
     }
 
@@ -517,7 +624,7 @@ public class DatabaseCon
         user.setBirthDate("2001-01-01");
         user.setMajor("major");
         user.setGender("Male");
-        user.setRole("Admin");
+        user.setRole("Student");
         user.setPersonalPhoneNumber("personalPhoneNumber");
         registerUser(user);
 
@@ -534,12 +641,24 @@ public class DatabaseCon
         }
     }
 
+    public static void closeDatabase()
+    {
+        try
+        {
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args)
     {
-        // for (int i = 0; i < 100; i++)
-        // {
-        // RegisterTesting(i + "@university.com");
-        // }
+        for (int i = 1; i < 2; i++)
+        {
+            RegisterTesting(i + "@university.com");
+        }
         ActivateAllUsers();
     }
 

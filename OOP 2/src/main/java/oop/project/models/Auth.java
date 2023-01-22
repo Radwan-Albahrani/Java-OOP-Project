@@ -26,6 +26,10 @@ public class Auth
         this.password = password;
     }
 
+    public Auth()
+    {
+    }
+
     public void setPassword(String password)
     {
         this.password = password;

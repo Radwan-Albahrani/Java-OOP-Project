@@ -1,7 +1,11 @@
 package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
@@ -11,57 +15,33 @@ import oop.project.handlers.FilterButtonHandler;
 import oop.project.hooks.*;
 import java.awt.*;
 
+import oop.project.models.UserModel;
+import oop.project.API.*;
+
 /* View Students Panel
 TODO: Get Data from database and display it in the table
 */
 
 public class ViewStudentsPanel extends TransparentPanel
 {
-
+    Box viewStudentsBox;
 
     public ViewStudentsPanel(int Width, int Height)
     {
-        Box viewStudentsBox;
+
+        UserModel user = new UserModel();
+        user = DatabaseCon.currentUser;
+        String userID = Long.toString(user.getUserID());
 
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
         JLabel viewStudentsLabel = new TitleLabel("Here are all the students");
         viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         this.add(viewStudentsLabel);
 
-        String[] columnNames = {"ID", "First Name", "Last Name", "Quiz Grade", "Midterm Grade", "Final Grade",
-                "Project Grade", "Total Grade"};
+        ResultSet students = DatabaseCon.getStudentsOfInstructor(userID);
+        JTable table = new JTable();
+        table.setModel(DbUtils.resultSetToTableModel(students));
 
-        Object[][] data = { // temp data
-                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
-                {2, "John", "Doe", 20, 25, 40, 15, 100},
-                {3, "Sue", "Black", 20, 25, 40, 15, 100},
-                {4, "Jane", "White", 20, 25, 40, 15, 100},
-                {5, "Joe", "Brown", 20, 25, 40, 15, 100},
-                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
-                {2, "John", "Doe", 20, 25, 40, 15, 100},
-                {3, "Sue", "Black", 20, 25, 40, 15, 100},
-                {4, "Jane", "White", 20, 25, 40, 15, 100},
-                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
-                {2, "John", "Doe", 20, 25, 40, 15, 100},
-                {3, "Sue", "Black", 20, 25, 40, 15, 100},
-                {4, "Jane", "White", 20, 25, 40, 15, 100},
-                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
-                {2, "John", "Doe", 20, 25, 40, 15, 100},
-                {3, "Sue", "Black", 20, 25, 40, 15, 100},
-                {4, "Jane", "White", 20, 25, 40, 15, 100},
-                {1, "Kathy", "Smith", 20, 25, 40, 15, 100},
-                {2, "John", "Doe", 20, 25, 40, 15, 100},
-                {3, "Sue", "Black", 20, 25, 40, 15, 100},
-                {4, "Jane", "White", 20, 25, 40, 15, 100},
-        };
-
-        JTable table = new JTable(data, columnNames)
-        {
-            public boolean editCellAt(int row, int column, java.util.EventObject e)
-            {
-                return false;
-            }
-        };
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.setDragEnabled(false);
         table.setRowHeight(40);
@@ -80,15 +60,12 @@ public class ViewStudentsPanel extends TransparentPanel
         filterButton.setPreferredSize(new Dimension(150, 50));
         filterButton.setAlignmentX(CENTER_ALIGNMENT);
 
-
         JComponent[] components = {viewStudentsLabel, scrollPaneTable, filterButton};
         viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(viewStudentsBox);
 
-        //Button Handler
+        // Button Handler
         filterButton.addActionListener(new FilterButtonHandler(this));
     }
-
-
 
 }
