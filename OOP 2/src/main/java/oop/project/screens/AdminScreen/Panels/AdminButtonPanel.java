@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet.FontAttribute;
 
 import com.k33ptoo.components.*;
 
@@ -19,6 +20,8 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     Map<String, KButton> myButtons = new Hashtable<String, KButton>();
     Map<String, JPanel> panels = new Hashtable<>();
 
+    
+
     String[] All_buttons = {
             " Main Menu ", // done
             " View Alerts ", // done
@@ -28,9 +31,12 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " View Profile ", // done
             " Edit Information ", // done
             " Registration Requests ", // done
-            "Logout" // ,
-            // "Creat Course"
-            // done
+            " Logout "  ,                  // done
+            " Courses "   ,                 //done
+            " Creat Course(s) ",        //done
+            " Delete Course(s) ",       //done
+            " View Courses ",            //done
+             "HOME"
 
     };
 
@@ -43,12 +49,19 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             "AdminScreen/ViewProfile.png",
             "AdminScreen/EditInfo.png",
             "AdminScreen/ViewRegisteration.png",
-            "AdminScreen/Logout.png"
+            "AdminScreen/Logout.png",
+            "AdminScreen/Courses.png",
+            "AdminScreen/AddCourses.png",
+            "AdminScreen/DeleteCourses.png",
+            "AdminScreen/View Courses.png",
+            "AdminScreen/MainMenu.png" 
+
     };
 
     JFrame frame;
     Box user_info;
     Box mainButtonBox;
+    Box coursesBox;
 
     public void insertingPanels(Map<String, JPanel> panel)
     {
@@ -57,7 +70,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
         for (int i = 0; i < All_buttons.length; i++)
         {
             myButtons.get(All_buttons[i].trim())
-                    .addActionListener(new ButtonHandlerAdmin(frame, this.panels, user_info, mainButtonBox));
+                    .addActionListener(new ButtonHandlerAdmin(frame, this.panels, user_info, mainButtonBox, coursesBox));
         }
 
     }
@@ -86,12 +99,13 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("View Alerts"),
                 myButtons.get("Manage Users"),
                 myButtons.get("Registration Requests"),
-                myButtons.get("View Profile")
+                myButtons.get("View Profile"),
+                myButtons.get("Courses")
         };
         // Add the buttons to the mainButtonBox
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 6);
 
-        // Buttons for the student Box
+        // Buttons for editing-users Box
         JLabel editTitle = new JLabel("Edit User Information");
         editTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 34));
         editTitle.setForeground(Color.BLACK);
@@ -105,8 +119,28 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("View Students"),
         };
 
-        // Add the buttons to the studentButtonBox
+        // Add the buttons to the edit-users-Box 
         user_info = AddToBox.addToHorizontalBox(profileJComponents, 5);
+
+        //Buttons for courses Box
+        JLabel coursesJLabel = new JLabel("Courses");
+        coursesJLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
+        coursesJLabel.setForeground(Color.BLACK);
+        coursesJLabel.setHorizontalAlignment(JLabel.CENTER);
+        coursesJLabel.setVerticalAlignment(JLabel.CENTER);
+
+        JComponent [] coursesComponents =
+        {
+            coursesJLabel,
+            myButtons.get("HOME"),
+            myButtons.get("Creat Course(s)"),
+            myButtons.get("Delete Course(s)"),
+            myButtons.get("View Courses")
+
+        };
+
+        coursesBox = AddToBox.addToHorizontalBox(coursesComponents, 5);
+
 
         // Add the main box and the logout button during panel initialization
         this.setLayout(new BorderLayout());
