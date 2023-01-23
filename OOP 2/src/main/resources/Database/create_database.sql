@@ -54,7 +54,7 @@ CREATE TABLE Students (
 
 
 CREATE TABLE Courses (
-    CourseID INT PRIMARY KEY,
+    CourseID  VARCHAR(10) PRIMARY KEY,
     CourseName VARCHAR(255) NOT NULL,
     CreditHours INT NOT NULL,
     MaxCap INT NOT NULL,
@@ -63,8 +63,8 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE StudentCourses (
-    StudID varchar(255) NOT NULL,
-    CourseID INT NOT NULL,
+    StudID VARCHAR(255) NOT NULL,
+    CourseID VARCHAR(10) NOT NULL,
     QuizGrade FLOAT NOT NULL,
     MidtermGrade FLOAT NOT NULL,
     FinalGrade FLOAT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE StudentCourses (
 CREATE TABLE Announcements (
     AnnouncementID INT PRIMARY KEY,
     Announcement VARCHAR(255) NOT NULL,
-    CourseID INT NOT NULL,
+    CourseID VARCHAR(10) NOT NULL,
     FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
 );
 

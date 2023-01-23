@@ -207,6 +207,7 @@ public class DatabaseCon
         return null;
     }
 
+
     public static ResultSet getAllWithTypeRS(String type)
     {
 
@@ -586,6 +587,33 @@ public class DatabaseCon
             System.err.println("Error Getting Students of Instructor: " + e.getMessage());
         }
         return null;
+    }
+
+    public static List<UserModel> getStudentsOfInstructorList(String userID)
+    {
+        List<UserModel> students = new ArrayList<UserModel>();
+        ResultSet rs = getStudentsOfInstructor(userID);
+        try
+        {
+            while (rs.next())
+            {
+                UserModel student = new UserModel();
+                student.setUserID(rs.getLong(1));
+                student.setFirstName(rs.getString(2));
+                student.setLastName(rs.getString(3));
+                student.setGender(rs.getString(4));
+                student.setTotalGrade(rs.getDouble(5));
+                students.add(student);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
+        }
+
+
+
+        return students;
     }
 
     public static void Logout()
