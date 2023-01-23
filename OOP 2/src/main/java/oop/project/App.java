@@ -12,9 +12,9 @@ public final class App
 
         public static void main(String[] args)
         {
-                // new LoginScreen();
+                new LoginScreen();
                 // new InstructorScreen();
                 // new StudentScreen();
-                new AdminScreen();
+                // new AdminScreen();
         }
 }

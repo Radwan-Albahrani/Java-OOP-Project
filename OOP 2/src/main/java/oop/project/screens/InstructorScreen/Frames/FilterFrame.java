@@ -22,7 +22,6 @@ import oop.project.handlers.FilterButtonHandler;
 
 public class FilterFrame extends JFrame
 {
-
     KButton filterButton;
     JComboBox<String> filterOptionsID = new JComboBox<String>();
     JComboBox<String> filterOptionsFirstName = new JComboBox<String>();
@@ -33,13 +32,19 @@ public class FilterFrame extends JFrame
 
     public FilterFrame(JPanel parent)
     {
+        setPreferredSize(new Dimension(400, 30));
         idFieldBetween.setVisible(false);
+        idFieldBetween.setMaximumSize(getPreferredSize());
+        idFieldBetween.setMinimumSize(getPreferredSize());
         firstNameFieldBetween.setVisible(false);
+        firstNameFieldBetween.setMaximumSize(getPreferredSize());
+        firstNameFieldBetween.setMinimumSize(getPreferredSize());
         lastNameFieldBetween.setVisible(false);
+        lastNameFieldBetween.setMaximumSize(getPreferredSize());
+        lastNameFieldBetween.setMinimumSize(getPreferredSize());
 
         FrameConfig.set(this, "Filter by", 500, 400);
         KGradientPanel filterPanel = new ThemedPanelInstructor();
-        setPreferredSize(new Dimension(350, 30));
 
         JLabel filterLabel = new JLabel("Filter");
         filterLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
@@ -83,13 +88,13 @@ public class FilterFrame extends JFrame
         filterOptionsLastName.setMaximumRowCount(10);
 
         JComponent[] idFieldComponents = {idField, idFieldBetween};
-        Box idFieldBox = AddToBox.addToVerticalBox(idFieldComponents, 1);
+        Box idFieldBox = AddToBox.addToHorizontalBox(idFieldComponents, 2);
 
         JComponent[] firstNameFieldComponents = {firstNameField, firstNameFieldBetween};
-        Box firstNameFieldBox = AddToBox.addToVerticalBox(firstNameFieldComponents, 1);
+        Box firstNameFieldBox = AddToBox.addToHorizontalBox(firstNameFieldComponents, 2);
 
         JComponent[] lastNameFieldComponents = {lastNameField, lastNameFieldBetween};
-        Box lastNameFieldBox = AddToBox.addToVerticalBox(lastNameFieldComponents, 1);
+        Box lastNameFieldBox = AddToBox.addToHorizontalBox(lastNameFieldComponents, 2);
 
         JComponent[] filterComponents = {idLabel, filterOptionsID, idFieldBox, firstNameLabel, filterOptionsFirstName,
                 firstNameFieldBox, lastNameLabel, filterOptionsLastName, lastNameFieldBox};
@@ -165,7 +170,6 @@ public class FilterFrame extends JFrame
                 repaint();
             }
         });
-
     }
 
     public void setHandler(FilterButtonHandler handler)
