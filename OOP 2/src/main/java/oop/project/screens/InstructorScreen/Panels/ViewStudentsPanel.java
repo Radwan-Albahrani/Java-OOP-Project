@@ -44,6 +44,7 @@ public class ViewStudentsPanel extends TransparentPanel
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.setDragEnabled(false);
+        table.setDefaultEditor(Object.class, null);
         table.setRowHeight(40);
         table.setCellSelectionEnabled(false);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

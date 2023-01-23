@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -264,7 +265,17 @@ public class EditGradesPanel extends TransparentPanel
 
         previousButton.addActionListener(
                 new NextPreviousHandler(idJComboBoxList));
+        List<JTextField> allGrades = new ArrayList<>();
+        allGrades.add(quizField);
+        allGrades.add(midtermField);
+        allGrades.add(finalField);
+        allGrades.add(projectField);
+        allGrades.add(totalField);
 
+        quizField.addFocusListener(new GradesFocusHandler(allGrades, 10, 0));
+        midtermField.addFocusListener(new GradesFocusHandler(allGrades, 20, 1));
+        finalField.addFocusListener(new GradesFocusHandler(allGrades, 40, 2));
+        projectField.addFocusListener(new GradesFocusHandler(allGrades, 30, 3));
     }
 
 }
