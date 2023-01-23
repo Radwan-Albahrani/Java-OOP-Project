@@ -4,7 +4,7 @@ USE informationsystem;
 
 CREATE TABLE User (
     UserID varchar(255) PRIMARY KEY,
-    Username VARCHAR(255) NOT NULL,
+    Username VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
     Type ENUM('Admin', 'Instructor', 'Student') NOT NULL,
     status ENUM("Inactive", "Active")
@@ -249,3 +249,28 @@ JOIN Profile ON User.UserID = Profile.UserID
 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 WHERE User.Status = "Active";
+ 
+ 
+## ----------------------Testing Dummy Data-------------------------------------
+CALL generate_user('admin0', 'admin0', 'Admin', 'admin0FirstName', 'admin0LastName', 'Male', '1999-01-01', 'testing', 'admin0@university.com', '0', 'admin0@gmail.com');
+CALL generate_user('admin1', 'admin1', 'Admin', 'admin1FirstName', 'admin1LastName', 'Male', '1999-01-01', 'testing', 'admin1@university.com', '0', 'admin1@gmail.com');
+
+CALL generate_user('instructor0', 'Instructor', 'Instructor', 'instructor0FirstName', 'instructor0LastName', 'Male', '1999-01-01', 'testing', 'instructor0@university.com', '1', 'instructor0@gmail.com');
+CALL generate_user('instructor1', 'Instructor', 'Instructor', 'instructor1FirstName', 'instructor1LastName', 'Male', '1999-01-01', 'testing', 'instructor1@university.com', '1', 'instructor1@gmail.com');
+
+CALL generate_user('student0', 'student0', 'Student', 'student0FirstName', 'student0LastName', 'Male', '1999-01-01', 'testing', 'student0@university.com', '2', 'student0@gmail.com');
+CALL generate_user('student1', 'student1', 'Student', 'student1FirstName', 'student1LastName', 'Male', '1999-01-01', 'testing', 'student1@university.com', '2', 'student1@gmail.com');
+
+INSERT INTO courses
+VALUES('CS111', 'CS', '3', '30', '2230000003');
+INSERT INTO courses
+VALUES('Math111', 'Math', '2', '29', '2230000004');
+
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000005', 'CS111', 10, 10, 10, 10);
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000005', 'Math111', 10, 10, 10, 10);
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000006', 'CS111', 10, 10, 10, 10);
+ INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000006', 'Math111', 10, 10, 10, 10);
