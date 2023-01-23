@@ -335,12 +335,11 @@ public class DatabaseCon
         UserModel user = new UserModel();
 
         // Get the connection
-        con = connectDBViews();
+        con = connectDB();
         String statement = """
-                SELECT
-                User.UserID,
+                SELECT User.UserID,
                 User.Username,
-                User.Password
+                User.Password,
                 User.Type,
                 Profile.FirstName,
                 Profile.LastName,
@@ -353,13 +352,13 @@ public class DatabaseCon
                 personalcontactdetails.Phone as 'Personal Phone',
                 User.Status
                 FROM User INNER JOIN Profile ON User.UserID = Profile.UserID
-                INNER JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
-                INNER JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
+                    INNER JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
+                    INNER JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 WHERE User.UserID = ?;
                     """;;
 
         // Create the statement
-        try (PreparedStatement tmt = con.prepareStatement(statement);)
+        try (PreparedStatement stmt = con.prepareStatement(statement);)
         {
             stmt.setString(1, ID);
 
@@ -389,7 +388,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            System.err.println("Error Getting All Users: " + e.getMessage());
+            System.err.println("Error Getting One User: " + e.getMessage());
         } finally
         {
             try
@@ -476,16 +475,6 @@ public class DatabaseCon
         catch (SQLException e)
         {
             System.err.println("Error Getting Users of Status as ResultSet: " + e.getMessage());
-        } finally
-        {
-            try
-            {
-                con.close();
-            }
-            catch (SQLException e)
-            {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -572,6 +561,29 @@ public class DatabaseCon
         return null;
     }
 
+    public static List<String> getAlerts()
+    {
+        List<String> alerts = new ArrayList<>();
+        String query = """
+                SELECT Alert FROM alerts;
+                """;
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                alerts.add(rs.getString(1));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Alerts: " + e.getMessage());
+        }
+        return alerts;
+    }
+
     public static int checkEmail(String email)
     {
         con = connectDB();
@@ -595,7 +607,7 @@ public class DatabaseCon
         return 0;
     }
 
-    public static int Login(String username, String password)
+    public static int login(String username, String password)
     {
         con = connectDB();
         String query = """
@@ -689,10 +701,66 @@ public class DatabaseCon
         {
             stmt.setString(1, userID);
             stmt.executeUpdate();
+            UserModel user = getOneUser(userID);
+            SendEmail.sendActivationEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
         }
         catch (SQLException e)
         {
             System.err.println("Error Activating User: " + e.getMessage());
+        }
+
+    }
+
+    public static void activateAllUsers()
+    {
+        List<UserModel> users = getAllUsersWithStatus("Inactive");
+        if (users != null)
+        {
+            for (UserModel userModel : users)
+            {
+                activateUser(userModel.getUserID() + "");
+            }
+        }
+    }
+
+    public static void createCourse(String courseID, String courseName, String courseCredit, String maxCapacity)
+            throws SQLException
+    {
+        con = connectDB();
+        String query = """
+                INSERT INTO Courses (CourseID, CourseName, CreditHours, MaxCap)
+                VALUES (?, ?, ?, ?);
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, courseID);
+            stmt.setString(2, courseName);
+            stmt.setString(3, courseCredit);
+            stmt.setString(4, maxCapacity);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Creating Course: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void deleteCourse(String courseID)
+    {
+        con = connectDB();
+        String query = """
+                DELETE FROM Courses
+                WHERE CourseID = ?;
+                """;
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, courseID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Deleting Course: " + e.getMessage());
         }
     }
 
@@ -727,24 +795,9 @@ public class DatabaseCon
 
     }
 
-    private static void ActivateAllUsers()
-    {
-        List<UserModel> users = getAllUsersWithStatus("Inactive");
-
-        for (UserModel userModel : users)
-        {
-            activateUser(userModel.getUserID() + "");
-            System.out.println(userModel.toString());
-        }
-    }
-
     public static void main(String[] args)
     {
-        for (int i = 1; i < 2; i++)
-        {
-            RegisterTesting(i + "@university.com");
-        }
-        ActivateAllUsers();
+        UserModel user = getOneUser("1");
     }
 
 }

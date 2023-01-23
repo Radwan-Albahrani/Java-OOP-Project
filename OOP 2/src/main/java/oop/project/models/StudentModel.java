@@ -10,60 +10,73 @@ public class StudentModel extends UserModel
     private double projectGrade;
     private double totalGrade;
 
-
-    public String getCourseID() {
+    public String getCourseID()
+    {
         return courseID;
     }
-    public void setCourseID(String courseID) {
+
+    public void setCourseID(String courseID)
+    {
         this.courseID = courseID;
     }
 
-    public double getQuizGrade() {
+    public double getQuizGrade()
+    {
         return quizGrade;
     }
 
-    public void setQuizGrade(double quizGrade) {
+    public void setQuizGrade(double quizGrade)
+    {
         this.quizGrade = quizGrade;
     }
 
-    public double getMidtermGrade() {
+    public double getMidtermGrade()
+    {
         return midtermGrade;
     }
- 
-    public void setMidtermGrade(double midtermGrade) {
+
+    public void setMidtermGrade(double midtermGrade)
+    {
         this.midtermGrade = midtermGrade;
     }
 
-    public double getProjectGrade() {
+    public double getProjectGrade()
+    {
         return projectGrade;
     }
 
-    public void setProjectGrade(double projectGrade) {
+    public void setProjectGrade(double projectGrade)
+    {
         this.projectGrade = projectGrade;
     }
 
-    public double getFinalGrade() {
+    public double getFinalGrade()
+    {
         return finalGrade;
     }
 
-    public void setFinalGrade(double finalGrade) {
+    public void setFinalGrade(double finalGrade)
+    {
         this.finalGrade = finalGrade;
     }
 
-    public double getTotalGrade() {
+    public double getTotalGrade()
+    {
         return totalGrade;
     }
 
-    public void setTotalGrade(double totalGrade) {
+    public void setTotalGrade(double totalGrade)
+    {
         this.totalGrade = totalGrade;
     }
 
-    public String getCourseName() {
+    public String getCourseName()
+    {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(String courseName)
+    {
         this.courseName = courseName;
     }
 }
-

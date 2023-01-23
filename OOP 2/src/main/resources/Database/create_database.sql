@@ -85,7 +85,7 @@ CREATE TABLE Announcements (
 );
 
 CREATE TABLE Alerts (
-    AlertID INT PRIMARY KEY,
+    AlertID INT PRIMARY KEY AUTO_INCREMENT,
     Alert VARCHAR(255) NOT NULL
 );
 
@@ -121,6 +121,12 @@ ADD FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) ON DELETE CA
 
 ALTER TABLE  StudentCourses
 ADD FOREIGN KEY (StudID) REFERENCES Students(StudentID) ON DELETE CASCADE;
+
+ALTER TABLE studentcourses
+ADD CONSTRAINT fk_studentcourses_courses
+FOREIGN KEY (CourseID) REFERENCES courses (CourseID)
+ON DELETE CASCADE;
+
 
 ALTER TABLE  Announcements
 ADD FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE;
@@ -262,15 +268,18 @@ CALL generate_user('student0', 'student', 'Student', 'student0FirstName', 'stude
 CALL generate_user('student1', 'student', 'Student', 'student1FirstName', 'student1LastName', 'Male', '1999-01-01', 'testing', 'student1@university.com', '2', 'student1@gmail.com');
 
 INSERT INTO courses
-VALUES('CS111', 'CS', '3', '30', '2230000003');
+VALUES('CS-111', 'CS', '3', '30', '2230000003');
 INSERT INTO courses
-VALUES('Math111', 'Math', '2', '29', '2230000004');
+VALUES('Math-111', 'Math', '2', '29', '2230000004');
 
 INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000005', 'CS111', 10, 10, 10, 10);
+VALUES('2230000005', 'CS-111', 10, 10, 10, 10);
 INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000005', 'Math111', 10, 10, 10, 10);
+VALUES('2230000005', 'Math-111', 10, 10, 10, 10);
 INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'CS111', 10, 10, 10, 10);
+VALUES('2230000006', 'CS-111', 10, 10, 10, 10);
  INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'Math111', 10, 10, 10, 10);
+VALUES('2230000006', 'Math-111', 10, 10, 10, 10);
+INSERT INTO Alerts(Alert)
+VALUES
+("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert");

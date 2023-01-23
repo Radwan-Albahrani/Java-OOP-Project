@@ -98,6 +98,36 @@ public class SendEmail
         new Thread(() -> sendEmail(to, emailMessage, subject)).start();
     }
 
+    public static void sendActivationEmail(String to, String name)
+    {
+        String emailMessage = """
+                Dear %s
+
+                Your account has been activated. You can now login to the Student Information System.
+
+                Regards,
+                The SIS team
+                        """.formatted(name);
+        String subject = "Account Activated";
+
+        new Thread(() -> sendEmail(to, emailMessage, subject)).start();
+    }
+
+    public static void sendActivationEmailGeneric(String to)
+    {
+        String emailMessage = """
+                Dear User
+
+                Your account has been activated. You can now login to the Student Information System.
+
+                Regards,
+                The SIS team
+                        """;
+        String subject = "Account Activated";
+
+        new Thread(() -> sendEmail(to, emailMessage, subject)).start();
+    }
+
     public static void sendEmailWithMessage(String to, String emailMessage, String subject)
     {
         new Thread(() -> sendEmail(to, emailMessage, subject)).start();

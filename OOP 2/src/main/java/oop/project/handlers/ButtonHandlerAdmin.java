@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.AdminScreen.AdminScreen;
 import oop.project.screens.LoginScreen.LoginScreen;
+import oop.project.screens.AdminScreen.Panels.*;
 
 import java.util.*;
 
@@ -82,8 +83,10 @@ public class ButtonHandlerAdmin implements ActionListener
             panels.get("button").add(user_info, BorderLayout.NORTH);
 
             removePanels();
+
+            ((ViewInstructors) panels.get("Instructors")).refreshTable();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
-            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Information"));
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Instructors"));
         }
 
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel
@@ -91,6 +94,8 @@ public class ButtonHandlerAdmin implements ActionListener
         {
             System.err.println("View Instructors button clicked - Admin");
             removePanels();
+
+            ((ViewInstructors) panels.get("Instructors")).refreshTable();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Instructors"));
         }
@@ -100,6 +105,7 @@ public class ButtonHandlerAdmin implements ActionListener
         {
             System.err.println("View Students button clicked - Admin");
             removePanels();
+            ((ViewStudents) panels.get("Student")).refreshTable();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Student"));
         }
@@ -114,10 +120,12 @@ public class ButtonHandlerAdmin implements ActionListener
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Profile"));
         }
 
-        else if (buttonClicked.equals("View Registration Requests"))
+        else if (buttonClicked.equals("Registration Requests"))
         {
             System.err.println("View Registration Requests button clicked - Admin");
             removePanels();
+
+            ((ViewRegistrationPanel) panels.get("Registrations")).refreshTable();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Registrations"));
         }
@@ -129,6 +137,8 @@ public class ButtonHandlerAdmin implements ActionListener
             panels.get("button").add(courseBox, BorderLayout.NORTH);
 
             removePanels();
+
+            ((CoursesPanel) panels.get("Courses")).refreshTable();
 
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Courses"));

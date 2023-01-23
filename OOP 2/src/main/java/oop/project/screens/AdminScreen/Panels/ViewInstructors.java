@@ -12,16 +12,17 @@ import oop.project.components.core.TitleLabel;
 
 public class ViewInstructors extends TransparentPanel
 {
+    JTable table = new JTable();
+    ResultSet resultSet;
+
     public ViewInstructors(int Width, int Height)
     {
-        // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
+        // Instructor Panel Setup
         JLabel viewInstructorsLabel = new TitleLabel("The instructors");
-        this.add(viewInstructorsLabel);
-
         Box viewInstructorsBox;
 
-        JTable table = new JTable();
-        ResultSet resultSet = DatabaseCon.getAllWithTypeRS("Instructor");
+        table = new JTable();
+        resultSet = DatabaseCon.getAllWithTypeRS("Instructor");
         table.setModel(DbUtils.resultSetToTableModel(resultSet));
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
@@ -35,11 +36,17 @@ public class ViewInstructors extends TransparentPanel
         table.setAutoCreateRowSorter(true);
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
-        scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 100));
+        scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 200));
 
         JComponent[] components = {viewInstructorsLabel, scrollPaneTable};
         viewInstructorsBox = AddToBox.addToHorizontalBoxWithSpace(components, 2);
         this.add(viewInstructorsBox);
 
+    }
+
+    public void refreshTable()
+    {
+        resultSet = DatabaseCon.getAllWithTypeRS("Instructor");
+        table.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
 }

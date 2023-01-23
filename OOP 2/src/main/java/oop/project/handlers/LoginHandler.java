@@ -29,7 +29,7 @@ public class LoginHandler implements ActionListener
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
 
-        int result = DatabaseCon.Login(username, password);
+        int result = DatabaseCon.login(username, password);
         if (result == 2)
         {
             if (DatabaseCon.currentUser.getRole().equals("Admin"))

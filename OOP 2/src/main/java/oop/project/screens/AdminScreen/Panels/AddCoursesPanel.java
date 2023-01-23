@@ -7,8 +7,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import oop.project.handlers.NextPreviousHandler;
-
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 
@@ -117,5 +115,7 @@ public class AddCoursesPanel extends TransparentPanel
         this.add(createButton, c);
 
         // Button Handlers TODO
+        createButton.addActionListener(
+                new CreateCourseHandler(idTextField, courseNameField, creditHoursField, maxCapacityField));
     }
 }

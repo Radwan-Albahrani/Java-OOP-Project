@@ -25,7 +25,7 @@ public class AdminScreen extends JFrame
         JPanel main_interface = new AdminInterface(getWidth(), getHeight());
         JPanel edit_info = new EditUserInfo(getWidth(), getHeight());
         JPanel view_profile = new ProfilePanel(getWidth(), getHeight(), 0);
-        JPanel view_student = new ViewStudent(getWidth(), getHeight());
+        JPanel view_student = new ViewStudents(getWidth(), getHeight());
         JPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());
         JPanel view_Alerts = new ViewAlerts(getWidth(), getHeight());
         KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
