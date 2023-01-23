@@ -41,7 +41,6 @@ public class CustomButtonInstructor extends RoundedButton
         this.setkBorderRadius(30);
     }
 
-
     public CustomButtonInstructor(String text, String iconLocation)
     {
         Image image = FrameConfig.getPictureWithSize(iconLocation, 40, 40);

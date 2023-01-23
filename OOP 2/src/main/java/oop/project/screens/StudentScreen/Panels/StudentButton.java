@@ -13,8 +13,8 @@ import com.k33ptoo.components.*;
 
 public class StudentButton extends ThemedPanelStudent
 {
-    Dictionary<String, KButton> studentButtons = new Hashtable<String, KButton>();
-    Dictionary<String, JPanel> studentPanels;
+    Map<String, KButton> studentButtons = new Hashtable<String, KButton>();
+    Map<String, JPanel> studentPanels;
 
     String[] ButtonNames = {
             " Send Alerts ",
@@ -29,25 +29,24 @@ public class StudentButton extends ThemedPanelStudent
             "Logout"
     };
 
-    String[] ButtonIcon = 
-    {
-        "StudentScreen/SendAlerts.png",
-        "StudentScreen/ViewProfile.png",
-        "StudentScreen/ViewAnnouncements.png",
-        "StudentScreen/ManageClass.png",
-        "StudentScreen/ViewGrades.png",
-        "StudentScreen/MainMenu.png",
-        "StudentScreen/SelectCourse.png",
-        "StudentScreen/RegisterClass.png",
-        "StudentScreen/DropClass.jpg",
-        "StudentScreen/Logout.png",            
+    String[] ButtonIcon = {
+            "StudentScreen/SendAlerts.png",
+            "StudentScreen/ViewProfile.png",
+            "StudentScreen/ViewAnnouncements.png",
+            "StudentScreen/ManageClass.png",
+            "StudentScreen/ViewGrades.png",
+            "StudentScreen/MainMenu.png",
+            "StudentScreen/SelectCourse.png",
+            "StudentScreen/RegisterClass.png",
+            "StudentScreen/DropClass.jpg",
+            "StudentScreen/Logout.png",
     };
 
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
 
-    public void setPanels(Dictionary<String, JPanel> studentPanels)
+    public void setPanels(Map<String, JPanel> studentPanels)
     {
         this.studentPanels = studentPanels;
         for (int i = 0; i < studentButtons.size(); i++)

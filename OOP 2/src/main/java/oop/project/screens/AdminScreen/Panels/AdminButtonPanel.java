@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.text.AttributeSet.FontAttribute;
 
 import com.k33ptoo.components.*;
 
@@ -20,8 +19,6 @@ public class AdminButtonPanel extends ThemedPanelAdmin
     Map<String, KButton> myButtons = new Hashtable<String, KButton>();
     Map<String, JPanel> panels = new Hashtable<>();
 
-    
-
     String[] All_buttons = {
             " Main Menu ", // done
             " View Alerts ", // done
@@ -31,12 +28,12 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " View Profile ", // done
             " Edit Information ", // done
             " Registration Requests ", // done
-            " Logout "  ,                  // done
-            " Courses "   ,                 //done
-            " Creat Course(s) ",        //done
-            " Delete Course(s) ",       //done
-            " View Courses ",            //done
-             "HOME"
+            " Logout ", // done
+            " Courses ", // done
+            " Create Course(s) ", // done
+            " Delete Course(s) ", // done
+            " View Courses ", // done
+            "HOME"
 
     };
 
@@ -54,7 +51,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             "AdminScreen/AddCourses.png",
             "AdminScreen/DeleteCourses.png",
             "AdminScreen/View Courses.png",
-            "AdminScreen/MainMenu.png" 
+            "AdminScreen/MainMenu.png"
 
     };
 
@@ -98,9 +95,9 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 mainTitle,
                 myButtons.get("View Alerts"),
                 myButtons.get("Manage Users"),
+                myButtons.get("Courses"),
                 myButtons.get("Registration Requests"),
-                myButtons.get("View Profile"),
-                myButtons.get("Courses")
+                myButtons.get("View Profile")
         };
         // Add the buttons to the mainButtonBox
         mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 6);
@@ -119,28 +116,26 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("View Students"),
         };
 
-        // Add the buttons to the edit-users-Box 
+        // Add the buttons to the edit-users-Box
         user_info = AddToBox.addToHorizontalBox(profileJComponents, 5);
 
-        //Buttons for courses Box
+        // Buttons for courses Box
         JLabel coursesJLabel = new JLabel("Courses");
         coursesJLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 40));
         coursesJLabel.setForeground(Color.BLACK);
         coursesJLabel.setHorizontalAlignment(JLabel.CENTER);
         coursesJLabel.setVerticalAlignment(JLabel.CENTER);
 
-        JComponent [] coursesComponents =
-        {
-            coursesJLabel,
-            myButtons.get("HOME"),
-            myButtons.get("Creat Course(s)"),
-            myButtons.get("Delete Course(s)"),
-            myButtons.get("View Courses")
+        JComponent[] coursesComponents = {
+                coursesJLabel,
+                myButtons.get("HOME"),
+                myButtons.get("Create Course(s)"),
+                myButtons.get("Delete Course(s)"),
+                myButtons.get("View Courses")
 
         };
 
         coursesBox = AddToBox.addToHorizontalBox(coursesComponents, 5);
-
 
         // Add the main box and the logout button during panel initialization
         this.setLayout(new BorderLayout());

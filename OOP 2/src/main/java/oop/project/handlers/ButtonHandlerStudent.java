@@ -18,12 +18,12 @@ import java.util.*;
 
 public class ButtonHandlerStudent implements ActionListener
 {
-    Dictionary<String, JPanel> panels;
+    Map<String, JPanel> panels;
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
 
-    public ButtonHandlerStudent(JFrame frame, Dictionary<String, JPanel> panels, Box studentButtonBox,
+    public ButtonHandlerStudent(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
     {
         this.frame = frame;
@@ -42,10 +42,8 @@ public class ButtonHandlerStudent implements ActionListener
             panels.get("button").remove(studentButtonBox);
             panels.get("button").add(mainButtonBox, BorderLayout.NORTH);
 
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("dropClass"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
+
             FrameConfig.setBackground(frame, "StudentScreen/background.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
@@ -55,41 +53,29 @@ public class ButtonHandlerStudent implements ActionListener
             panels.get("button").remove(mainButtonBox);
             panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
 
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("dropClass"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
+
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("registerClass"));
         }
 
         else if (buttonClicked.equals("Send Alerts"))
         {
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("dropClass"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("sendAlerts"));
         }
 
         else if (buttonClicked.equals("Drop Class"))
         {
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("dropClass"));
         }
 
         else if (buttonClicked.equals("View Profile"))
         {
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("dropClass"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
             ((ProfilePanel) panels.get("profile")).setProfile(DatabaseCon.currentUser);
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
@@ -97,21 +83,14 @@ public class ButtonHandlerStudent implements ActionListener
 
         else if (buttonClicked.equals("View Grades"))
         {
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("dropClass"));
+            removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
         else if (buttonClicked.equals("View Announcements"))
         {
-            frame.remove(panels.get("main"));
-            frame.remove(panels.get("registerClass"));
-            frame.remove(panels.get("sendAlerts"));
-            frame.remove(panels.get("dropClass"));
-            frame.remove(panels.get("viewGrades"));
+            removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewAnnouncements"));
         }
@@ -126,6 +105,14 @@ public class ButtonHandlerStudent implements ActionListener
 
         frame.revalidate();
         frame.repaint();
+    }
+
+    private void removePanels()
+    {
+        for (JPanel panel : panels.values())
+        {
+            frame.remove(panel);
+        }
     }
 
 }

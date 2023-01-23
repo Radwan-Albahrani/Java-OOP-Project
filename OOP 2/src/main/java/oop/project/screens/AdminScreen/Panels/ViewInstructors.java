@@ -15,9 +15,8 @@ public class ViewInstructors extends TransparentPanel
     public ViewInstructors(int Width, int Height)
     {
         // Student Panel Setup (Will replace Main Panel when Student Button is clicked)
-        JLabel viewStudentsLabel = new TitleLabel("The instructors");
-        viewStudentsLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        this.add(viewStudentsLabel);
+        JLabel viewInstructorsLabel = new TitleLabel("The instructors");
+        this.add(viewInstructorsLabel);
 
         Box viewInstructorsBox;
 
@@ -27,16 +26,18 @@ public class ViewInstructors extends TransparentPanel
 
         table.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
         table.setDragEnabled(false);
+        table.setDefaultEditor(Object.class, null);
         table.setRowHeight(40);
         table.setCellSelectionEnabled(false);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.getTableHeader().setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        table.setAutoCreateRowSorter(true);
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 100));
 
-        JComponent[] components = {viewStudentsLabel, scrollPaneTable};
+        JComponent[] components = {viewInstructorsLabel, scrollPaneTable};
         viewInstructorsBox = AddToBox.addToHorizontalBoxWithSpace(components, 2);
         this.add(viewInstructorsBox);
 

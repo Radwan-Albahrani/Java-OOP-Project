@@ -206,7 +206,6 @@ public class DatabaseCon
         return null;
     }
 
-
     public static ResultSet getAllWithTypeRS(String type)
     {
 
@@ -227,6 +226,30 @@ public class DatabaseCon
         catch (SQLException e)
         {
             System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static ResultSet getAllCourses()
+    {
+
+        // Get the connection
+        con = connectDB();
+        String view = "SELECT * FROM courses;";
+
+        // Create the statement
+        try
+        {
+            stmt = con.prepareStatement(view);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Courses ResultSet: " + e.getMessage());
         }
         return null;
     }
@@ -493,8 +516,7 @@ public class DatabaseCon
         catch (SQLException e)
         {
             System.err.println("Error Getting Students of Instructor's Grades: " + e.getMessage());
-        }
-        finally
+        } finally
         {
             try
             {
@@ -508,7 +530,6 @@ public class DatabaseCon
         return students;
     }
 
-    
     public static ResultSet getStudentsOfInstructorGrades(String userID)
     {
         String query = """
@@ -530,7 +551,6 @@ public class DatabaseCon
         return null;
     }
 
-
     public static ResultSet getStudentsOfInstructor(String userID)
     {
         String query = """
@@ -551,7 +571,6 @@ public class DatabaseCon
         }
         return null;
     }
-
 
     public static int checkEmail(String email)
     {
@@ -677,9 +696,6 @@ public class DatabaseCon
         }
     }
 
-
-
-
     public static void closeDatabase()
     {
         try
@@ -692,7 +708,7 @@ public class DatabaseCon
         }
     }
 
-    ///Testing Functions --------------------------------------------------------------------------------
+    /// Testing Functions --------------------------------------------------------------------------------
     private static void RegisterTesting(String email)
     {
         UserModel user = new UserModel();
@@ -721,7 +737,6 @@ public class DatabaseCon
             System.out.println(userModel.toString());
         }
     }
-
 
     public static void main(String[] args)
     {

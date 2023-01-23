@@ -282,6 +282,7 @@ public class ProfilePanel extends TransparentPanel
     {
         if (user == null)
         {
+            System.out.println("User is null");
             return;
         }
         // Set Name

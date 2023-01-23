@@ -27,7 +27,7 @@ public class StudentScreen extends JFrame
         JPanel viewGrades = new ViewGrades(getWidth(), getHeight());
         JPanel viewAnnouncements = new ViewAnnouncements(getWidth(), getHeight());
 
-        Dictionary<String, JPanel> panels = new Hashtable<String, JPanel>();
+        Map<String, JPanel> panels = new Hashtable<String, JPanel>();
         panels.put("main", mainPanel);
         panels.put("profile", profile);
         panels.put("registerClass", registerClass);

@@ -1,7 +1,5 @@
 package oop.project.screens.AdminScreen;
 
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
@@ -32,6 +30,8 @@ public class AdminScreen extends JFrame
         JPanel view_Alerts = new ViewAlerts(getWidth(), getHeight());
         KGradientPanel pButtonPanel = new AdminButtonPanel(this, getWidth(), getHeight());
         JPanel viewRegistrations = new ViewRegistrationPanel(getWidth(), getHeight());
+        JPanel viewCourses = new CoursesPanel(getWidth(), getHeight());
+        JPanel addCourses = new AddCoursesPanel(getWidth(), getHeight());
 
         Map<String, JPanel> Map_panel = new Hashtable<>();
 
@@ -43,7 +43,8 @@ public class AdminScreen extends JFrame
         Map_panel.put("Alerts", view_Alerts);
         Map_panel.put("button", pButtonPanel);
         Map_panel.put("Registrations", viewRegistrations);
-        Map_panel.put("Courses", viewRegistrations);
+        Map_panel.put("Courses", viewCourses);
+        Map_panel.put("AddCourses", addCourses);
 
         ((AdminButtonPanel) pButtonPanel).insertingPanels(Map_panel);
 

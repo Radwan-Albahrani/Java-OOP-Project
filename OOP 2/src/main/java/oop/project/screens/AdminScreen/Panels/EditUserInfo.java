@@ -12,6 +12,7 @@ import oop.project.handlers.NextPreviousHandler;
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 
+import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
@@ -158,19 +159,19 @@ public class EditUserInfo extends TransparentPanel
         userInfoBox = AddToBox.addToHorizontalBox(pictureComponents, 1);
 
         // Operational Buttons
-        KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
+        KButton nextButton = new CustomButtonAdmin("—>", 100, 50);
         nextButton.setActionCommand("next");
         nextButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
         nextButton.setAlignmentX(LEFT_ALIGNMENT);
-        KButton previousButton = new CustomButtonInstructor("<—", 100, 50);
+        KButton previousButton = new CustomButtonAdmin("<—", 100, 50);
         previousButton.setActionCommand("previous");
         previousButton.setAlignmentX(RIGHT_ALIGNMENT);
         previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         // Cancel Save Buttons
-        KButton cancelButton = new CustomButtonInstructor("Cancel");
+        KButton cancelButton = new CustomButtonAdmin("Cancel");
         cancelButton.setAlignmentX(CENTER_ALIGNMENT);
-        KButton saveButton = new CustomButtonInstructor("Save");
+        KButton saveButton = new CustomButtonAdmin("Save");
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
 
         JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton};
