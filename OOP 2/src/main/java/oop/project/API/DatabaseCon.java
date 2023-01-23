@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import oop.project.models.Auth;
-import oop.project.models.UserModel;
+import oop.project.models.*;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -468,6 +467,93 @@ public class DatabaseCon
         return null;
     }
 
+
+    public static List<StudentModel> getStudentsOfInstructorList(String userID)
+    {
+        List<StudentModel> students = null;
+        ResultSet rs = null;
+        try
+        {
+            rs = getStudentsOfInstructorGrades(userID);
+            students = new ArrayList<StudentModel>();
+
+            while (rs.next())
+            {
+                StudentModel student = new StudentModel();
+                student.setUserID(rs.getLong(1));
+                student.setFirstName(rs.getString(2));
+                student.setLastName(rs.getString(3));
+                student.setQuizGrade(rs.getDouble(4));
+                student.setMidtermGrade(rs.getDouble(5));
+                student.setFinalGrade(rs.getDouble(6));
+                student.setProjectGrade(rs.getDouble(7));
+                student.setTotalGrade(rs.getDouble(8));
+                students.add(student);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor's Grades: " + e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing ResultSet: " + e.getMessage());
+            }
+        }
+        return students;
+    }
+
+    
+    public static ResultSet getStudentsOfInstructorGrades(String userID)
+    {
+        String query = """
+                SELECT UserID, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
+                FROM studentcourses, profile
+                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                    """.formatted(userID);
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
+        }
+        return null;
+    }
+
+
+    public static ResultSet getStudentsOfInstructor(String userID)
+    {
+        String query = """
+                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
+                FROM studentcourses, profile
+                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                    """.formatted(userID);
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
+        }
+        return null;
+    }
+
+
     public static int checkEmail(String email)
     {
         con = connectDB();
@@ -566,54 +652,6 @@ public class DatabaseCon
                 System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
-    }
-
-    public static ResultSet getStudentsOfInstructor(String userID)
-    {
-        String query = """
-                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
-                FROM studentcourses, profile
-                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
-                    """.formatted(userID);
-        con = connectDB();
-        try
-        {
-            stmt = con.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            return rs;
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public static List<UserModel> getStudentsOfInstructorList(String userID)
-    {
-        List<UserModel> students = new ArrayList<UserModel>();
-        ResultSet rs = getStudentsOfInstructor(userID);
-        try
-        {
-            while (rs.next())
-            {
-                UserModel student = new UserModel();
-                student.setUserID(rs.getLong(1));
-                student.setFirstName(rs.getString(2));
-                student.setLastName(rs.getString(3));
-                student.setGender(rs.getString(4));
-                student.setTotalGrade(rs.getDouble(5));
-                students.add(student);
-            }
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error Getting Students of Instructor: " + e.getMessage());
-        }
-
-
-
-        return students;
     }
 
     public static void Logout()
