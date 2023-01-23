@@ -467,8 +467,7 @@ public class DatabaseCon
         return null;
     }
 
-
-    public static List<StudentModel> getStudentsOfInstructorList(String userID)
+    public static List<StudentModel> getStudentsOfInstructorGradesList(String userID)
     {
         List<StudentModel> students = null;
         ResultSet rs = null;
@@ -678,6 +677,22 @@ public class DatabaseCon
         }
     }
 
+
+
+
+    public static void closeDatabase()
+    {
+        try
+        {
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    ///Testing Functions --------------------------------------------------------------------------------
     private static void RegisterTesting(String email)
     {
         UserModel user = new UserModel();
@@ -690,7 +705,7 @@ public class DatabaseCon
         user.setBirthDate("2001-01-01");
         user.setMajor("major");
         user.setGender("Male");
-        user.setRole("Student");
+        user.setRole("Instructor");
         user.setPersonalPhoneNumber("personalPhoneNumber");
         registerUser(user);
 
@@ -707,17 +722,6 @@ public class DatabaseCon
         }
     }
 
-    public static void closeDatabase()
-    {
-        try
-        {
-            con.close();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String[] args)
     {

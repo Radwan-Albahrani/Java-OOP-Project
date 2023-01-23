@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ import oop.project.components.panels.TransparentPanel;
 import oop.project.handlers.*;
 import oop.project.hooks.*;
 
-import oop.project.models.UserModel;
+import oop.project.models.*;
 import oop.project.API.*;
 
 public class EditGradesPanel extends TransparentPanel
@@ -37,22 +38,10 @@ public class EditGradesPanel extends TransparentPanel
         Box buttonsBox;
 
         // Getting Grades from Database
-
-        String queryGradesInfo = """
-                SELECT profile.UserID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
-                FROM studentcourses, workcontactdetails, profile
-                WHERE   profile.UserID = workcontactdetails.UserID
-                        StudID = profile.UserID && CourseID IN
-                                                    (SELECT CourseID FROM courses WHERE InstructorID = '" + userID + "';
-                                """;
-
-        String queryID = """
-                        SELECT StudentID
-                        FROM students;
-                                        """;
-
-
-        ResultSet studentRS = DatabaseCon.customQuery(queryGradesInfo);
+        UserModel currentUser = new UserModel();
+        currentUser = DatabaseCon.currentUser;
+        String currentUserID = Long.toString(currentUser.getUserID());
+        List<StudentModel> students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); //ArrayList of Student grades for the current instructor
 
         // Label Setup
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
@@ -76,9 +65,9 @@ public class EditGradesPanel extends TransparentPanel
         idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
         idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
         idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < students.size(); i++)
         {
-            idJComboBoxList.addItem("" + i);
+            idJComboBoxList.addItem("" + students.get(i).getUserID());
         }
 
         JComponent[] idComponents = {idLabel, idJComboBoxList};
@@ -92,6 +81,7 @@ public class EditGradesPanel extends TransparentPanel
         nameLabel.setForeground(ThemeColors.BLACK);
 
         RoundedJTextField nameField = new RoundedJTextField(15);
+        nameField.setText(students.get(1).getFirstName() + " " + students.get(1).getLastName());
         nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         nameField.setEditable(false);
         nameField.setMinimumSize(new Dimension(400, 50));

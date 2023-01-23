@@ -36,7 +36,14 @@ public class NavBar extends JPanel
         {
             exitButton.addActionListener((ActionEvent e) ->
             {
-                DatabaseCon.closeDatabase();
+                try
+                {
+                    DatabaseCon.closeDatabase();
+                }
+                catch (Exception ex)
+                {
+                    System.err.println("Error closing database" + ex.getMessage());
+                }
                 System.exit(0);
             });
         }
