@@ -689,7 +689,7 @@ public class DatabaseCon
         currentUser = null;
     }
 
-    public static void activateUser(String userID)
+    public static void activateUser(String userID) throws Exception
     {
         con = connectDB();
         String query = """
@@ -700,13 +700,17 @@ public class DatabaseCon
         try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, userID);
-            stmt.executeUpdate();
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error Activating User: No User Found");
+            }
             UserModel user = getOneUser(userID);
             SendEmail.sendActivationEmail(user.getPersonalEmail(), user.getFirstName() + " " + user.getLastName());
         }
         catch (SQLException e)
         {
-            System.err.println("Error Activating User: " + e.getMessage());
+            throw new Exception("Error Activating User: " + e.getMessage());
         }
 
     }
@@ -718,7 +722,15 @@ public class DatabaseCon
         {
             for (UserModel userModel : users)
             {
-                activateUser(userModel.getUserID() + "");
+                try
+                {
+                    activateUser(userModel.getUserID() + "");
+                }
+                catch (Exception e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -746,7 +758,7 @@ public class DatabaseCon
         }
     }
 
-    public static void deleteCourse(String courseID)
+    public static void deleteCourse(String courseID) throws Exception
     {
         con = connectDB();
         String query = """
@@ -756,11 +768,15 @@ public class DatabaseCon
         try (PreparedStatement stmt = con.prepareStatement(query);)
         {
             stmt.setString(1, courseID);
-            stmt.executeUpdate();
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error Deleting Course: No Course Found");
+            }
         }
         catch (SQLException e)
         {
-            System.err.println("Error Deleting Course: " + e.getMessage());
+            throw new Exception("Error Deleting Course: " + e.getMessage());
         }
     }
 

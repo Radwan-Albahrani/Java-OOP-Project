@@ -15,7 +15,6 @@ import com.k33ptoo.components.KButton;
 
 import oop.project.API.DatabaseCon;
 import oop.project.colors.ThemeColors;
-import oop.project.components.buttons.CustomButton;
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.panels.TransparentPanel;
 import oop.project.hooks.AddToBox;

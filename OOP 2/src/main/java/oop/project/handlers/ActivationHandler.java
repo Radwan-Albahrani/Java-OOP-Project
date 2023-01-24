@@ -26,7 +26,14 @@ public class ActivationHandler implements ActionListener
         if (e.getActionCommand().equals("Activate"))
         {
             String id = textField.getText();
-            DatabaseCon.activateUser(id);
+            try
+            {
+                DatabaseCon.activateUser(id);
+            }
+            catch (Exception e1)
+            {
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
             textField.setText("");
             ((ViewRegistrationPanel) panel).refreshTable();
         }

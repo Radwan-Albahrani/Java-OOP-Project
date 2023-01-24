@@ -26,7 +26,15 @@ public class DeleteCourseHandler implements ActionListener
         if (e.getActionCommand().equals("Delete"))
         {
             String id = textField.getText();
-            DatabaseCon.deleteCourse(id);
+            try
+            {
+                DatabaseCon.deleteCourse(id);
+            }
+            catch (Exception e1)
+            {
+                // TODO Auto-generated catch block
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
             textField.setText("");
             ((CoursesPanel) panel).refreshTable();
         }
