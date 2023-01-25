@@ -32,7 +32,6 @@ public class DeleteCourseHandler implements ActionListener
             }
             catch (Exception e1)
             {
-                // TODO Auto-generated catch block
                 JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             textField.setText("");

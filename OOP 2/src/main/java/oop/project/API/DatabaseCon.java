@@ -84,6 +84,200 @@ public class DatabaseCon
         }
     }
 
+    public static List<String> getCoursesOfStudent(String studentID)
+    {
+        con = connectDB();
+        String query = "SELECT CourseID FROM StudentCourses WHERE StudID = ?";
+        List<String> courses = new ArrayList<String>();
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, studentID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                courses.add(rs.getString(1));
+            }
+            return courses;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting courses of student: " + e.getMessage());
+            return null;
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static List<String> getAnnouncementOfCourse(String courseID)
+    {
+        con = connectDB();
+        String query = "SELECT Announcement FROM Announcements WHERE CourseID = ?";
+        List<String> announcements = new ArrayList<String>();
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, courseID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                announcements.add(rs.getString(1));
+            }
+            return announcements;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting announcements of course: " + e.getMessage());
+            return null;
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static int registerCourseToStudent(String courseID, String studentID) throws Exception
+    {
+        con = connectDB();
+        String query = "INSERT INTO StudentCourses (StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade) VALUES (?, ?, 0, 0, 0, 0)";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, studentID);
+            stmt.setString(2, courseID);
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error registering course to student");
+            }
+            return 1;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error registering course to student: " + e.getMessage());
+            throw new Exception("Error registering course to student: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static int dropCourseFromStudent(String courseID, String studentID)
+    {
+        con = connectDB();
+        String query = "DELETE FROM StudentCourses WHERE StudID = ? AND CourseID = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, studentID);
+            stmt.setString(2, courseID);
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error dropping course from student");
+            }
+            return 1;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error dropping course from student: " + e.getMessage());
+            return 0;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error dropping course from student: " + e.getMessage());
+            return 0;
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static ResultSet getAvailableCourses(String studentID)
+    {
+        con = connectDB();
+        String query = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?)";
+        try
+        {
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, studentID);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting available courses: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static void sendAlert(String alert)
+    {
+        con = connectDB();
+        String query = "INSERT INTO Alerts (Alert) VALUES (?)";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, alert);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error sending alert: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static ResultSet getRegisteredCourses(String studentID)
+    {
+        con = connectDB();
+        String query = "SELECT * FROM StudentCourses WHERE StudID = ?";
+        try
+        {
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, studentID);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting registered courses: " + e.getMessage());
+            return null;
+        }
+    }
+
     public static long generateID()
     {
         con = connectDB();
@@ -728,7 +922,6 @@ public class DatabaseCon
                 }
                 catch (Exception e)
                 {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -792,28 +985,28 @@ public class DatabaseCon
         }
     }
 
-    /// Testing Functions --------------------------------------------------------------------------------
-    private static void RegisterTesting(String email)
-    {
-        UserModel user = new UserModel();
-        user.setFirstName("firstName");
-        user.setLastName("lastName");
-        user.setEmail("TestEmail");
-        user.setPersonalEmail(email);
-        user.setPhoneNumber("phoneNumber");
-        user.setAuth(new Auth("username", "password"));
-        user.setBirthDate("2001-01-01");
-        user.setMajor("major");
-        user.setGender("Male");
-        user.setRole("Instructor");
-        user.setPersonalPhoneNumber("personalPhoneNumber");
-        registerUser(user);
+    // /// Testing Functions --------------------------------------------------------------------------------
+    // private static void RegisterTesting(String email)
+    // {
+    // UserModel user = new UserModel();
+    // user.setFirstName("firstName");
+    // user.setLastName("lastName");
+    // user.setEmail("TestEmail");
+    // user.setPersonalEmail(email);
+    // user.setPhoneNumber("phoneNumber");
+    // user.setAuth(new Auth("username", "password"));
+    // user.setBirthDate("2001-01-01");
+    // user.setMajor("major");
+    // user.setGender("Male");
+    // user.setRole("Instructor");
+    // user.setPersonalPhoneNumber("personalPhoneNumber");
+    // registerUser(user);
 
-    }
+    // }
 
-    public static void main(String[] args)
-    {
-        UserModel user = getOneUser("1");
-    }
+    // public static void main(String[] args)
+    // {
+    // UserModel user = getOneUser("1");
+    // }
 
 }

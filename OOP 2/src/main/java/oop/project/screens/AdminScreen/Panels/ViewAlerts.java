@@ -45,10 +45,10 @@ public class ViewAlerts extends TransparentPanel
         KButton refreshButton = new CustomButtonAdmin(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] announcementComponents = {alertsLabel, scrollBar, refreshButton}; // Components for the Alerts Menu
-        Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1);
+        JComponent[] alertComponents = {alertsLabel, scrollBar, refreshButton}; // Components for the Alerts Menu
+        Box alertBox = AddToBox.addToVerticalBox(alertComponents, 1);
 
-        this.add(announcementBox);
+        this.add(alertBox);
 
         alerts = DatabaseCon.getAlerts();
 
