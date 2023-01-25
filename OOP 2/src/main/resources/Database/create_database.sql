@@ -65,10 +65,10 @@ CREATE TABLE Courses (
 CREATE TABLE StudentCourses (
     StudID VARCHAR(255) NOT NULL,
     CourseID VARCHAR(10) NOT NULL,
-    QuizGrade FLOAT NOT NULL,
-    MidtermGrade FLOAT NOT NULL,
-    FinalGrade FLOAT NOT NULL,
-    ProjectGrade FLOAT NOT NULL,
+    QuizGrade FLOAT,
+    MidtermGrade FLOAT,
+    FinalGrade FLOAT,
+    ProjectGrade FLOAT,
     TotalGrade FLOAT NOT NULL,
     PRIMARY KEY (StudID, CourseID),
     FOREIGN KEY (StudID) REFERENCES Students(StudentID),
@@ -78,7 +78,7 @@ CREATE TABLE StudentCourses (
 
 
 CREATE TABLE Announcements (
-    AnnouncementID INT PRIMARY KEY,
+    AnnouncementID INT PRIMARY KEY auto_increment,
     Announcement VARCHAR(255) NOT NULL,
     CourseID VARCHAR(10) NOT NULL,
     FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
@@ -283,3 +283,5 @@ VALUES('2230000006', 'Math-111', 10, 10, 10, 10);
 INSERT INTO Alerts(Alert)
 VALUES
 ("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert");
+
+INSERT INTO announcements(Announcement, CourseID) VALUES("This is a TestAnnouncement", "Math-111")

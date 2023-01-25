@@ -2,11 +2,7 @@ package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
 import com.k33ptoo.components.KButton;

@@ -23,7 +23,6 @@ public class StudentButton extends ThemedPanelStudent
             " Manage Classes ",
             " View Grades ",
             " Main Menu ",
-            " Select Course ",
             " Register Class ",
             " Drop Class ",
             "Logout"
@@ -36,9 +35,8 @@ public class StudentButton extends ThemedPanelStudent
             "StudentScreen/ManageClass.png",
             "StudentScreen/ViewGrades.png",
             "StudentScreen/MainMenu.png",
-            "StudentScreen/SelectCourse.png",
             "StudentScreen/RegisterClass.png",
-            "StudentScreen/DropClass.jpg",
+            "StudentScreen/DropClass.png",
             "StudentScreen/Logout.png",
     };
 
@@ -73,13 +71,12 @@ public class StudentButton extends ThemedPanelStudent
         JComponent[] mainButtonComponents = {
                 mainTitle,
                 studentButtons.get("Send Alerts"),
-                studentButtons.get("View Profile"),
                 studentButtons.get("View Announcements"),
                 studentButtons.get("Manage Classes"),
-                studentButtons.get("View Grades")
+                studentButtons.get("View Profile")
         };
 
-        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 6);
+        mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);
         JLabel coursesTitle = new JLabel("Manage Courses");
         coursesTitle.setFont(new Font("Trebuchet MS", Font.BOLD, 34));
         coursesTitle.setForeground(Color.BLACK);
@@ -88,9 +85,9 @@ public class StudentButton extends ThemedPanelStudent
         JComponent[] studentButtonComponents = {
                 coursesTitle,
                 studentButtons.get("Main Menu"),
-                studentButtons.get("Select Course"),
                 studentButtons.get("Register Class"),
                 studentButtons.get("Drop Class"),
+                studentButtons.get("View Grades")
         };
 
         studentButtonBox = AddToBox.addToHorizontalBox(studentButtonComponents, 5);

@@ -1,6 +1,5 @@
 package oop.project.components.core;
 
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import oop.project.colors.ThemeColors;

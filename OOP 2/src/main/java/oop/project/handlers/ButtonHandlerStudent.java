@@ -13,6 +13,10 @@ import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.StudentScreen.StudentScreen;
+import oop.project.screens.StudentScreen.Panels.DropClass;
+import oop.project.screens.StudentScreen.Panels.ViewAnnouncements;
+import oop.project.screens.StudentScreen.Panels.ViewGrades;
+import oop.project.screens.StudentScreen.Panels.registerClassPanel;
 
 import java.util.*;
 
@@ -48,15 +52,17 @@ public class ButtonHandlerStudent implements ActionListener
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("main"));
         }
 
-        else if (buttonClicked.equals("Register Class") || buttonClicked.equals("Manage Classes"))
+        else if (buttonClicked.equals("View Grades") || buttonClicked.equals("Manage Classes"))
         {
             panels.get("button").remove(mainButtonBox);
             panels.get("button").add(studentButtonBox, BorderLayout.NORTH);
 
             removePanels();
 
+            ((ViewGrades) panels.get("viewGrades")).refreshTable();
+
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("registerClass"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
         else if (buttonClicked.equals("Send Alerts"))
@@ -69,6 +75,8 @@ public class ButtonHandlerStudent implements ActionListener
         else if (buttonClicked.equals("Drop Class"))
         {
             removePanels();
+
+            ((DropClass) panels.get("dropClass")).refreshTable();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("dropClass"));
         }
@@ -81,15 +89,17 @@ public class ButtonHandlerStudent implements ActionListener
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("profile"));
         }
 
-        else if (buttonClicked.equals("View Grades"))
+        else if (buttonClicked.equals("Register Class"))
         {
+            ((registerClassPanel) panels.get("registerClass")).refreshTable();
             removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
-            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
+            ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("registerClass"));
         }
 
         else if (buttonClicked.equals("View Announcements"))
         {
+            ((ViewAnnouncements) panels.get("viewAnnouncements")).refreshCourseList();
             removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewAnnouncements"));
@@ -101,6 +111,11 @@ public class ButtonHandlerStudent implements ActionListener
             DatabaseCon.Logout();
             frame.dispose();
             new LoginScreen();
+        }
+
+        else
+        {
+            System.out.println(buttonClicked + " - This button has not been implemented yet.");
         }
 
         frame.revalidate();

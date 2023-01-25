@@ -6,12 +6,8 @@ import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
-
 import javax.swing.*;
 import com.k33ptoo.components.KButton;
 
@@ -42,7 +38,7 @@ public class EditGradesPanel extends TransparentPanel
         UserModel currentUser = new UserModel();
         currentUser = DatabaseCon.currentUser;
         String currentUserID = Long.toString(currentUser.getUserID());
-        List<StudentModel> students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); //ArrayList of Student grades for the current instructor
+        List<StudentModel> students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); // ArrayList of Student grades for the current instructor
 
         // Label Setup
         JLabel editGradesLabel = new TitleLabel("Edit Students Grades");

@@ -75,7 +75,7 @@ public class CreateCourseHandler implements ActionListener
             throw new Exception("Please enter a course max capacity");
         }
 
-        // REGEX ID is XXX-123 OR XX-123 or XXXX-123
+        // REGEX ID is only letters and numbers
         if (!id.matches("[a-zA-Z]{2,4}-[0-9]{3}"))
         {
             throw new Exception("Course ID must be in the format XXX-123 or XX-123 OR XXXX-123");
