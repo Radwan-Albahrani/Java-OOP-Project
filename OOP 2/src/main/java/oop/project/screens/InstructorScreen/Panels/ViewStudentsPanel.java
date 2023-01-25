@@ -1,7 +1,6 @@
 package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
-import java.io.File;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
