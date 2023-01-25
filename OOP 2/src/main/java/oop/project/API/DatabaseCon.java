@@ -235,6 +235,32 @@ public class DatabaseCon
         }
     }
 
+    public static void sendAnnouncement(String announcement, String courseID)
+    {
+        con = connectDB();
+        String query = "INSERT INTO Announcements (Announcement, CourseID) VALUES (?, ?)";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, announcement);
+            stmt.setString(2, courseID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error sending announcement: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void sendAlert(String alert)
     {
         con = connectDB();

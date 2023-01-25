@@ -2,8 +2,9 @@ package oop.project.handlers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.io.*;
 
@@ -31,8 +32,8 @@ public class GenerateReport implements ActionListener
             {
                 ex.printStackTrace();
             }
+            JOptionPane.showMessageDialog(null, "Report Generated!", "Success!", JOptionPane.INFORMATION_MESSAGE);
         }
-        //TODO: Add query options
     }
 
     public static void exportTable(JTable table, String path) throws IOException
