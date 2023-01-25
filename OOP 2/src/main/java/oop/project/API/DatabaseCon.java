@@ -395,7 +395,7 @@ public class DatabaseCon
         }
         catch (SQLException e)
         {
-            System.err.println("Error Getting Users of Type As resultSet: " + e.getMessage());
+            System.err.println("Error with Custom Query: " + e.getMessage());
         }
         return null;
     }

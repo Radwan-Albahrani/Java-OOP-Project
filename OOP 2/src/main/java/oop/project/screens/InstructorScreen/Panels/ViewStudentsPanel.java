@@ -3,6 +3,8 @@ package oop.project.screens.InstructorScreen.Panels;
 import java.awt.Font;
 import java.io.File;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
@@ -62,8 +64,41 @@ public class ViewStudentsPanel extends TransparentPanel
         viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(viewStudentsBox);
 
+
+        // Report Generation
+        String reportTableQuery = """
+            SELECT UserID, FirstName, LastName, Sex, courses.CourseID, CourseName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
+            FROM studentcourses, profile, courses
+            WHERE StudID = UserID && courses.CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                """.formatted(userID);
+
+        ResultSet reportResultSet = DatabaseCon.customQuery(reportTableQuery);
+        JTable reportTableJTable = new JTable();
+        reportTableJTable.setModel(DbUtils.resultSetToTableModel(reportResultSet));
+
+        String courseIDQuery = """
+            SELECT CourseID
+            FROM courses
+            WHERE InstructorID = %s;
+                """.formatted(userID);
+        ResultSet courseIDResultSet = DatabaseCon.customQuery(courseIDQuery);
+        // Change result set into string
+        ArrayList<String> courseIDList = new ArrayList<>();
+        // Add all the course IDs to the list
+        try
+        {
+            while (courseIDResultSet.next())
+            {
+                courseIDList.add(courseIDResultSet.getString("CourseID"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         // Button Handler
-        reportButton.addActionListener(new GenerateReport(table, "src/main/resources/reports/Instructor/Instructor - StudentReport.csv"));
+        reportButton.addActionListener(new GenerateReport(reportTableJTable, "src/main/resources/reports/Instructors/" + userID + " - " + courseIDList.get(0) + " - Student Report.csv"));
     }
 
 }
