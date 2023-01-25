@@ -1,0 +1,3 @@
+UserID,FirstName,LastName,Sex,Birthdate,Major,Email,Phone,Personal Email,
+2230000005,student0FirstName,student0LastName,Male,1999-01-01,testing,student0@university.com,2,student0@gmail.com,
+2230000006,student1FirstName,student1LastName,Male,1999-01-01,testing,student1@university.com,2,student1@gmail.com,

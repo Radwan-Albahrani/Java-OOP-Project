@@ -1,13 +1,14 @@
 package oop.project.screens.InstructorScreen.Panels;
 
 import java.awt.Font;
+import java.io.File;
 import java.sql.ResultSet;
 import javax.swing.*;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
 import com.k33ptoo.components.KButton;
 import oop.project.components.panels.TransparentPanel;
-import oop.project.handlers.FilterButtonHandler;
+import oop.project.handlers.GenerateReport;
 import oop.project.hooks.*;
 import java.awt.*;
 
@@ -52,17 +53,17 @@ public class ViewStudentsPanel extends TransparentPanel
         scrollPaneTable.setPreferredSize(new Dimension(Width - 460, Height - 200));
         scrollPaneTable.setAlignmentX(CENTER_ALIGNMENT);
 
-        KButton filterButton = new CustomButtonInstructor("Filter By");
-        filterButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        filterButton.setPreferredSize(new Dimension(150, 50));
-        filterButton.setAlignmentX(CENTER_ALIGNMENT);
+        KButton reportButton = new CustomButtonInstructor("Generate Report");
+        reportButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        reportButton.setPreferredSize(new Dimension(150, 50));
+        reportButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        JComponent[] components = {viewStudentsLabel, scrollPaneTable, filterButton};
+        JComponent[] components = {viewStudentsLabel, scrollPaneTable, reportButton};
         viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(viewStudentsBox);
 
         // Button Handler
-        filterButton.addActionListener(new FilterButtonHandler(this));
+        reportButton.addActionListener(new GenerateReport(table, "src/main/resources/reports/Instructor/Instructor - StudentReport.csv"));
     }
 
 }
