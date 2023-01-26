@@ -19,13 +19,14 @@ public class MainPanel extends TransparentPanel
     public MainPanel(int Width, int Height)
     {
         String courseIDQuery = """
-            SELECT CourseID
-            FROM courses
-            WHERE InstructorID = %s;
-                """.formatted(DatabaseCon.currentUser.getUserID());
+                SELECT CourseID
+                FROM courses
+                WHERE InstructorID = %s;
+                    """.formatted(DatabaseCon.currentUser.getUserID());
         ResultSet courseIDResultSet = DatabaseCon.customQuery(courseIDQuery);
         // Change result set into string
         ArrayList<String> courseIDList = new ArrayList<>();
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // Add all the course IDs to the list
         try
         {
@@ -42,7 +43,7 @@ public class MainPanel extends TransparentPanel
         // TODO: if the instructor is not in a course, show a message saying they are not in a course
         JLabel welcomeLabel = new TitleLabel(
                 "Welcome, " + DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName());
-        welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 50));
+        welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 45));
         this.add(welcomeLabel);
 
         if (courseIDList.size() == 0) // If the instructor is not in a course
@@ -63,18 +64,19 @@ public class MainPanel extends TransparentPanel
         }
         else // If the instructor is in a course
         {
-            System.out.println("This Instructor is registered in course " + courseIDList.get(0) + " - Instructor" + DatabaseCon.currentUser.getUserID());
+            System.out.println("This Instructor is registered in course " + courseIDList.get(0) + " - Instructor"
+                    + DatabaseCon.currentUser.getUserID());
             JLabel courseLabel = new JLabel("You are currently registered in " + courseIDList.get(0));
 
             // JLabel informationLabel = new JLabel("Here is some information about your course:");
             // /*
-            //  * TODO: Add information about the course
-            //  * Top 3 students
-            //  * Average grade
-            //  * Number of students
-            //  * Last 3 announcements
-            //  * Current achademic year, term, and week
-            //  */
+            // * TODO: Add information about the course
+            // * Top 3 students
+            // * Average grade
+            // * Number of students
+            // * Last 3 announcements
+            // * Current achademic year, term, and week
+            // */
             courseLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
             this.add(courseLabel);
