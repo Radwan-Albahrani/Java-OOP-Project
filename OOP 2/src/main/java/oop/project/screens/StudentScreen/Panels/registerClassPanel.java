@@ -19,7 +19,7 @@ public class registerClassPanel extends TransparentPanel
 {
     JTable table;
     ResultSet resultSet;
-    String ID = "2230000005"; // TODO CHANGE TO REAL ID
+    String ID = Long.toString(DatabaseCon.currentUser.getUserID());
 
     public registerClassPanel(int Width, int Height)
     {

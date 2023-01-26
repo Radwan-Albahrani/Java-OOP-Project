@@ -1,5 +1,6 @@
 package oop.project.screens.InstructorScreen.Panels;
 
+import oop.project.API.DatabaseCon;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.TitleLabel;
 import oop.project.components.panels.TransparentPanel;
@@ -17,9 +18,9 @@ public class MainPanel extends TransparentPanel
     {
         boolean inCourse = false;
 
-        // TODO: Change to actual name
         // TODO: if the instructor is not in a course, show a message saying they are not in a course
-        JLabel welcomeLabel = new TitleLabel("Welcome, [Name Here]");
+        JLabel welcomeLabel = new TitleLabel(
+                "Welcome, " + DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName());
         welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 50));
         this.add(welcomeLabel);
 

@@ -21,6 +21,7 @@ public class ViewAnnouncements extends TransparentPanel
     JComboBox<String> classComboBox;
     List<String> courses;
     String separator = "\n------------------------------------------------------------------------------------------------------------------\n";
+    String ID = Long.toString(DatabaseCon.currentUser.getUserID());
 
     public ViewAnnouncements(int Width, int Height)
     {
@@ -31,7 +32,7 @@ public class ViewAnnouncements extends TransparentPanel
         classComboBox.setPreferredSize(new Dimension(300, 50));
         classComboBox.setFont(new Font("Trebuchet MS", Font.PLAIN, 25));
 
-        courses = DatabaseCon.getCoursesOfStudent("2230000005");
+        courses = DatabaseCon.getCoursesOfStudent(ID);
         for (String course : courses)
         {
             classComboBox.addItem(course);
@@ -48,7 +49,7 @@ public class ViewAnnouncements extends TransparentPanel
         scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollBar.setViewportView(announcementTextArea);
 
-        KButton refreshButton = new CustomButtonStudent(" Refresh "); // TODO CHANGE TO CURRENT ID
+        KButton refreshButton = new CustomButtonStudent(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));
 
         JComponent[] announcementComponents = {ViewAnnouncementsLabel, classComboBox, scrollBar, refreshButton}; // Components for the Alerts Menu
@@ -91,7 +92,7 @@ public class ViewAnnouncements extends TransparentPanel
     public void refreshCourseList()
     {
         classComboBox.removeAllItems();
-        List<String> courses = DatabaseCon.getCoursesOfStudent("2230000005"); // TODO CHANGE TO CURRENT ID
+        List<String> courses = DatabaseCon.getCoursesOfStudent(ID);
         for (String course : courses)
         {
             classComboBox.addItem(course);
