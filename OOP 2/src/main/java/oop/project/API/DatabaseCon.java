@@ -220,7 +220,7 @@ public class DatabaseCon
     public static ResultSet getAvailableCourses(String studentID)
     {
         con = connectDB();
-        String query = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?)";
+        String query = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?) AND instructorID IS NOT NULL";
         try
         {
             stmt = con.prepareStatement(query);
