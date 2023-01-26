@@ -38,7 +38,7 @@ public class RegisterCourseHandler implements ActionListener, ItemListener{
     @Override
     public void itemStateChanged(ItemEvent e)
     {
-        // TODO: Actually implement this
+        // TODO: Actually allow instructor to register course
     }
 }
 

@@ -78,7 +78,7 @@ CREATE TABLE StudentCourses (
 
 
 CREATE TABLE Announcements (
-    AnnouncementID INT PRIMARY KEY auto_increment,
+    AnnouncementID INT PRIMARY KEY AUTO_INCREMENT,
     Announcement VARCHAR(255) NOT NULL,
     CourseID VARCHAR(10) NOT NULL,
     FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
@@ -255,8 +255,8 @@ JOIN Profile ON User.UserID = Profile.UserID
 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 WHERE User.Status = "Active";
- 
- 
+
+
 ## ----------------------Testing Dummy Data-------------------------------------
 CALL generate_user('admin0', 'admin', 'Admin', 'admin0FirstName', 'admin0LastName', 'Male', '1999-01-01', 'testing', 'admin0@university.com', '0', 'admin0@gmail.com');
 CALL generate_user('admin1', 'admin', 'Admin', 'admin1FirstName', 'admin1LastName', 'Male', '1999-01-01', 'testing', 'admin1@university.com', '0', 'admin1@gmail.com');
