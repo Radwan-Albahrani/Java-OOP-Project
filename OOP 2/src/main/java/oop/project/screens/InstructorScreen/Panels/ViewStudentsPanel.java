@@ -16,9 +16,6 @@ import java.awt.*;
 import oop.project.models.UserModel;
 import oop.project.API.*;
 
-/* View Students Panel
-TODO: Get Data from database and display it in the table
-*/
 
 public class ViewStudentsPanel extends TransparentPanel
 {

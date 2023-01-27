@@ -56,7 +56,6 @@ public class MainPanel extends TransparentPanel
             e.printStackTrace();
         }
 
-        // TODO: if the instructor is not in a course, show a message saying they are not in a course
         JLabel welcomeLabel = new TitleLabel(
                 "<html> Welcome, " + DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName() + "</html>");
         welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
