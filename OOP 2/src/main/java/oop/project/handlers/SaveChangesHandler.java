@@ -17,5 +17,10 @@ public class SaveChangesHandler implements ActionListener
         {
             System.err.println("Cancel Button Clicked");
         }
+        if (buttonClicked.equals("Save Grades"))
+        {
+            
+            System.err.println("Save Grades Button Clicked");
+        }
     }
 }
