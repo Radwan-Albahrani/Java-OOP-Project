@@ -1,11 +1,12 @@
 package oop.project.screens.InstructorScreen.Panels;
-//TODO: actually implement this panel
 import java.awt.Dimension;
 import java.awt.Font;
 import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -23,7 +24,8 @@ import oop.project.API.*;
 
 public class EditGradesPanel extends TransparentPanel
 {
-    public int currentEntryIndex;
+    List<StudentModel> students;
+    int currentEntryIndex;
 
     public EditGradesPanel(int Width, int Height)
     {
@@ -39,7 +41,7 @@ public class EditGradesPanel extends TransparentPanel
             UserModel currentUser = new UserModel();
             currentUser = DatabaseCon.currentUser;
             String currentUserID = Long.toString(currentUser.getUserID());
-            List<StudentModel> students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); // ArrayList of Student grades for the current instructor
+            students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); // ArrayList of Student grades for the current instructor
 
             // Label Setup
             JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
@@ -49,7 +51,6 @@ public class EditGradesPanel extends TransparentPanel
             picture.setAlignmentX(CENTER_ALIGNMENT);
 
             // ID
-            // TODO: ID is a list of the students in the class
             JLabel idLabel = new JLabel("ID: ");
             idLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
             idLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -62,24 +63,25 @@ public class EditGradesPanel extends TransparentPanel
             idJComboBoxList.setMinimumSize(new Dimension(1000, 50));
             idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
             idJComboBoxList.setAlignmentX(RIGHT_ALIGNMENT);
+
             idJComboBoxList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXX");
             for (int i = 0; i < students.size(); i++)
             {
                 idJComboBoxList.addItem("" + students.get(i).getUserID());
             }
 
+            idJComboBoxList.setSelectedIndex(-1);
+
             JComponent[] idComponents = {idLabel, idJComboBoxList};
             idBox = AddToBox.addToHorizontalBox(idComponents, 1);
 
             // Name Setup
-            // TODO: Combine First and Last Name into one field
             JLabel nameLabel = new JLabel("Name: ");
             nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
             nameLabel.setAlignmentX(RIGHT_ALIGNMENT);
             nameLabel.setForeground(ThemeColors.BLACK);
 
             RoundedJTextField nameField = new RoundedJTextField(15);
-            nameField.setText(students.get(0).getFirstName() + " " + students.get(0).getLastName());
             nameField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
             nameField.setEditable(false);
             nameField.setMinimumSize(new Dimension(400, 50));
@@ -223,13 +225,14 @@ public class EditGradesPanel extends TransparentPanel
             previousButton.setAlignmentX(RIGHT_ALIGNMENT);
             previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
-            KButton cancelButton = new CustomButtonInstructor("Cancel");
-            cancelButton.setAlignmentX(CENTER_ALIGNMENT);
-            KButton saveButton = new CustomButtonInstructor("Save");
+            KButton saveButton = new CustomButtonInstructor("Save Grades");
             saveButton.setAlignmentX(CENTER_ALIGNMENT);
 
-            JComponent[] buttonsComponents = {previousButton, nextButton, cancelButton, saveButton};
+            JComponent[] buttonsComponents = {previousButton, nextButton};
             buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
+
+            JComponent[] buttonsComponents2 = {buttonsBox, saveButton};
+            buttonsBox = AddToBox.addToVerticalBox(buttonsComponents2, 1);
 
             // Add to Panel
             this.setLayout(new GridBagLayout());
@@ -254,14 +257,48 @@ public class EditGradesPanel extends TransparentPanel
             this.add(buttonsBox, c);
 
             // Button Handlers
-            cancelButton.addActionListener(new SaveChangesHandler());
-            saveButton.addActionListener(new SaveChangesHandler());
+            saveButton.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    if (currentEntryIndex == -1)
+                    {
+                        JOptionPane.showMessageDialog(null, "Please select a student first!");
+                    }
+                    else if (quizField.getText().isEmpty() || midtermField.getText().isEmpty() || finalField.getText().isEmpty() || projectField.getText().isEmpty())
+                    {
+                        JOptionPane.showMessageDialog(null, "Please fill in all the fields!");
+                    }
+                    else
+                    {
+                        Long id = students.get(currentEntryIndex).getUserID();
+                        String course = students.get(currentEntryIndex).getCourseID();
+                        String quiz = quizField.getText();
+                        String midterm = midtermField.getText();
+                        String finalExam = finalField.getText();
+                        String project = projectField.getText();
+                        try
+                        {
+                            DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
+
+                                JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            JOptionPane.showMessageDialog(null, "Grades could not be updated!", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            });
 
             nextButton.addActionListener(
                     new NextPreviousHandler(idJComboBoxList));
 
             previousButton.addActionListener(
                     new NextPreviousHandler(idJComboBoxList));
+
             List<JTextField> allGrades = new ArrayList<>();
             allGrades.add(quizField);
             allGrades.add(midtermField);
@@ -273,6 +310,23 @@ public class EditGradesPanel extends TransparentPanel
             midtermField.addFocusListener(new GradesFocusHandler(allGrades, 20, 1));
             finalField.addFocusListener(new GradesFocusHandler(allGrades, 40, 2));
             projectField.addFocusListener(new GradesFocusHandler(allGrades, 30, 3));
+
+            idJComboBoxList.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
+
+                    currentEntryIndex = idJComboBoxList.getSelectedIndex();
+                    nameField.setText(students.get(currentEntryIndex).getFirstName() + " " + students.get(currentEntryIndex).getLastName());
+                    emailField.setText(students.get(currentEntryIndex).getEmail());
+                    quizField.setText(String.valueOf(students.get(currentEntryIndex).getQuizGrade()));
+                    midtermField.setText(String.valueOf(students.get(currentEntryIndex).getMidtermGrade()));
+                    finalField.setText(String.valueOf(students.get(currentEntryIndex).getFinalGrade()));
+                    projectField.setText(String.valueOf(students.get(currentEntryIndex).getProjectGrade()));
+                    totalField.setText(String.valueOf(students.get(currentEntryIndex).getTotalGrade()));
+                }
+            });
         }
 
         catch (Exception e)
