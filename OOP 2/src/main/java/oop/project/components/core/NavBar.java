@@ -62,8 +62,8 @@ public class NavBar extends JPanel
         });
 
         JPanel navBar = new JPanel();
-        navBar.setSize(screenWidth - 2, 30);
-        navBar.setLocation(-2, 0);
+        navBar.setSize(screenWidth - 6, 30);
+        navBar.setLocation(-6, 0);
         navBar.setOpaque(true);
         navBar.setLayout(null);
         navBar.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
