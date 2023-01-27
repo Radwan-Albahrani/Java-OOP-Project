@@ -21,9 +21,9 @@ public class FrameConfig
         frame.setIconImage(icon);
         frame.setLayout(null);
         frame.setUndecorated(true);
-        frame.getRootPane().setBorder(new LineBorder(ThemeColors.MEDIUM_SEA_GREEN, 2));
+        frame.getRootPane().setBorder(new LineBorder(ThemeColors.MEDIUM_SEA_GREEN, 6));
     }
-    
+
     public static void set(JFrame frame, String title, int Width, int Height) // Custom size
     {
         // Frame Setup
