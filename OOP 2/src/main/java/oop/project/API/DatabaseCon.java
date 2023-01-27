@@ -148,6 +148,38 @@ public class DatabaseCon
         }
     }
 
+
+    public static int registerCourseToInstructor(String courseID, String instructorID) throws Exception
+    {
+        con = connectDB();
+        String query = "UPDATE Courses SET InstructorID = ? WHERE CourseID = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, instructorID);
+            stmt.setString(2, courseID);
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error registering course to instructor");
+            }
+            return 1;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error registering course to instructor: " + e.getMessage());
+            throw new Exception("Error registering course to instructor: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
     public static int registerCourseToStudent(String courseID, String studentID) throws Exception
     {
         con = connectDB();
@@ -214,6 +246,23 @@ public class DatabaseCon
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static ResultSet getUnassignedCourses()
+    {
+        con = connectDB();
+        String query = "SELECT * FROM Courses WHERE InstructorID IS NULL";
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting unassigned courses: " + e.getMessage());
+            return null;
         }
     }
 

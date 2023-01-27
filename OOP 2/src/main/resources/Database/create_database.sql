@@ -76,12 +76,10 @@ CREATE TABLE StudentCourses (
 );
 
 
-
 CREATE TABLE Announcements (
     AnnouncementID INT PRIMARY KEY AUTO_INCREMENT,
     Announcement VARCHAR(255) NOT NULL,
-    CourseID VARCHAR(10) NOT NULL,
-    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+    CourseID VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE Alerts (
@@ -127,9 +125,10 @@ ADD CONSTRAINT fk_studentcourses_courses
 FOREIGN KEY (CourseID) REFERENCES courses (CourseID)
 ON DELETE CASCADE;
 
-
-ALTER TABLE  Announcements
-ADD FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE;
+ALTER TABLE announcements
+ADD CONSTRAINT announcements_ibfk_1
+FOREIGN KEY (CourseID) REFERENCES courses(CourseID)
+ON DELETE CASCADE;
 
 DELIMITER $$
 CREATE TRIGGER calculate_total_grade_insert
@@ -284,4 +283,3 @@ INSERT INTO Alerts(Alert)
 VALUES
 ("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert");
 
-INSERT INTO announcements(Announcement, CourseID) VALUES("This is a TestAnnouncement", "Math-111")

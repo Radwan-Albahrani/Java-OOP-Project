@@ -2,20 +2,26 @@ package oop.project.handlers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.JFrame;
-import oop.project.screens.InstructorScreen.Frames.RegisterCourseFrame;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import oop.project.screens.InstructorScreen.Panels.MainPanel;
+import oop.project.API.DatabaseCon;
 
-public class RegisterCourseHandler implements ActionListener, ItemListener{
+public class RegisterCourseHandler implements ActionListener{
 
-    private final JFrame registerCourseFrame;
+    private JTextField searchField;
+    private String ID;
+    private JPanel panel;
 
-    public RegisterCourseHandler(MainPanel mainPanel)
+    public RegisterCourseHandler(JTextField searchField, String ID, JPanel panel)
     {
-        this.registerCourseFrame = new RegisterCourseFrame(mainPanel);
+        this.searchField = searchField;
+        this.ID = ID;
+        this.panel = panel;
     }
 
     @Override
@@ -24,21 +30,20 @@ public class RegisterCourseHandler implements ActionListener, ItemListener{
         String buttonClicked = e.getActionCommand().trim();
         if (buttonClicked.equals("Register Course"))
         {
-            System.err.println("Register Course Button Clicked");
-            ((RegisterCourseFrame) registerCourseFrame).setHandler(this);
-            registerCourseFrame.setVisible(true);
-        }
-        else if (buttonClicked.equals("Register"))
-        {
-            System.err.println("Register Button Clicked");
-            registerCourseFrame.dispose();
+            String courseID = searchField.getText();
+            try
+            {
+                DatabaseCon.registerCourseToInstructor(courseID, ID);
+                ((MainPanel) panel).refreshPanel();
+                JOptionPane.showMessageDialog(null, "Course " + courseID + " Registered Successfully", "Successful", JOptionPane.INFORMATION_MESSAGE);
+                System.err.println("Course Registered Successfully - " + ID + " into " + courseID);
+            }
+            catch (Exception e1)
+            {
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e)
-    {
-        // TODO: Actually allow instructor to register course
-    }
 }
 

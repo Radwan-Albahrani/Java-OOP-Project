@@ -3,9 +3,11 @@ package oop.project.handlers;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import oop.project.API.DatabaseCon;
@@ -66,7 +68,29 @@ public class ButtonHandlerInstructor implements ActionListener
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
         {
+            //if instructor doesnt have a course, disable manage students
             System.err.println("View Students button clicked - Instructor");
+
+            ResultSet rs = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+            ArrayList<String> rsList = new ArrayList<>();
+            try
+            {
+                while (rs.next())
+                {
+                    rsList.add(rs.getString("CourseID"));
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+            if (rsList.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "You are not assigned to a course. Please register to one first to view students", "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                System.err.println("No courses found, can not view students");
+                return;
+            }
+
             panels.get("button").remove(mainButtonBox); // Remove the main menu button box
             panels.get("button").add(studentButtonBox, BorderLayout.NORTH); // Add the student button box
 
