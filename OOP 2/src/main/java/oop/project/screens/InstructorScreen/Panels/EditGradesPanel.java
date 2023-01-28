@@ -262,6 +262,12 @@ public class EditGradesPanel extends TransparentPanel
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    if (students.size() == 0)
+                    {
+                        JOptionPane.showMessageDialog(null, "There are no students in this course!");
+                        return;
+                    }
+
                     System.err.println("Save Button Clicked");
                     if (currentEntryIndex == -1)
                     {

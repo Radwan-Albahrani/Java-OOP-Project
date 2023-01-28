@@ -46,6 +46,8 @@ public class EditUserInfo extends TransparentPanel
         JLabel Edit_User_info = new TitleLabel("Edit Information");
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
+        JLabel sameID = new JLabel("You are editing your own information");
+
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
@@ -246,7 +248,6 @@ public class EditUserInfo extends TransparentPanel
         JComponent [] buttonsComponents2 = {buttonsBox, saveButton};
         buttonsBox = AddToBox.addToVerticalBox(buttonsComponents2, 1);
 
-
         // Add to Panel
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -273,6 +274,12 @@ public class EditUserInfo extends TransparentPanel
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    if (users.size() == 0)
+                    {
+                        JOptionPane.showMessageDialog(null, "There are no users!");
+                        return;
+                    }
+
                     if (idJComboBoxList.getSelectedIndex() == -1)
                     {
                         JOptionPane.showMessageDialog(null, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -330,7 +337,8 @@ public class EditUserInfo extends TransparentPanel
         idJComboBoxList.addActionListener(new ActionListener()
         {
             @Override
-                public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 setProfile(users.get(idJComboBoxList.getSelectedIndex()));
             }
         });
