@@ -546,15 +546,16 @@ public class DatabaseCon
                 // Create the user from the results
                 UserModel user = new UserModel();
                 user.setUserID(rs.getLong(1));
-                user.setFirstName(rs.getString(2));
-                user.setLastName(rs.getString(3));
-                user.setGender(rs.getString(4));
-                user.setBirthDate(rs.getString(5));
-                user.setMajor(rs.getString(6));
-                user.setEmail(rs.getString(7));
-                user.setPhoneNumber(rs.getString(8));
-                user.setPersonalEmail(rs.getString(9));
-                user.setPersonalPhoneNumber(rs.getString(10));
+                user.setRole(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthDate(rs.getString(7));
+                user.setMajor(rs.getString(8));
+                user.setEmail(rs.getString(9));
+                user.setPhoneNumber(rs.getString(10));
+                user.setPersonalEmail(rs.getString(11));
+                user.setPersonalPhoneNumber(rs.getString(12));
 
                 // Add the user to the list
                 users.add(user);
@@ -805,9 +806,8 @@ public class DatabaseCon
         return null;
     }
 
-    
 
-    public static int updateUserInfo(Long userID, String fname, String lname, String birthdate, String major, String personalphone, String personalemail, String workphone)
+    public static void updateUserInfo(Long userID, String fname, String lname, String birthdate, String major, String personalphone, String personalemail, String workphone) throws Exception
     {
         con = connectDB();
         String statement = "UPDATE profile SET FirstName = ?, LastName = ?, Birthdate = ?, Major = ? WHERE UserID = ?;";
@@ -823,30 +823,40 @@ public class DatabaseCon
 
             stmt1.executeUpdate();
 
-            statement = "UPDATE personalcontactdetails SET Email = ?, Phone = ? WHERE UserID = ?;";
-            try (PreparedStatement stmt2 = con.prepareStatement(statement);)
-            {
-                stmt2.setString(1, fname);
-                stmt2.setString(2, personalphone);
-                stmt2.setLong(3, userID);
-
-                stmt2.executeUpdate();
-
-                statement = "UPDATE workcontactdetails SET Phone = ? WHERE UserID = ?;";
-                try (PreparedStatement stmt3 = con.prepareStatement(statement);)
-                {
-                    stmt3.setString(1, personalphone);
-                    stmt3.setLong(2, userID);
-
-                    stmt3.executeUpdate();
-
-                    return 1;
-                }
-            }
         }
         catch (SQLException e)
         {
             System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
+        }
+
+        statement = "UPDATE personalcontactdetails SET Email = ?, Phone = ? WHERE UserID = ?;";
+        try (PreparedStatement stmt2 = con.prepareStatement(statement);)
+        {
+            stmt2.setString(1, fname);
+            stmt2.setString(2, personalphone);
+            stmt2.setLong(3, userID);
+
+            stmt2.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
+        }
+        statement = "UPDATE workcontactdetails SET Phone = ? WHERE UserID = ?;";
+        try (PreparedStatement stmt3 = con.prepareStatement(statement);)
+        {
+            stmt3.setString(1, personalphone);
+            stmt3.setLong(2, userID);
+
+            stmt3.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
         }
         finally
         {
@@ -859,7 +869,6 @@ public class DatabaseCon
                 System.err.println("Error Closing Database: " + e.getMessage());
             }
         }
-        return 0;
     }
 
     public static int saveGrade(Long userID, String courseID, String quizGrade, String midtermGrade, String finalGrade, String projectGrade)

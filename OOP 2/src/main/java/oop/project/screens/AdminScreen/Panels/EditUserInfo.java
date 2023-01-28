@@ -68,6 +68,7 @@ public class EditUserInfo extends TransparentPanel
         {
             idJComboBoxList.addItem("" + users.get(i).getUserID());
         }
+        idJComboBoxList.setSelectedIndex(-1);
 
         JComponent[] idComponents = {idLabel, idJComboBoxList};
         Box idBox = AddToBox.addToVerticalBox(idComponents, 1);
@@ -208,7 +209,6 @@ public class EditUserInfo extends TransparentPanel
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
 
-
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
         Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
@@ -273,6 +273,13 @@ public class EditUserInfo extends TransparentPanel
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    if (idJComboBoxList.getSelectedIndex() == -1)
+                    {
+                        JOptionPane.showMessageDialog(null, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    users = DatabaseCon.getAllUsersFull();
+                    currentEntryIndex = idJComboBoxList.getSelectedIndex();
                     System.err.println("Save Button Clicked");
                         Long id = users.get(currentEntryIndex).getUserID();
                         String name[] = nameField.getText().split(" ");
@@ -287,7 +294,6 @@ public class EditUserInfo extends TransparentPanel
                     {
                         DatabaseCon.updateUserInfo(id, fname, lname, birthdate, major, personalphone, personalemail, workphone);
                         JOptionPane.showMessageDialog(null, "User Info updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
                     }
                     catch (Exception e1)
                     {
