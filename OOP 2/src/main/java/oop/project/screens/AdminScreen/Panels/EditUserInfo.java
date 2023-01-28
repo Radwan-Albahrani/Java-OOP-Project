@@ -278,6 +278,7 @@ public class EditUserInfo extends TransparentPanel
                         JOptionPane.showMessageDialog(null, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
+
                     users = DatabaseCon.getAllUsersFull();
                     currentEntryIndex = idJComboBoxList.getSelectedIndex();
                     System.err.println("Save Button Clicked");
@@ -290,6 +291,24 @@ public class EditUserInfo extends TransparentPanel
                         String personalphone = personalPhoneField.getText();
                         String workphone = workPhoneField.getText();
                         String major = majorField.getText();
+
+
+                        if (fname.equals("") || lname.equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a first and last name!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        else if (birthdate.equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a birthdate!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        else if (major.equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, "Please enter a major!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
                     try
                     {
                         DatabaseCon.updateUserInfo(id, fname, lname, birthdate, major, personalphone, personalemail, workphone);
