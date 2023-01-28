@@ -23,6 +23,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             " Main Menu ", // done
             " View Alerts ", // done
             " Manage Users ", // done
+            " Edit User Info ",
             " View Instructors ", // done
             " View Students ", // done
             " View Profile ", // done
@@ -40,6 +41,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
             "AdminScreen/MainMenu.png",
             "AdminScreen/ViewAlerts.png",
             "AdminScreen/ManageUsers.png",
+            "AdminScreen/EditInfo.png",
             "AdminScreen/ViewInstructors.png",
             "AdminScreen/ViewStudents.png",
             "AdminScreen/ViewProfile.png",
@@ -112,12 +114,13 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 editTitle,
                 myButtons.get("Main Menu"),
                 myButtons.get("Registration Requests"),
+                myButtons.get("Edit User Info"),
                 myButtons.get("View Instructors"),
                 myButtons.get("View Students"),
         };
 
         // Add the buttons to the edit-users-Box
-        user_info = AddToBox.addToHorizontalBox(profileJComponents, 5);
+        user_info = AddToBox.addToHorizontalBox(profileJComponents, 6);
 
         // Buttons for courses Box
         JLabel coursesJLabel = new JLabel("Courses");

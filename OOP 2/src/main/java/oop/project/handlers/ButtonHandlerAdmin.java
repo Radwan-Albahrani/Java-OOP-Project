@@ -166,6 +166,13 @@ public class ButtonHandlerAdmin implements ActionListener
 
         }
 
+        else if (buttonClicked.equals("Edit User Info"))
+        {
+            removePanels();
+            FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Information"));
+        }
+
         // If the button clicked is Logout, Dispose of this frame and go back to login screen
         else if (buttonClicked.equals("Logout"))
         {
