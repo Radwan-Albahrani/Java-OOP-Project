@@ -46,8 +46,6 @@ public class EditUserInfo extends TransparentPanel
         JLabel Edit_User_info = new TitleLabel("Edit Information");
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
-        JLabel sameID = new JLabel("You are editing your own information");
-
         // Picture Setup
         JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
@@ -76,7 +74,7 @@ public class EditUserInfo extends TransparentPanel
         Box idBox = AddToBox.addToVerticalBox(idComponents, 1);
 
         // Name Setup
-        JLabel nameLabel = new JLabel("Name");
+        JLabel nameLabel = new JLabel("Name*");
         nameLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         nameLabel.setForeground(ThemeColors.BLACK);
@@ -92,7 +90,7 @@ public class EditUserInfo extends TransparentPanel
         Box nameBox = AddToBox.addToVerticalBox(nameComponents, 1);
 
         // BirthDate Setup
-        JLabel birthDateLabel = new JLabel("Date Of Birth");
+        JLabel birthDateLabel = new JLabel("Date Of Birth*");
         birthDateLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         birthDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
         birthDateLabel.setForeground(ThemeColors.BLACK);
@@ -153,7 +151,7 @@ public class EditUserInfo extends TransparentPanel
         Box occupationBox = AddToBox.addToVerticalBox(occupationComponents, 1);
 
         // Major Setup
-        JLabel majorLabel = new JLabel("Major");
+        JLabel majorLabel = new JLabel("Major*");
         majorLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         majorLabel.setAlignmentX(CENTER_ALIGNMENT);
         majorLabel.setForeground(ThemeColors.BLACK);
@@ -339,6 +337,11 @@ public class EditUserInfo extends TransparentPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if (idJComboBoxList.getSelectedItem().equals(DatabaseCon.currentUser.getUserID()))
+                {
+                    //TODO: show that user is editing their own information
+                    Edit_User_info.setText(Edit_User_info.getText() + ", You are editing your own information");
+                }
                 setProfile(users.get(idJComboBoxList.getSelectedIndex()));
             }
         });
