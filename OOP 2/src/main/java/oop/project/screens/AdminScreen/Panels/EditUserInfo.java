@@ -194,9 +194,9 @@ public class EditUserInfo extends TransparentPanel
         c.gridy = 2;
         this.add(buttonsBox, c);
 
-        // Button Handlers
-        cancelButton.addActionListener(new SaveChangesHandler());
-        saveButton.addActionListener(new SaveChangesHandler());
+        // TODO: Button Handlers
+        // cancelButton.addActionListener(new SaveChangesHandler());
+        // saveButton.addActionListener(new SaveChangesHandler());
 
         nextButton.addActionListener(
                 new NextPreviousHandler(idJComboBoxList));

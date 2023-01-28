@@ -172,6 +172,7 @@ public class ProfilePanel extends TransparentPanel
 
         personalEmailField = new RoundedJTextField(15);
         personalEmailField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        personalEmailField.setEditable(false);
         personalEmailField.setMinimumSize(new Dimension(400, 50));
         personalEmailField.setMaximumSize(new Dimension(400, 50));
         personalEmailField.setAlignmentX(LEFT_ALIGNMENT);
@@ -195,6 +196,7 @@ public class ProfilePanel extends TransparentPanel
         personalPhoneField = new RoundedJTextField(15);
         personalPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
+        personalPhoneField.setEditable(false);
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
         personalPhoneField.setAlignmentX(LEFT_ALIGNMENT);
 
@@ -211,16 +213,6 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] resetPasswordComponents = {resetPasswordButton};
         Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
 
-        // Save Changes Button
-        saveChangesButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        saveChangesButton.setMinimumSize(new Dimension(200, 50));
-        saveChangesButton.setMaximumSize(new Dimension(200, 50));
-        saveChangesButton.setAlignmentX(RIGHT_ALIGNMENT);
-        saveChangesButton.setForeground(ThemeColors.BLACK);
-
-        JComponent[] saveChangesComponents = {saveChangesButton};
-        Box saveChangesBox = AddToBox.addToVerticalBox(saveChangesComponents, 1);
-
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
         Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
@@ -231,8 +223,6 @@ public class ProfilePanel extends TransparentPanel
         JComponent[] workInfoComponents = {professionalInfoBox, contactInfoBox};
         Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
 
-        JComponent[] buttonComponents = {resetPasswordBox, saveChangesBox};
-        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 1);
 
         // Add to Panel
         this.setLayout(new GridBagLayout());
@@ -252,11 +242,10 @@ public class ProfilePanel extends TransparentPanel
         c.gridy = 2;
         this.add(workInfoBox, c);
         c.gridy = 3;
-        this.add(buttonBox, c);
+        this.add(resetPasswordBox, c);
 
         // Button Handler
         resetPasswordButton.addActionListener(new ResetPasswordHandler(this, type));
-        saveChangesButton.addActionListener(new SaveChangesHandler());
     }
 
     public void setButtonsType(int type)

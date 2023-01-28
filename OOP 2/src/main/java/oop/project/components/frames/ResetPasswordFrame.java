@@ -21,6 +21,10 @@ public class ResetPasswordFrame extends JFrame
     boolean added = false;
     KGradientPanel resetPasswordPanel;
 
+    JLabel oldPasswordLabel;
+    JLabel newPasswordLabel;
+    JLabel confirmPasswordLabel;
+
     public ResetPasswordFrame(JPanel parent, int type)
     {
         FrameConfig.set(this, "Reset Password", 500, 300);
@@ -29,15 +33,16 @@ public class ResetPasswordFrame extends JFrame
         setButtonsType(type);
         setPanelType(type);
 
-        JLabel oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
+        oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
         oldPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         RoundedJPasswordField oldPasswordField = new RoundedJPasswordField(15);
-        JLabel newPasswordLabel = new JLabel("New Password", SwingConstants.CENTER);
+        newPasswordLabel = new JLabel("New Password", SwingConstants.CENTER);
         newPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         RoundedJPasswordField newPasswordField = new RoundedJPasswordField(15);
-        JLabel confirmPasswordLabel = new JLabel("Confirm Password", SwingConstants.CENTER);
+        confirmPasswordLabel = new JLabel("Confirm Password", SwingConstants.CENTER);
         confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         RoundedJPasswordField confirmPasswordField = new RoundedJPasswordField(15);
+        confirmPasswordField.getSelectedText();
 
         // Add to Frame
         this.setLayout(new BorderLayout()); // set the layout to border layout
@@ -51,6 +56,9 @@ public class ResetPasswordFrame extends JFrame
         resetPasswordPanel.add(resetPasswordBox);
         this.add(resetPasswordPanel);
         this.setLocationRelativeTo(parent);
+
+        // Set the handler
+        submitButton.addActionListener(new ResetPasswordHandler(oldPasswordField.getPassword(), newPasswordField.getPassword(), confirmPasswordField.getPassword()));
     }
 
     private void setPanelType(int type)
@@ -90,7 +98,14 @@ public class ResetPasswordFrame extends JFrame
         }
         else if (buttonsType == 2)
         {
-            submitButton = new CustomButtonInstructor("Reset");
+            submitButton = new CustomButtonInstructor("Submit");
         }
+
+    }
+    public void refreshPanel()
+    {
+        oldPasswordLabel.setText("");
+        newPasswordLabel.setText("");
+        confirmPasswordLabel.setText("");
     }
 }

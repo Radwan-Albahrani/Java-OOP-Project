@@ -214,6 +214,5 @@ public class MainPanel extends TransparentPanel
         this.revalidate();
         this.repaint();
         this.add(new MainPanel(getWidth(), getHeight()));
-
     }
 }

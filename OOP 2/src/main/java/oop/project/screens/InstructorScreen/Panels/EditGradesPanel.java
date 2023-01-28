@@ -262,6 +262,7 @@ public class EditGradesPanel extends TransparentPanel
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    System.err.println("Save Button Clicked");
                     if (currentEntryIndex == -1)
                     {
                         JOptionPane.showMessageDialog(null, "Please select a student first!");
@@ -282,7 +283,7 @@ public class EditGradesPanel extends TransparentPanel
                         {
                             DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
 
-                                JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                         catch (Exception ex)
@@ -328,13 +329,10 @@ public class EditGradesPanel extends TransparentPanel
                 }
             });
         }
-
         catch (Exception e)
         {
             System.err.println("Instuctor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
             e.printStackTrace();
         }
-
     }
-
 }
