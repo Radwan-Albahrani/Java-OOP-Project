@@ -1269,11 +1269,14 @@ public class DatabaseCon
     {
         try
         {
-            con.close();
+            if (con != null)
+            {
+                con.close();
+            }
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 

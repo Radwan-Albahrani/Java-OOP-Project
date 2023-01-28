@@ -42,7 +42,7 @@ public class NavBar extends JPanel
                 }
                 catch (Exception ex)
                 {
-                    System.err.println("Error closing database" + ex.getMessage());
+                    System.err.println("Error closing database: " + ex.getMessage());
                 }
                 System.exit(0);
             });
