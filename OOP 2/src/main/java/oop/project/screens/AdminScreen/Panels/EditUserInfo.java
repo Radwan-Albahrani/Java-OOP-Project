@@ -279,9 +279,9 @@ public class EditUserInfo extends TransparentPanel
                         return;
                     }
 
-                    users = DatabaseCon.getAllUsersFull();
-                    currentEntryIndex = idJComboBoxList.getSelectedIndex();
-                    System.err.println("Save Button Clicked");
+                        users = DatabaseCon.getAllUsersFull();
+                        currentEntryIndex = idJComboBoxList.getSelectedIndex();
+                        System.err.println("Save Button Clicked");
                         Long id = users.get(currentEntryIndex).getUserID();
                         String name[] = nameField.getText().split(" ");
                         String fname = name[0];
