@@ -107,7 +107,8 @@ public class ResetPasswordFrame extends JFrame
         {
             if (new String(newPasswordField.getPassword()).equals(new String(confirmPasswordField.getPassword())))
             {
-                result = DatabaseCon.resetPassword(new String(newPasswordField.getPassword()));
+                result = DatabaseCon.updatePassword(new String(newPasswordField.getPassword()),
+                        Long.toString(DatabaseCon.currentUser.getUserID()));
                 return result;
             }
             else

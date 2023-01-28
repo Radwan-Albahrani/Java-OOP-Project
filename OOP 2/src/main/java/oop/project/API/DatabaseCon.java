@@ -1030,14 +1030,14 @@ public class DatabaseCon
         }
     }
 
-    public static int resetPassword(String password)
+    public static int updatePassword(String password, String userID)
     {
         String query = "UPDATE user SET password = ? WHERE userID = ?;";
         con = connectDB();
         try (PreparedStatement stmt = con.prepareStatement(query))
         {
             stmt.setString(1, password);
-            stmt.setString(2, Long.toString(currentUser.getUserID()));
+            stmt.setString(2, userID);
             int result = stmt.executeUpdate();
             if (result == 1)
             {
@@ -1045,13 +1045,12 @@ public class DatabaseCon
             }
             else
             {
-                return -1;
+                return 1;
             }
-
         }
         catch (SQLException e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error Updating Password: " + e.getMessage());
             return -1;
         }
     }
