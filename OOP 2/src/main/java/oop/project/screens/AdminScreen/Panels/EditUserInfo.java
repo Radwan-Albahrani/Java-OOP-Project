@@ -268,7 +268,6 @@ public class EditUserInfo extends TransparentPanel
         this.add(buttonsBox, c);
 
         // Button Handlers
-
         saveButton.addActionListener(new ActionListener()
             {
                 @Override
