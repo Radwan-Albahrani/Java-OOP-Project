@@ -27,8 +27,10 @@ public class FrameConfig
         frame.setResizable(false);
         try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + "AppIcon.jpg"))
         {
-            System.out.println(Thread.currentThread().getContextClassLoader().getResource(App.Path + "AppIcon.jpg") + " "
-                    + App.Path + "AppIcon.jpg");
+            if (in == null)
+            {
+                System.out.println(App.Path + "AppIcon.jpg");
+            }
             BufferedImage image = ImageIO.read(in);
             Image icon = new ImageIcon(image).getImage();
             frame.setIconImage(icon);
@@ -54,8 +56,10 @@ public class FrameConfig
         // Background Setup
         try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + path))
         {
-            System.out.println(
-                    Thread.currentThread().getContextClassLoader().getResource(App.Path + path) + " " + App.Path + path);
+            if (in == null)
+            {
+                System.out.println(App.Path + path);
+            }
             BufferedImage image = ImageIO.read(in);
             Image backgroundImage = new ImageIcon(image).getImage();
             int width = frame.getWidth();
@@ -75,7 +79,10 @@ public class FrameConfig
         String fullPath = App.Path + path;
         try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fullPath))
         {
-            System.out.println(Thread.currentThread().getContextClassLoader().getResource(fullPath) + " " + fullPath);
+            if (in == null)
+            {
+                System.out.println(fullPath);
+            }
             BufferedImage toolImage = ImageIO.read(in);
             Image image = new ImageIcon(toolImage).getImage();
             int width = image.getWidth(null);
@@ -96,8 +103,10 @@ public class FrameConfig
     {
         try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + path))
         {
-            System.out.println(
-                    Thread.currentThread().getContextClassLoader().getResource(App.Path + path) + " " + App.Path + path);
+            if (in == null)
+            {
+                System.out.println(App.Path + path);
+            }
             BufferedImage toolImage = ImageIO.read(in);
             Image image = new ImageIcon(toolImage).getImage();
             Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
