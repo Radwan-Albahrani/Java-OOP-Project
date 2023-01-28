@@ -23,7 +23,7 @@ public class LoginPanel extends ThemedPanelGeneric
         JLabel loginLabel = new TitleLabel("Student Information System");
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("LoginScreen/LoginScreenIcon.png", 0.4);
+        JLabel picture = FrameConfig.getPicture("LoginScreen/loginScreenIcon.png", 0.4);
 
         // Login Top Panel Setup
         JPanel LoginTopBox = new VerticalPanel(loginLabel, picture);

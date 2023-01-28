@@ -16,7 +16,7 @@ public class StudentScreen extends JFrame
     {
         FrameConfig.set(this, "Student");
 
-        FrameConfig.setBackground(this, "StudentScreen/background.png");
+        FrameConfig.setBackground(this, "StudentScreen/Background.png");
 
         JPanel mainPanel = new StudentMain(getWidth(), getHeight());
         KGradientPanel buttonPanel = new StudentButton(this, getWidth(), getHeight());

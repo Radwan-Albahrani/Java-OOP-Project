@@ -280,7 +280,4 @@ INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade
 VALUES('2230000006', 'CS-111', 10, 10, 10, 10);
  INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
 VALUES('2230000006', 'Math-111', 10, 10, 10, 10);
-INSERT INTO Alerts(Alert)
-VALUES
-("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert"),("This is a test Alert");
 

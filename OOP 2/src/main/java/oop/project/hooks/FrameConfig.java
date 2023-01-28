@@ -2,6 +2,13 @@ package oop.project.hooks;
 
 import oop.project.colors.ThemeColors;
 import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -11,52 +18,95 @@ public class FrameConfig
 {
     public static void set(JFrame frame, String title)
     {
+
         // Frame Setup
         frame.setTitle(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1600, 900);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        Image icon = new ImageIcon(App.Path + "AppIcon.jpg").getImage();
-        frame.setIconImage(icon);
-        frame.setLayout(null);
-        frame.setUndecorated(true);
-        frame.getRootPane().setBorder(new LineBorder(ThemeColors.MEDIUM_SEA_GREEN, 6));
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + "AppIcon.jpg"))
+        {
+            System.out.println(Thread.currentThread().getContextClassLoader().getResource(App.Path + "AppIcon.jpg") + " "
+                    + App.Path + "AppIcon.jpg");
+            BufferedImage image = ImageIO.read(in);
+            Image icon = new ImageIcon(image).getImage();
+            frame.setIconImage(icon);
+            frame.setLayout(null);
+            frame.setUndecorated(true);
+            frame.getRootPane().setBorder(new LineBorder(ThemeColors.MEDIUM_SEA_GREEN, 6));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static void set(JFrame frame, String title, int Width, int Height) // Custom size
     {
         // Frame Setup
         set(frame, title);
-        frame.setSize( Width, Height);
+        frame.setSize(Width, Height);
     }
-
 
     public static void setBackground(JFrame frame, String path)
     {
         // Background Setup
-        Image backgroundImage = new ImageIcon(App.Path + path).getImage();
-        int width = frame.getWidth();
-        int height = frame.getHeight();
-        Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
-        frame.setContentPane(background);
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + path))
+        {
+            System.out.println(
+                    Thread.currentThread().getContextClassLoader().getResource(App.Path + path) + " " + App.Path + path);
+            BufferedImage image = ImageIO.read(in);
+            Image backgroundImage = new ImageIcon(image).getImage();
+            int width = frame.getWidth();
+            int height = frame.getHeight();
+            Image scaledBackgroundImage = backgroundImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            JLabel background = new JLabel(new ImageIcon(scaledBackgroundImage));
+            frame.setContentPane(background);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static JLabel getPicture(String path, double scale)
     {
-        Image image = new ImageIcon(App.Path + path).getImage();
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        Image scaledImage = image.getScaledInstance((int) (width * scale), (int) (height * scale), Image.SCALE_SMOOTH);
-        JLabel picture = new JLabel(new ImageIcon(scaledImage));
-        return picture;
+        String fullPath = App.Path + path;
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fullPath))
+        {
+            System.out.println(Thread.currentThread().getContextClassLoader().getResource(fullPath) + " " + fullPath);
+            BufferedImage toolImage = ImageIO.read(in);
+            Image image = new ImageIcon(toolImage).getImage();
+            int width = image.getWidth(null);
+            int height = image.getHeight(null);
+            Image scaledImage = image.getScaledInstance((int) (width * scale), (int) (height * scale), Image.SCALE_SMOOTH);
+            JLabel picture = new JLabel(new ImageIcon(scaledImage));
+            return picture;
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
+
     }
 
     public static Image getPictureWithSize(String path, int width, int height)
     {
-        Image image = new ImageIcon(App.Path + path).getImage();
-        Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return scaledImage;
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + path))
+        {
+            System.out.println(
+                    Thread.currentThread().getContextClassLoader().getResource(App.Path + path) + " " + App.Path + path);
+            BufferedImage toolImage = ImageIO.read(in);
+            Image image = new ImageIcon(toolImage).getImage();
+            Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return scaledImage;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

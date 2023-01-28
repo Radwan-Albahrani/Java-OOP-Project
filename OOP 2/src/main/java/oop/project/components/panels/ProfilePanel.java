@@ -42,7 +42,7 @@ public class ProfilePanel extends TransparentPanel
         setButtonsType(type);
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
+        JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
 
         // Personal Information Setup
         // ID Setup
@@ -221,7 +221,6 @@ public class ProfilePanel extends TransparentPanel
 
         JComponent[] workInfoComponents = {professionalInfoBox, contactInfoBox};
         Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
-
 
         // Add to Panel
         this.setLayout(new GridBagLayout());

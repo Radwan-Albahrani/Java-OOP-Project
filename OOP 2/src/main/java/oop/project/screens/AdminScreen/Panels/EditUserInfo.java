@@ -51,7 +51,7 @@ public class EditUserInfo extends TransparentPanel
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
+        JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
         // Personal Information Setup

@@ -1,4 +1,5 @@
 package oop.project.screens.InstructorScreen.Panels;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import oop.project.colors.ThemeColors;
@@ -47,7 +48,7 @@ public class EditGradesPanel extends TransparentPanel
             JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
 
             // Picture Setup
-            JLabel picture = FrameConfig.getPicture("/DefaultProfilePicture.png", 0.2);
+            JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
             picture.setAlignmentX(CENTER_ALIGNMENT);
 
             // ID
@@ -273,7 +274,8 @@ public class EditGradesPanel extends TransparentPanel
                     {
                         JOptionPane.showMessageDialog(null, "Please select a student first!");
                     }
-                    else if (quizField.getText().isEmpty() || midtermField.getText().isEmpty() || finalField.getText().isEmpty() || projectField.getText().isEmpty())
+                    else if (quizField.getText().isEmpty() || midtermField.getText().isEmpty()
+                            || finalField.getText().isEmpty() || projectField.getText().isEmpty())
                     {
                         JOptionPane.showMessageDialog(null, "Please fill in all the fields!");
                     }
@@ -289,11 +291,13 @@ public class EditGradesPanel extends TransparentPanel
                         {
                             DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
 
-                            JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success",
+                                    JOptionPane.INFORMATION_MESSAGE);
                         }
                         catch (Exception ex)
                         {
-                            JOptionPane.showMessageDialog(null, "Grades could not be updated!", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Grades could not be updated!", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -317,14 +321,17 @@ public class EditGradesPanel extends TransparentPanel
             finalField.addFocusListener(new GradesFocusHandler(allGrades, 40, 2));
             projectField.addFocusListener(new GradesFocusHandler(allGrades, 30, 3));
 
-            idJComboBoxList.addActionListener(new ActionListener() {
+            idJComboBoxList.addActionListener(new ActionListener()
+            {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e)
+                {
 
                     students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
 
                     currentEntryIndex = idJComboBoxList.getSelectedIndex();
-                    nameField.setText(students.get(currentEntryIndex).getFirstName() + " " + students.get(currentEntryIndex).getLastName());
+                    nameField.setText(students.get(currentEntryIndex).getFirstName() + " "
+                            + students.get(currentEntryIndex).getLastName());
                     emailField.setText(students.get(currentEntryIndex).getEmail());
                     quizField.setText(String.valueOf(students.get(currentEntryIndex).getQuizGrade()));
                     midtermField.setText(String.valueOf(students.get(currentEntryIndex).getMidtermGrade()));
@@ -336,7 +343,8 @@ public class EditGradesPanel extends TransparentPanel
         }
         catch (Exception e)
         {
-            System.err.println("Instuctor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
+            System.err.println(
+                    "Instuctor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
             e.printStackTrace();
         }
     }

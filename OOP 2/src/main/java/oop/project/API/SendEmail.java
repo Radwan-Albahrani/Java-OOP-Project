@@ -1,6 +1,8 @@
 package oop.project.API;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -135,8 +137,11 @@ public class SendEmail
 
     private static Map<?, ?> readJson()
     {
+        // String path = "src/main/resources/secret/secret.json";
+        String path = "secret/secret.json";
         Gson gson = new Gson();
-        try (FileReader reader = new FileReader("src/main/resources/secret/secret.json"))
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in)))
         {
             // Convert JSON File to Java Object
             Map<?, ?> secrets = gson.fromJson(reader, Map.class);
