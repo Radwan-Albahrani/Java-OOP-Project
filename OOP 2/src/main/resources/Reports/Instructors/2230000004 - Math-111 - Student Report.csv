@@ -1,5 +1,1 @@
 UserID,FirstName,LastName,Sex,CourseID,CourseName,QuizGrade,MidtermGrade,FinalGrade,ProjectGrade,TotalGrade,
-2230000005,student0FirstName,student0LastName,Male,Math-111,Math,10.0,10.0,10.0,10.0,40.0,
-2230000005,student0FirstName,student0LastName,Male,Math-111,Math,0.0,0.0,0.0,0.0,0.0,
-2230000006,student1FirstName,student1LastName,Male,Math-111,Math,10.0,10.0,10.0,10.0,40.0,
-2230000006,student1FirstName,student1LastName,Male,Math-111,Math,10.0,10.0,10.0,10.0,40.0,

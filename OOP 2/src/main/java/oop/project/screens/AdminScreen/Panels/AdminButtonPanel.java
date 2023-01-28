@@ -117,6 +117,7 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("Edit User Info"),
                 myButtons.get("View Instructors"),
                 myButtons.get("View Students"),
+                myButtons.get("Edit Information")
         };
 
         // Add the buttons to the edit-users-Box

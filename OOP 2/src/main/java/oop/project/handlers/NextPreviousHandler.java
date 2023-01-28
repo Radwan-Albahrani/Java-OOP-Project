@@ -7,10 +7,6 @@ import javax.swing.JComboBox;
 
 public class NextPreviousHandler implements ActionListener
 {
-    /**
-     *
-     */
-
     private final JComboBox<String> idJComboBoxList;
 
     public NextPreviousHandler(JComboBox<String> idJComboBoxList)
@@ -24,6 +20,10 @@ public class NextPreviousHandler implements ActionListener
         int currentEntryIndex = idJComboBoxList.getSelectedIndex();
         if (e.getActionCommand().equals("previous"))
         {
+            if (currentEntryIndex == -1)
+            {
+                return;
+            }
             if (currentEntryIndex > 0)
             {
                 currentEntryIndex--;
@@ -39,6 +39,11 @@ public class NextPreviousHandler implements ActionListener
         }
         else if (e.getActionCommand().equals("next"))
         {
+            if (currentEntryIndex == -1)
+            {
+                return;
+            }
+
             if (currentEntryIndex < idJComboBoxList.getItemCount() - 1)
             {
                 currentEntryIndex++;

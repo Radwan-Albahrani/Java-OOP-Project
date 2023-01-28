@@ -84,9 +84,9 @@ public class ButtonHandlerAdmin implements ActionListener
 
             removePanels();
 
-            ((ViewInstructors) panels.get("Instructors")).refreshTable();
+            panels.get("Information");
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
-            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Instructors"));
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Information"));
         }
 
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel

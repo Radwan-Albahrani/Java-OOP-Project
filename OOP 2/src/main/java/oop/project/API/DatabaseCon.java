@@ -50,6 +50,29 @@ public class DatabaseCon
         return null;
     }
 
+    public static ResultSet customQuery(String query)
+    {
+        // Get the connection
+        con = connectDB();
+        String view = query;
+
+        // Create the statement
+        try
+        {
+            stmt = con.prepareStatement(view);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error with Custom Query: " + e.getMessage());
+        }
+        return null;
+    }
+
     public static int registerUser(UserModel user)
     {
         // Get the connection
@@ -148,6 +171,39 @@ public class DatabaseCon
         }
     }
 
+
+    public static int registerCourseToInstructor(String courseID, String instructorID) throws Exception
+    {
+        con = connectDB();
+        String query = "UPDATE Courses SET InstructorID = ? WHERE CourseID = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query);)
+        {
+            stmt.setString(1, instructorID);
+            stmt.setString(2, courseID);
+            int result = stmt.executeUpdate();
+            if (result == 0)
+            {
+                throw new Exception("Error registering course to instructor");
+            }
+            return 1;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error registering course to instructor: " + e.getMessage());
+            throw new Exception("Error registering course to instructor: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static int registerCourseToStudent(String courseID, String studentID) throws Exception
     {
         con = connectDB();
@@ -214,6 +270,23 @@ public class DatabaseCon
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static ResultSet getUnassignedCourses()
+    {
+        con = connectDB();
+        String query = "SELECT * FROM Courses WHERE InstructorID IS NULL";
+        try
+        {
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error getting unassigned courses: " + e.getMessage());
+            return null;
         }
     }
 
@@ -403,29 +476,6 @@ public class DatabaseCon
         return users;
     }
 
-    public static ResultSet customQuery(String query)
-    {
-        // Get the connection
-        con = connectDB();
-        String view = query;
-
-        // Create the statement
-        try
-        {
-            stmt = con.prepareStatement(view);
-
-            // Execute the statement
-            ResultSet rs = stmt.executeQuery();
-            return rs;
-
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error with Custom Query: " + e.getMessage());
-        }
-        return null;
-    }
-
     public static ResultSet getAllWithTypeRS(String type)
     {
 
@@ -474,6 +524,62 @@ public class DatabaseCon
         return null;
     }
 
+    public static List<UserModel> getAllUsersFull()
+    {
+        // Set up the list
+        List<UserModel> users = new ArrayList<>();
+
+        // Get the connection
+        con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all users full`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            // Get the results
+            while (rs.next())
+            {
+                // Create the user from the results
+                UserModel user = new UserModel();
+                user.setUserID(rs.getLong(1));
+                user.setRole(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthDate(rs.getString(7));
+                user.setMajor(rs.getString(8));
+                user.setEmail(rs.getString(9));
+                user.setPhoneNumber(rs.getString(10));
+                user.setPersonalEmail(rs.getString(11));
+                user.setPersonalPhoneNumber(rs.getString(12));
+
+                // Add the user to the list
+                users.add(user);
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting All Users: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return users;
+    }
+
+
     public static List<UserModel> getAllUsers()
     {
         // Set up the list
@@ -503,6 +609,7 @@ public class DatabaseCon
                 user.setMajor(rs.getString(6));
                 user.setEmail(rs.getString(6));
                 user.setPhoneNumber(rs.getString(8));
+                
 
                 // Add the user to the list
                 users.add(user);
@@ -699,6 +806,108 @@ public class DatabaseCon
         return null;
     }
 
+
+    public static void updateUserInfo(Long userID, String fname, String lname, String birthdate, String major, String personalphone, String personalemail, String workphone) throws Exception
+    {
+        con = connectDB();
+        String statement = "UPDATE profile SET FirstName = ?, LastName = ?, Birthdate = ?, Major = ? WHERE UserID = ?;";
+
+        // Create the statement
+        try (PreparedStatement stmt1 = con.prepareStatement(statement);)
+        {
+            stmt1.setString(1, fname);
+            stmt1.setString(2, lname);
+            stmt1.setString(3, birthdate);
+            stmt1.setString(4, major);
+            stmt1.setLong(5, userID);
+
+            stmt1.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
+        }
+
+        statement = "UPDATE personalcontactdetails SET Email = ?, Phone = ? WHERE UserID = ?;";
+        try (PreparedStatement stmt2 = con.prepareStatement(statement);)
+        {
+            stmt2.setString(1, fname);
+            stmt2.setString(2, personalphone);
+            stmt2.setLong(3, userID);
+
+            stmt2.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
+        }
+        statement = "UPDATE workcontactdetails SET Phone = ? WHERE UserID = ?;";
+        try (PreparedStatement stmt3 = con.prepareStatement(statement);)
+        {
+            stmt3.setString(1, personalphone);
+            stmt3.setLong(2, userID);
+
+            stmt3.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+            throw e;
+        }
+        finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+    }
+
+    public static int saveGrade(Long userID, String courseID, String quizGrade, String midtermGrade, String finalGrade, String projectGrade)
+    {
+        // Get the connection
+        con = connectDB();
+        String statement = "UPDATE studentcourses SET QuizGrade = ?, MidtermGrade = ?, FinalGrade = ?, ProjectGrade = ? WHERE StudID = ? && CourseID = ?;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(statement);)
+        {
+            stmt.setString(1, quizGrade);
+            stmt.setString(2, midtermGrade);
+            stmt.setString(3, finalGrade);
+            stmt.setString(4, projectGrade);
+            stmt.setLong(5, userID);
+            stmt.setString(6, courseID);
+
+            stmt.executeUpdate();
+
+            return 1;
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving Grade: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return 0;
+    }
     public static List<StudentModel> getStudentsOfInstructorGradesList(String userID)
     {
         List<StudentModel> students = null;
@@ -712,13 +921,15 @@ public class DatabaseCon
             {
                 StudentModel student = new StudentModel();
                 student.setUserID(rs.getLong(1));
-                student.setFirstName(rs.getString(2));
-                student.setLastName(rs.getString(3));
-                student.setQuizGrade(rs.getDouble(4));
-                student.setMidtermGrade(rs.getDouble(5));
-                student.setFinalGrade(rs.getDouble(6));
-                student.setProjectGrade(rs.getDouble(7));
-                student.setTotalGrade(rs.getDouble(8));
+                student.setCourseID(rs.getString(2));
+                student.setEmail(rs.getString(3));
+                student.setFirstName(rs.getString(4));
+                student.setLastName(rs.getString(5));
+                student.setQuizGrade(rs.getDouble(6));
+                student.setMidtermGrade(rs.getDouble(7));
+                student.setFinalGrade(rs.getDouble(8));
+                student.setProjectGrade(rs.getDouble(9));
+                student.setTotalGrade(rs.getDouble(10));
                 students.add(student);
             }
         }
@@ -742,9 +953,9 @@ public class DatabaseCon
     public static ResultSet getStudentsOfInstructorGrades(String userID)
     {
         String query = """
-                SELECT UserID, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
-                FROM studentcourses, profile
-                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                SELECT profile.UserID, CourseID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
+                FROM studentcourses, profile, workcontactdetails
+                WHERE StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
                     """.formatted(userID);
         con = connectDB();
         try

@@ -113,7 +113,6 @@ public class AddCoursesPanel extends TransparentPanel
         c.gridy = 2;
         this.add(createButton, c);
 
-        // Button Handlers TODO
         createButton.addActionListener(
                 new CreateCourseHandler(idTextField, courseNameField, creditHoursField, maxCapacityField));
     }
