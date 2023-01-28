@@ -258,6 +258,7 @@ WHERE User.Status = "Active";
 
 ## ----------------------Testing Dummy Data-------------------------------------
 CALL generate_user('admin0', 'admin', 'Admin', 'admin0FirstName', 'admin0LastName', 'Male', '1999-01-01', 'testing', 'admin0@university.com', '0', 'admin0@gmail.com');
+UPDATE user SET status = "Active" WHERE userID = "2230000001";
 CALL generate_user('admin1', 'admin', 'Admin', 'admin1FirstName', 'admin1LastName', 'Male', '1999-01-01', 'testing', 'admin1@university.com', '0', 'admin1@gmail.com');
 
 CALL generate_user('instructor0', 'instructor', 'Instructor', 'instructor0FirstName', 'instructor0LastName', 'Male', '1999-01-01', 'testing', 'instructor0@university.com', '1', 'instructor0@gmail.com');
