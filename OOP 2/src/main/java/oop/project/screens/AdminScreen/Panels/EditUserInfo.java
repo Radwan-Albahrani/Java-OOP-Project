@@ -29,7 +29,7 @@ public class EditUserInfo extends TransparentPanel
     List<UserModel> users;
     int currentEntryIndex;
     RoundedJTextField nameField;
-    RoundedJTextField idField;
+    JComboBox<String> idJComboBoxList;
     RoundedJTextField birthDateField;
     RoundedJTextField genderField;
     RoundedJTextField occupationField;
@@ -57,7 +57,7 @@ public class EditUserInfo extends TransparentPanel
         idLabel.setAlignmentX(CENTER_ALIGNMENT);
         idLabel.setForeground(ThemeColors.BLACK);
 
-        JComboBox<String> idJComboBoxList = new JComboBox<String>();
+        idJComboBoxList = new JComboBox<String>();
         idJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         idJComboBoxList.setMinimumSize(new Dimension(1000, 50));
         idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
@@ -69,7 +69,7 @@ public class EditUserInfo extends TransparentPanel
             idJComboBoxList.addItem("" + users.get(i).getUserID());
         }
 
-        JComponent[] idComponents = {idLabel, idField};
+        JComponent[] idComponents = {idLabel, idJComboBoxList};
         Box idBox = AddToBox.addToVerticalBox(idComponents, 1);
 
         // Name Setup
@@ -322,7 +322,7 @@ public class EditUserInfo extends TransparentPanel
         nameField.setText(user.getFirstName() + " " + user.getLastName());
 
         // Set ID
-        idField.setText(Long.toString(user.getUserID()));
+        idJComboBoxList.setSelectedItem(Long.toString(user.getUserID()));
 
         // Set Birth Date
         birthDateField.setText(user.getBirthDate());
