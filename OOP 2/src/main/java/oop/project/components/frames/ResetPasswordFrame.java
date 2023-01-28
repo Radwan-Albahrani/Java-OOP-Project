@@ -5,6 +5,7 @@ import java.awt.*;
 
 import com.k33ptoo.components.*;
 
+import oop.project.API.DatabaseCon;
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
 import oop.project.components.core.NavBar;
@@ -20,6 +21,9 @@ public class ResetPasswordFrame extends JFrame
     KButton submitButton;
     boolean added = false;
     KGradientPanel resetPasswordPanel;
+    RoundedJPasswordField oldPasswordField;
+    RoundedJPasswordField newPasswordField;
+    RoundedJPasswordField confirmPasswordField;
 
     public ResetPasswordFrame(JPanel parent, int type)
     {
@@ -31,13 +35,15 @@ public class ResetPasswordFrame extends JFrame
 
         JLabel oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
         oldPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJPasswordField oldPasswordField = new RoundedJPasswordField(15);
+        oldPasswordField = new RoundedJPasswordField(15);
+
         JLabel newPasswordLabel = new JLabel("New Password", SwingConstants.CENTER);
         newPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJPasswordField newPasswordField = new RoundedJPasswordField(15);
+        newPasswordField = new RoundedJPasswordField(15);
+
         JLabel confirmPasswordLabel = new JLabel("Confirm Password", SwingConstants.CENTER);
         confirmPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        RoundedJPasswordField confirmPasswordField = new RoundedJPasswordField(15);
+        confirmPasswordField = new RoundedJPasswordField(15);
 
         // Add to Frame
         this.setLayout(new BorderLayout()); // set the layout to border layout
@@ -91,6 +97,28 @@ public class ResetPasswordFrame extends JFrame
         else if (buttonsType == 2)
         {
             submitButton = new CustomButtonInstructor("Reset");
+        }
+    }
+
+    public int resetPassword()
+    {
+        int result = DatabaseCon.checkPassword(new String(oldPasswordField.getPassword()));
+        if (result == 0)
+        {
+            if (new String(newPasswordField.getPassword()).equals(new String(confirmPasswordField.getPassword())))
+            {
+                result = DatabaseCon.resetPassword(new String(newPasswordField.getPassword()));
+                return result;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else
+        {
+
+            return 2;
         }
     }
 }

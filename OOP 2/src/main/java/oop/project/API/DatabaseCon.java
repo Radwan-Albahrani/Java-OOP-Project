@@ -999,6 +999,63 @@ public class DatabaseCon
         }
     }
 
+    public static int checkPassword(String password)
+    {
+        String query = "SELECT password FROM user WHERE userID = ?;";
+        con = connectDB();
+        try (PreparedStatement stmt = con.prepareStatement(query))
+        {
+            stmt.setString(1, Long.toString(currentUser.getUserID()));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next())
+            {
+                if (rs.getString(1).equals(password))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Checking Password: " + e.getMessage());
+            return -1;
+        }
+    }
+
+    public static int resetPassword(String password)
+    {
+        String query = "UPDATE user SET password = ? WHERE userID = ?;";
+        con = connectDB();
+        try (PreparedStatement stmt = con.prepareStatement(query))
+        {
+            stmt.setString(1, password);
+            stmt.setString(2, Long.toString(currentUser.getUserID()));
+            int result = stmt.executeUpdate();
+            if (result == 1)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error: " + e.getMessage());
+            return -1;
+        }
+    }
+
     public static void closeDatabase()
     {
         try

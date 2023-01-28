@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import oop.project.components.frames.ResetPasswordFrame;
 import oop.project.components.panels.ProfilePanel;
@@ -30,7 +31,23 @@ public class ResetPasswordHandler implements ActionListener
         else if (buttonClicked.equals("Submit"))
         {
             System.err.println("Submit Button Clicked");
-            resetPasswordFrame.dispose();
+            int result = ((ResetPasswordFrame) resetPasswordFrame).resetPassword();
+            if (result == 0)
+            {
+                JOptionPane.showMessageDialog(resetPasswordFrame, "Password Reset Successful", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+                resetPasswordFrame.dispose();
+            }
+            else if (result == 2)
+            {
+                JOptionPane.showMessageDialog(resetPasswordFrame, "Old Password Does not Match", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(resetPasswordFrame, "Password Reset Failed", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
