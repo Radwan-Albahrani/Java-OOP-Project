@@ -12,14 +12,14 @@ public class CustomButtonStudent extends RoundedButton
     public CustomButtonStudent(String text)
     {
         this.setText(text);
-        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         this.setkStartColor(ThemeColors.GREENISH);
         this.setkEndColor(ThemeColors.LIGHT_BROWN);
         this.setkHoverStartColor(ThemeColors.GREENISH);
         this.setkHoverEndColor(ThemeColors.GREENISH);
         this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
         this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
-        this.setPreferredSize(new Dimension(400, 50));
+        this.setPreferredSize(new Dimension(400, 70));
         this.setMinimumSize(getPreferredSize());
         this.setMaximumSize(getPreferredSize());
         this.setkBorderRadius(30);
@@ -35,14 +35,14 @@ public class CustomButtonStudent extends RoundedButton
         this.setText(text);
         this.setIconTextGap(30);
 
-        this.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        this.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         this.setkStartColor(ThemeColors.GREENISH);
         this.setkEndColor(ThemeColors.LIGHT_BROWN);
         this.setkHoverStartColor(ThemeColors.GREENISH);
         this.setkHoverEndColor(ThemeColors.GREENISH);
         this.setkForeGround(ThemeColors.LAVENDER_BLUSH);
         this.setkHoverForeGround(ThemeColors.ROSE_MADDER);
-        this.setPreferredSize(new Dimension(400, 50));
+        this.setPreferredSize(new Dimension(400, 70));
         this.setMinimumSize(getPreferredSize());
         this.setMaximumSize(getPreferredSize());
         this.setkBorderRadius(30);

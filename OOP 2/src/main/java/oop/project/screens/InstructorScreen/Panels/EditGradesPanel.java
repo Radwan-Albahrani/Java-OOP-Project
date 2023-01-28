@@ -217,11 +217,11 @@ public class EditGradesPanel extends TransparentPanel
             gradesBox = AddToBox.addToVerticalBox(gradesComponents, 1);
 
             // Buttons
-            KButton nextButton = new CustomButtonInstructor("—>", 100, 50);
+            KButton nextButton = new CustomButtonInstructor("->", 100, 50);
             nextButton.setActionCommand("next");
             nextButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
             nextButton.setAlignmentX(LEFT_ALIGNMENT);
-            KButton previousButton = new CustomButtonInstructor("<—", 100, 50);
+            KButton previousButton = new CustomButtonInstructor("<-", 100, 50);
             previousButton.setActionCommand("previous");
             previousButton.setAlignmentX(RIGHT_ALIGNMENT);
             previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
