@@ -114,10 +114,11 @@ public class AdminButtonPanel extends ThemedPanelAdmin
                 myButtons.get("Registration Requests"),
                 myButtons.get("View Instructors"),
                 myButtons.get("View Students"),
+                myButtons.get("Edit Information")
         };
 
         // Add the buttons to the edit-users-Box
-        user_info = AddToBox.addToHorizontalBox(profileJComponents, 5);
+        user_info = AddToBox.addToHorizontalBox(profileJComponents, 6);
 
         // Buttons for courses Box
         JLabel coursesJLabel = new JLabel("Courses");

@@ -284,7 +284,6 @@ public class EditGradesPanel extends TransparentPanel
                             DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
 
                             JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
                         }
                         catch (Exception ex)
                         {

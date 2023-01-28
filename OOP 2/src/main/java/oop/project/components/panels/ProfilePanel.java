@@ -22,7 +22,6 @@ import com.k33ptoo.components.KButton;
 public class ProfilePanel extends TransparentPanel
 {
     KButton resetPasswordButton;
-    KButton saveChangesButton;
     RoundedJTextField nameField;
     RoundedJTextField idField;
     RoundedJTextField birthDateField;
@@ -253,17 +252,14 @@ public class ProfilePanel extends TransparentPanel
         if (type == 0)
         {
             resetPasswordButton = new CustomButtonAdmin("Reset Password");
-            saveChangesButton = new CustomButtonAdmin("Save Changes");
         }
         else if (type == 1)
         {
             resetPasswordButton = new CustomButtonInstructor("Reset Password");
-            saveChangesButton = new CustomButtonInstructor("Save Changes");
         }
         else if (type == 2)
         {
             resetPasswordButton = new CustomButtonStudent("Reset Password");
-            saveChangesButton = new CustomButtonStudent("Save Changes");
         }
     }
 

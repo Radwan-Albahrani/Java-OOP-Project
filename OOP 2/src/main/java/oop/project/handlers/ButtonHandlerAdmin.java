@@ -57,6 +57,7 @@ public class ButtonHandlerAdmin implements ActionListener
             frame.remove(panels.get("Student"));
             frame.remove(panels.get("Registrations"));
             frame.remove(panels.get("Courses"));
+            frame.remove(panels.get("Edit Information"));
             FrameConfig.setBackground(frame, "AdminScreen/background.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Main"));
         }
@@ -72,6 +73,7 @@ public class ButtonHandlerAdmin implements ActionListener
             frame.remove(panels.get("Main"));
             frame.remove(panels.get("Registrations"));
             frame.remove(panels.get("Courses"));
+            frame.remove(panels.get("Edit Information"));
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Alerts"));
         }
@@ -86,7 +88,7 @@ public class ButtonHandlerAdmin implements ActionListener
 
             ((ViewInstructors) panels.get("Instructors")).refreshTable();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
-            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Instructors"));
+            ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Edit Information"));
         }
 
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel

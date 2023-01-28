@@ -524,6 +524,61 @@ public class DatabaseCon
         return null;
     }
 
+    public static List<UserModel> getAllUsersFull()
+    {
+        // Set up the list
+        List<UserModel> users = new ArrayList<>();
+
+        // Get the connection
+        con = connectDBViews();
+        String view = "SELECT * FROM informationsystem.`view all users full`;";
+
+        // Create the statement
+        try (PreparedStatement stmt = con.prepareStatement(view);)
+        {
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            // Get the results
+            while (rs.next())
+            {
+                // Create the user from the results
+                UserModel user = new UserModel();
+                user.setUserID(rs.getLong(1));
+                user.setFirstName(rs.getString(2));
+                user.setLastName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setBirthDate(rs.getString(5));
+                user.setMajor(rs.getString(6));
+                user.setEmail(rs.getString(7));
+                user.setPhoneNumber(rs.getString(8));
+                user.setPersonalEmail(rs.getString(9));
+                user.setPersonalPhoneNumber(rs.getString(10));
+
+                // Add the user to the list
+                users.add(user);
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Getting All Users: " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return users;
+    }
+
+
     public static List<UserModel> getAllUsers()
     {
         // Set up the list
@@ -553,6 +608,7 @@ public class DatabaseCon
                 user.setMajor(rs.getString(6));
                 user.setEmail(rs.getString(6));
                 user.setPhoneNumber(rs.getString(8));
+                
 
                 // Add the user to the list
                 users.add(user);
@@ -747,6 +803,63 @@ public class DatabaseCon
             System.err.println("Error Getting Users of Status as ResultSet: " + e.getMessage());
         }
         return null;
+    }
+
+    
+
+    public static int updateUserInfo(Long userID, String fname, String lname, String birthdate, String major, String personalphone, String personalemail, String workphone)
+    {
+        con = connectDB();
+        String statement = "UPDATE profile SET FirstName = ?, LastName = ?, Birthdate = ?, Major = ? WHERE UserID = ?;";
+
+        // Create the statement
+        try (PreparedStatement stmt1 = con.prepareStatement(statement);)
+        {
+            stmt1.setString(1, fname);
+            stmt1.setString(2, lname);
+            stmt1.setString(3, birthdate);
+            stmt1.setString(4, major);
+            stmt1.setLong(5, userID);
+
+            stmt1.executeUpdate();
+
+            statement = "UPDATE personalcontactdetails SET Email = ?, Phone = ? WHERE UserID = ?;";
+            try (PreparedStatement stmt2 = con.prepareStatement(statement);)
+            {
+                stmt2.setString(1, fname);
+                stmt2.setString(2, personalphone);
+                stmt2.setLong(3, userID);
+
+                stmt2.executeUpdate();
+
+                statement = "UPDATE workcontactdetails SET Phone = ? WHERE UserID = ?;";
+                try (PreparedStatement stmt3 = con.prepareStatement(statement);)
+                {
+                    stmt3.setString(1, personalphone);
+                    stmt3.setLong(2, userID);
+
+                    stmt3.executeUpdate();
+
+                    return 1;
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Saving User Info: " + e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                con.close();
+            }
+            catch (SQLException e)
+            {
+                System.err.println("Error Closing Database: " + e.getMessage());
+            }
+        }
+        return 0;
     }
 
     public static int saveGrade(Long userID, String courseID, String quizGrade, String midtermGrade, String finalGrade, String projectGrade)
