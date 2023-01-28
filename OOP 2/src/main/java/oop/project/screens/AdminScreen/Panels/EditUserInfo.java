@@ -8,13 +8,14 @@ import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 import oop.project.handlers.NextPreviousHandler;
 
 import javax.swing.*;
+
+import com.github.lgooddatepicker.components.DatePicker;
 import com.k33ptoo.components.KButton;
 
 import oop.project.components.buttons.CustomButtonAdmin;
@@ -30,7 +31,7 @@ public class EditUserInfo extends TransparentPanel
     int currentEntryIndex;
     RoundedJTextField nameField;
     JComboBox<String> idJComboBoxList;
-    RoundedJTextField birthDateField;
+    DatePicker birthDateField;
     RoundedJTextField genderField;
     RoundedJTextField occupationField;
     RoundedJTextField majorField;
@@ -38,12 +39,15 @@ public class EditUserInfo extends TransparentPanel
     RoundedJTextField personalEmailField;
     RoundedJTextField workPhoneField;
     RoundedJTextField personalPhoneField;
+    JLabel Edit_User_info;
+    final JPanel mainPanel;
 
-    public EditUserInfo(int Width, int Height)
+    public EditUserInfo(int Width, int Height, JPanel mainPanel)
     {
+        this.mainPanel = mainPanel;
         users = DatabaseCon.getAllUsersFull();
 
-        JLabel Edit_User_info = new TitleLabel("Edit Information");
+        Edit_User_info = new TitleLabel("Edit Information");
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         // Picture Setup
@@ -95,7 +99,7 @@ public class EditUserInfo extends TransparentPanel
         birthDateLabel.setAlignmentX(RIGHT_ALIGNMENT);
         birthDateLabel.setForeground(ThemeColors.BLACK);
 
-        birthDateField = new RoundedJTextField(15);
+        birthDateField = new DatePicker();
         birthDateField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         birthDateField.setMinimumSize(new Dimension(400, 50));
         birthDateField.setMaximumSize(new Dimension(400, 50));
@@ -208,7 +212,6 @@ public class EditUserInfo extends TransparentPanel
         JComponent[] phoneComponents = {phoneLabel, workPhoneField, personalPhoneField};
         Box phoneBox = AddToBox.addToVerticalBox(phoneComponents, 1);
 
-
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
         Box professionalInfoBox = AddToBox.addToVerticalBox(professionalInfoComponents, 2);
@@ -218,7 +221,6 @@ public class EditUserInfo extends TransparentPanel
 
         JComponent[] workInfoComponents = {professionalInfoBox, contactInfoBox};
         Box workInfoBox = AddToBox.addToVerticalBox(workInfoComponents, 1);
-
 
         // Operational Buttons
         KButton nextButton = new CustomButtonAdmin("—>", 100, 50);
@@ -230,7 +232,7 @@ public class EditUserInfo extends TransparentPanel
         previousButton.setAlignmentX(RIGHT_ALIGNMENT);
         previousButton.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
-        //Save Buttons
+        // Save Buttons
         KButton saveButton = new CustomButtonAdmin("Save");
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
         saveButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
@@ -243,7 +245,7 @@ public class EditUserInfo extends TransparentPanel
         Box buttonsBox = AddToBox.addToVerticalBox(buttonsComponents, 2);
         buttonsBox.setAlignmentX(CENTER_ALIGNMENT);
 
-        JComponent [] buttonsComponents2 = {buttonsBox, saveButton};
+        JComponent[] buttonsComponents2 = {buttonsBox, saveButton};
         buttonsBox = AddToBox.addToVerticalBox(buttonsComponents2, 1);
 
         // Add to Panel
@@ -267,64 +269,7 @@ public class EditUserInfo extends TransparentPanel
         this.add(buttonsBox, c);
 
         // Button Handlers
-        saveButton.addActionListener(new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (users.size() == 0)
-                    {
-                        JOptionPane.showMessageDialog(null, "There are no users!");
-                        return;
-                    }
-
-                    if (idJComboBoxList.getSelectedIndex() == -1)
-                    {
-                        JOptionPane.showMessageDialog(null, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-
-                        users = DatabaseCon.getAllUsersFull();
-                        currentEntryIndex = idJComboBoxList.getSelectedIndex();
-                        System.err.println("Save Button Clicked");
-                        Long id = users.get(currentEntryIndex).getUserID();
-                        String name[] = nameField.getText().split(" ");
-                        String fname = name[0];
-                        String lname = name[1];
-                        String birthdate = birthDateField.getText();
-                        String personalemail = personalEmailField.getText();
-                        String personalphone = personalPhoneField.getText();
-                        String workphone = workPhoneField.getText();
-                        String major = majorField.getText();
-
-
-                        if (fname.equals("") || lname.equals(""))
-                        {
-                            JOptionPane.showMessageDialog(null, "Please enter a first and last name!", "Error", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        else if (birthdate.equals(""))
-                        {
-                            JOptionPane.showMessageDialog(null, "Please enter a birthdate!", "Error", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        else if (major.equals(""))
-                        {
-                            JOptionPane.showMessageDialog(null, "Please enter a major!", "Error", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-
-                    try
-                    {
-                        DatabaseCon.updateUserInfo(id, fname, lname, birthdate, major, personalphone, personalemail, workphone);
-                        JOptionPane.showMessageDialog(null, "User Info updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    catch (Exception e1)
-                    {
-                        JOptionPane.showMessageDialog(null, "User Info could not be updated!, " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            });
+        saveButton.addActionListener(e -> SaveInformation());
 
         nextButton.addActionListener(
                 new NextPreviousHandler(idJComboBoxList));
@@ -332,19 +277,7 @@ public class EditUserInfo extends TransparentPanel
         previousButton.addActionListener(
                 new NextPreviousHandler(idJComboBoxList));
 
-        idJComboBoxList.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if (idJComboBoxList.getSelectedItem().equals(DatabaseCon.currentUser.getUserID()))
-                {
-                    //TODO: show that user is editing their own information
-                    Edit_User_info.setText(Edit_User_info.getText() + ", You are editing your own information");
-                }
-                setProfile(users.get(idJComboBoxList.getSelectedIndex()));
-            }
-        });
+        idJComboBoxList.addActionListener(e -> getUser());
     }
 
     public void setProfile(UserModel user)
@@ -361,7 +294,8 @@ public class EditUserInfo extends TransparentPanel
         idJComboBoxList.setSelectedItem(Long.toString(user.getUserID()));
 
         // Set Birth Date
-        birthDateField.setText(user.getBirthDate());
+        LocalDate localDate = LocalDate.parse(user.getBirthDate());
+        birthDateField.setDate(localDate);
 
         // set gender
         genderField.setText(user.getGender());
@@ -383,5 +317,121 @@ public class EditUserInfo extends TransparentPanel
 
         // Set Personal Phone
         personalPhoneField.setText(user.getPersonalPhoneNumber());
+    }
+
+    private void SaveInformation()
+    {
+        if (users.size() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "There are no users!");
+            return;
+        }
+
+        if (idJComboBoxList.getSelectedIndex() == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        users = DatabaseCon.getAllUsersFull();
+        currentEntryIndex = idJComboBoxList.getSelectedIndex();
+        System.err.println("Save Button Clicked");
+        Long id = users.get(currentEntryIndex).getUserID();
+        String name[] = nameField.getText().split(" ");
+        String fname;
+        String lname;
+        try
+        {
+            fname = name[0];
+            lname = name[1];
+        }
+        catch (Exception e)
+        {
+            fname = name[0];
+            lname = "";
+        }
+        int result = validateDate(birthDateField);
+        if (result != 1)
+        {
+            return;
+        }
+        String birthdate = birthDateField.getDate().toString();
+        String personalEmail = personalEmailField.getText();
+        String personalPhone = personalPhoneField.getText();
+        String workPhone = workPhoneField.getText();
+        String major = majorField.getText();
+
+        if (fname.equals("") || lname.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a first and last name!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (birthdate.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a birthdate!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (major.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a major!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try
+        {
+            DatabaseCon.updateUserInfo(id, fname, lname, birthdate, major, personalPhone, personalEmail, workPhone);
+            JOptionPane.showMessageDialog(null, "User Info updated successfully!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            users = DatabaseCon.getAllUsersFull();
+
+            ((AdminInterface) mainPanel).refreshName();
+        }
+        catch (Exception e1)
+        {
+            JOptionPane.showMessageDialog(null, "User Info could not be updated!, " + e1.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void getUser()
+    {
+        if (idJComboBoxList.getSelectedItem().equals(Long.toString(DatabaseCon.currentUser.getUserID())))
+        {
+            Edit_User_info.setText("Edit Information, You are editing your own information");
+            this.revalidate();
+            this.repaint();
+        }
+        else
+        {
+            Edit_User_info.setText("Edit Information");
+            this.revalidate();
+            this.repaint();
+        }
+        this.setProfile(users.get(idJComboBoxList.getSelectedIndex()));
+    }
+
+    private int validateDate(DatePicker date)
+    {
+        if (date.getDate() == null)
+        {
+            JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if (date.getDate().isAfter(LocalDate.now()))
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        else if (date.getDate().isBefore(LocalDate.now().minusYears(100)))
+        {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        else if (date.getDate().isAfter(LocalDate.now().minusYears(18)))
+        {
+            JOptionPane.showMessageDialog(this, "Date must be at least 18 years old", "Error", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+        return 1;
     }
 }

@@ -23,7 +23,7 @@ public class AdminScreen extends JFrame
         FrameConfig.setBackground(this, "AdminScreen/background.png");
 
         JPanel main_interface = new AdminInterface(getWidth(), getHeight());
-        JPanel edit_info = new EditUserInfo(getWidth(), getHeight());
+        JPanel edit_info = new EditUserInfo(getWidth(), getHeight(), main_interface);
         JPanel view_profile = new ProfilePanel(getWidth(), getHeight(), 0);
         JPanel view_student = new ViewStudents(getWidth(), getHeight());
         JPanel view_Instructors = new ViewInstructors(getWidth(), getHeight());

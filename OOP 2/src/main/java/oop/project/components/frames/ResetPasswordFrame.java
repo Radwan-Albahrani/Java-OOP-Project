@@ -33,7 +33,7 @@ public class ResetPasswordFrame extends JFrame
         setButtonsType(type);
         setPanelType(type);
 
-        oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
+        JLabel oldPasswordLabel = new JLabel("Old Password", SwingConstants.CENTER);
         oldPasswordLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         oldPasswordField = new RoundedJPasswordField(15);
 
@@ -57,10 +57,6 @@ public class ResetPasswordFrame extends JFrame
         resetPasswordPanel.add(resetPasswordBox);
         this.add(resetPasswordPanel);
         this.setLocationRelativeTo(parent);
-
-        // Set the handler
-        submitButton.addActionListener(new ResetPasswordHandler(oldPasswordField.getPassword(),
-                newPasswordField.getPassword(), confirmPasswordField.getPassword()));
     }
 
     private void setPanelType(int type)
@@ -100,9 +96,8 @@ public class ResetPasswordFrame extends JFrame
         }
         else if (buttonsType == 2)
         {
-            submitButton = new CustomButtonInstructor("Submit");
+            submitButton = new CustomButtonInstructor("Reset");
         }
-
     }
 
     public int resetPassword()
@@ -123,7 +118,6 @@ public class ResetPasswordFrame extends JFrame
         }
         else
         {
-
             return 2;
         }
     }

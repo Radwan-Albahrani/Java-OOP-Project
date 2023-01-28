@@ -171,7 +171,6 @@ public class DatabaseCon
         }
     }
 
-
     public static int registerCourseToInstructor(String courseID, String instructorID) throws Exception
     {
         con = connectDB();
@@ -579,7 +578,6 @@ public class DatabaseCon
         return users;
     }
 
-
     public static List<UserModel> getAllUsers()
     {
         // Set up the list
@@ -609,7 +607,6 @@ public class DatabaseCon
                 user.setMajor(rs.getString(6));
                 user.setEmail(rs.getString(6));
                 user.setPhoneNumber(rs.getString(8));
-                
 
                 // Add the user to the list
                 users.add(user);
@@ -806,8 +803,8 @@ public class DatabaseCon
         return null;
     }
 
-
-    public static void updateUserInfo(Long userID, String fname, String lname, String birthdate, String major, String personalphone, String personalemail, String workphone) throws Exception
+    public static void updateUserInfo(Long userID, String fname, String lname, String birthdate, String major,
+            String personalPhone, String personalEmail, String workPhone) throws Exception
     {
         con = connectDB();
         String statement = "UPDATE profile SET FirstName = ?, LastName = ?, Birthdate = ?, Major = ? WHERE UserID = ?;";
@@ -833,8 +830,8 @@ public class DatabaseCon
         statement = "UPDATE personalcontactdetails SET Email = ?, Phone = ? WHERE UserID = ?;";
         try (PreparedStatement stmt2 = con.prepareStatement(statement);)
         {
-            stmt2.setString(1, fname);
-            stmt2.setString(2, personalphone);
+            stmt2.setString(1, personalEmail);
+            stmt2.setString(2, personalPhone);
             stmt2.setLong(3, userID);
 
             stmt2.executeUpdate();
@@ -848,7 +845,7 @@ public class DatabaseCon
         statement = "UPDATE workcontactdetails SET Phone = ? WHERE UserID = ?;";
         try (PreparedStatement stmt3 = con.prepareStatement(statement);)
         {
-            stmt3.setString(1, personalphone);
+            stmt3.setString(1, workPhone);
             stmt3.setLong(2, userID);
 
             stmt3.executeUpdate();
@@ -857,8 +854,7 @@ public class DatabaseCon
         {
             System.err.println("Error Saving User Info: " + e.getMessage());
             throw e;
-        }
-        finally
+        } finally
         {
             try
             {
@@ -871,7 +867,8 @@ public class DatabaseCon
         }
     }
 
-    public static int saveGrade(Long userID, String courseID, String quizGrade, String midtermGrade, String finalGrade, String projectGrade)
+    public static int saveGrade(Long userID, String courseID, String quizGrade, String midtermGrade, String finalGrade,
+            String projectGrade)
     {
         // Get the connection
         con = connectDB();
@@ -908,6 +905,7 @@ public class DatabaseCon
         }
         return 0;
     }
+
     public static List<StudentModel> getStudentsOfInstructorGradesList(String userID)
     {
         List<StudentModel> students = null;
@@ -956,7 +954,8 @@ public class DatabaseCon
                 SELECT profile.UserID, CourseID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
                 FROM studentcourses, profile, workcontactdetails
                 WHERE StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
-                    """.formatted(userID);
+                    """
+                .formatted(userID);
         con = connectDB();
         try
         {
