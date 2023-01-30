@@ -11,11 +11,14 @@ import oop.project.handlers.RegisterCourseHandler;
 import oop.project.hooks.AddToBox;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+
 import com.k33ptoo.components.KButton;
 
 public class MainPanel extends TransparentPanel
@@ -27,6 +30,7 @@ public class MainPanel extends TransparentPanel
     List<String> announcements;
     JLabel announcementLabel;
     JTextArea announcementTextArea;
+    PromptedTextField searchField;
 
     public MainPanel(int Width, int Height)
     {
@@ -57,9 +61,9 @@ public class MainPanel extends TransparentPanel
         }
 
         JLabel welcomeLabel = new TitleLabel(
-                "<html> Welcome, " + DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName() + "</html>");
+                "<html> Welcome, " + DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName()
+                        + "</html>");
         welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-
 
         if (courseIDList.size() == 0) // If the instructor is not in a course
         {
@@ -83,13 +87,21 @@ public class MainPanel extends TransparentPanel
             table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 20));
             table.setAutoCreateRowSorter(true);
             table.setAlignmentX(CENTER_ALIGNMENT);
+            table.addMouseListener(new MouseAdapter()
+            {
+                @Override
+                public void mouseClicked(MouseEvent evt)
+                {
+                    setID();
+                }
+            });
 
             JScrollPane scrollPaneTable = new JScrollPane(table);
             scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 500));
             scrollPaneTable.setMinimumSize(new Dimension(Width - 480, Height - 500));
             scrollPaneTable.setMaximumSize(new Dimension(Width - 480, Height - 500));
 
-            PromptedTextField searchField = new PromptedTextField("Enter ID here");
+            searchField = new PromptedTextField("Enter ID here");
             searchField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
             searchField.setMinimumSize(new Dimension(300, 50));
             searchField.setPreferredSize(new Dimension(300, 50));
@@ -127,7 +139,6 @@ public class MainPanel extends TransparentPanel
             c.insets = new Insets(50, 350, 0, 350);
             this.add(registerBox, c);
 
-
             // Button Handler
             registerButton.addActionListener(new RegisterCourseHandler(searchField, ID, this));
 
@@ -139,10 +150,10 @@ public class MainPanel extends TransparentPanel
             String courseCredits = courseCreditsList.get(0);
 
             String countStudentsQuery = """
-                SELECT COUNT(*) AS NoOfStudents
-                FROM studentcourses
-                WHERE CourseID = '%s';
-                    """.formatted(courseID);
+                    SELECT COUNT(*) AS NoOfStudents
+                    FROM studentcourses
+                    WHERE CourseID = '%s';
+                        """.formatted(courseID);
             ResultSet countStudentsRS = DatabaseCon.customQuery(countStudentsQuery);
             ArrayList<String> countStudentsList = new ArrayList<>();
             try
@@ -158,7 +169,9 @@ public class MainPanel extends TransparentPanel
             }
 
             System.err.println("This Instructor is registered in course " + courseID + " - User: " + ID);
-            JLabel courseInfoLabel = new JLabel("<html><br> You are currently assigned to " + courseID + " - " + courseName + " with " + courseCredits + " credits.<br> There are " + countStudentsList.get(0) + " students in the course </html>");
+            JLabel courseInfoLabel = new JLabel(
+                    "<html><br> You are currently assigned to " + courseID + " - " + courseName + " with " + courseCredits
+                            + " credits.<br> There are " + countStudentsList.get(0) + " students in the course </html>");
             courseInfoLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
             courseInfoLabel.setForeground(Color.BLACK);
 
@@ -181,7 +194,8 @@ public class MainPanel extends TransparentPanel
             KButton refreshButton = new CustomButtonInstructor(" Refresh ");
             refreshButton.setPreferredSize(new Dimension(150, 50));
 
-            JComponent[] announcementComponents = {welcomeLabel, courseInfoLabel, announcementLabel, scrollBar, refreshButton}; // Components for the Alerts Menu
+            JComponent[] announcementComponents = {welcomeLabel, courseInfoLabel, announcementLabel, scrollBar,
+                    refreshButton}; // Components for the Alerts Menu
             Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1);
 
             this.add(announcementBox);
@@ -214,5 +228,12 @@ public class MainPanel extends TransparentPanel
         this.revalidate();
         this.repaint();
         this.add(new MainPanel(getWidth(), getHeight()));
+    }
+
+    private void setID()
+    {
+        String id = table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+        searchField.setText(id);
+        searchField.setForeground(Color.BLACK);
     }
 }

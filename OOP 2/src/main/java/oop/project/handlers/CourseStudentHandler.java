@@ -35,6 +35,8 @@ public class CourseStudentHandler implements ActionListener
             {
                 DatabaseCon.registerCourseToStudent(courseID, ID);
                 ((registerClassPanel) panel).refreshTable();
+                JOptionPane.showMessageDialog(panel, "Course registered successfully", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
             catch (Exception e)
             {
@@ -45,8 +47,16 @@ public class CourseStudentHandler implements ActionListener
         {
             try
             {
+                int result = JOptionPane.showConfirmDialog(panel, "Are you sure you want to drop this course?",
+                        "Drop Course", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.NO_OPTION)
+                {
+                    return;
+                }
                 DatabaseCon.dropCourseFromStudent(courseID, ID);
                 ((DropClass) panel).refreshTable();
+                JOptionPane.showMessageDialog(panel, "Course dropped successfully", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
             catch (Exception e)
             {

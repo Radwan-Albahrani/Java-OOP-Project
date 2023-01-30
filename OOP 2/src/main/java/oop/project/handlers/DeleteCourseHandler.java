@@ -25,17 +25,25 @@ public class DeleteCourseHandler implements ActionListener
     {
         if (e.getActionCommand().equals("Delete"))
         {
+            int result = JOptionPane.showConfirmDialog(panel, "Are you sure you want to delete this course?",
+                    "Delete Course", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION)
+            {
+                return;
+            }
             String id = textField.getText();
             try
             {
                 DatabaseCon.deleteCourse(id);
+                textField.setText("");
+                ((CoursesPanel) panel).refreshTable();
+                JOptionPane.showMessageDialog(panel, "Course deleted successfully", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
             catch (Exception e1)
             {
                 JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            textField.setText("");
-            ((CoursesPanel) panel).refreshTable();
         }
         else if (e.getActionCommand().equals("Activate All"))
         {

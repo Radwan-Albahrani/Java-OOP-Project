@@ -5,6 +5,8 @@ import javax.swing.*;
 import com.k33ptoo.components.KButton;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 import oop.project.API.DatabaseCon;
@@ -20,6 +22,7 @@ public class CoursesPanel extends TransparentPanel
 {
     JTable table;
     ResultSet resultSet;
+    PromptedTextField searchField;
 
     public CoursesPanel(int Width, int Height)
     {
@@ -40,13 +43,21 @@ public class CoursesPanel extends TransparentPanel
         table.getTableHeader().setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         table.setAutoCreateRowSorter(true);
         table.setAlignmentX(CENTER_ALIGNMENT);
+        table.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent evt)
+            {
+                setID();
+            }
+        });
 
         JScrollPane scrollPaneTable = new JScrollPane(table);
         scrollPaneTable.setPreferredSize(new Dimension(Width - 480, Height - 500));
         scrollPaneTable.setMinimumSize(new Dimension(Width - 480, Height - 500));
         scrollPaneTable.setMaximumSize(new Dimension(Width - 480, Height - 500));
 
-        PromptedTextField searchField = new PromptedTextField("Enter ID here");
+        searchField = new PromptedTextField("Enter ID here");
         searchField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         searchField.setMinimumSize(new Dimension(300, 50));
         searchField.setPreferredSize(new Dimension(300, 50));
@@ -87,5 +98,12 @@ public class CoursesPanel extends TransparentPanel
     {
         resultSet = DatabaseCon.getAllCourses();
         table.setModel(DbUtils.resultSetToTableModel(resultSet));
+    }
+
+    private void setID()
+    {
+        String id = table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+        searchField.setText(id);
+        searchField.setForeground(Color.BLACK);
     }
 }

@@ -268,7 +268,7 @@ CALL generate_user('student0', 'student', 'Student', 'student0FirstName', 'stude
 CALL generate_user('student1', 'student', 'Student', 'student1FirstName', 'student1LastName', 'Male', '1999-01-01', 'testing', 'student1@university.com', '2', 'student1@gmail.com');
 
 INSERT INTO courses
-VALUES('CS-111', 'CS', '3', '30', '2230000003');
+VALUES('CS-111', 'CS', '3', '30', '');
 INSERT INTO courses
 VALUES('Math-111', 'Math', '2', '29', '2230000004');
 
