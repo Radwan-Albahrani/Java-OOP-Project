@@ -14,11 +14,11 @@ public class EmailTextField extends RoundedJTextField
     {
         // Validate email using regex
         String email = getText();
-        if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
+        if (email.matches( "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$" ))
         {
             int result = DatabaseCon.checkEmail(email);
             return result;
         }
-        return 1;
+        return 2;
     }
 }

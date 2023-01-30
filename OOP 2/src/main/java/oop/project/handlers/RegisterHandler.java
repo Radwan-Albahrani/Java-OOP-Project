@@ -143,6 +143,11 @@ public class RegisterHandler implements ActionListener
                 frame.dispose();
                 new LoginScreen();
             }
+            else if (result == 0)
+            {
+                JOptionPane.showMessageDialog(frame, "Registration Failed. Please check your email format and try again.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             else
             {
                 JOptionPane.showMessageDialog(frame, "Registration Failed. Email Already Registered", "Error",
