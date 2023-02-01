@@ -265,14 +265,14 @@ WHERE User.Status = "Active";
 
 
 ## ------------------------------------- Dummy Data -------------------------------------------- 
-CALL generate_user('admin0', 'admin', 'Admin', 'Radwan', 'Albahrani', 'Male', '1999-01-01', 'Engineering', '2230000001@university.com', '0574135810', 'admin0@gmail.com');
+CALL generate_user('admin', 'admin', 'Admin', 'Radwan', 'Albahrani', 'Male', '2001-09-13', 'Engineering', '2230000001@university.com', '0574135810', 'admin0@gmail.com');
 UPDATE user SET status = "Active" WHERE userID = "2230000001";
 
-CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmad', 'Male', '1999-01-01', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
-CALL generate_user('2230000003', 'instructor', 'Instructor', 'Safwan', 'Nabeel', 'Male', '1999-01-01', 'CyberSecurity', '2230000003@university.com', '0557814688', 'instructor1@gmail.com');
+CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmad', 'Male', '2002-07-23', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
+CALL generate_user('2230000003', 'instructor', 'Instructor', 'Safwan', 'Nabeel', 'Male', '2001-05-24', 'CyberSecurity', '2230000003@university.com', '0557814688', 'instructor1@gmail.com');
 
-CALL generate_user('2230000004', 'student', 'Student', 'Abdulaziz', 'Amer', 'Male', '1999-01-01', 'Artificial Intelligence', '2230000004@university.com', '0567812368', 'student0@gmail.com');
-CALL generate_user('2230000005', 'student', 'Student', 'Basel', 'Alabdullah', 'Male', '1999-01-01', 'Artificial Intelligence', '2230000005@university.com', '0507891256', 'student1@gmail.com');
+CALL generate_user('2230000004', 'student', 'Student', 'Abdulaziz', 'Amer', 'Male', '2002-02-15', 'Artificial Intelligence', '2230000004@university.com', '0567812368', 'student0@gmail.com');
+CALL generate_user('2230000005', 'student', 'Student', 'Basel', 'Alabdullah', 'Male', '2002-08-12', 'Artificial Intelligence', '2230000005@university.com', '0507891256', 'student1@gmail.com');
 
 INSERT INTO courses
 VALUES('CS-111', 'CS', '3', '30', Null);
