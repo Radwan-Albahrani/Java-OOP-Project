@@ -16,17 +16,16 @@ import java.awt.*;
 import oop.project.models.UserModel;
 import oop.project.API.*;
 
-//TODO: Editing the grade doesnt show up in the table, must refresh the table to see the changes
-
 public class ViewStudentsPanel extends TransparentPanel
 {
     Box viewStudentsBox;
+    JTable table;
 
     public ViewStudentsPanel(int Width, int Height)
     {
         try
         {
-                UserModel user = new UserModel();
+            UserModel user = new UserModel();
             user = DatabaseCon.currentUser;
             String userID = Long.toString(user.getUserID());
 
@@ -36,7 +35,7 @@ public class ViewStudentsPanel extends TransparentPanel
             this.add(viewStudentsLabel);
 
             ResultSet students = DatabaseCon.getStudentsOfInstructor(userID);
-            JTable table = new JTable();
+            table = new JTable();
             table.setModel(DbUtils.resultSetToTableModel(students));
 
             table.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
@@ -62,23 +61,23 @@ public class ViewStudentsPanel extends TransparentPanel
             viewStudentsBox = AddToBox.addToVerticalBox(components, 1);
             this.add(viewStudentsBox);
 
-
             // Report Generation
             String reportTableQuery = """
-                SELECT UserID, FirstName, LastName, Sex, courses.CourseID, CourseName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
-                FROM studentcourses, profile, courses
-                WHERE StudID = UserID && courses.CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
-                    """.formatted(userID);
+                    SELECT UserID, FirstName, LastName, Sex, courses.CourseID, CourseName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
+                    FROM studentcourses, profile, courses
+                    WHERE StudID = UserID && courses.CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                        """
+                    .formatted(userID);
 
             ResultSet reportResultSet = DatabaseCon.customQuery(reportTableQuery);
             JTable reportTableJTable = new JTable();
             reportTableJTable.setModel(DbUtils.resultSetToTableModel(reportResultSet));
 
             String courseIDQuery = """
-                SELECT CourseID
-                FROM courses
-                WHERE InstructorID = %s;
-                    """.formatted(userID);
+                    SELECT CourseID
+                    FROM courses
+                    WHERE InstructorID = %s;
+                        """.formatted(userID);
             ResultSet courseIDResultSet = DatabaseCon.customQuery(courseIDQuery);
             // Change result set into string
             ArrayList<String> courseIDList = new ArrayList<>();
@@ -96,13 +95,33 @@ public class ViewStudentsPanel extends TransparentPanel
             }
 
             // Button Handler
-            reportButton.addActionListener(new GenerateReport(reportTableJTable, "src/main/resources/reports/Instructors/" + userID + " - " + courseIDList.get(0) + " - Student Report.csv"));
+            reportButton.addActionListener(new GenerateReport(reportTableJTable, "src/main/resources/reports/Instructors/"
+                    + userID + " - " + courseIDList.get(0) + " - Student Report.csv"));
         }
         catch (Exception e)
         {
-            System.err.println("Instuctor is not assigned to any courses. Must be assigned to at least one course to view students.");
+            System.err.println(
+                    "Instructor is not assigned to any courses. Must be assigned to at least one course to view students.");
         }
 
+    }
+
+    public void refreshTable()
+    {
+        try
+        {
+            UserModel user = new UserModel();
+            user = DatabaseCon.currentUser;
+            String userID = Long.toString(user.getUserID());
+
+            ResultSet students = DatabaseCon.getStudentsOfInstructor(userID);
+            table.setModel(DbUtils.resultSetToTableModel(students));
+        }
+        catch (Exception e)
+        {
+            System.err.println(
+                    "Instructor is not assigned to any courses. Must be assigned to at least one course to view students.");
+        }
     }
 
 }

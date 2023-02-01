@@ -15,6 +15,7 @@ import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
+import oop.project.screens.InstructorScreen.Panels.ViewStudentsPanel;
 
 import java.util.*;
 
@@ -26,7 +27,8 @@ public class ButtonHandlerInstructor implements ActionListener
     Box studentButtonBox;
     Box mainButtonBox;
 
-    ResultSet rs = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+    ResultSet rs = DatabaseCon
+            .customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
     ArrayList<String> rsList = new ArrayList<>();
 
     // Constructor
@@ -76,7 +78,9 @@ public class ButtonHandlerInstructor implements ActionListener
             }
             if (rsList.isEmpty())
             {
-                JOptionPane.showMessageDialog(null, "You are not assigned to a course. Please register to one first send an announcement", "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "You are not assigned to a course. Please register to one first send an announcement",
+                        "Missing Course", JOptionPane.INFORMATION_MESSAGE);
                 System.err.println("No courses found, can not view students");
                 return;
             }
@@ -89,7 +93,7 @@ public class ButtonHandlerInstructor implements ActionListener
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
         {
-            //if instructor doesnt have a course, disable manage students
+            // if instructor doesn't have a course, disable manage students
             System.err.println("View Students button clicked - Instructor");
 
             try
@@ -105,7 +109,9 @@ public class ButtonHandlerInstructor implements ActionListener
             }
             if (rsList.isEmpty())
             {
-                JOptionPane.showMessageDialog(null, "You are not assigned to a course. Please register to one first to view students", "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "You are not assigned to a course. Please register to one first to view students", "Missing Course",
+                        JOptionPane.INFORMATION_MESSAGE);
                 System.err.println("No courses found, can not view students");
                 return;
             }
@@ -115,6 +121,7 @@ public class ButtonHandlerInstructor implements ActionListener
 
             removePanels();
 
+            ((ViewStudentsPanel) panels.get("viewStudents")).refreshTable();
             FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("viewStudents"));
         }
