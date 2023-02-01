@@ -25,7 +25,7 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/informationsystem";
         try
         {
-            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            con = DriverManager.getConnection(DATABASE_URL, "JavaApp", "root");
             return con;
         }
         catch (SQLException sqlException)
@@ -40,7 +40,7 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/";
         try
         {
-            Connection con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            Connection con = DriverManager.getConnection(DATABASE_URL, "JavaApp", "root");
             return con;
         }
         catch (SQLException sqlException)
