@@ -16,6 +16,7 @@ import java.awt.*;
 import oop.project.models.UserModel;
 import oop.project.API.*;
 
+//TODO: Editing the grade doesnt show up in the table, must refresh the table to see the changes
 
 public class ViewStudentsPanel extends TransparentPanel
 {

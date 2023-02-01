@@ -2,6 +2,7 @@ package oop.project.handlers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -31,6 +32,13 @@ public class CourseStudentHandler implements ActionListener
 
         if (OperationType == 0)
         {
+            List<Integer> count = DatabaseCon.getCountOfStudentsInCourse(courseID);
+            List<Integer> max = DatabaseCon.getMaxCountofCourse(courseID);
+            if (count.get(0) >= max.get(0))
+            {
+                JOptionPane.showMessageDialog(null, "Course is full, can not register.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             try
             {
                 DatabaseCon.registerCourseToStudent(courseID, ID);

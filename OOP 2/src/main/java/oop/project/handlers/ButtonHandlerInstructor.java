@@ -26,6 +26,9 @@ public class ButtonHandlerInstructor implements ActionListener
     Box studentButtonBox;
     Box mainButtonBox;
 
+    ResultSet rs = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+    ArrayList<String> rsList = new ArrayList<>();
+
     // Constructor
     public ButtonHandlerInstructor(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
             Box mainButtonBox)
@@ -60,6 +63,24 @@ public class ButtonHandlerInstructor implements ActionListener
         {
             System.err.println("Add Announcement button clicked - Instructor");
 
+            try
+            {
+                while (rs.next())
+                {
+                    rsList.add(rs.getString("CourseID"));
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+            if (rsList.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "You are not assigned to a course. Please register to one first send an announcement", "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                System.err.println("No courses found, can not view students");
+                return;
+            }
+
             removePanels();
 
             FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
@@ -71,8 +92,6 @@ public class ButtonHandlerInstructor implements ActionListener
             //if instructor doesnt have a course, disable manage students
             System.err.println("View Students button clicked - Instructor");
 
-            ResultSet rs = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
-            ArrayList<String> rsList = new ArrayList<>();
             try
             {
                 while (rs.next())
