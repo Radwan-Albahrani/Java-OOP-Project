@@ -361,7 +361,17 @@ public class EditUserInfo extends TransparentPanel
         String personalPhone = personalPhoneField.getText();
 
         result = ((EmailTextField) personalEmailField).Validate();
-        if (result != 0)
+        if (result == 1)
+        {
+            UserModel getUser = DatabaseCon.getOneUser(Long.toString(id));
+            if (!personalEmail.equals(getUser.getPersonalEmail()))
+            {
+                JOptionPane.showMessageDialog(null, "Email Already Registered", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        else if (result != 0)
         {
             JOptionPane.showMessageDialog(null, "Please enter a valid personal email!", "Error",
                     JOptionPane.ERROR_MESSAGE);
