@@ -265,29 +265,28 @@ WHERE User.Status = "Active";
 
 
 ## ------------------------------------- Dummy Data -------------------------------------------- 
-CALL generate_user('admin0', 'admin', 'Admin', 'admin0FirstName', 'admin0LastName', 'Male', '1999-01-01', 'testing', 'admin0@university.com', '0', 'admin0@gmail.com');
+CALL generate_user('admin0', 'admin', 'Admin', 'Radwan', 'Albahrani', 'Male', '1999-01-01', 'Engineering', '2230000001@university.com', '0574135810', 'admin0@gmail.com');
 UPDATE user SET status = "Active" WHERE userID = "2230000001";
-CALL generate_user('admin1', 'admin', 'Admin', 'admin1FirstName', 'admin1LastName', 'Male', '1999-01-01', 'testing', 'admin1@university.com', '0', 'admin1@gmail.com');
 
-CALL generate_user('instructor0', 'instructor', 'Instructor', 'instructor0FirstName', 'instructor0LastName', 'Male', '1999-01-01', 'testing', 'instructor0@university.com', '1', 'instructor0@gmail.com');
-CALL generate_user('instructor1', 'instructor', 'Instructor', 'instructor1FirstName', 'instructor1LastName', 'Male', '1999-01-01', 'testing', 'instructor1@university.com', '1', 'instructor1@gmail.com');
+CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmad', 'Male', '1999-01-01', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
+CALL generate_user('2230000003', 'instructor', 'Instructor', 'Safwan', 'Nabeel', 'Male', '1999-01-01', 'CyberSecurity', '2230000003@university.com', '0557814688', 'instructor1@gmail.com');
 
-CALL generate_user('student0', 'student', 'Student', 'student0FirstName', 'student0LastName', 'Male', '1999-01-01', 'testing', 'student0@university.com', '2', 'student0@gmail.com');
-CALL generate_user('student1', 'student', 'Student', 'student1FirstName', 'student1LastName', 'Male', '1999-01-01', 'testing', 'student1@university.com', '2', 'student1@gmail.com');
+CALL generate_user('2230000004', 'student', 'Student', 'Abdulaziz', 'Amer', 'Male', '1999-01-01', 'Artificial Intelligence', '2230000004@university.com', '0567812368', 'student0@gmail.com');
+CALL generate_user('2230000005', 'student', 'Student', 'Basel', 'Alabdullah', 'Male', '1999-01-01', 'Artificial Intelligence', '2230000005@university.com', '0507891256', 'student1@gmail.com');
 
 INSERT INTO courses
 VALUES('CS-111', 'CS', '3', '30', Null);
 INSERT INTO courses
-VALUES('Math-111', 'Math', '2', '29', '2230000004');
+VALUES('Math-111', 'Math', '2', '29', '2230000003');
 
 INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000004', 'CS-111', 10, 10, 10, 10);
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000004', 'Math-111', 10, 10, 10, 10);
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
 VALUES('2230000005', 'CS-111', 10, 10, 10, 10);
-INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000005', 'Math-111', 10, 10, 10, 10);
-INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'CS-111', 10, 10, 10, 10);
  INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'Math-111', 10, 10, 10, 10);
+VALUES('2230000005', 'Math-111', 10, 10, 10, 10);
 
 ## ------------------------------------- User -------------------------------------------- 
 
