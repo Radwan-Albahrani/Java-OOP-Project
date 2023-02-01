@@ -143,16 +143,6 @@ public class RegisterHandler implements ActionListener
                 frame.dispose();
                 new LoginScreen();
             }
-            else if (result == 0)
-            {
-                JOptionPane.showMessageDialog(frame, "Registration Failed. Please check your email format and try again.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(frame, "Registration Failed. Email Already Registered", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
         }
 
         frame.revalidate();
@@ -184,7 +174,7 @@ public class RegisterHandler implements ActionListener
         {
             if (((JTextField) component.getValue()).getText().equals(""))
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -196,7 +186,7 @@ public class RegisterHandler implements ActionListener
         {
             if (((JPasswordField) component.getValue()).getPassword().length == 0)
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -224,7 +214,7 @@ public class RegisterHandler implements ActionListener
         {
             if (((PhoneTextField) component.getValue()).getText().equals(""))
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -232,7 +222,8 @@ public class RegisterHandler implements ActionListener
             int result = ((PhoneTextField) component.getValue()).Validate();
             if (result != 0)
             {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid phone number");
+                JOptionPane.showMessageDialog(frame, "Please enter a valid phone number", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -244,7 +235,7 @@ public class RegisterHandler implements ActionListener
         {
             if (((EmailTextField) component.getValue()).getText().equals(""))
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -252,14 +243,14 @@ public class RegisterHandler implements ActionListener
             int result = ((EmailTextField) component.getValue()).Validate();
             if (result == 1)
             {
-                JOptionPane.showMessageDialog(frame, "Email Already Registered");
+                JOptionPane.showMessageDialog(frame, "Email Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
             }
             if (result != 0)
             {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid email");
+                JOptionPane.showMessageDialog(frame, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -271,7 +262,7 @@ public class RegisterHandler implements ActionListener
         {
             if (((JComboBox<?>) component.getValue()).getSelectedItem().equals(""))
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
@@ -283,28 +274,29 @@ public class RegisterHandler implements ActionListener
         {
             if (((DatePicker) component.getValue()).getDate() == null)
             {
-                JOptionPane.showMessageDialog(frame, "Please fill out all fields");
+                JOptionPane.showMessageDialog(frame, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
             }
             else if (((DatePicker) component.getValue()).getDate().isAfter(LocalDate.now()))
             {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid date");
+                JOptionPane.showMessageDialog(frame, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
             }
             else if (((DatePicker) component.getValue()).getDate().isBefore(LocalDate.now().minusYears(100)))
             {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid date");
+                JOptionPane.showMessageDialog(frame, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
             }
             else if (((DatePicker) component.getValue()).getDate().isAfter(LocalDate.now().minusYears(18)))
             {
-                JOptionPane.showMessageDialog(frame, "You must be at least 18 years old to register");
+                JOptionPane.showMessageDialog(frame, "You must be at least 18 years old to register", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 info.clear();
                 passwords.clear();
                 return -1;
