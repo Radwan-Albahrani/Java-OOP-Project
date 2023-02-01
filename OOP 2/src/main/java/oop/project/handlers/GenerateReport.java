@@ -12,6 +12,7 @@ public class GenerateReport implements ActionListener
 {
     JTable table;
     String path;
+
     public GenerateReport(JTable table, String path)
     {
         this.table = table;
@@ -40,7 +41,10 @@ public class GenerateReport implements ActionListener
     {
         try
         {
-            File file = new File(path);
+            String pathWithoutFile = path.substring(0, path.lastIndexOf("/"));
+            File file = new File(pathWithoutFile);
+            file.mkdirs();
+            file = new File(path);
             if (file.createNewFile())
             {
                 System.err.println("File created: " + file.getName());
@@ -52,18 +56,18 @@ public class GenerateReport implements ActionListener
 
             TableModel model = table.getModel();
             FileWriter out = new FileWriter(file);
-            for(int i=0; i < model.getColumnCount(); i++)
+            for (int i = 0; i < model.getColumnCount(); i++)
             {
                 out.write(model.getColumnName(i) + ",");
             }
 
             out.write("\n");
 
-            for(int i=0; i< model.getRowCount(); i++)
+            for (int i = 0; i < model.getRowCount(); i++)
             {
-                for(int j=0; j < model.getColumnCount(); j++)
+                for (int j = 0; j < model.getColumnCount(); j++)
                 {
-                    out.write(model.getValueAt(i,j).toString()+",");
+                    out.write(model.getValueAt(i, j).toString() + ",");
                 }
                 out.write("\n");
             }

@@ -52,7 +52,7 @@ public class ViewInstructors extends TransparentPanel
         this.add(viewInstructorsBox);
 
         // Button Handler
-        reportButton.addActionListener(new GenerateReport(table, "src/main/resources/reports/Admin/Admin - InstructorReport.csv"));
+        reportButton.addActionListener(new GenerateReport(table, "./reports/Admin/Admin - InstructorReport.csv"));
     }
 
     public void refreshTable()

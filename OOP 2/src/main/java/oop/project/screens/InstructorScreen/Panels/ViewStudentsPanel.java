@@ -95,7 +95,7 @@ public class ViewStudentsPanel extends TransparentPanel
             }
 
             // Button Handler
-            reportButton.addActionListener(new GenerateReport(reportTableJTable, "src/main/resources/reports/Instructors/"
+            reportButton.addActionListener(new GenerateReport(reportTableJTable, "./reports/Instructors/"
                     + userID + " - " + courseIDList.get(0) + " - Student Report.csv"));
         }
         catch (Exception e)
