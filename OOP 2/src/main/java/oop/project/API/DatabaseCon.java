@@ -73,64 +73,6 @@ public class DatabaseCon
         return null;
     }
 
-    public static List<Integer> getCountOfStudentsInCourse(String CourseID)
-    {
-        // Get the connection
-        con = connectDB();
-        String view = "SELECT COUNT(*) FROM studentcourses WHERE CourseID = ?";
-
-        // Create the statement
-        try
-        {
-            stmt = con.prepareStatement(view);
-            stmt.setString(1, CourseID);
-
-            // Execute the statement
-            ResultSet rs = stmt.executeQuery();
-            List<Integer> count = new ArrayList<Integer>();
-            while (rs.next())
-            {
-                count.add(rs.getInt(1));
-            }
-            return count;
-
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error with Custom Query: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public static List<Integer> getMaxCountofCourse(String CourseID)
-    {
-        // Get the connection
-        con = connectDB();
-        String view = "SELECT MaxCap FROM courses WHERE CourseID = ?";
-
-        // Create the statement
-        try
-        {
-            stmt = con.prepareStatement(view);
-            stmt.setString(1, CourseID);
-
-            // Execute the statement
-            ResultSet rs = stmt.executeQuery();
-            List<Integer> count = new ArrayList<Integer>();
-            while (rs.next())
-            {
-                count.add(rs.getInt(1));
-            }
-            return count;
-
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error with Custom Query: " + e.getMessage());
-        }
-        return null;
-    }
-
     public static int registerUser(UserModel user)
     {
         // Get the connection
@@ -350,7 +292,12 @@ public class DatabaseCon
     public static ResultSet getAvailableCourses(String studentID)
     {
         con = connectDB();
-        String query = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?) AND instructorID IS NOT NULL";
+        String query = """
+                SELECT * FROM Courses
+                WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?)
+                AND instructorID IS NOT NULL
+                AND (SELECT COUNT(*) FROM StudentCourses WHERE CourseID = Courses.CourseID) < maxCap
+                """;
         try
         {
             stmt = con.prepareStatement(query);
