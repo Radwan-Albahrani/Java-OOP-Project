@@ -47,6 +47,21 @@ public class ButtonHandlerInstructor implements ActionListener
         // Get the clicked button
         String buttonClicked = e.getActionCommand().trim();
 
+        rs = DatabaseCon
+                .customQuery(
+                        "SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+        try
+        {
+            while (rs.next())
+            {
+                rsList.add(rs.getString("CourseID"));
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         // if the button clicked is Main Menu, Replace button panel and add the main panel
         if (buttonClicked.equals("Main Menu") || buttonClicked.equals("Home"))
         {
@@ -65,17 +80,6 @@ public class ButtonHandlerInstructor implements ActionListener
         {
             System.err.println("Add Announcement button clicked - Instructor");
 
-            try
-            {
-                while (rs.next())
-                {
-                    rsList.add(rs.getString("CourseID"));
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
             if (rsList.isEmpty())
             {
                 JOptionPane.showMessageDialog(null,
@@ -96,17 +100,6 @@ public class ButtonHandlerInstructor implements ActionListener
             // if instructor doesn't have a course, disable manage students
             System.err.println("View Students button clicked - Instructor");
 
-            try
-            {
-                while (rs.next())
-                {
-                    rsList.add(rs.getString("CourseID"));
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
             if (rsList.isEmpty())
             {
                 JOptionPane.showMessageDialog(null,
