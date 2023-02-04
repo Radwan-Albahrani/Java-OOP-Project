@@ -45,10 +45,18 @@ public class ViewAlerts extends TransparentPanel
         KButton refreshButton = new CustomButtonAdmin(" Refresh ");
         refreshButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] alertComponents = {alertsLabel, scrollBar, refreshButton}; // Components for the Alerts Menu
+        KButton clearButton = new CustomButtonAdmin(" Clear ");
+        clearButton.setPreferredSize(new Dimension(150, 50));
+
+        JComponent[] alertComponents = {alertsLabel, scrollBar}; // Components for the Alerts Menu
         Box alertBox = AddToBox.addToVerticalBox(alertComponents, 1);
 
+        JComponent[] buttonComponents = {refreshButton, clearButton}; // Components for the Buttons Menu
+        Box buttonBox = AddToBox.addToHorizontalBox(buttonComponents, 1);
+
         this.add(alertBox);
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(buttonBox);
 
         alerts = DatabaseCon.getAlerts();
 
@@ -58,6 +66,7 @@ public class ViewAlerts extends TransparentPanel
         }
 
         refreshButton.addActionListener(e -> refreshAlerts());
+        clearButton.addActionListener(e -> clearAlerts());
     }
 
     private void refreshAlerts()
@@ -68,7 +77,12 @@ public class ViewAlerts extends TransparentPanel
         {
             alertTextArea.append(alert + separator);
         }
+    }
 
+    private void clearAlerts()
+    {
+        DatabaseCon.clearAlerts();
+        alertTextArea.setText("");
     }
 
 }

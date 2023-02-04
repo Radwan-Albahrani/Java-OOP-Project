@@ -1019,6 +1019,23 @@ public class DatabaseCon
         return alerts;
     }
 
+    public static void clearAlerts()
+    {
+        String query = """
+                DELETE FROM alerts;
+                """;
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Clearing Alerts: " + e.getMessage());
+        }
+    }
+
     public static int checkEmail(String email)
     {
         con = connectDB();
