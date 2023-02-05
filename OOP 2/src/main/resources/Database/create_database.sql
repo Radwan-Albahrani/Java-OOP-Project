@@ -1,7 +1,9 @@
+## ------------------------------------- Refresh --------------------------------------------
 DROP Database if exists informationsystem;
 CREATE database informationsystem;
 USE informationsystem;
 
+## ------------------------------------- Create Tables --------------------------------------------
 CREATE TABLE User (
     UserID varchar(255) PRIMARY KEY,
     Username VARCHAR(255) NOT NULL UNIQUE,
@@ -96,6 +98,7 @@ CREATE TABLE ViewAlerts (
 
 CREATE INDEX type_index ON User(Type);
 
+## ------------------------------------- Constraints --------------------------------------------
 ALTER TABLE ViewAlerts
 ADD FOREIGN KEY (Type) REFERENCES User(Type) ON DELETE CASCADE;
 
@@ -130,6 +133,14 @@ ADD CONSTRAINT announcements_ibfk_1
 FOREIGN KEY (CourseID) REFERENCES courses(CourseID)
 ON DELETE CASCADE;
 
+ALTER TABLE StudentCourses
+ADD CONSTRAINT quiz_grade_check CHECK (QuizGrade >= 0 AND QuizGrade <= 10),
+ADD CONSTRAINT midterm_grade_check CHECK (MidtermGrade >= 0 AND MidtermGrade <= 20),
+ADD CONSTRAINT final_grade_check CHECK (FinalGrade >= 0 AND FinalGrade <= 40),
+ADD CONSTRAINT project_grade_check CHECK (ProjectGrade >= 0 AND ProjectGrade <= 30),
+ADD CONSTRAINT total_grade_check CHECK (TotalGrade <= 100);
+
+## ------------------------------------- Triggers -------------------------------------------- 
 DELIMITER $$
 CREATE TRIGGER calculate_total_grade_insert
 BEFORE INSERT ON StudentCourses
@@ -148,12 +159,7 @@ BEGIN
 END$$
 DELIMITER ;
 
-ALTER TABLE StudentCourses
-ADD CONSTRAINT quiz_grade_check CHECK (QuizGrade >= 0 AND QuizGrade <= 10),
-ADD CONSTRAINT midterm_grade_check CHECK (MidtermGrade >= 0 AND MidtermGrade <= 20),
-ADD CONSTRAINT final_grade_check CHECK (FinalGrade >= 0 AND FinalGrade <= 40),
-ADD CONSTRAINT project_grade_check CHECK (ProjectGrade >= 0 AND ProjectGrade <= 30),
-ADD CONSTRAINT total_grade_check CHECK (TotalGrade <= 100);
+## ------------------------------------- Proceedures -------------------------------------------- 
 
 DELIMITER $$
 CREATE PROCEDURE generate_user(IN username varchar(255), IN password varchar(255), IN type ENUM('Admin','Instructor','Student'), IN firstName VARCHAR(255), IN lastName VARCHAR(255), IN sex ENUM('Male','Female','Other'), IN birthdate DATE, IN major VARCHAR(255), IN email VARCHAR(255), IN phone VARCHAR(255), IN personalEmail VARCHAR(255))
@@ -176,6 +182,8 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+
+## ------------------------------------- Views -------------------------------------------- 
 
 CREATE VIEW `View All Admin` AS
 SELECT User.UserID, Profile.FirstName, Profile.LastName, Profile.Sex, Profile.Birthdate, Profile.Major, WorkContactDetails.Email, workcontactdetails.Phone, personalcontactdetails.Email as "Personal Email"
@@ -256,28 +264,33 @@ JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
 WHERE User.Status = "Active";
 
 
-## ----------------------Testing Dummy Data-------------------------------------
-CALL generate_user('admin0', 'admin', 'Admin', 'admin0FirstName', 'admin0LastName', 'Male', '1999-01-01', 'testing', 'admin0@university.com', '0', 'admin0@gmail.com');
+## ------------------------------------- Dummy Data -------------------------------------------- 
+CALL generate_user('admin', 'admin', 'Admin', 'Radwan', 'Albahrani', 'Male', '2001-09-13', 'Engineering', '2230000001@university.com', '0574135810', 'admin0@gmail.com');
 UPDATE user SET status = "Active" WHERE userID = "2230000001";
-CALL generate_user('admin1', 'admin', 'Admin', 'admin1FirstName', 'admin1LastName', 'Male', '1999-01-01', 'testing', 'admin1@university.com', '0', 'admin1@gmail.com');
 
-CALL generate_user('instructor0', 'instructor', 'Instructor', 'instructor0FirstName', 'instructor0LastName', 'Male', '1999-01-01', 'testing', 'instructor0@university.com', '1', 'instructor0@gmail.com');
-CALL generate_user('instructor1', 'instructor', 'Instructor', 'instructor1FirstName', 'instructor1LastName', 'Male', '1999-01-01', 'testing', 'instructor1@university.com', '1', 'instructor1@gmail.com');
+CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmad', 'Male', '2002-07-23', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
+CALL generate_user('2230000003', 'instructor', 'Instructor', 'Safwan', 'Nabeel', 'Male', '2001-05-24', 'CyberSecurity', '2230000003@university.com', '0557814688', 'instructor1@gmail.com');
 
-CALL generate_user('student0', 'student', 'Student', 'student0FirstName', 'student0LastName', 'Male', '1999-01-01', 'testing', 'student0@university.com', '2', 'student0@gmail.com');
-CALL generate_user('student1', 'student', 'Student', 'student1FirstName', 'student1LastName', 'Male', '1999-01-01', 'testing', 'student1@university.com', '2', 'student1@gmail.com');
+CALL generate_user('2230000004', 'student', 'Student', 'Abdulaziz', 'Amer', 'Male', '2002-02-15', 'Artificial Intelligence', '2230000004@university.com', '0567812368', 'student0@gmail.com');
+CALL generate_user('2230000005', 'student', 'Student', 'Basel', 'Alabdullah', 'Male', '2002-08-12', 'Artificial Intelligence', '2230000005@university.com', '0507891256', 'student1@gmail.com');
 
 INSERT INTO courses
-VALUES('CS-111', 'CS', '3', '30', '');
+VALUES('CS-111', 'CS', '3', '30', Null);
 INSERT INTO courses
-VALUES('Math-111', 'Math', '2', '29', '2230000004');
+VALUES('Math-111', 'Math', '2', '29', '2230000003');
 
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000004', 'CS-111', 10, 10, 10, 10);
+INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
+VALUES('2230000004', 'Math-111', 10, 10, 10, 10);
 INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
 VALUES('2230000005', 'CS-111', 10, 10, 10, 10);
-INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000005', 'Math-111', 10, 10, 10, 10);
-INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'CS-111', 10, 10, 10, 10);
  INSERT INTO studentcourses(StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade)
-VALUES('2230000006', 'Math-111', 10, 10, 10, 10);
+VALUES('2230000005', 'Math-111', 10, 10, 10, 10);
+
+## ------------------------------------- User -------------------------------------------- 
+
+DROP USER IF EXISTS 'JavaApp'@'localhost';
+CREATE USER 'JavaApp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+GRANT ALL PRIVILEGES ON *.* TO 'JavaApp'@'localhost' WITH GRANT OPTION;
 

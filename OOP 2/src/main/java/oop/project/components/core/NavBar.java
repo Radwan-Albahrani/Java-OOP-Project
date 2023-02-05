@@ -4,6 +4,8 @@ import javax.swing.*;
 
 import oop.project.API.DatabaseCon;
 import oop.project.colors.ThemeColors;
+import oop.project.hooks.FrameConfig;
+
 import com.k33ptoo.utils.ComponentMoverUtil;
 
 import java.awt.*;
@@ -56,6 +58,13 @@ public class NavBar extends JPanel
         minimizeButton.setFocusPainted(false);
         minimizeButton.setOpaque(false);
 
+        // LOGO
+        Image image = FrameConfig.getPictureWithSize("AppIconRemoved.png", 40, 40);
+        JLabel logo = new JLabel(new ImageIcon(image));
+        logo.setSize(30, 29);
+        logo.setLocation(5, 2);
+        logo.setOpaque(false);
+
         minimizeButton.addActionListener((ActionEvent e) ->
         {
             frame.setState(JFrame.ICONIFIED);
@@ -69,6 +78,7 @@ public class NavBar extends JPanel
         navBar.setBackground(ThemeColors.MEDIUM_SEA_GREEN);
         navBar.add(exitButton);
         navBar.add(minimizeButton);
+        navBar.add(logo);
         frame.setLayout(new BorderLayout());
         frame.add(navBar, BorderLayout.NORTH);
 

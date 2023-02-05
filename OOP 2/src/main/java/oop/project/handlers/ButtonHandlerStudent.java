@@ -65,7 +65,7 @@ public class ButtonHandlerStudent implements ActionListener
             ((StudentScreen) frame).resetFrame(panels.get("button"), panels.get("viewGrades"));
         }
 
-        else if (buttonClicked.equals("Send Alerts"))
+        else if (buttonClicked.equals("Alert Admin"))
         {
             removePanels();
             FrameConfig.setBackground(frame, "StudentScreen/backgroundBlurred.png");

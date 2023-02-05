@@ -15,6 +15,7 @@ import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
+import oop.project.screens.InstructorScreen.Panels.ViewStudentsPanel;
 
 import java.util.*;
 
@@ -25,6 +26,10 @@ public class ButtonHandlerInstructor implements ActionListener
     JFrame frame;
     Box studentButtonBox;
     Box mainButtonBox;
+
+    ResultSet rs = DatabaseCon
+            .customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+    ArrayList<String> rsList = new ArrayList<>();
 
     // Constructor
     public ButtonHandlerInstructor(JFrame frame, Map<String, JPanel> panels, Box studentButtonBox,
@@ -41,6 +46,21 @@ public class ButtonHandlerInstructor implements ActionListener
     {
         // Get the clicked button
         String buttonClicked = e.getActionCommand().trim();
+
+        rs = DatabaseCon
+                .customQuery(
+                        "SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
+        try
+        {
+            while (rs.next())
+            {
+                rsList.add(rs.getString("CourseID"));
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
         // if the button clicked is Main Menu, Replace button panel and add the main panel
         if (buttonClicked.equals("Main Menu") || buttonClicked.equals("Home"))
@@ -60,6 +80,15 @@ public class ButtonHandlerInstructor implements ActionListener
         {
             System.err.println("Add Announcement button clicked - Instructor");
 
+            if (rsList.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,
+                        "You are not assigned to a course. Please register to one first send an announcement",
+                        "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                System.err.println("No courses found, can not view students");
+                return;
+            }
+
             removePanels();
 
             FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
@@ -68,25 +97,14 @@ public class ButtonHandlerInstructor implements ActionListener
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("View Students") || buttonClicked.equals("Manage Students"))
         {
-            //if instructor doesnt have a course, disable manage students
+            // if instructor doesn't have a course, disable manage students
             System.err.println("View Students button clicked - Instructor");
 
-            ResultSet rs = DatabaseCon.customQuery("SELECT CourseID FROM courses WHERE InstructorID = " + DatabaseCon.currentUser.getUserID() + ";");
-            ArrayList<String> rsList = new ArrayList<>();
-            try
-            {
-                while (rs.next())
-                {
-                    rsList.add(rs.getString("CourseID"));
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
             if (rsList.isEmpty())
             {
-                JOptionPane.showMessageDialog(null, "You are not assigned to a course. Please register to one first to view students", "Missing Course", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "You are not assigned to a course. Please register to one first to view students", "Missing Course",
+                        JOptionPane.INFORMATION_MESSAGE);
                 System.err.println("No courses found, can not view students");
                 return;
             }
@@ -96,6 +114,7 @@ public class ButtonHandlerInstructor implements ActionListener
 
             removePanels();
 
+            ((ViewStudentsPanel) panels.get("viewStudents")).refreshTable();
             FrameConfig.setBackground(frame, "InstructorScreen/backgroundBlurred.png");
             ((InstructorScreen) frame).resetFrame(panels.get("button"), panels.get("viewStudents"));
         }

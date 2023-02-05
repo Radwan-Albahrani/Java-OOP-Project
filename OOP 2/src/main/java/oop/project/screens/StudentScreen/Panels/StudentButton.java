@@ -17,7 +17,7 @@ public class StudentButton extends ThemedPanelStudent
     Map<String, JPanel> studentPanels;
 
     String[] ButtonNames = {
-            " Send Alerts ",
+            " Alert Admin ",
             "View Profile",
             " View Announcements",
             " Manage Classes ",
@@ -70,10 +70,10 @@ public class StudentButton extends ThemedPanelStudent
         mainTitle.setVerticalAlignment(JLabel.CENTER);
         JComponent[] mainButtonComponents = {
                 mainTitle,
-                studentButtons.get("Send Alerts"),
                 studentButtons.get("View Announcements"),
                 studentButtons.get("Manage Classes"),
-                studentButtons.get("View Profile")
+                studentButtons.get("View Profile"),
+                studentButtons.get("Alert Admin")
         };
 
         mainButtonBox = AddToBox.addToHorizontalBox(mainButtonComponents, 5);

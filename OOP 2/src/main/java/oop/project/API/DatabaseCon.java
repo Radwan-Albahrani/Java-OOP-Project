@@ -25,7 +25,7 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/informationsystem";
         try
         {
-            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            con = DriverManager.getConnection(DATABASE_URL, "JavaApp", "root");
             return con;
         }
         catch (SQLException sqlException)
@@ -40,8 +40,7 @@ public class DatabaseCon
         String DATABASE_URL = "jdbc:mysql://localhost:3306/";
         try
         {
-            Connection con = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            return con;
+            return DriverManager.getConnection(DATABASE_URL, "JavaApp", "root");
         }
         catch (SQLException sqlException)
         {
@@ -79,8 +78,7 @@ public class DatabaseCon
         con = connectDB();
 
         // Create the statement
-        try (CallableStatement call = con.prepareCall("CALL generate_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                Statement stmt = con.createStatement();)
+        try (CallableStatement call = con.prepareCall("CALL generate_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))
         {
             // Set the parameters
             call.setString(1, user.getAuth().getUsername());
@@ -111,11 +109,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "SELECT CourseID FROM StudentCourses WHERE StudID = ?";
-        List<String> courses = new ArrayList<String>();
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        List<String> courses = new ArrayList<>();
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, studentID);
-            ResultSet rs = stmt.executeQuery();
+            statement.setString(1, studentID);
+            ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
                 courses.add(rs.getString(1));
@@ -134,7 +132,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error getting courses of student: " + e.getMessage());
             }
         }
     }
@@ -143,11 +141,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "SELECT Announcement FROM Announcements WHERE CourseID = ?";
-        List<String> announcements = new ArrayList<String>();
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        List<String> announcements = new ArrayList<>();
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, courseID);
-            ResultSet rs = stmt.executeQuery();
+            statement.setString(1, courseID);
+            ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
                 announcements.add(rs.getString(1));
@@ -166,7 +164,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error getting announcements of course: " + e.getMessage());
             }
         }
     }
@@ -175,11 +173,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "UPDATE Courses SET InstructorID = ? WHERE CourseID = ?";
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, instructorID);
-            stmt.setString(2, courseID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, instructorID);
+            statement.setString(2, courseID);
+            int result = statement.executeUpdate();
             if (result == 0)
             {
                 throw new Exception("Error registering course to instructor");
@@ -198,7 +196,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error closing connection: " + e.getMessage());
             }
         }
     }
@@ -207,11 +205,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "INSERT INTO StudentCourses (StudID, CourseID, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade) VALUES (?, ?, 0, 0, 0, 0)";
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, studentID);
-            stmt.setString(2, courseID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, studentID);
+            statement.setString(2, courseID);
+            int result = statement.executeUpdate();
             if (result == 0)
             {
                 throw new Exception("Error registering course to student");
@@ -230,7 +228,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error registering course to student: " + e.getMessage());
             }
         }
     }
@@ -239,11 +237,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "DELETE FROM StudentCourses WHERE StudID = ? AND CourseID = ?";
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, studentID);
-            stmt.setString(2, courseID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, studentID);
+            statement.setString(2, courseID);
+            int result = statement.executeUpdate();
             if (result == 0)
             {
                 throw new Exception("Error dropping course from student");
@@ -267,7 +265,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error dropping course from student: " + e.getMessage());
             }
         }
     }
@@ -292,7 +290,12 @@ public class DatabaseCon
     public static ResultSet getAvailableCourses(String studentID)
     {
         con = connectDB();
-        String query = "SELECT * FROM Courses WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?) AND instructorID IS NOT NULL";
+        String query = """
+                SELECT * FROM Courses
+                WHERE CourseID NOT IN (SELECT CourseID FROM StudentCourses WHERE StudID = ?)
+                AND instructorID IS NOT NULL
+                AND (SELECT COUNT(*) FROM StudentCourses WHERE CourseID = Courses.CourseID) < maxCap
+                """;
         try
         {
             stmt = con.prepareStatement(query);
@@ -311,11 +314,11 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "INSERT INTO Announcements (Announcement, CourseID) VALUES (?, ?)";
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, announcement);
-            stmt.setString(2, courseID);
-            stmt.executeUpdate();
+            statement.setString(1, announcement);
+            statement.setString(2, courseID);
+            statement.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -328,7 +331,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error sending announcement: " + e.getMessage());
             }
         }
     }
@@ -337,10 +340,10 @@ public class DatabaseCon
     {
         con = connectDB();
         String query = "INSERT INTO Alerts (Alert) VALUES (?)";
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, alert);
-            stmt.executeUpdate();
+            statement.setString(1, alert);
+            statement.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -353,7 +356,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+                System.out.println("Error sending alert: " + e.getMessage());
             }
         }
     }
@@ -379,9 +382,9 @@ public class DatabaseCon
     public static long generateID()
     {
         con = connectDB();
-        try (Statement stmt = con.createStatement();)
+        try (Statement statement = con.createStatement();)
         {
-            ResultSet rs = stmt.executeQuery("SELECT MAX(UserID) FROM User");
+            ResultSet rs = statement.executeQuery("SELECT MAX(UserID) FROM User");
             if (rs.next())
             {
                 if (rs.getLong(1) == 0)
@@ -416,7 +419,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+
             }
         }
 
@@ -432,12 +435,12 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all " + type + "`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
+        try (PreparedStatement statement = con.prepareStatement(
                 view);)
         {
 
             // Execute the statement
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Get the results
             while (rs.next())
@@ -533,11 +536,11 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all users full`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(view);)
+        try (PreparedStatement statement = con.prepareStatement(view);)
         {
 
             // Execute the statement
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Get the results
             while (rs.next())
@@ -588,11 +591,11 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(view);)
+        try (PreparedStatement statement = con.prepareStatement(view);)
         {
 
             // Execute the statement
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Get the results
             while (rs.next())
@@ -660,7 +663,7 @@ public class DatabaseCon
 
         // Get the connection
         con = connectDB();
-        String statement = """
+        String query = """
                 SELECT User.UserID,
                 User.Username,
                 User.Password,
@@ -679,15 +682,15 @@ public class DatabaseCon
                     INNER JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
                     INNER JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 WHERE User.UserID = ?;
-                    """;;
+                    """;
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(statement);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, ID);
+            statement.setString(1, ID);
 
             // Execute the statement
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Get the results
             while (rs.next())
@@ -737,12 +740,11 @@ public class DatabaseCon
         String view = "SELECT * FROM informationsystem.`view all " + status + " users`;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(
-                view);)
+        try (PreparedStatement statement = con.prepareStatement(view);)
         {
 
             // Execute the statement
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Get the results
             while (rs.next())
@@ -774,7 +776,7 @@ public class DatabaseCon
             }
             catch (SQLException e)
             {
-                e.printStackTrace();
+
             }
         }
         return users;
@@ -872,19 +874,19 @@ public class DatabaseCon
     {
         // Get the connection
         con = connectDB();
-        String statement = "UPDATE studentcourses SET QuizGrade = ?, MidtermGrade = ?, FinalGrade = ?, ProjectGrade = ? WHERE StudID = ? && CourseID = ?;";
+        String query = "UPDATE studentcourses SET QuizGrade = ?, MidtermGrade = ?, FinalGrade = ?, ProjectGrade = ? WHERE StudID = ? && CourseID = ?;";
 
         // Create the statement
-        try (PreparedStatement stmt = con.prepareStatement(statement);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, quizGrade);
-            stmt.setString(2, midtermGrade);
-            stmt.setString(3, finalGrade);
-            stmt.setString(4, projectGrade);
-            stmt.setLong(5, userID);
-            stmt.setString(6, courseID);
+            statement.setString(1, quizGrade);
+            statement.setString(2, midtermGrade);
+            statement.setString(3, finalGrade);
+            statement.setString(4, projectGrade);
+            statement.setLong(5, userID);
+            statement.setString(6, courseID);
 
-            stmt.executeUpdate();
+            statement.executeUpdate();
 
             return 1;
 
@@ -913,7 +915,7 @@ public class DatabaseCon
         try
         {
             rs = getStudentsOfInstructorGrades(userID);
-            students = new ArrayList<StudentModel>();
+            students = new ArrayList<>();
 
             while (rs.next())
             {
@@ -938,7 +940,8 @@ public class DatabaseCon
         {
             try
             {
-                rs.close();
+                if (rs != null)
+                    rs.close();
             }
             catch (SQLException e)
             {
@@ -1014,6 +1017,23 @@ public class DatabaseCon
         return alerts;
     }
 
+    public static void clearAlerts()
+    {
+        String query = """
+                DELETE FROM alerts;
+                """;
+        con = connectDB();
+        try
+        {
+            stmt = con.prepareStatement(query);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error Clearing Alerts: " + e.getMessage());
+        }
+    }
+
     public static int checkEmail(String email)
     {
         con = connectDB();
@@ -1023,10 +1043,10 @@ public class DatabaseCon
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 WHERE PersonalContactDetails.Email = ?
                 """;
-        try (PreparedStatement stmt = con.prepareStatement(query))
+        try (PreparedStatement statement = con.prepareStatement(query))
         {
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
             rs.next();
             return rs.getInt(1);
         }
@@ -1061,11 +1081,11 @@ public class DatabaseCon
                 Where user.Username = ?
                 AND user.Password = ?;
                     """;
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
             if (rs.next())
             {
                 if (rs.getString(13).equals("Active"))
@@ -1127,10 +1147,10 @@ public class DatabaseCon
                 SET Status = 'Active'
                 WHERE UserID = ?;
                 """;
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, userID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, userID);
+            int result = statement.executeUpdate();
             if (result == 0)
             {
                 throw new Exception("Error Activating User: No User Found");
@@ -1158,7 +1178,7 @@ public class DatabaseCon
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
+                    System.err.println("Error Activating User: " + e.getMessage());
                 }
             }
         }
@@ -1172,13 +1192,13 @@ public class DatabaseCon
                 INSERT INTO Courses (CourseID, CourseName, CreditHours, MaxCap)
                 VALUES (?, ?, ?, ?);
                 """;
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, courseID);
-            stmt.setString(2, courseName);
-            stmt.setString(3, courseCredit);
-            stmt.setString(4, maxCapacity);
-            stmt.executeUpdate();
+            statement.setString(1, courseID);
+            statement.setString(2, courseName);
+            statement.setString(3, courseCredit);
+            statement.setString(4, maxCapacity);
+            statement.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -1194,10 +1214,10 @@ public class DatabaseCon
                 DELETE FROM Courses
                 WHERE CourseID = ?;
                 """;
-        try (PreparedStatement stmt = con.prepareStatement(query);)
+        try (PreparedStatement statement = con.prepareStatement(query);)
         {
-            stmt.setString(1, courseID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, courseID);
+            int result = statement.executeUpdate();
             if (result == 0)
             {
                 throw new Exception("Error Deleting Course: No Course Found");
@@ -1213,10 +1233,10 @@ public class DatabaseCon
     {
         String query = "SELECT password FROM user WHERE userID = ?;";
         con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement(query))
+        try (PreparedStatement statement = con.prepareStatement(query))
         {
-            stmt.setString(1, Long.toString(currentUser.getUserID()));
-            ResultSet rs = stmt.executeQuery();
+            statement.setString(1, Long.toString(currentUser.getUserID()));
+            ResultSet rs = statement.executeQuery();
             if (rs.next())
             {
                 if (rs.getString(1).equals(password))
@@ -1244,11 +1264,11 @@ public class DatabaseCon
     {
         String query = "UPDATE user SET password = ? WHERE userID = ?;";
         con = connectDB();
-        try (PreparedStatement stmt = con.prepareStatement(query))
+        try (PreparedStatement statement = con.prepareStatement(query))
         {
-            stmt.setString(1, password);
-            stmt.setString(2, userID);
-            int result = stmt.executeUpdate();
+            statement.setString(1, password);
+            statement.setString(2, userID);
+            int result = statement.executeUpdate();
             if (result == 1)
             {
                 return 0;
@@ -1279,29 +1299,4 @@ public class DatabaseCon
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    // /// Testing Functions --------------------------------------------------------------------------------
-    // private static void RegisterTesting(String email)
-    // {
-    // UserModel user = new UserModel();
-    // user.setFirstName("firstName");
-    // user.setLastName("lastName");
-    // user.setEmail("TestEmail");
-    // user.setPersonalEmail(email);
-    // user.setPhoneNumber("phoneNumber");
-    // user.setAuth(new Auth("username", "password"));
-    // user.setBirthDate("2001-01-01");
-    // user.setMajor("major");
-    // user.setGender("Male");
-    // user.setRole("Instructor");
-    // user.setPersonalPhoneNumber("personalPhoneNumber");
-    // registerUser(user);
-
-    // }
-
-    // public static void main(String[] args)
-    // {
-    // UserModel user = getOneUser("1");
-    // }
-
 }

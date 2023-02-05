@@ -51,8 +51,8 @@ public class ViewStudents extends TransparentPanel
         Box ViewStudentsBox = AddToBox.addToVerticalBox(components, 1);
         this.add(ViewStudentsBox);
 
-                // Button Handler
-                reportButton.addActionListener(new GenerateReport(table, "src/main/resources/reports/Admin/Admin - StudentReport.csv"));
+        // Button Handler
+        reportButton.addActionListener(new GenerateReport(table, "./reports/Admin/Admin - StudentReport.csv"));
     }
 
     public void refreshTable()
