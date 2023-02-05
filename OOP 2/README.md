@@ -1,5 +1,29 @@
 # Java Project
 
+The aim of this project is to create a Student Information System (SIS) using Java. The primary audience/user(s) of this system will be:
+
+1. Admin
+2. Instructors
+3. Students
+
+## Step 1: Setting up the database
+
+- Open MySQL Workbench
+- Make a server connection with the following credentials:
+  - Hostname: localhost
+  - Port: 3306
+  - Username: root
+  - Password: root
+- Go to src/main/resources/Database and open the file called "create_database.sql"
+- Copy the contents of the file
+- Open a new query tab in MySQL Workbench
+- Paste the contents of the file into the query tab
+- Run all the queries in the file
+
+## Step 2: Running the program
+
+### NetBeans
+
 To Run the program. Make sure you have NetBeans installed on your computer, then do the following:
 
 - Open NetBeans
@@ -9,6 +33,8 @@ To Run the program. Make sure you have NetBeans installed on your computer, then
 - Click on the project folder
 - Click on Open Project
 - Click on Run Project
+
+### Command Line
 
 To Run the program from the command line, do the following:
 
