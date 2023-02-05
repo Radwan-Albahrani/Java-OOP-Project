@@ -12,8 +12,8 @@ The aim of this project is to create a Student Information System (SIS) using Ja
 - Make a server connection with the following credentials:
   - Hostname: localhost
   - Port: 3306
-  - Username: root
-  - Password: root
+  - Username: doesn't matter
+  - Password: doesn't matter
 - Go to src/main/resources/Database and open the file called "create_database.sql"
 - Copy the contents of the file
 - Open a new query tab in MySQL Workbench
