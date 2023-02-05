@@ -1,4 +1,7 @@
+# Java Project
+
 To Run the program. Make sure you have NetBeans installed on your computer, then do the following:
+
 - Open NetBeans
 - Click on File
 - Click on Open Project
@@ -8,7 +11,10 @@ To Run the program. Make sure you have NetBeans installed on your computer, then
 - Click on Run Project
 
 To Run the program from the command line, do the following:
+
 - Open a command prompt
 - Navigate to the folder where you saved the project
 - Navigate to the Jar file included with the project
 - Type the following command: java -jar "Java Project.jar"
+
+Note: This would ONLY work if you have java version 17 or higher installed.
