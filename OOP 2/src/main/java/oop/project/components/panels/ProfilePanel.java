@@ -8,7 +8,20 @@ import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
+
+
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 import javax.swing.*;
+import java.awt.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.buttons.CustomButtonInstructor;
@@ -24,6 +37,7 @@ import com.k33ptoo.components.KButton;
 public class ProfilePanel extends TransparentPanel
 {
     KButton resetPasswordButton;
+    KButton uploadPictureButton;
     RoundedJTextField nameField;
     RoundedJTextField idField;
     RoundedJTextField birthDateField;
@@ -212,8 +226,15 @@ public class ProfilePanel extends TransparentPanel
         resetPasswordButton.setAlignmentX(RIGHT_ALIGNMENT);
         resetPasswordButton.setForeground(ThemeColors.BLACK);
 
-        JComponent[] resetPasswordComponents = {resetPasswordButton};
-        Box resetPasswordBox = AddToBox.addToVerticalBox(resetPasswordComponents, 1);
+        // Upload picture button
+        uploadPictureButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        uploadPictureButton.setMinimumSize(new Dimension(200, 50));
+        uploadPictureButton.setMaximumSize(new Dimension(200, 50));
+        uploadPictureButton.setAlignmentX(RIGHT_ALIGNMENT);
+        uploadPictureButton.setForeground(ThemeColors.BLACK);
+
+        JComponent[] buttonComponents = {resetPasswordButton, uploadPictureButton};
+        Box buttonBox = AddToBox.addToVerticalBox(buttonComponents, 2);
 
         // Work Information Box Setup
         JComponent[] professionalInfoComponents = {occupationBox, majorBox};
@@ -243,10 +264,58 @@ public class ProfilePanel extends TransparentPanel
         c.gridy = 2;
         this.add(workInfoBox, c);
         c.gridy = 3;
-        this.add(resetPasswordBox, c);
+        this.add(buttonBox, c);
 
         // Button Handler
         resetPasswordButton.addActionListener(new ResetPasswordHandler(this, type));
+        uploadPictureButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "NOTE: ONLY JPG, PNG, JPEG ALLOWED", "Upload Picture", JOptionPane.INFORMATION_MESSAGE);
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION)
+            {
+                File selectedFile = fileChooser.getSelectedFile();
+                String path = selectedFile.getAbsolutePath();
+                System.out.println(path);
+                try
+                {
+                    BufferedImage image = ImageIO.read(selectedFile);
+                    Image scaledImage = image.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
+
+                    BufferedImage bufferedimagescaled = new BufferedImage
+                    (image.getWidth(null),image.getHeight(null),BufferedImage.TYPE_INT_RGB);
+                    Graphics bg = bufferedimagescaled.getGraphics();
+                    bg.drawImage(image, 0, 0, null);
+                    bg.dispose();
+
+                    ImageIcon icon = new ImageIcon(scaledImage);
+                    picture.setIcon(icon);
+
+                    // Upload to database
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    ImageIO.write(bufferedimagescaled, "png", bos);
+                    byte [] data = bos.toByteArray();
+                    Blob blobimage = new SerialBlob(data);
+
+                    DatabaseCon.setProfilePicture(blobimage, Long.toString(DatabaseCon.currentUser.getUserID()));
+                    JOptionPane.showMessageDialog(null, "Profile picture updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+                catch (IOException ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Error opening file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (SerialException e1) {
+                    JOptionPane.showMessageDialog(null, "Error serializing file: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (SQLException e1)
+                {
+                    JOptionPane.showMessageDialog(null, "Error getting Blob of image : " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     public void setButtonsType(int type)
@@ -254,14 +323,17 @@ public class ProfilePanel extends TransparentPanel
         if (type == 0)
         {
             resetPasswordButton = new CustomButtonAdmin("Reset Password");
+            uploadPictureButton = new CustomButtonAdmin("Upload Picture");
         }
         else if (type == 1)
         {
             resetPasswordButton = new CustomButtonInstructor("Reset Password");
+            uploadPictureButton = new CustomButtonInstructor("Upload Picture");
         }
         else if (type == 2)
         {
             resetPasswordButton = new CustomButtonStudent("Reset Password");
+            uploadPictureButton = new CustomButtonStudent("Upload Picture");
         }
     }
 

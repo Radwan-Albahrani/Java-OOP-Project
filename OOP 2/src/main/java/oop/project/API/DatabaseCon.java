@@ -1,5 +1,6 @@
 package oop.project.API;
 
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -9,6 +10,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.*;
 
 import oop.project.hooks.FrameConfig;
@@ -78,7 +81,8 @@ public class DatabaseCon
                 image = rs.getBytes("picture");
             }
             Image img = Toolkit.getDefaultToolkit().createImage(image);
-            ImageIcon icon = new ImageIcon(img);
+            Image scaledImage = img.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(scaledImage);
             JLabel lPhoto = new JLabel();
             lPhoto.setIcon(icon);
             return lPhoto;
@@ -93,6 +97,26 @@ public class DatabaseCon
             System.err.println("Error getting photo: " + e.getMessage());
         }
         return null;
+    }
+
+    public static void setProfilePicture(Blob picture, String id)
+    {
+        //update profile with the picture id
+        con = connectDB();
+        String view = "UPDATE profile SET picture = ? WHERE userID = ?";
+        try
+        {
+            stmt = con.prepareStatement(view);
+            stmt.setBlob(1, picture);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+
+            System.err.println("Profile picture uploaded to database successfully!");
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error setting photo: " + e.getMessage());
+        }
     }
 
     public static ResultSet customQuery(String query)
