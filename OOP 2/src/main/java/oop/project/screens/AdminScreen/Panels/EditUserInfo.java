@@ -19,6 +19,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.k33ptoo.components.KButton;
 
 import oop.project.components.MiniComponents.EmailTextField;
+import oop.project.components.MiniComponents.PhoneTextField;
 import oop.project.components.buttons.CustomButtonAdmin;
 import oop.project.components.core.RoundedJTextField;
 import oop.project.components.core.TitleLabel;
@@ -38,8 +39,8 @@ public class EditUserInfo extends TransparentPanel
     RoundedJTextField majorField;
     EmailTextField workEmailField;
     EmailTextField personalEmailField;
-    RoundedJTextField workPhoneField;
-    RoundedJTextField personalPhoneField;
+    PhoneTextField workPhoneField;
+    PhoneTextField personalPhoneField;
     JLabel Edit_User_info;
     final JPanel mainPanel;
 
@@ -198,13 +199,13 @@ public class EditUserInfo extends TransparentPanel
         phoneLabel.setAlignmentX(RIGHT_ALIGNMENT);
         phoneLabel.setForeground(ThemeColors.BLACK);
 
-        workPhoneField = new RoundedJTextField(15);
+        workPhoneField = new PhoneTextField(15);
         workPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         workPhoneField.setMinimumSize(new Dimension(400, 50));
         workPhoneField.setMaximumSize(new Dimension(400, 50));
         workPhoneField.setAlignmentX(LEFT_ALIGNMENT);
 
-        personalPhoneField = new RoundedJTextField(15);
+        personalPhoneField = new PhoneTextField(15);
         personalPhoneField.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
         personalPhoneField.setMinimumSize(new Dimension(400, 50));
         personalPhoneField.setMaximumSize(new Dimension(400, 50));
@@ -359,9 +360,26 @@ public class EditUserInfo extends TransparentPanel
         String birthdate = birthDateField.getDate().toString();
         String personalEmail = personalEmailField.getText();
         String personalPhone = personalPhoneField.getText();
+        result = ((PhoneTextField) personalPhoneField).Validate();
+        if (result != 0 && personalPhone.length() != 0)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a valid personal phone!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         result = ((EmailTextField) personalEmailField).Validate();
-        if (result != 0)
+        if (result == 1)
+        {
+            UserModel getUser = DatabaseCon.getOneUser(Long.toString(id));
+            if (!personalEmail.equals(getUser.getPersonalEmail()))
+            {
+                JOptionPane.showMessageDialog(null, "Email Already Registered", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        else if (result != 0)
         {
             JOptionPane.showMessageDialog(null, "Please enter a valid personal email!", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -369,6 +387,15 @@ public class EditUserInfo extends TransparentPanel
         }
 
         String workPhone = workPhoneField.getText();
+
+        result = ((PhoneTextField) workPhoneField).Validate();
+        if (result != 0)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a valid work phone!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         String major = majorField.getText();
 
         if (fname.equals("") || lname.equals(""))
