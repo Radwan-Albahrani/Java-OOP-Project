@@ -182,7 +182,4 @@ public class UserModel
     {
         return auth;
     }
-
-
-
 }

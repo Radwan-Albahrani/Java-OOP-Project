@@ -32,6 +32,7 @@ public class ProfilePanel extends TransparentPanel
     RoundedJTextField personalEmailField;
     RoundedJTextField workPhoneField;
     RoundedJTextField personalPhoneField;
+    JLabel picture;
 
     public ProfilePanel(int Width, int Height, int type)
     {
@@ -41,8 +42,8 @@ public class ProfilePanel extends TransparentPanel
         // Button Setup
         setButtonsType(type);
 
-        // Picture Setup
-        JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
+        // // Picture Setup TODO: Add picture
+        // JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
 
         // Personal Information Setup
         // ID Setup
@@ -298,5 +299,10 @@ public class ProfilePanel extends TransparentPanel
 
         // Set Personal Phone
         personalPhoneField.setText(user.getPersonalPhoneNumber());
+
+        // Set Photo 
+        Photo.setIcon(new ImageIcon(user.getPhoto()));
+        
+
     }
 }
