@@ -273,6 +273,8 @@ public class ProfilePanel extends TransparentPanel
                 JOptionPane.INFORMATION_MESSAGE);
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setCurrentDirectory(
+                new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
         int returnValue = fileChooser.showOpenDialog(null);
