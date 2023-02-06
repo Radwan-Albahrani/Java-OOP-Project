@@ -1041,7 +1041,8 @@ public class DatabaseCon
                 SELECT profile.UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
                 FROM user, studentcourses, profile
                 WHERE user.UserID = StudID && StudID = profile.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s) && user.status = 'Active';
-                    """.formatted(userID);
+                    """
+                .formatted(userID);
         con = connectDB();
         try
         {
@@ -1141,7 +1142,7 @@ public class DatabaseCon
                 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 Where user.Username = ?
-                AND user.Password = ?;
+                AND BINARY user.Password = BINARY ?;
                     """;
         try (PreparedStatement statement = con.prepareStatement(query);)
         {
