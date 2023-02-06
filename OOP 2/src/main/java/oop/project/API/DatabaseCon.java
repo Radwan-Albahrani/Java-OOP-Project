@@ -1017,8 +1017,8 @@ public class DatabaseCon
     {
         String query = """
                 SELECT profile.UserID, CourseID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
-                FROM studentcourses, profile, workcontactdetails
-                WHERE StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                FROM user, studentcourses, profile, workcontactdetails
+                WHERE user.UserID = StudID && StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s) && user.status = 'Active';
                     """
                 .formatted(userID);
         con = connectDB();
@@ -1038,9 +1038,9 @@ public class DatabaseCon
     public static ResultSet getStudentsOfInstructor(String userID)
     {
         String query = """
-                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
-                FROM studentcourses, profile
-                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                SELECT profile.UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
+                FROM user, studentcourses, profile
+                WHERE user.UserID = StudID && StudID = profile.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s) && user.status = 'Active';
                     """.formatted(userID);
         con = connectDB();
         try

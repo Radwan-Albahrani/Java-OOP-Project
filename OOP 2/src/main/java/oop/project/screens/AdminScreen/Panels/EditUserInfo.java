@@ -42,6 +42,7 @@ public class EditUserInfo extends TransparentPanel
     PhoneTextField workPhoneField;
     PhoneTextField personalPhoneField;
     JLabel Edit_User_info;
+    JLabel picture = new JLabel();
     final JPanel mainPanel;
 
     public EditUserInfo(int Width, int Height, JPanel mainPanel)
@@ -53,7 +54,7 @@ public class EditUserInfo extends TransparentPanel
         Edit_User_info.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
 
         // Picture Setup
-        JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
+        picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
         picture.setAlignmentX(CENTER_ALIGNMENT);
 
         // Personal Information Setup
@@ -319,6 +320,9 @@ public class EditUserInfo extends TransparentPanel
 
         // Set Personal Phone
         personalPhoneField.setText(user.getPersonalPhoneNumber());
+
+        // Set Picture
+        picture.setIcon(DatabaseCon.getProfilePicture(Long.toString(user.getUserID())));
     }
 
     private void SaveInformation()

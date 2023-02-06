@@ -287,7 +287,7 @@ public class ProfilePanel extends TransparentPanel
                 Image scaledImage = image.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
 
                 BufferedImage bufferedImageScaled = new BufferedImage(image.getWidth(null), image.getHeight(null),
-                        BufferedImage.TYPE_INT_RGB);
+                        BufferedImage.TYPE_INT_ARGB);
                 Graphics bg = bufferedImageScaled.getGraphics();
                 bg.drawImage(image, 0, 0, null);
                 bg.dispose();
