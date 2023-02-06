@@ -6,8 +6,6 @@ import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -25,6 +23,7 @@ import oop.project.API.*;
 
 public class EditGradesPanel extends TransparentPanel
 {
+    // Variables
     List<StudentModel> students;
     int currentEntryIndex;
     JComboBox<String> idJComboBoxList;
@@ -74,9 +73,7 @@ public class EditGradesPanel extends TransparentPanel
             {
                 idJComboBoxList.addItem("" + students.get(i).getUserID());
             }
-            System.err.println("before " + idJComboBoxList.getSelectedIndex());
             idJComboBoxList.setSelectedIndex(-1);
-            System.err.println("after " + idJComboBoxList.getSelectedIndex());
 
             JComponent[] idComponents = {idLabel, idJComboBoxList};
             idBox = AddToBox.addToHorizontalBox(idComponents, 1);
@@ -263,50 +260,7 @@ public class EditGradesPanel extends TransparentPanel
             this.add(buttonsBox, c);
 
             // Button Handlers
-            saveButton.addActionListener(new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (students.size() == 0)
-                    {
-                        JOptionPane.showMessageDialog(null, "There are no students in this course!");
-                        return;
-                    }
-
-                    System.err.println("Save Button Clicked");
-                    if (currentEntryIndex == -1)
-                    {
-                        JOptionPane.showMessageDialog(null, "Please select a student first!");
-                    }
-                    else if (quizField.getText().isEmpty() || midtermField.getText().isEmpty()
-                            || finalField.getText().isEmpty() || projectField.getText().isEmpty())
-                    {
-                        JOptionPane.showMessageDialog(null, "Please fill in all the fields!");
-                    }
-                    else
-                    {
-                        Long id = students.get(currentEntryIndex).getUserID();
-                        String course = students.get(currentEntryIndex).getCourseID();
-                        String quiz = quizField.getText();
-                        String midterm = midtermField.getText();
-                        String finalExam = finalField.getText();
-                        String project = projectField.getText();
-                        try
-                        {
-                            DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
-
-                            JOptionPane.showMessageDialog(null, "Grades updated successfully!", "Success",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        catch (Exception ex)
-                        {
-                            JOptionPane.showMessageDialog(null, "Grades could not be updated!", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                }
-            });
+            saveButton.addActionListener(e -> updateGrade(quizField, midtermField, finalField, projectField));
 
             nextButton.addActionListener(
                     new NextPreviousHandler(idJComboBoxList));
@@ -326,47 +280,18 @@ public class EditGradesPanel extends TransparentPanel
             finalField.addFocusListener(new GradesFocusHandler(allGrades, 40, 2));
             projectField.addFocusListener(new GradesFocusHandler(allGrades, 30, 3));
 
-            idJComboBoxList.addActionListener(new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (refreshed == false)
-                    {
-                        return;
-                    }
-                    System.err.println("clicking on combo box " + idJComboBoxList.getSelectedIndex());
-                    students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
-                    if (students.size() == 0)
-                    {
-                        JOptionPane.showMessageDialog(null, "There are no students in this course!");
-                        return;
-                    }
-                    currentEntryIndex = idJComboBoxList.getSelectedIndex();
-                    if (currentEntryIndex == -1)
-                    {
-                        return;
-                    }
-                    System.err.println("after stuff" + idJComboBoxList.getSelectedIndex());
-                    nameField.setText(students.get(currentEntryIndex).getFirstName() + " "
-                            + students.get(currentEntryIndex).getLastName());
-                    emailField.setText(students.get(currentEntryIndex).getEmail());
-                    quizField.setText(String.valueOf(students.get(currentEntryIndex).getQuizGrade()));
-                    midtermField.setText(String.valueOf(students.get(currentEntryIndex).getMidtermGrade()));
-                    finalField.setText(String.valueOf(students.get(currentEntryIndex).getFinalGrade()));
-                    projectField.setText(String.valueOf(students.get(currentEntryIndex).getProjectGrade()));
-                    totalField.setText(String.valueOf(students.get(currentEntryIndex).getTotalGrade()));
-                    picture.setIcon(DatabaseCon.getProfilePicture(Long.toString(students.get(currentEntryIndex).getUserID())));
-                }
-            });
+            idJComboBoxList.addActionListener(e -> updateSelected(nameField, emailField, quizField, midtermField, finalField,
+                    projectField, totalField));
         }
         catch (Exception e)
         {
             System.err.println(
-                    "Instuctor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
+                    "Instructor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
             e.printStackTrace();
         }
     }
+
+    // function to refresh the list of students
     public void refreshUsers()
     {
         students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
@@ -377,5 +302,79 @@ public class EditGradesPanel extends TransparentPanel
         }
         idJComboBoxList.setSelectedIndex(-1);
         refreshed = true;
+    }
+
+    // function to update the selected student
+    private void updateGrade(RoundedJTextField quizField, RoundedJTextField midtermField, RoundedJTextField finalField,
+            RoundedJTextField projectField)
+    {
+        if (students.size() == 0)
+        {
+            JOptionPane.showMessageDialog(this, "There are no students in this course!");
+            return;
+        }
+
+        System.err.println("Save Button Clicked");
+        if (currentEntryIndex == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Please select a student first!");
+        }
+        else if (quizField.getText().isEmpty() || midtermField.getText().isEmpty()
+                || finalField.getText().isEmpty() || projectField.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Please fill in all the fields!");
+        }
+        else
+        {
+            Long id = students.get(currentEntryIndex).getUserID();
+            String course = students.get(currentEntryIndex).getCourseID();
+            String quiz = quizField.getText();
+            String midterm = midtermField.getText();
+            String finalExam = finalField.getText();
+            String project = projectField.getText();
+            try
+            {
+                DatabaseCon.saveGrade(id, course, quiz, midterm, finalExam, project);
+
+                JOptionPane.showMessageDialog(this, "Grades updated successfully!", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                JOptionPane.showMessageDialog(this, "Grades could not be updated!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // function to update the selected student information in any of the fields
+    private void updateSelected(RoundedJTextField nameField, RoundedJTextField emailField,
+            RoundedJTextField quizField, RoundedJTextField midtermField, RoundedJTextField finalField,
+            RoundedJTextField projectField, RoundedJTextField totalField)
+    {
+        if (refreshed == false)
+        {
+            return;
+        }
+        students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
+        if (students.size() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "There are no students in this course!");
+            return;
+        }
+        currentEntryIndex = idJComboBoxList.getSelectedIndex();
+        if (currentEntryIndex == -1)
+        {
+            return;
+        }
+        nameField.setText(students.get(currentEntryIndex).getFirstName() + " "
+                + students.get(currentEntryIndex).getLastName());
+        emailField.setText(students.get(currentEntryIndex).getEmail());
+        quizField.setText(String.valueOf(students.get(currentEntryIndex).getQuizGrade()));
+        midtermField.setText(String.valueOf(students.get(currentEntryIndex).getMidtermGrade()));
+        finalField.setText(String.valueOf(students.get(currentEntryIndex).getFinalGrade()));
+        projectField.setText(String.valueOf(students.get(currentEntryIndex).getProjectGrade()));
+        totalField.setText(String.valueOf(students.get(currentEntryIndex).getTotalGrade()));
+        picture.setIcon(DatabaseCon.getProfilePicture(Long.toString(students.get(currentEntryIndex).getUserID())));
     }
 }

@@ -3,7 +3,6 @@ package oop.project.handlers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,7 +10,8 @@ import javax.swing.JTextField;
 import oop.project.screens.InstructorScreen.Panels.MainPanel;
 import oop.project.API.DatabaseCon;
 
-public class RegisterCourseHandler implements ActionListener{
+public class RegisterCourseHandler implements ActionListener
+{
 
     private JTextField searchField;
     private String ID;
@@ -35,7 +35,8 @@ public class RegisterCourseHandler implements ActionListener{
             {
                 DatabaseCon.registerCourseToInstructor(courseID, ID);
                 ((MainPanel) panel).refreshPanel();
-                JOptionPane.showMessageDialog(null, "Course " + courseID + " Registered Successfully", "Successful", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Course " + courseID + " Registered Successfully", "Successful",
+                        JOptionPane.INFORMATION_MESSAGE);
                 System.err.println("Course Registered Successfully - " + ID + " into " + courseID);
             }
             catch (Exception e1)
@@ -46,4 +47,3 @@ public class RegisterCourseHandler implements ActionListener{
     }
 
 }
-

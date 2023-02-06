@@ -39,7 +39,6 @@ public class UserModel
         return profile;
     }
 
-
     public String getStatus()
     {
         return status;
@@ -110,7 +109,8 @@ public class UserModel
         this.phoneNumber = phoneNumber;
     }
 
-    public Blob getPhoto() {
+    public Blob getPhoto()
+    {
         return photo;
     }
 
@@ -174,7 +174,8 @@ public class UserModel
         return phoneNumber;
     }
 
-    public void setPhoto(Blob photo) {
+    public void setPhoto(Blob photo)
+    {
         this.photo = photo;
     }
 

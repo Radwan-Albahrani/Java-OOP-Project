@@ -35,7 +35,7 @@ public class SendAlerts extends TransparentPanel
 
     private void sendAlert(String Alert)
     {
-        if (Alert.equals("") || Alert.equals("Enter your alert to the admin here." ))
+        if (Alert.equals("") || Alert.equals("Enter your alert to the admin here."))
         {
             JOptionPane.showMessageDialog(null, "Please enter an alert!", "Error!", JOptionPane.ERROR_MESSAGE);
             return;

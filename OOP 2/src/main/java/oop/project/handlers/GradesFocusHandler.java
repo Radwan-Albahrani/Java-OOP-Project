@@ -13,7 +13,8 @@ public class GradesFocusHandler implements FocusListener
     private int index;
     private double totalGrade = 0;
 
-    public GradesFocusHandler(List<JTextField> grade, double maxGrade, int index){
+    public GradesFocusHandler(List<JTextField> grade, double maxGrade, int index)
+    {
         this.grade = grade;
         this.maxGrade = maxGrade;
         this.index = index;
@@ -35,20 +36,20 @@ public class GradesFocusHandler implements FocusListener
         if (currentGrade > maxGrade)
             grade.get(index).setText(Double.toString(maxGrade));
 
-            this.totalGrade = 0;
-            for(int i = 0; i < 4; i++)
+        this.totalGrade = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            try
             {
-                try
-                {
-                    Double.parseDouble(grade.get(i).getText());
-                }
-                catch (Exception e)
-                {
-                    grade.get(i).setText("0");
-                }
-                totalGrade += Double.parseDouble(grade.get(i).getText());
+                Double.parseDouble(grade.get(i).getText());
             }
-            grade.get(grade.size() - 1).setText(Double.toString(totalGrade));
+            catch (Exception e)
+            {
+                grade.get(i).setText("0");
+            }
+            totalGrade += Double.parseDouble(grade.get(i).getText());
+        }
+        grade.get(grade.size() - 1).setText(Double.toString(totalGrade));
     }
 
     @Override
@@ -65,20 +66,20 @@ public class GradesFocusHandler implements FocusListener
         }
         if (currentGrade > maxGrade)
             grade.get(index).setText(Double.toString(maxGrade));
-        
+
         this.totalGrade = 0;
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+        {
+            try
             {
-                try
-                {
-                    Double.parseDouble(grade.get(i).getText());
-                }
-                catch (Exception e)
-                {
-                    grade.get(i).setText("0");
-                }
-                totalGrade += Double.parseDouble(grade.get(i).getText());
+                Double.parseDouble(grade.get(i).getText());
             }
+            catch (Exception e)
+            {
+                grade.get(i).setText("0");
+            }
+            totalGrade += Double.parseDouble(grade.get(i).getText());
+        }
         grade.get(grade.size() - 1).setText(Double.toString(totalGrade));
     }
 

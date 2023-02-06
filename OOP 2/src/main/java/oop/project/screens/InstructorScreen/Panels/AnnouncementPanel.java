@@ -18,6 +18,7 @@ public class AnnouncementPanel extends TransparentPanel
 {
     JTextArea announcementTextArea;
     JTextArea announcementSubjectLine;
+
     public AnnouncementPanel(int Width, int Height)
     {
         // Announcement Panel Setup (Will replace Main Panel when Announcement Button is clicked)
@@ -33,27 +34,32 @@ public class AnnouncementPanel extends TransparentPanel
         KButton sendAnnouncementButton = new CustomButtonInstructor(" Send ");
         sendAnnouncementButton.setPreferredSize(new Dimension(150, 50));
 
-        JComponent[] announcementComponents = {announcementLabel, announcementSubjectLine, announcementTextArea, sendAnnouncementButton}; // Components for the Announcement Menu
+        JComponent[] announcementComponents = {announcementLabel, announcementSubjectLine, announcementTextArea,
+                sendAnnouncementButton}; // Components for the Announcement Menu
         Box announcementBox = AddToBox.addToVerticalBox(announcementComponents, 1);
 
         this.add(announcementBox);
 
-        sendAnnouncementButton.addActionListener(e -> sendAnnouncement(announcementSubjectLine.getText(), announcementTextArea.getText()));
+        sendAnnouncementButton
+                .addActionListener(e -> sendAnnouncement(announcementSubjectLine.getText(), announcementTextArea.getText()));
     }
 
     private void sendAnnouncement(String AnnouncementSubject, String Announcement)
     {
-        if (((announcementTextArea.getText()).isEmpty()) || ((announcementSubjectLine.getText()).isEmpty()) || ((announcementTextArea.getText()).equals("Enter your announcement here.")) || ((announcementSubjectLine.getText()).equals("Enter the subject of your announcement here.")))
+        if (((announcementTextArea.getText()).isEmpty()) || ((announcementSubjectLine.getText()).isEmpty())
+                || ((announcementTextArea.getText()).equals("Enter your announcement here."))
+                || ((announcementSubjectLine.getText()).equals("Enter the subject of your announcement here.")))
         {
-            JOptionPane.showMessageDialog(null, "Please Write a Title and an Announcement!", "Failed!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please Write a Title and an Announcement!", "Failed!",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String courseIDQuery = """
-            SELECT CourseID
-            FROM courses
-            WHERE InstructorID = %s;
-                """.formatted(DatabaseCon.currentUser.getUserID());
+                SELECT CourseID
+                FROM courses
+                WHERE InstructorID = %s;
+                    """.formatted(DatabaseCon.currentUser.getUserID());
         ResultSet courseIDResultSet = DatabaseCon.customQuery(courseIDQuery);
         // Change result set into string
         ArrayList<String> courseIDList = new ArrayList<>();
@@ -76,8 +82,9 @@ public class AnnouncementPanel extends TransparentPanel
         AnnouncementBuilder.append("Subject: " + AnnouncementSubject + "\n\n");
         AnnouncementBuilder.append(Announcement + "\n\n");
         AnnouncementBuilder.append("Best Regards, \n");
-        AnnouncementBuilder.append(DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName() + " ("
-                + DatabaseCon.currentUser.getEmail() + ")");
+        AnnouncementBuilder
+                .append(DatabaseCon.currentUser.getFirstName() + " " + DatabaseCon.currentUser.getLastName() + " ("
+                        + DatabaseCon.currentUser.getEmail() + ")");
 
         // Send Email
         Announcement = AnnouncementBuilder.toString();
