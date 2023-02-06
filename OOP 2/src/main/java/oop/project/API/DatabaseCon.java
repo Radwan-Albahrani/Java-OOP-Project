@@ -7,12 +7,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.*;
+
+import oop.project.hooks.FrameConfig;
 import oop.project.models.*;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+
+
+
 
 public class DatabaseCon
 {
@@ -45,6 +54,43 @@ public class DatabaseCon
         catch (SQLException sqlException)
         {
             System.err.println("Error: " + sqlException.getMessage());
+        }
+        return null;
+    }
+
+    public static JLabel getProfilePicture(String id)
+    {
+        con = connectDB();
+        String view = "SELECT picture FROM profile WHERE userID = ?";
+
+        // Create the statement
+        try
+        {
+            stmt = con.prepareStatement(view);
+            stmt.setString(1, id);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            byte[] image = null;
+            while(rs.next())
+            {
+                image = rs.getBytes("picture");
+            }
+            Image img = Toolkit.getDefaultToolkit().createImage(image);
+            ImageIcon icon = new ImageIcon(img);
+            JLabel lPhoto = new JLabel();
+            lPhoto.setIcon(icon);
+            return lPhoto;
+        }
+        catch (NullPointerException e)
+        {
+            //Setting image as default image
+            return ((FrameConfig.getPicture("DefaultProfilePicture.png", 0.2)));
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error getting photo: " + e.getMessage());
         }
         return null;
     }

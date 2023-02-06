@@ -2,6 +2,8 @@ package oop.project.components.panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
+
+import oop.project.API.DatabaseCon;
 import oop.project.colors.ThemeColors;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -42,8 +44,8 @@ public class ProfilePanel extends TransparentPanel
         // Button Setup
         setButtonsType(type);
 
-        // // Picture Setup TODO: Add picture
-        // JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
+        // Picture Setup TODO: Add picture
+        picture = DatabaseCon.getProfilePicture(Long.toString(DatabaseCon.currentUser.getUserID()));
 
         // Personal Information Setup
         // ID Setup
@@ -300,8 +302,7 @@ public class ProfilePanel extends TransparentPanel
         // Set Personal Phone
         personalPhoneField.setText(user.getPersonalPhoneNumber());
 
-        // Set Photo 
-        Photo.setIcon(new ImageIcon(user.getPhoto()));
+        // Set Photo
         
 
     }
