@@ -27,6 +27,10 @@ public class EditGradesPanel extends TransparentPanel
 {
     List<StudentModel> students;
     int currentEntryIndex;
+    JComboBox<String> idJComboBoxList;
+    JLabel picture = new JLabel();
+    String currentUserID;
+    Boolean refreshed = false;
 
     public EditGradesPanel(int Width, int Height)
     {
@@ -41,14 +45,14 @@ public class EditGradesPanel extends TransparentPanel
             // Getting Grades from Database
             UserModel currentUser = new UserModel();
             currentUser = DatabaseCon.currentUser;
-            String currentUserID = Long.toString(currentUser.getUserID());
+            currentUserID = Long.toString(currentUser.getUserID());
             students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID); // ArrayList of Student grades for the current instructor
 
             // Label Setup
             JLabel editGradesLabel = new TitleLabel("Edit Students Grades");
 
             // Picture Setup
-            JLabel picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
+            picture = FrameConfig.getPicture("DefaultProfilePicture.png", 0.2);
             picture.setAlignmentX(CENTER_ALIGNMENT);
 
             // ID
@@ -59,7 +63,7 @@ public class EditGradesPanel extends TransparentPanel
             idLabel.setAlignmentX(RIGHT_ALIGNMENT);
             idLabel.setForeground(ThemeColors.BLACK);
 
-            JComboBox<String> idJComboBoxList = new JComboBox<String>();
+            idJComboBoxList = new JComboBox<String>();
             idJComboBoxList.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
             idJComboBoxList.setMinimumSize(new Dimension(1000, 50));
             idJComboBoxList.setMaximumSize(new Dimension(1000, 50));
@@ -70,8 +74,9 @@ public class EditGradesPanel extends TransparentPanel
             {
                 idJComboBoxList.addItem("" + students.get(i).getUserID());
             }
-
+            System.err.println("before " + idJComboBoxList.getSelectedIndex());
             idJComboBoxList.setSelectedIndex(-1);
+            System.err.println("after " + idJComboBoxList.getSelectedIndex());
 
             JComponent[] idComponents = {idLabel, idJComboBoxList};
             idBox = AddToBox.addToHorizontalBox(idComponents, 1);
@@ -326,10 +331,23 @@ public class EditGradesPanel extends TransparentPanel
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-
+                    if (refreshed == false)
+                    {
+                        return;
+                    }
+                    System.err.println("clicking on combo box " + idJComboBoxList.getSelectedIndex());
                     students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
-
+                    if (students.size() == 0)
+                    {
+                        JOptionPane.showMessageDialog(null, "There are no students in this course!");
+                        return;
+                    }
                     currentEntryIndex = idJComboBoxList.getSelectedIndex();
+                    if (currentEntryIndex == -1)
+                    {
+                        return;
+                    }
+                    System.err.println("after stuff" + idJComboBoxList.getSelectedIndex());
                     nameField.setText(students.get(currentEntryIndex).getFirstName() + " "
                             + students.get(currentEntryIndex).getLastName());
                     emailField.setText(students.get(currentEntryIndex).getEmail());
@@ -338,6 +356,7 @@ public class EditGradesPanel extends TransparentPanel
                     finalField.setText(String.valueOf(students.get(currentEntryIndex).getFinalGrade()));
                     projectField.setText(String.valueOf(students.get(currentEntryIndex).getProjectGrade()));
                     totalField.setText(String.valueOf(students.get(currentEntryIndex).getTotalGrade()));
+                    picture.setIcon(DatabaseCon.getProfilePicture(Long.toString(students.get(currentEntryIndex).getUserID())));
                 }
             });
         }
@@ -347,5 +366,16 @@ public class EditGradesPanel extends TransparentPanel
                     "Instuctor is not assigned to any courses. Must be assigned to at least one course to edit grades.");
             e.printStackTrace();
         }
+    }
+    public void refreshUsers()
+    {
+        students = DatabaseCon.getStudentsOfInstructorGradesList(currentUserID);
+        idJComboBoxList.removeAllItems();
+        for (int i = 0; i < students.size(); i++)
+        {
+            idJComboBoxList.addItem(Long.toString(students.get(i).getUserID()));
+        }
+        idJComboBoxList.setSelectedIndex(-1);
+        refreshed = true;
     }
 }

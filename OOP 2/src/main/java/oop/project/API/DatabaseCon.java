@@ -1,5 +1,6 @@
 package oop.project.API;
 
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -7,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
+import java.awt.*;
+
+import oop.project.hooks.FrameConfig;
 import oop.project.models.*;
 
 import java.sql.DriverManager;
@@ -47,6 +53,62 @@ public class DatabaseCon
             System.err.println("Error: " + sqlException.getMessage());
         }
         return null;
+    }
+
+    public static ImageIcon getProfilePicture(String id)
+    {
+        con = connectDB();
+        String view = "SELECT picture FROM profile WHERE userID = ?";
+
+        // Create the statement
+        try
+        {
+            stmt = con.prepareStatement(view);
+            stmt.setString(1, id);
+
+            // Execute the statement
+            ResultSet rs = stmt.executeQuery();
+
+            byte[] image = null;
+            while (rs.next())
+            {
+                image = rs.getBytes("picture");
+            }
+            Image img = Toolkit.getDefaultToolkit().createImage(image);
+            Image scaledImage = img.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(scaledImage);
+            return icon;
+        }
+        catch (NullPointerException e)
+        {
+            // Setting image as default image
+            return ((FrameConfig.getPictureIcon("DefaultProfilePicture.png", 0.2)));
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error getting photo: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static void setProfilePicture(Blob picture, String id)
+    {
+        // update profile with the picture id
+        con = connectDB();
+        String view = "UPDATE profile SET picture = ? WHERE userID = ?";
+        try
+        {
+            stmt = con.prepareStatement(view);
+            stmt.setBlob(1, picture);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+
+            System.err.println("Profile picture uploaded to database successfully!");
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error setting photo: " + e.getMessage());
+        }
     }
 
     public static ResultSet customQuery(String query)
@@ -955,8 +1017,8 @@ public class DatabaseCon
     {
         String query = """
                 SELECT profile.UserID, CourseID, Email, FirstName, LastName, QuizGrade, MidtermGrade, FinalGrade, ProjectGrade, TotalGrade
-                FROM studentcourses, profile, workcontactdetails
-                WHERE StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
+                FROM user, studentcourses, profile, workcontactdetails
+                WHERE user.UserID = StudID && StudID = profile.UserID && profile.UserID = workcontactdetails.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s) && user.status = 'Active';
                     """
                 .formatted(userID);
         con = connectDB();
@@ -976,10 +1038,11 @@ public class DatabaseCon
     public static ResultSet getStudentsOfInstructor(String userID)
     {
         String query = """
-                SELECT UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
-                FROM studentcourses, profile
-                WHERE StudID = UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s);
-                    """.formatted(userID);
+                SELECT profile.UserID, FirstName, LastName, Sex, TotalGrade as 'Total Course Grade'
+                FROM user, studentcourses, profile
+                WHERE user.UserID = StudID && StudID = profile.UserID && CourseID IN (SELECT CourseID FROM courses WHERE InstructorID = %s) && user.status = 'Active';
+                    """
+                .formatted(userID);
         con = connectDB();
         try
         {
@@ -1079,7 +1142,7 @@ public class DatabaseCon
                 JOIN WorkContactDetails ON User.UserID = WorkContactDetails.UserID
                 JOIN PersonalContactDetails ON User.UserID = PersonalContactDetails.UserID
                 Where user.Username = ?
-                AND user.Password = ?;
+                AND BINARY user.Password = BINARY ?;
                     """;
         try (PreparedStatement statement = con.prepareStatement(query);)
         {

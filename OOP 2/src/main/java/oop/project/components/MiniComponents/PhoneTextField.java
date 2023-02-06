@@ -12,6 +12,7 @@ public class PhoneTextField extends RoundedJTextField
     public int Validate()
     {
         String text = getText();
+        System.out.println("Phone: " + text);
         if (text.length() != 10)
         {
             return 1;

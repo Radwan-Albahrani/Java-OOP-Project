@@ -19,6 +19,7 @@ CREATE TABLE Profile (
     Sex ENUM("Male", "Female") NOT NULL,
     Birthdate DATE NOT NULL,
     Major VARCHAR(255) NOT NULL,
+    picture MEDIUMBLOB NULL,
     FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 
@@ -268,7 +269,7 @@ WHERE User.Status = "Active";
 CALL generate_user('admin', 'admin', 'Admin', 'Radwan', 'Albahrani', 'Male', '2001-09-13', 'Engineering', '2230000001@university.com', '0574135810', 'admin0@gmail.com');
 UPDATE user SET status = "Active" WHERE userID = "2230000001";
 
-CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmad', 'Male', '2002-07-23', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
+CALL generate_user('2230000002', 'instructor', 'Instructor', 'Yosef', 'Ahmed', 'Male', '2003-01-13', 'Computer Science', '2230000002@university.com', '0597413455', 'instructor0@gmail.com');
 CALL generate_user('2230000003', 'instructor', 'Instructor', 'Safwan', 'Nabeel', 'Male', '2001-05-24', 'CyberSecurity', '2230000003@university.com', '0557814688', 'instructor1@gmail.com');
 
 CALL generate_user('2230000004', 'student', 'Student', 'Abdulaziz', 'Amer', 'Male', '2002-02-15', 'Artificial Intelligence', '2230000004@university.com', '0567812368', 'student0@gmail.com');

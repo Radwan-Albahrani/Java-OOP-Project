@@ -1,5 +1,7 @@
 package oop.project.models;
 
+import com.mysql.cj.jdbc.Blob;
+
 public class UserModel
 {
     private String firstName;
@@ -12,6 +14,7 @@ public class UserModel
     private String major;
     private String phoneNumber;
     private String personalPhoneNumber;
+    private Blob photo;
     private Auth auth;
     private String status;
     private long userID;
@@ -35,6 +38,7 @@ public class UserModel
         profile += "Status: " + this.status + "\n";
         return profile;
     }
+
 
     public String getStatus()
     {
@@ -106,6 +110,10 @@ public class UserModel
         this.phoneNumber = phoneNumber;
     }
 
+    public Blob getPhoto() {
+        return photo;
+    }
+
     public void setAuth(Auth auth)
     {
         this.auth = auth;
@@ -166,9 +174,12 @@ public class UserModel
         return phoneNumber;
     }
 
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
+    }
+
     public Auth getAuth()
     {
         return auth;
     }
-
 }

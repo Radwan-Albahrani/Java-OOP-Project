@@ -99,6 +99,31 @@ public class FrameConfig
 
     }
 
+    public static ImageIcon getPictureIcon(String path, double scale)
+    {
+        String fullPath = App.Path + path;
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fullPath))
+        {
+            if (in == null)
+            {
+                System.out.println(fullPath);
+            }
+            BufferedImage toolImage = ImageIO.read(in);
+            Image image = new ImageIcon(toolImage).getImage();
+            int width = image.getWidth(null);
+            int height = image.getHeight(null);
+            Image scaledImage = image.getScaledInstance((int) (width * scale), (int) (height * scale), Image.SCALE_SMOOTH);
+            ImageIcon picture = new ImageIcon(scaledImage);
+            return picture;
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
+
+    }
+
     public static Image getPictureWithSize(String path, int width, int height)
     {
         try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(App.Path + path))

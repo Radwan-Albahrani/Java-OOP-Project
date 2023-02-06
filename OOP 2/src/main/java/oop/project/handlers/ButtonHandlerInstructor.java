@@ -15,6 +15,7 @@ import oop.project.components.panels.ProfilePanel;
 import oop.project.hooks.FrameConfig;
 import oop.project.screens.LoginScreen.LoginScreen;
 import oop.project.screens.InstructorScreen.InstructorScreen;
+import oop.project.screens.InstructorScreen.Panels.EditGradesPanel;
 import oop.project.screens.InstructorScreen.Panels.ViewStudentsPanel;
 
 import java.util.*;
@@ -122,6 +123,7 @@ public class ButtonHandlerInstructor implements ActionListener
         // If the button clicked is Edit Grades, Remove all the panels and add the Edit Grades panel
         else if (buttonClicked.equals("Edit Grades"))
         {
+            ((EditGradesPanel) panels.get("editGrades")).refreshUsers();
             System.err.println("Edit Grades button clicked - Instructor");
             System.err.println();
 

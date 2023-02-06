@@ -78,6 +78,8 @@ public class ButtonHandlerAdmin implements ActionListener
         // If the button clicked is View Students Or Manage Students, Replace button panel and add the view students panel
         else if (buttonClicked.equals("Manage Users") || buttonClicked.equals("Edit Information"))
         {
+            ((EditUserInfo) panels.get("Information")).setProfile(DatabaseCon.currentUser);
+
             System.err.println("Manage Users button clicked - Admin");
             panels.get("button").remove(mainButtonBox);
             panels.get("button").add(user_info, BorderLayout.NORTH);
@@ -168,6 +170,8 @@ public class ButtonHandlerAdmin implements ActionListener
 
         else if (buttonClicked.equals("Edit User Info"))
         {
+            ((EditUserInfo) panels.get("Information")).setProfile(DatabaseCon.currentUser);
+
             removePanels();
             FrameConfig.setBackground(frame, "AdminScreen/backgroundBlurred.png");
             ((AdminScreen) frame).resetFrame(panels.get("button"), panels.get("Information"));

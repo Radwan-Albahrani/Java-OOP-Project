@@ -170,7 +170,8 @@ public class RegisterHandler implements ActionListener
     private int Validation(Map.Entry<String, JComponent> component)
     {
         if (component.getValue() instanceof JTextField
-                && !(component.getValue() instanceof JPasswordField || component.getValue() instanceof EmailTextField))
+                && !(component.getValue() instanceof JPasswordField || component.getValue() instanceof EmailTextField
+                        || component.getValue() instanceof PhoneTextField))
         {
             if (((JTextField) component.getValue()).getText().equals(""))
             {
