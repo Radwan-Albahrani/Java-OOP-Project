@@ -28,7 +28,7 @@ public class ResetPasswordHandler implements ActionListener
             ((ResetPasswordFrame) resetPasswordFrame).setHandler(this);
             resetPasswordFrame.setVisible(true);
         }
-        else if (buttonClicked.equals("Submit"))
+        else if (buttonClicked.equals("Reset"))
         {
             System.err.println("Submit Button Clicked");
             int result = ((ResetPasswordFrame) resetPasswordFrame).resetPassword();
@@ -37,6 +37,11 @@ public class ResetPasswordHandler implements ActionListener
                 JOptionPane.showMessageDialog(resetPasswordFrame, "Password Reset Successful", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
                 resetPasswordFrame.dispose();
+            }
+            else if (result == 1)
+            {
+                JOptionPane.showMessageDialog(resetPasswordFrame, "New Passwords Do Not Match", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
             else if (result == 2)
             {

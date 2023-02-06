@@ -88,11 +88,11 @@ public class ResetPasswordFrame extends JFrame
     {
         if (buttonsType == 0)
         {
-            submitButton = new CustomButtonAdmin("Submit");
+            submitButton = new CustomButtonAdmin("Reset");
         }
         else if (buttonsType == 1)
         {
-            submitButton = new CustomButtonInstructor("Submit");
+            submitButton = new CustomButtonInstructor("Reset");
         }
         else if (buttonsType == 2)
         {
