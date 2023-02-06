@@ -9,8 +9,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.*;
 
@@ -21,10 +19,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
-
-
 
 public class DatabaseCon
 {
@@ -61,7 +55,7 @@ public class DatabaseCon
         return null;
     }
 
-    public static JLabel getProfilePicture(String id)
+    public static ImageIcon getProfilePicture(String id)
     {
         con = connectDB();
         String view = "SELECT picture FROM profile WHERE userID = ?";
@@ -76,21 +70,19 @@ public class DatabaseCon
             ResultSet rs = stmt.executeQuery();
 
             byte[] image = null;
-            while(rs.next())
+            while (rs.next())
             {
                 image = rs.getBytes("picture");
             }
             Image img = Toolkit.getDefaultToolkit().createImage(image);
             Image scaledImage = img.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(scaledImage);
-            JLabel lPhoto = new JLabel();
-            lPhoto.setIcon(icon);
-            return lPhoto;
+            return icon;
         }
         catch (NullPointerException e)
         {
-            //Setting image as default image
-            return ((FrameConfig.getPicture("DefaultProfilePicture.png", 0.2)));
+            // Setting image as default image
+            return ((FrameConfig.getPictureIcon("DefaultProfilePicture.png", 0.2)));
         }
         catch (SQLException e)
         {
@@ -101,7 +93,7 @@ public class DatabaseCon
 
     public static void setProfilePicture(Blob picture, String id)
     {
-        //update profile with the picture id
+        // update profile with the picture id
         con = connectDB();
         String view = "UPDATE profile SET picture = ? WHERE userID = ?";
         try

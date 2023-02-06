@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -48,7 +47,7 @@ public class ProfilePanel extends TransparentPanel
     RoundedJTextField personalEmailField;
     RoundedJTextField workPhoneField;
     RoundedJTextField personalPhoneField;
-    JLabel picture;
+    JLabel picture = new JLabel();
 
     public ProfilePanel(int Width, int Height, int type)
     {
@@ -57,9 +56,6 @@ public class ProfilePanel extends TransparentPanel
 
         // Button Setup
         setButtonsType(type);
-
-        // Picture Setup TODO: Add picture
-        picture = DatabaseCon.getProfilePicture(Long.toString(DatabaseCon.currentUser.getUserID()));
 
         // Personal Information Setup
         // ID Setup
@@ -268,54 +264,63 @@ public class ProfilePanel extends TransparentPanel
 
         // Button Handler
         resetPasswordButton.addActionListener(new ResetPasswordHandler(this, type));
-        uploadPictureButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "NOTE: ONLY JPG, PNG, JPEG ALLOWED", "Upload Picture", JOptionPane.INFORMATION_MESSAGE);
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
-            int returnValue = fileChooser.showOpenDialog(null);
-            if (returnValue == JFileChooser.APPROVE_OPTION)
+        uploadPictureButton.addActionListener(e -> uploadPicture());
+    }
+
+    private void uploadPicture()
+    {
+        JOptionPane.showMessageDialog(null, "NOTE: ONLY JPG, PNG, JPEG ALLOWED", "Upload Picture",
+                JOptionPane.INFORMATION_MESSAGE);
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            System.out.println(path);
+            try
             {
-                File selectedFile = fileChooser.getSelectedFile();
-                String path = selectedFile.getAbsolutePath();
-                System.out.println(path);
-                try
-                {
-                    BufferedImage image = ImageIO.read(selectedFile);
-                    Image scaledImage = image.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
+                BufferedImage image = ImageIO.read(selectedFile);
+                Image scaledImage = image.getScaledInstance(256, 256, Image.SCALE_SMOOTH);
 
-                    BufferedImage bufferedimagescaled = new BufferedImage
-                    (image.getWidth(null),image.getHeight(null),BufferedImage.TYPE_INT_RGB);
-                    Graphics bg = bufferedimagescaled.getGraphics();
-                    bg.drawImage(image, 0, 0, null);
-                    bg.dispose();
+                BufferedImage bufferedImageScaled = new BufferedImage(image.getWidth(null), image.getHeight(null),
+                        BufferedImage.TYPE_INT_RGB);
+                Graphics bg = bufferedImageScaled.getGraphics();
+                bg.drawImage(image, 0, 0, null);
+                bg.dispose();
 
-                    ImageIcon icon = new ImageIcon(scaledImage);
-                    picture.setIcon(icon);
+                ImageIcon icon = new ImageIcon(scaledImage);
+                picture.setIcon(icon);
 
-                    // Upload to database
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    ImageIO.write(bufferedimagescaled, "png", bos);
-                    byte [] data = bos.toByteArray();
-                    Blob blobimage = new SerialBlob(data);
+                // Upload to database
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImageScaled, "png", bos);
+                byte[] data = bos.toByteArray();
+                Blob blobImage = new SerialBlob(data);
 
-                    DatabaseCon.setProfilePicture(blobimage, Long.toString(DatabaseCon.currentUser.getUserID()));
-                    JOptionPane.showMessageDialog(null, "Profile picture updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                }
-                catch (IOException ex)
-                {
-                    JOptionPane.showMessageDialog(null, "Error opening file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                catch (SerialException e1) {
-                    JOptionPane.showMessageDialog(null, "Error serializing file: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                catch (SQLException e1)
-                {
-                    JOptionPane.showMessageDialog(null, "Error getting Blob of image : " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                DatabaseCon.setProfilePicture(blobImage, Long.toString(DatabaseCon.currentUser.getUserID()));
+                JOptionPane.showMessageDialog(null, "Profile picture updated successfully!", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
-        });
+            catch (IOException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error opening file: " + ex.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            catch (SerialException e1)
+            {
+                JOptionPane.showMessageDialog(null, "Error serializing file: " + e1.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            catch (SQLException e1)
+            {
+                JOptionPane.showMessageDialog(null, "Error getting Blob of image : " + e1.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     public void setButtonsType(int type)
@@ -375,7 +380,6 @@ public class ProfilePanel extends TransparentPanel
         personalPhoneField.setText(user.getPersonalPhoneNumber());
 
         // Set Photo
-        
-
+        picture.setIcon(DatabaseCon.getProfilePicture(Long.toString(user.getUserID())));
     }
 }
